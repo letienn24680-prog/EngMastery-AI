@@ -1,0 +1,2540 @@
+[
+  {
+    "order": 1,
+    "id": "g01-present-simple",
+    "number": "#01",
+    "title": "Hiện tại đơn (Present Simple)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + V(s/es) | S + am/is/are + N/Adj\n(-) S + do/does not + V_inf | S + am/is/are not + N/Adj\n(?) Do/Does + S + V_inf? | Am/Is/Are + S + N/Adj?\n* Dấu hiệu: always, usually, often, sometimes, rarely, never, every day/week, once a year...",
+    "essence": "Diễn tả một chân lý, sự thật hiển nhiên; thói quen, hành động lặp đi lặp lại ở hiện tại; hoặc lịch trình, thời gian biểu cố định (tàu xe, máy bay, lịch học).",
+    "examples": [
+      {
+        "en": "Water freezes at 0 degrees Celsius and boils at 100 degrees Celsius.",
+        "vi": "Nước đóng băng ở 0 độ C và sôi ở 100 độ C.",
+        "breakdown": "Chân lý khoa học hiển nhiên -> chia Hiện tại đơn số ít: freezes, boils."
+      },
+      {
+        "en": "The express train to Da Nang departs at 7:30 tomorrow morning.",
+        "vi": "Chuyến tàu hỏa tốc hành đi Đà Nẵng khởi hành lúc 7h30 sáng mai.",
+        "breakdown": "Lịch trình tàu xe cố định -> dùng Hiện tại đơn (departs) diễn đạt tương lai."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The Earth ________ around the Sun, which takes approximately 365 days.",
+        "options": [
+          "A. revolves",
+          "B. is revolving",
+          "C. revolved",
+          "D. has revolved"
+        ],
+        "answer": 0,
+        "explanation": "Chân lý tự nhiên hiển nhiên -> Dùng thì Hiện tại đơn: 'revolves' (Chủ ngữ ngôi thứ 3 số ít)."
+      },
+      {
+        "question": "Our final English exam ________ at 8:00 AM next Monday according to the school schedule.",
+        "options": [
+          "A. will start",
+          "B. is starting",
+          "C. starts",
+          "D. started"
+        ],
+        "answer": 2,
+        "explanation": "Lịch thi theo thời gian biểu của nhà trường -> Dùng thì Hiện tại đơn: 'starts'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 2,
+    "id": "g02-present-continuous",
+    "number": "#02",
+    "title": "Hiện tại tiếp diễn (Present Continuous)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + am/is/are + V-ing\n(-) S + am/is/are not + V-ing\n(?) Am/Is/Are + S + V-ing?\n* Dấu hiệu: now, right now, at the moment, at present, Look!, Listen!, Be quiet!...",
+    "essence": "Diễn tả hành động đang diễn ra ngay tại thời điểm nói; kế hoạch dự định chắc chắn sẽ thực hiện trong tương lai gần; hoặc sự phàn nàn về một thói quen xấu (đi kèm always, continually).",
+    "examples": [
+      {
+        "en": "Listen! The teacher is explaining an important grammar rule.",
+        "vi": "Hãy lắng nghe kìa! Giáo viên đang giải thích một quy tắc ngữ pháp quan trọng.",
+        "breakdown": "Mệnh lệnh gây chú ý 'Listen!' -> hành động đang diễn ra: is explaining."
+      },
+      {
+        "en": "He is always leaving his dirty dishes in the sink, which annoys his roommate.",
+        "vi": "Anh ấy cứ luôn để bát đĩa bẩn trong bồn rửa, khiến bạn cùng phòng rất bực mình.",
+        "breakdown": "Phàn nàn thói quen lặp đi lặp lại gây khó chịu: is always leaving."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Please lower your voice! The baby ________ soundly in the next room.",
+        "options": [
+          "A. sleeps",
+          "B. is sleeping",
+          "C. slept",
+          "D. has slept"
+        ],
+        "answer": 1,
+        "explanation": "Lời nhắc nhở 'Please lower your voice!' chứng tỏ hành động đang diễn ra -> dùng 'is sleeping'."
+      },
+      {
+        "question": "We ________ to Nha Trang this weekend; our flight tickets and resort rooms have already been booked.",
+        "options": [
+          "A. fly",
+          "B. are flying",
+          "C. flew",
+          "D. were flying"
+        ],
+        "answer": 1,
+        "explanation": "Kế hoạch đã chuẩn bị đầy đủ vé và phòng nghỉ -> dùng thì Hiện tại tiếp diễn chỉ tương lai có sắp đặt: 'are flying'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 3,
+    "id": "g03-present-perfect",
+    "number": "#03",
+    "title": "Hiện tại hoàn thành (Present Perfect)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + have/has + V3/ed\n(-) S + have/has not (haven't/hasn't) + V3/ed\n(?) Have/Has + S + V3/ed?\n* Dấu hiệu: already, yet, just, ever, never, recently, so far, up to now, since + mốc tg, for + khoảng tg, this is the first time...",
+    "essence": "Diễn tả hành động bắt đầu trong quá khứ kéo dài đến hiện tại; hành động vừa mới xảy ra; trải nghiệm tính đến hiện tại; hoặc hành động đã xảy ra không rõ thời gian nhưng kết quả quan trọng ở hiện tại.",
+    "examples": [
+      {
+        "en": "They have lived in this metropolitan city for over fifteen years.",
+        "vi": "Họ đã sinh sống tại thành phố đại đô thị này được hơn mười lăm năm.",
+        "breakdown": "Bắt đầu 15 năm trước và hiện vẫn đang ở đó: have lived + for 15 years."
+      },
+      {
+        "en": "This is the third time that she has won the national scholarship.",
+        "vi": "Đây là lần thứ ba cô ấy giành được học bổng quốc gia.",
+        "breakdown": "Cấu trúc 'This is the first/second/third time' + Present Perfect: has won."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Dr. Minh ________ at this specialized hospital since he returned from Germany in 2018.",
+        "options": [
+          "A. worked",
+          "B. is working",
+          "C. has worked",
+          "D. had worked"
+        ],
+        "answer": 2,
+        "explanation": "Cấu trúc: S + have/has V3/ed + since + S + V2/ed -> Dùng 'has worked'."
+      },
+      {
+        "question": "This is the most challenging examination that I ________.",
+        "options": [
+          "A. ever took",
+          "B. have ever taken",
+          "C. was taking",
+          "D. had ever taken"
+        ],
+        "answer": 1,
+        "explanation": "Cấu trúc so sánh nhất (the most challenging) + Present Perfect: 'have ever taken'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 4,
+    "id": "g04-present-perfect-continuous",
+    "number": "#04",
+    "title": "Hiện tại hoàn thành tiếp diễn (Present Perfect Continuous)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + have/has + been + V-ing\n(-) S + have/has not + been + V-ing\n(?) Have/Has + S + been + V-ing?\n* Dấu hiệu: all day, all morning, for [hours/days] now, how long...",
+    "essence": "Nhấn mạnh tính liên tục và kéo dài không gián đoạn của hành động từ quá khứ đến hiện tại; hoặc hành động vừa mới dứt nhưng để lại hậu quả/dấu vết rất rõ ràng ở hiện tại.",
+    "examples": [
+      {
+        "en": "Her eyes are exhausted because she has been reading medical documents all day.",
+        "vi": "Mắt cô ấy mệt mỏi vì cô ấy đã đọc tài liệu y khoa liên tục cả ngày.",
+        "breakdown": "Dấu vết hiện tại (eyes are exhausted) + quá trình liên tục (all day) -> has been reading."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The ground is completely soaked because it ________ heavily for three hours.",
+        "options": [
+          "A. has been raining",
+          "B. is raining",
+          "C. rained",
+          "D. was raining"
+        ],
+        "answer": 0,
+        "explanation": "Hậu quả hiện tại (ground is soaked) và quá trình mưa liên tục suốt 3 giờ -> Dùng 'has been raining'."
+      },
+      {
+        "question": "How long ________ for the job interview results? - For nearly two weeks!",
+        "options": [
+          "A. have you been waiting",
+          "B. do you wait",
+          "C. did you wait",
+          "D. are you waiting"
+        ],
+        "answer": 0,
+        "explanation": "Câu hỏi 'How long' nhấn mạnh quá trình chờ đợi kéo dài đến nay -> Dùng 'have you been waiting'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 5,
+    "id": "g05-past-simple",
+    "number": "#05",
+    "title": "Quá khứ đơn (Past Simple)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + V2/ed | S + was/were + N/Adj\n(-) S + did not + V_inf | S + was/were not + N/Adj\n(?) Did + S + V_inf? | Was/Were + S + N/Adj?\n* Dấu hiệu: yesterday, ago, last week/month/year, in 1995, in the past, when S + V2...",
+    "essence": "Diễn tả hành động đã bắt đầu, xảy ra và kết thúc hoàn toàn tại một thời điểm xác định trong quá khứ; hoặc một chuỗi các hành động liên tiếp trong quá khứ.",
+    "examples": [
+      {
+        "en": "He stepped out of the taxi, paid the driver, and walked straight into the office.",
+        "vi": "Anh ấy bước ra khỏi taxi, trả tiền cho tài xế và đi thẳng vào văn phòng.",
+        "breakdown": "Chuỗi hành động liên tiếp trong quá khứ: stepped -> paid -> walked."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The World Health Organization ________ the eradication of smallpox in 1980.",
+        "options": [
+          "A. declares",
+          "B. declared",
+          "C. has declared",
+          "D. was declaring"
+        ],
+        "answer": 1,
+        "explanation": "Có mốc thời gian xác định trong quá khứ 'in 1980' -> Dùng Quá khứ đơn: 'declared'."
+      },
+      {
+        "question": "My grandparents ________ in a quiet countryside village before moving to the city in 2005.",
+        "options": [
+          "A. live",
+          "B. lived",
+          "C. are living",
+          "D. have lived"
+        ],
+        "answer": 1,
+        "explanation": "Hành động đã hoàn toàn kết thúc trước năm 2005 -> Dùng Quá khứ đơn: 'lived'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 6,
+    "id": "g06-past-continuous",
+    "number": "#06",
+    "title": "Quá khứ tiếp diễn (Past Continuous)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + was/were + V-ing\n(-) S + was/were not + V-ing\n(?) Was/Were + S + V-ing?\n* Cấu trúc: While + S + was/were + V-ing, S + V2/ed | S + was/were + V-ing WHEN + S + V2/ed | At [thời điểm cụ thể] yesterday",
+    "essence": "Diễn tả hành động đang diễn ra tại một thời điểm chính xác trong quá khứ; hoặc một hành động đang diễn ra thì một hành động ngắn khác xen vào.",
+    "examples": [
+      {
+        "en": "At 8:30 PM last night, we were revising for the national mock examination.",
+        "vi": "Vào lúc 8h30 tối hôm qua, chúng tôi đang ôn tập cho kỳ thi thử quốc gia.",
+        "breakdown": "Thời điểm cụ thể trong quá khứ 'At 8:30 PM last night' -> were revising."
+      },
+      {
+        "en": "While the laboratory team was conducting the experiment, the power suddenly went out.",
+        "vi": "Trong khi đội ngũ phòng thí nghiệm đang tiến hành thí nghiệm thì đột ngột mất điện.",
+        "breakdown": "Đang diễn ra (was conducting) thì bị xen vào (went out)."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "While the tourists ________ through the national reserve, they spotted a rare snow leopard.",
+        "options": [
+          "A. trekked",
+          "B. were trekking",
+          "C. have trekked",
+          "D. trek"
+        ],
+        "answer": 1,
+        "explanation": "Mệnh đề sau 'While' diễn tả hành động đang diễn ra trong quá khứ -> Dùng 'were trekking'."
+      },
+      {
+        "question": "What ________ you doing at 10 PM yesterday when the emergency siren rang?",
+        "options": [
+          "A. did",
+          "B. were",
+          "C. had",
+          "D. are"
+        ],
+        "answer": 1,
+        "explanation": "Hành động đang diễn ra tại thời điểm cụ thể 'at 10 PM yesterday' -> Dùng 'were you doing'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 7,
+    "id": "g07-past-perfect",
+    "number": "#07",
+    "title": "Quá khứ hoàn thành (Past Perfect)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + had + V3/ed\n(-) S + had not (hadn't) + V3/ed\n(?) Had + S + V3/ed?\n* Cấu trúc liên kết:\n1. By the time + S + V2/ed, S + had + V3/ed\n2. S + had + V3/ed + BEFORE + S + V2/ed\n3. AFTER + S + had + V3/ed, S + V2/ed",
+    "essence": "Diễn tả hành động xảy ra và hoàn tất trước một hành động khác trong quá khứ, hoặc trước một mốc thời gian trong quá khứ.",
+    "examples": [
+      {
+        "en": "By the time the firefighter squad arrived, the neighbors had put out the fire.",
+        "vi": "Trước khi đội lính cứu hỏa đến nơi, hàng xóm đã dập tắt đám cháy.",
+        "breakdown": "Dập cháy xong trước (had put out) -> lính cứu hỏa đến sau (arrived)."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "By the time the rescue team reached the isolated mountain village, villagers ________ all flood victims.",
+        "options": [
+          "A. evacuated",
+          "B. had evacuated",
+          "C. have evacuated",
+          "D. were evacuating"
+        ],
+        "answer": 1,
+        "explanation": "By the time + S + V2/ed, S + had + V3/ed -> Dùng 'had evacuated'."
+      },
+      {
+        "question": "After she ________ the master's dissertation, she received a scholarship offer from Oxford.",
+        "options": [
+          "A. defended",
+          "B. had defended",
+          "C. was defending",
+          "D. defends"
+        ],
+        "answer": 1,
+        "explanation": "After + S + had + V3/ed, S + V2/ed -> Dùng 'had defended'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 8,
+    "id": "g08-past-perfect-continuous",
+    "number": "#08",
+    "title": "Quá khứ hoàn thành tiếp diễn (Past Perfect Continuous)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + had + been + V-ing\n(-) S + had not + been + V-ing\n(?) Had + S + been + V-ing?\n* Dấu hiệu: had been V-ing for [duration] before + S + V2/ed",
+    "essence": "Nhấn mạnh khoảng thời gian kéo dài liên tục của một hành động trước khi có một hành động khác xảy ra trong quá khứ.",
+    "examples": [
+      {
+        "en": "He had been driving for six straight hours before he decided to take a rest.",
+        "vi": "Anh ấy đã lái xe liên tục suốt sáu tiếng đồng hồ trước khi quyết định dừng lại nghỉ ngơi.",
+        "breakdown": "Lái xe liên tục 6 tiếng (had been driving) trước khi quyết định (decided)."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The marathon runner collapsed because he ________ for three hours under the scorching sun.",
+        "options": [
+          "A. has run",
+          "B. had been running",
+          "C. was running",
+          "D. ran"
+        ],
+        "answer": 1,
+        "explanation": "Nguyên nhân dẫn đến kiệt sức trong quá khứ (collapsed) là hành động chạy liên tục trong 3 giờ trước đó -> Dùng 'had been running'."
+      },
+      {
+        "question": "When we arrived at the construction site, the workers ________ hard in the mud all morning.",
+        "options": [
+          "A. had been working",
+          "B. have worked",
+          "C. are working",
+          "D. were to work"
+        ],
+        "answer": 0,
+        "explanation": "Nhấn mạnh quá trình làm việc liên tục kéo dài cả buổi sáng trước thời điểm quá khứ 'arrived' -> Dùng Quá khứ hoàn thành tiếp diễn (had been working)."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 9,
+    "id": "g09-future-simple",
+    "number": "#09",
+    "title": "Tương lai đơn (Future Simple)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + will + V_inf\n(-) S + will not (won't) + V_inf\n(?) Will + S + V_inf?\n* Dấu hiệu: tomorrow, next week/year, in the future, I think, I hope, I believe, probably...",
+    "essence": "Diễn tả quyết định tức thời nảy sinh ngay lúc nói; lời hứa, lời cảnh báo, đe dọa; hoặc dự đoán chủ quan về tương lai không có căn cứ hiện tại.",
+    "examples": [
+      {
+        "en": "I think the government will implement stricter laws on carbon emissions.",
+        "vi": "Tôi nghĩ rằng chính phủ sẽ áp dụng các đạo luật nghiêm ngặt hơn về lượng phát thải carbon.",
+        "breakdown": "Dự đoán chủ quan cá nhân sau 'I think' -> will implement."
+      },
+      {
+        "en": "Don't carry that heavy luggage alone; I will assist you.",
+        "vi": "Đừng xách hành lý nặng một mình; tôi sẽ giúp bạn.",
+        "breakdown": "Quyết định tức thì ngay lúc nói để giúp đỡ -> will assist."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "I am so tired. - Sit down and relax, I ________ you a cup of hot tea.",
+        "options": [
+          "A. am making",
+          "B. will make",
+          "C. made",
+          "D. have made"
+        ],
+        "answer": 1,
+        "explanation": "Quyết định đưa ra ngay lúc nói -> Dùng thì Tương lai đơn: 'will make'."
+      },
+      {
+        "question": "Experts predict that renewable energy ________ fossil fuels in the near future.",
+        "options": [
+          "A. replaces",
+          "B. replaced",
+          "C. will replace",
+          "D. is replacing"
+        ],
+        "answer": 2,
+        "explanation": "Dự đoán tương lai sau 'predict that' -> Dùng 'will replace'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 10,
+    "id": "g10-future-continuous",
+    "number": "#10",
+    "title": "Tương lai tiếp diễn (Future Continuous)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + will + be + V-ing\n(-) S + will not + be + V-ing\n(?) Will + S + be + V-ing?\n* Dấu hiệu: at this time tomorrow, at [specific time] next week...",
+    "essence": "Diễn tả một hành động sẽ đang diễn ra tại một thời điểm hoặc một khoảng thời gian xác định trong tương lai.",
+    "examples": [
+      {
+        "en": "At 9 o'clock tomorrow morning, thousands of students will be sitting for the national entrance exam.",
+        "vi": "Vào lúc 9 giờ sáng mai, hàng ngàn học sinh sẽ đang ngồi làm bài thi tuyển sinh quốc gia.",
+        "breakdown": "Thời điểm cụ thể trong tương lai 'At 9 o'clock tomorrow' -> will be sitting."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "This time next month, we ________ across Europe on our graduation trip.",
+        "options": [
+          "A. will travel",
+          "B. will be travelling",
+          "C. travelled",
+          "D. are travelling"
+        ],
+        "answer": 1,
+        "explanation": "'This time next month' chỉ thời điểm xác định trong tương lai -> Dùng thì Tương lai tiếp diễn: 'will be travelling'."
+      },
+      {
+        "question": "Don't call her at 8 PM tonight because she ________ an important board meeting.",
+        "options": [
+          "A. will attend",
+          "B. will be attending",
+          "C. attended",
+          "D. attends"
+        ],
+        "answer": 1,
+        "explanation": "Hành động sẽ đang diễn ra vào lúc 8h tối nay -> Dùng 'will be attending'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 11,
+    "id": "g11-future-perfect",
+    "number": "#11",
+    "title": "Tương lai hoàn thành (Future Perfect)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + will + have + V3/ed\n(-) S + will not + have + V3/ed\n(?) Will + S + have + V3/ed?\n* Cấu trúc liên kết:\n1. By the time + S + V(s/es) (hiện tại đơn), S + will have + V3/ed\n2. By + mốc thời gian tương lai (by 2030, by next June), S + will have + V3/ed",
+    "essence": "Diễn tả hành động sẽ được hoàn tất trước một thời điểm cụ thể hoặc trước một hành động khác trong tương lai.",
+    "examples": [
+      {
+        "en": "By the time you graduate from high school, you will have mastered English grammar.",
+        "vi": "Trước khi bạn tốt nghiệp cấp ba, bạn sẽ hoàn thành việc nắm vững ngữ pháp tiếng Anh.",
+        "breakdown": "By the time + S + V(hiện tại) -> vế chính dùng will have mastered."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "By the end of this year, the construction workers ________ the trans-national highway.",
+        "options": [
+          "A. will complete",
+          "B. will have completed",
+          "C. completed",
+          "D. have completed"
+        ],
+        "answer": 1,
+        "explanation": "By + mốc thời gian tương lai (By the end of this year) -> Dùng Tương lai hoàn thành: 'will have completed'."
+      },
+      {
+        "question": "By the time my brother returns from Australia, I ________ my university graduation thesis.",
+        "options": [
+          "A. will finish",
+          "B. will have finished",
+          "C. finished",
+          "D. have finished"
+        ],
+        "answer": 1,
+        "explanation": "By the time + S + V(s/es), S + will have V3/ed -> Dùng 'will have finished'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 12,
+    "id": "g12-future-perfect-continuous",
+    "number": "#12",
+    "title": "Tương lai hoàn thành tiếp diễn (Future Perfect Continuous)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + will + have + been + V-ing\n(-) S + will not + have + been + V-ing\n(?) Will + S + have + been + V-ing?\n* Dấu hiệu: By + mốc tương lai, S + will have been V-ing for [duration]",
+    "essence": "Nhấn mạnh tính liên tục của một hành động tính tới một mốc thời gian xác định trong tương lai.",
+    "examples": [
+      {
+        "en": "By next November, Professor Smith will have been lecturing at this university for 25 years.",
+        "vi": "Tính đến tháng 11 tới, Giáo sư Smith sẽ giảng dạy tại trường đại học này tròn 25 năm liên tục.",
+        "breakdown": "Nhấn mạnh quá trình 25 năm liên tục tính tới mốc tương lai: will have been lecturing."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "By next month, the environmentalist team ________ researching climate impacts for a decade.",
+        "options": [
+          "A. will conduct",
+          "B. will have been conducting",
+          "C. conducted",
+          "D. is conducting"
+        ],
+        "answer": 1,
+        "explanation": "Nhấn mạnh độ dài thời gian liên tục 'for a decade' tính đến mốc 'By next month' -> Dùng 'will have been conducting'."
+      },
+      {
+        "question": "By the end of this year, Professor Harrison ________ at this university for 35 continuous years.",
+        "options": [
+          "A. will have been teaching",
+          "B. has taught",
+          "C. will teach",
+          "D. is teaching"
+        ],
+        "answer": 0,
+        "explanation": "Có mốc 'By the end of this year' kèm khoảng thời gian liên tục 'for 35 continuous years' -> Dùng Tương lai hoàn thành tiếp diễn (will have been teaching)."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 13,
+    "id": "g13-near-future",
+    "number": "#13",
+    "title": "Tương lai gần (Near Future: Be going to)",
+    "category": "tenses",
+    "categoryLabel": "1. Hệ thống các thì",
+    "sectionTitle": "Phần 1: 13 Thì & Tương Lai Gần",
+    "formula": "(+) S + am/is/are + going to + V_inf\n(-) S + am/is/are not + going to + V_inf\n(?) Am/Is/Are + S + going to + V_inf?\n* Dấu hiệu: có kế hoạch từ trước, hoặc có dấu hiệu/chứng cứ rõ ràng ở hiện tại",
+    "essence": "Diễn tả dự định/kế hoạch đã được cân nhắc từ trước thời điểm nói; hoặc dự đoán tương lai dựa trên dấu hiệu/bằng chứng khách quan nhìn thấy ngay lúc nói.",
+    "examples": [
+      {
+        "en": "Look at those thick dark clouds in the sky! It is going to rain heavily.",
+        "vi": "Hãy nhìn những đám mây đen dày đặc trên bầu trời kìa! Trời sắp mưa to rồi đấy.",
+        "breakdown": "Dự đoán dựa trên bằng chứng hiện tại (mây đen) -> is going to rain."
+      },
+      {
+        "en": "I have saved money for months; I am going to buy a new laptop next week.",
+        "vi": "Tôi đã tiết kiệm tiền suốt mấy tháng; tôi dự định sẽ mua một chiếc máy tính xách tay mới vào tuần tới.",
+        "breakdown": "Kế hoạch đã chuẩn bị tiền từ trước -> am going to buy."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Be careful! The ladder is wobbling; you ________ fall!",
+        "options": [
+          "A. will",
+          "B. are going to",
+          "C. were",
+          "D. have"
+        ],
+        "answer": 1,
+        "explanation": "Dự đoán có bằng chứng trực quan rõ rệt (thang đang rung lắc) -> Dùng 'are going to fall'."
+      },
+      {
+        "question": "We have already made hotel reservations; we ________ spend our vacation in Da Nang.",
+        "options": [
+          "A. are going to",
+          "B. will",
+          "C. would",
+          "D. shall"
+        ],
+        "answer": 0,
+        "explanation": "Kế hoạch đã chuẩn bị trước (đã đặt phòng) -> Dùng 'are going to spend'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 14,
+    "id": "g14-basic-passive",
+    "number": "#14",
+    "title": "Bị động cơ bản theo các thì (Basic Passive Voice)",
+    "category": "passive",
+    "categoryLabel": "2. Thể bị động",
+    "sectionTitle": "Phần 2: Thể Bị Động Toàn Diện",
+    "formula": "Quy tắc chung: S + BE (chia theo thì) + V3/ed + (by O)\n1. Hiện tại đơn: S + am/is/are + V3/ed\n2. Quá khứ đơn: S + was/were + V3/ed\n3. Tiếp diễn: S + am/is/are/was/were + BEING + V3/ed\n4. Hoàn thành: S + have/has/had + BEEN + V3/ed\n5. Tương lai đơn: S + will + BE + V3/ed",
+    "essence": "Dùng khi chủ ngữ là đối tượng chịu tác động của hành động, hoặc khi người thực hiện hành động không quan trọng, không rõ danh tính, hoặc đã quá hiển nhiên.",
+    "examples": [
+      {
+        "en": "The national high school exam papers are strictly sealed and confidential.",
+        "vi": "Đề thi THPT Quốc gia được niêm phong nghiêm ngặt và bảo mật.",
+        "breakdown": "Hiện tại đơn bị động: are sealed (chủ ngữ số nhiều exam papers)."
+      },
+      {
+        "en": "A new modern bridge is being built across the Red River.",
+        "vi": "Một cây cầu hiện đại mới đang được xây dựng bắc qua sông Hồng.",
+        "breakdown": "Hiện tại tiếp diễn bị động: is being built."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Millions of smartphones ________ by tech companies every month.",
+        "options": [
+          "A. manufacture",
+          "B. are manufactured",
+          "C. were manufactured",
+          "D. are manufacturing"
+        ],
+        "answer": 1,
+        "explanation": "Chủ ngữ 'Millions of smartphones' là vật chịu tác động, thói quen lặp lại ở hiện tại -> Dùng bị động hiện tại đơn: 'are manufactured'."
+      },
+      {
+        "question": "The historical monument ________ by a severe storm last September.",
+        "options": [
+          "A. damaged",
+          "B. was damaged",
+          "C. is damaged",
+          "D. had damaged"
+        ],
+        "answer": 1,
+        "explanation": "Có mốc thời gian quá khứ 'last September' và chủ ngữ bị động -> Dùng 'was damaged'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 15,
+    "id": "g15-passive-modals",
+    "number": "#15",
+    "title": "Bị động với động từ khuyết thiếu (Passive with Modals)",
+    "category": "passive",
+    "categoryLabel": "2. Thể bị động",
+    "sectionTitle": "Phần 2: Thể Bị Động Toàn Diện",
+    "formula": "1. Hiện tại / Tương lai: S + modal (can, must, should, may, might, have to) + BE + V3/ed\n2. Quá khứ (phỏng đoán/tiếc nuối): S + modal + HAVE BEEN + V3/ed",
+    "essence": "Chuyển câu chứa động từ khuyết thiếu sang dạng bị động để nhấn mạnh quyền hạn, nghĩa vụ, sự bắt buộc hoặc phỏng đoán đối với đối tượng bị tác động.",
+    "examples": [
+      {
+        "en": "All plastic waste must be sorted before recycling.",
+        "vi": "Tất cả rác thải nhựa phải được phân loại trước khi đem tái chế.",
+        "breakdown": "Modal 'must' + be + V3/ed: must be sorted."
+      },
+      {
+        "en": "The report should have been submitted yesterday.",
+        "vi": "Bản báo cáo lẽ ra đã phải được nộp từ ngày hôm qua.",
+        "breakdown": "Bị động quá khứ với modal tiếc nuối: should have been submitted."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Strict environmental regulations must ________ to preserve national parks.",
+        "options": [
+          "A. enforce",
+          "B. be enforced",
+          "C. to enforce",
+          "D. being enforced"
+        ],
+        "answer": 1,
+        "explanation": "Cấu trúc bị động với modal verb: must + be + V3/ed -> Dùng 'be enforced'."
+      },
+      {
+        "question": "This rare artifact ought to ________ with extreme care in the museum.",
+        "options": [
+          "A. be preserved",
+          "B. preserve",
+          "C. have preserved",
+          "D. preserving"
+        ],
+        "answer": 0,
+        "explanation": "Ought to + be + V3/ed -> Dùng 'be preserved'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 16,
+    "id": "g16-causative-form",
+    "number": "#16",
+    "title": "Bị động thể nhờ bảo / sai khiến (Causative Form: Have / Get sth done)",
+    "category": "passive",
+    "categoryLabel": "2. Thể bị động",
+    "sectionTitle": "Phần 2: Thể Bị Động Toàn Diện",
+    "formula": "1. Thể chủ động:\n- HAVE + sb + V_inf (nhờ ai làm gì)\n- GET + sb + TO V_inf (thuyết phục/nhờ ai làm gì)\n2. Thể bị động (cực hay thi):\n- S + HAVE / GET + sth + V3/ed (bởi ai: by sb)",
+    "essence": "Dùng khi người nói không tự mình làm một việc gì đó mà thuê, nhờ, hoặc yêu cầu một người khác thực hiện cho mình.",
+    "examples": [
+      {
+        "en": "My father had his car repaired by a certified mechanic yesterday.",
+        "vi": "Bố tôi đã nhờ một thợ cơ khí lành nghề sửa chiếc xe ô tô của ông vào ngày hôm qua.",
+        "breakdown": "S + had + sth (his car) + V3/ed (repaired)."
+      },
+      {
+        "en": "She got her university application translated into English.",
+        "vi": "Cô ấy đã nhờ người dịch hồ sơ ứng tuyển đại học của mình sang tiếng Anh.",
+        "breakdown": "S + got + sth (her application) + V3/ed (translated)."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "I am going to have my air conditioner ________ before the summer heatwave begins.",
+        "options": [
+          "A. servicing",
+          "B. to service",
+          "C. serviced",
+          "D. service"
+        ],
+        "answer": 2,
+        "explanation": "Cấu trúc bị động nhờ bảo: have + sth + V3/ed -> Dùng 'serviced'."
+      },
+      {
+        "question": "The manager got his secretary ________ all the meeting documents for the directors.",
+        "options": [
+          "A. to prepare",
+          "B. prepare",
+          "C. prepared",
+          "D. preparing"
+        ],
+        "answer": 0,
+        "explanation": "Cấu trúc chủ động của GET: get + sb + TO V_inf -> Dùng 'to prepare'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 17,
+    "id": "g17-impersonal-passive",
+    "number": "#17",
+    "title": "Bị động khách quan / tường thuật ý kiến (Impersonal Passive: It is said that...)",
+    "category": "passive",
+    "categoryLabel": "2. Thể bị động",
+    "sectionTitle": "Phần 2: Thể Bị Động Toàn Diện",
+    "formula": "Chủ động: People/They + say/believe/think/report/rumor + that + S2 + V2...\n-> Cách 1: It + is/was + said/believed/thought + that + S2 + V2...\n-> Cách 2 (Chuyển S2 lên đầu):\n- Cùng thì: S2 + is/are/was/were said + TO V_inf\n- Khác thì (V2 xảy ra trước V1): S2 + is/are/was/were said + TO HAVE V3/ed",
+    "essence": "Dùng để truyền đạt thông tin, dư luận hoặc ý kiến của số đông một cách khách quan, trang trọng mà không cần chỉ đích danh ai nói.",
+    "examples": [
+      {
+        "en": "It is reported that the global temperature has risen by 1.1 degrees Celsius.",
+        "vi": "Người ta báo cáo rằng nhiệt độ toàn cầu đã tăng 1,1 độ C.",
+        "breakdown": "Dạng bị động giả: It is reported that..."
+      },
+      {
+        "en": "Thomas Edison is believed to have invented the phonograph in 1877.",
+        "vi": "Thomas Edison được tin là đã phát minh ra máy hát đĩa vào năm 1877.",
+        "breakdown": "Tin ở hiện tại (is believed) nhưng phát minh trong quá khứ (1877) -> TO HAVE V3: to have invented."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The ancient fortress is believed ________ by Roman architects centuries ago.",
+        "options": [
+          "A. to build",
+          "B. to be built",
+          "C. to have been built",
+          "D. building"
+        ],
+        "answer": 2,
+        "explanation": "Pháo đài được xây trong quá khứ (centuries ago) trước thời điểm hiện tại (is believed) và mang nghĩa bị động -> Dùng 'to have been built'."
+      },
+      {
+        "question": "It ________ that the newly discovered drug could cure rare viral infections.",
+        "options": [
+          "A. is said",
+          "B. says",
+          "C. has said",
+          "D. is saying"
+        ],
+        "answer": 0,
+        "explanation": "Cấu trúc bị động khách quan: It is said that + S + V -> Dùng 'is said'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 18,
+    "id": "g18-passive-perception",
+    "number": "#18",
+    "title": "Bị động với động từ chỉ giác quan / tri giác (Passive with verbs of perception)",
+    "category": "passive",
+    "categoryLabel": "2. Thể bị động",
+    "sectionTitle": "Phần 2: Thể Bị Động Toàn Diện",
+    "formula": "1. Chủ động:\n- S + see / hear / watch / notice + O + V_inf (chứng kiến toàn bộ hành động)\n- S + see / hear / watch / notice + O + V-ing (chứng kiến hành động đang diễn ra)\n2. Bị động:\n- S(O) + be + seen / heard / noticed + TO V_inf (toàn bộ hành động: thêm 'to')\n- S(O) + be + seen / heard / noticed + V-ing (hành động đang diễn ra: giữ nguyên V-ing)",
+    "essence": "Diễn tả một đối tượng được người khác nhìn thấy, nghe thấy hoặc nhận thấy đang làm gì hoặc làm xong việc gì.",
+    "examples": [
+      {
+        "en": "The suspect was seen to enter the jewelry store through the back door.",
+        "vi": "Kẻ tình nghi được nhìn thấy đã đi vào cửa hàng trang sức qua cửa sau.",
+        "breakdown": "Chủ động: People saw the suspect enter -> Bị động thêm 'to': was seen TO ENTER."
+      },
+      {
+        "en": "The young girl was heard singing a traditional lullaby in the garden.",
+        "vi": "Người ta nghe thấy cô bé đang hát một bài hát ru truyền thống trong vườn.",
+        "breakdown": "Chủ động: Heard her singing -> Bị động giữ nguyên V-ing: was heard singing."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The thief was seen ________ the perimeter wall and escape into the dark forest.",
+        "options": [
+          "A. climb",
+          "B. to climb",
+          "C. climbed",
+          "D. to be climbed"
+        ],
+        "answer": 1,
+        "explanation": "Bị động của động từ giác quan (see sb do sth) chuyển sang bị động thêm 'to' -> 'was seen to climb'."
+      },
+      {
+        "question": "Children were noticed ________ football in the school playground during the afternoon break.",
+        "options": [
+          "A. playing",
+          "B. to be played",
+          "C. played",
+          "D. having played"
+        ],
+        "answer": 0,
+        "explanation": "Chứng kiến hành động đang diễn ra: be noticed + V-ing -> Dùng 'playing'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 19,
+    "id": "g19-passive-two-objects",
+    "number": "#19",
+    "title": "Bị động kép và bị động có hai tân ngữ (Passive with two objects)",
+    "category": "passive",
+    "categoryLabel": "2. Thể bị động",
+    "sectionTitle": "Phần 2: Thể Bị Động Toàn Diện",
+    "formula": "Chủ động: S + V + O1 (người: tân ngữ gián tiếp) + O2 (vật: tân ngữ trực tiếp)\n(Ví dụ: give, send, lend, offer, teach, buy, pay...)\n-> Bị động 1 (đưa tân ngữ người lên đầu - tự nhiên nhất):\n   O1 + BE + V3/ed + O2 + (by S)\n-> Bị động 2 (đưa tân ngữ vật lên đầu - cần thêm giới từ to/for):\n   O2 + BE + V3/ed + TO / FOR + O1 + (by S)",
+    "essence": "Khi câu chủ động có hai tân ngữ (tân ngữ chỉ người và tân ngữ chỉ vật), có thể tạo thành 2 câu bị động tương ứng tùy thuộc vào thông tin muốn nhấn mạnh.",
+    "examples": [
+      {
+        "en": "The outstanding student was awarded a full scholarship by the university.",
+        "vi": "Học sinh xuất sắc đã được trường đại học trao một suất học bổng toàn phần.",
+        "breakdown": "Bị động 1 (đưa người O1 lên làm chủ ngữ): The student was awarded a scholarship."
+      },
+      {
+        "en": "A generous scholarship was awarded TO the outstanding student.",
+        "vi": "Một suất học bổng hào phóng đã được trao cho người học sinh xuất sắc.",
+        "breakdown": "Bị động 2 (đưa vật O2 lên làm chủ ngữ): thêm giới từ TO."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "All newly hired employees were offered ________ by the company director.",
+        "options": [
+          "A. a lucrative contract",
+          "B. to a lucrative contract",
+          "C. for a lucrative contract",
+          "D. with a lucrative contract"
+        ],
+        "answer": 0,
+        "explanation": "Cấu trúc bị động: S (người) + be offered + O (vật) -> Dùng trực tiếp danh từ 'a lucrative contract'."
+      },
+      {
+        "question": "A prestigious medal was presented ________ the war veteran by the President.",
+        "options": [
+          "A. for",
+          "B. to",
+          "C. with",
+          "D. at"
+        ],
+        "answer": 1,
+        "explanation": "Khi đưa tân ngữ vật lên trước (A medal was presented), giới từ đi với người là TO -> 'presented to the war veteran'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 20,
+    "id": "g20-zero-conditional",
+    "number": "#20",
+    "title": "Câu điều kiện loại 0 (Zero Conditional)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "If / When + S + V(s/es) (Hiện tại đơn), S + V(s/es) (Hiện tại đơn)",
+    "essence": "Diễn tả sự thật khoa học hiển nhiên, quy luật tự nhiên, hoặc thói quen chắc chắn xảy ra nếu điều kiện được đáp ứng.",
+    "examples": [
+      {
+        "en": "If you heat ice, it melts into water.",
+        "vi": "Nếu bạn đun nóng băng, nó sẽ tan chảy thành nước.",
+        "breakdown": "Cả 2 mệnh đề đều chia Hiện tại đơn: heat -> melts."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "If you mix red and blue paint, you ________ purple.",
+        "options": [
+          "A. get",
+          "B. will get",
+          "C. got",
+          "D. are getting"
+        ],
+        "answer": 0,
+        "explanation": "Quy luật pha màu tự nhiên hiển nhiên -> Dùng câu điều kiện loại 0: 'get'."
+      },
+      {
+        "question": "Plants ________ if they do not receive enough sunlight and water.",
+        "options": [
+          "A. die",
+          "B. will have died",
+          "C. would die",
+          "D. died"
+        ],
+        "answer": 0,
+        "explanation": "Sự thật sinh học hiển nhiên, diễn tả quy luật tự nhiên -> Dùng Điều kiện loại 0 (If + S + V(hiện tại), S + V(hiện tại)): 'die'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 21,
+    "id": "g21-first-conditional",
+    "number": "#21",
+    "title": "Câu điều kiện loại 1 (First Conditional)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "If + S + V(s/es) (Hiện tại đơn), S + will / can / may / must + V_inf\n(Mệnh lệnh: If + S + V(s/es), (please) + V_inf / Don't + V_inf)",
+    "essence": "Diễn tả điều kiện có thể xảy ra ở hiện tại hoặc tương lai và kết quả có thật tương ứng.",
+    "examples": [
+      {
+        "en": "If she studies diligently every evening, she will pass the entrance exam with flying colours.",
+        "vi": "Nếu cô ấy học tập chăm chỉ mỗi buổi tối, cô ấy sẽ thi đỗ kỳ thi tuyển sinh với kết quả xuất sắc.",
+        "breakdown": "Mệnh đề If chia hiện tại đơn (studies), mệnh đề chính dùng will + pass."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "If the weather ________ favorable tomorrow morning, we will go on a field trip.",
+        "options": [
+          "A. is",
+          "B. will be",
+          "C. was",
+          "D. would be"
+        ],
+        "answer": 0,
+        "explanation": "Trong mệnh đề IF loại 1, động từ chia ở Hiện tại đơn -> Dùng 'is'."
+      },
+      {
+        "question": "If you encounter any technical issues with the system, ________ the hotline immediately.",
+        "options": [
+          "A. calling",
+          "B. call",
+          "C. called",
+          "D. will call"
+        ],
+        "answer": 1,
+        "explanation": "Mệnh đề chính dạng câu mệnh lệnh -> Dùng động từ nguyên thể 'call'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 22,
+    "id": "g22-second-conditional",
+    "number": "#22",
+    "title": "Câu điều kiện loại 2 (Second Conditional)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "If + S + V2/ed (To be: WERE cho mọi ngôi), S + would / could / might + V_inf",
+    "essence": "Diễn tả điều kiện giả định trái ngược với thực tế ở hiện tại, hoặc tình huống không có thật ở hiện tại; dùng đưa ra lời khuyên (If I were you).",
+    "examples": [
+      {
+        "en": "If I had more leisure time, I would volunteer at the wildlife sanctuary.",
+        "vi": "Nếu tôi có nhiều thời gian rảnh hơn, tôi sẽ đi làm tình nguyện viên tại khu bảo tồn động vật hoang dã.",
+        "breakdown": "Hiện tại không có rảnh: If I had (V2) -> would volunteer."
+      },
+      {
+        "en": "If I were in your position, I would accept that prestigious scholarship immediately.",
+        "vi": "Nếu tôi ở vị trí của bạn, tôi sẽ nhận ngay suất học bổng danh giá đó.",
+        "breakdown": "Lời khuyên giả định: If I were in your position -> would accept."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "If he ________ fluent in French, he could apply for the diplomatic position in Paris.",
+        "options": [
+          "A. is",
+          "B. were",
+          "C. has been",
+          "D. will be"
+        ],
+        "answer": 1,
+        "explanation": "Điều kiện trái ngược với thực tế hiện tại (loại 2), to be dùng 'were' cho mọi ngôi -> Dùng 'were'."
+      },
+      {
+        "question": "If my family lived closer to the city center, we ________ so much time commuting every day.",
+        "options": [
+          "A. won't spend",
+          "B. wouldn't spend",
+          "C. didn't spend",
+          "D. haven't spent"
+        ],
+        "answer": 1,
+        "explanation": "Mệnh đề chính của câu điều kiện loại 2: would + V_inf -> Dùng 'wouldn't spend'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 23,
+    "id": "g23-third-conditional",
+    "number": "#23",
+    "title": "Câu điều kiện loại 3 (Third Conditional)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "If + S + had + V3/ed (Quá khứ hoàn thành), S + would / could / might + HAVE + V3/ed",
+    "essence": "Diễn tả điều kiện giả định trái ngược hoàn toàn với thực tế đã xảy ra trong quá khứ, thường dùng để bày tỏ sự tiếc nuối hoặc trách móc.",
+    "examples": [
+      {
+        "en": "If the rescue team had arrived fifteen minutes earlier, they could have saved the climbers.",
+        "vi": "Nếu đội cứu hộ đến sớm hơn 15 phút, họ đã có thể cứu được những người leo núi.",
+        "breakdown": "Thực tế trong quá khứ đội cứu hộ đến muộn: had arrived -> could have saved."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "If you ________ your seatbelt, you would not have sustained severe injuries in the crash.",
+        "options": [
+          "A. fasten",
+          "B. had fastened",
+          "C. were fastening",
+          "D. fastened"
+        ],
+        "answer": 1,
+        "explanation": "Mệnh đề chính là 'would not have sustained' (loại 3) -> Mệnh đề If chia Quá khứ hoàn thành: 'had fastened'."
+      },
+      {
+        "question": "If Minh had prepared more thoroughly for the interview, he ________ the job offer.",
+        "options": [
+          "A. would get",
+          "B. will get",
+          "C. would have got",
+          "D. got"
+        ],
+        "answer": 2,
+        "explanation": "Mệnh đề If có 'had prepared' (loại 3) -> Mệnh đề chính: 'would have got'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 24,
+    "id": "g24-mixed-conditionals",
+    "number": "#24",
+    "title": "Câu điều kiện hỗn hợp (Mixed Conditionals: loại 2 & 3)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "1. Dạng 1 (Giả thiết quá khứ -> Kết quả hiện tại: Loại 3 + Loại 2):\n   If + S + had + V3/ed, S + would / could + V_inf (now / today)\n2. Dạng 2 (Bản chất hiện tại -> Kết quả quá khứ: Loại 2 + Loại 3):\n   If + S + were / V2/ed, S + would / could + HAVE + V3/ed",
+    "essence": "Kết hợp giữa điều kiện ở một thời điểm (quá khứ/hiện tại) và kết quả ở một thời điểm khác (hiện tại/quá khứ). Dấu hiệu quan trọng nhất là các từ chỉ thời gian: now, today, yesterday...",
+    "examples": [
+      {
+        "en": "If I had accepted the scholarship last year, I would be studying in London right now.",
+        "vi": "Nếu năm ngoái tôi nhận học bổng, thì bây giờ tôi đang học tập ở London rồi.",
+        "breakdown": "Giả thiết quá khứ (last year: had accepted) -> kết quả hiện tại (right now: would be studying)."
+      },
+      {
+        "en": "If she weren't so afraid of flying, she would have travelled to Japan with us last summer.",
+        "vi": "Nếu cô ấy không sợ đi máy bay (bản chất luôn thế), cô ấy đã đi du lịch Nhật Bản cùng chúng tôi vào mùa hè năm ngoái.",
+        "breakdown": "Bản chất hiện tại (weren't) -> kết quả quá khứ (last summer: would have travelled)."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "If Nam had taken my advice yesterday, he ________ in such a dilemma now.",
+        "options": [
+          "A. won't be",
+          "B. wouldn't be",
+          "C. wouldn't have been",
+          "D. isn't"
+        ],
+        "answer": 1,
+        "explanation": "Giả thiết quá khứ (yesterday: had taken) nhưng kết quả ở hiện tại (now) -> Dùng điều kiện hỗn hợp: 'wouldn't be'."
+      },
+      {
+        "question": "If she ________ English fluently, she would have secured that foreign investment deal last month.",
+        "options": [
+          "A. spoke",
+          "B. had spoken",
+          "C. speaks",
+          "D. will speak"
+        ],
+        "answer": 0,
+        "explanation": "Bản chất năng lực hiện tại (If she spoke) dẫn đến kết quả trong quá khứ (last month: would have secured) -> Dùng 'spoke'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 25,
+    "id": "g25-inversion-conditionals",
+    "number": "#25",
+    "title": "Đảo ngữ câu điều kiện (Inversion in Conditionals: Should, Were, Had)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "Bỏ 'IF' và đảo trợ động từ lên đầu câu:\n1. Loại 1: SHOULD + S + V_inf, S + will + V_inf\n2. Loại 2: WERE + S + to V_inf / WERE + S + Adj/Noun, S + would + V_inf\n3. Loại 3: HAD + S + V3/ed, S + would have + V3/ed\n* Phủ định: để 'NOT' sau chủ ngữ (Ví dụ: Had he not noticed...)",
+    "essence": "Tăng tính trang trọng (formal), học thuật cho câu văn; xuất hiện với tần suất cực kỳ cao trong các đề thi tuyển sinh và THPT Quốc Gia.",
+    "examples": [
+      {
+        "en": "Should you require further assistance, please contact our support team.",
+        "vi": "Nếu quý khách cần thêm sự hỗ trợ, xin vui lòng liên hệ với đội ngũ chăm sóc khách hàng.",
+        "breakdown": "= If you should require / If you require."
+      },
+      {
+        "en": "Had we invested in renewable technology earlier, our operating costs would have reduced significantly.",
+        "vi": "Nếu chúng ta đầu tư vào công nghệ tái tạo sớm hơn, chi phí vận hành đã giảm đáng kể.",
+        "breakdown": "= If we had invested..."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "________ anyone call for me while I am out, please take a message.",
+        "options": [
+          "A. Should",
+          "B. Were",
+          "C. Had",
+          "D. If should"
+        ],
+        "answer": 0,
+        "explanation": "Đảo ngữ câu điều kiện loại 1: Should + S + V_inf -> Dùng 'Should'."
+      },
+      {
+        "question": "________ more financial capital, the company would expand into overseas markets.",
+        "options": [
+          "A. Were the company to possess",
+          "B. Had the company possessed",
+          "C. If the company possesses",
+          "D. Should the company possess"
+        ],
+        "answer": 0,
+        "explanation": "Mệnh đề chính là 'would expand' (loại 2) -> Đảo ngữ loại 2: Were + S + to V -> Dùng 'Were the company to possess'."
+      },
+      {
+        "question": "________ the safety protocols carefully, the industrial accident would not have occurred.",
+        "options": [
+          "A. Had the workers followed",
+          "B. Did the workers follow",
+          "C. Were the workers to follow",
+          "D. Should the workers follow"
+        ],
+        "answer": 0,
+        "explanation": "Mệnh đề chính là 'would not have occurred' (loại 3) -> Đảo ngữ loại 3: Had + S + V3/ed -> Dùng 'Had the workers followed'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 26,
+    "id": "g26-if-alternatives",
+    "number": "#26",
+    "title": "Biến thể thay thế \"If\" (Unless, Provided that, As long as, In case, But for, Without)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "1. UNLESS = If... not (Trừ khi / Nếu không)\n2. PROVIDED THAT / PROVIDING THAT / AS LONG AS / SO LONG AS = If (Miễn là)\n3. IN CASE + Clause (Phòng khi / Đề phòng)\n4. BUT FOR / WITHOUT + Noun/V-ing:\n- Loại 2: But for / Without + N, S + would + V_inf\n- Loại 3: But for / Without + N, S + would have + V3/ed (Nếu không vì / Nếu không nhờ có)",
+    "essence": "Các liên từ và cụm giới từ tương đương với mệnh đề điều kiện, giúp diễn đạt linh hoạt các sắc thái dự phòng, ràng buộc điều kiện hoặc lòng biết ơn.",
+    "examples": [
+      {
+        "en": "Unless you register before midnight, your application will be disqualified.",
+        "vi": "Trừ khi bạn đăng ký trước nửa đêm, bằng không hồ sơ của bạn sẽ bị loại (= If you do not register...).",
+        "breakdown": "Unless + S + V khẳng định = If + S + V phủ định."
+      },
+      {
+        "en": "But for his timely warning, we would have driven into the flooded road.",
+        "vi": "Nếu không nhờ có lời cảnh báo kịp thời của anh ấy, chúng tôi đã lái xe vào con đường ngập lụt.",
+        "breakdown": "But for + N (warning) -> câu điều kiện loại 3: would have driven."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "You can borrow my personal laptop ________ you promise to handle it with utmost care.",
+        "options": [
+          "A. as long as",
+          "B. unless",
+          "C. in case",
+          "D. but for"
+        ],
+        "answer": 0,
+        "explanation": "'as long as' = miễn là mang nghĩa điều kiện tích cực: Miễn là bạn hứa giữ gìn cẩn thận."
+      },
+      {
+        "question": "________ the unconditional support of my parents, I would never have succeeded in this business.",
+        "options": [
+          "A. But for",
+          "B. Provided that",
+          "C. As long as",
+          "D. Unless"
+        ],
+        "answer": 0,
+        "explanation": "But for + Noun phrase (hỗ trợ của cha mẹ), S + would have V3 -> Dùng 'But for' (nếu không nhờ có)."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 27,
+    "id": "g27-present-subjunctive",
+    "number": "#27",
+    "title": "Thể giả định hiện tại / Bàng thái cách (Present Subjunctive: suggest, demand, vital that...)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "1. Với động từ yêu cầu/đề xuất:\nS1 + suggest / recommend / demand / insist / request / require / advise + that + S2 + (should) + V_inf\n2. Với tính từ quan trọng/cấp thiết:\nIt is essential / vital / imperative / crucial / necessary / mandatory + that + S + (should) + V_inf\n* Dạng bị động: (should) BE + V3/ed",
+    "essence": "Động từ trong mệnh đề 'that' LUÔN Ở DẠNG NGUYÊN THỂ KHÔNG CHIA (không chia theo thì, không chia số ít, không chia ngôi), kể cả khi S2 là he, she, it.",
+    "examples": [
+      {
+        "en": "The doctor strongly recommended that the patient quit smoking immediately.",
+        "vi": "Bác sĩ khuyến nghị mạnh mẽ rằng bệnh nhân nên bỏ thuốc lá ngay lập tức.",
+        "breakdown": "Recommended that + the patient + QUIT (nguyên thể, không thêm -s)."
+      },
+      {
+        "en": "It is vital that all national cultural heritage be preserved for future generations.",
+        "vi": "Điều thiết yếu là tất cả di sản văn hóa quốc gia phải được bảo tồn cho các thế hệ tương lai.",
+        "breakdown": "Vital that + S + BE PRESERVED (bị động nguyên thể)."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The board of directors demanded that the financial director ________ an explanation immediately.",
+        "options": [
+          "A. gives",
+          "B. give",
+          "C. gave",
+          "D. has given"
+        ],
+        "answer": 1,
+        "explanation": "Cấu trúc giả định thức: demand that + S + (should) V_inf -> Dùng 'give' nguyên thể không chia."
+      },
+      {
+        "question": "It is essential that every candidate ________ strictly by the examination regulations.",
+        "options": [
+          "A. abides",
+          "B. abide",
+          "C. abided",
+          "D. is abiding"
+        ],
+        "answer": 1,
+        "explanation": "It is essential that + S + V_inf -> Dùng 'abide' nguyên thể."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 28,
+    "id": "g28-wish-if-only",
+    "number": "#28",
+    "title": "Giả định với mong ước (Wish / If only ở hiện tại, quá khứ, tương lai)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "1. Ước cho Hiện tại (trái ngược hiện tại):\n   S + wish / If only + S + V2/ed (To be: WERE cho mọi ngôi)\n2. Ước cho Quá khứ (tiếc nuối quá khứ):\n   S + wish / If only + S + HAD + V3/ed\n3. Ước cho Tương lai (mong muốn thay đổi/phàn nàn):\n   S + wish / If only + S + WOULD / COULD + V_inf",
+    "essence": "Diễn tả những mong muốn, ước nguyện không có thật ở hiện tại, quá khứ hoặc tương lai. Quy tắc bất biến là luôn lùi một thì so với thời điểm được ước.",
+    "examples": [
+      {
+        "en": "I wish I were more confident when speaking English in front of an audience.",
+        "vi": "Tôi ước gì mình tự tin hơn khi nói tiếng Anh trước đám đông.",
+        "breakdown": "Ước hiện tại: wish I WERE."
+      },
+      {
+        "en": "If only we had reserved our train tickets earlier; now all seats are booked.",
+        "vi": "Giá như chúng tôi đặt vé tàu sớm hơn; giờ thì tất cả chỗ đã kín rồi.",
+        "breakdown": "Ước quá khứ: had reserved."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "He lives far from his workplace. He wishes he ________ closer to his office.",
+        "options": [
+          "A. lives",
+          "B. lived",
+          "C. has lived",
+          "D. had lived"
+        ],
+        "answer": 1,
+        "explanation": "Ước trái ngược thực tế hiện tại (He lives far) -> Lùi về Quá khứ đơn: 'lived'."
+      },
+      {
+        "question": "I regret not attending the seminar yesterday. If only I ________ there!",
+        "options": [
+          "A. was",
+          "B. had been",
+          "C. were",
+          "D. would be"
+        ],
+        "answer": 1,
+        "explanation": "Tiếc nuối sự việc trong quá khứ (yesterday) -> Dùng Quá khứ hoàn thành: 'had been'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 29,
+    "id": "g29-its-time-would-rather",
+    "number": "#29",
+    "title": "Giả định với cấu trúc thời gian và sở thích (It's time / It's high time, Would rather)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "1. Cấu trúc It's time:\n- IT IS TIME / IT IS HIGH TIME / IT IS ABOUT TIME + S + V2/ed (Đã đến lúc ai phải làm gì)\n- IT IS TIME + (for sb) + TO V_inf\n2. Cấu trúc Would rather:\n- Cùng chủ ngữ: S + would rather + V_inf + THAN + V_inf\n- Hai chủ ngữ khác nhau:\n  + Hiện tại / Tương lai: S1 + would rather + S2 + V2/ed\n  + Quá khứ: S1 + would rather + S2 + HAD + V3/ed",
+    "essence": "Diễn tả tính cấp bách cần làm ngay một việc đã trễ (It's time), hoặc diễn tả mong muốn ai đó làm điều gì theo ý mình (Would rather có 2 chủ ngữ).",
+    "examples": [
+      {
+        "en": "It is high time municipal authorities took effective measures against air pollution.",
+        "vi": "Đã đến lúc chính quyền đô thị phải áp dụng các biện pháp hiệu quả chống ô nhiễm không khí.",
+        "breakdown": "It is high time + S + V2/ed: took."
+      },
+      {
+        "en": "I would rather you didn't smoke inside the study room.",
+        "vi": "Tôi muốn bạn không hút thuốc bên trong phòng học hơn.",
+        "breakdown": "Hai chủ ngữ khác nhau ở hiện tại: would rather you DIDN'T SMOKE."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "It is about time our government ________ stricter laws to combat wildlife trafficking.",
+        "options": [
+          "A. enacted",
+          "B. enacts",
+          "C. enact",
+          "D. has enacted"
+        ],
+        "answer": 0,
+        "explanation": "Cấu trúc: It is about time + S + V2/ed -> Dùng 'enacted'."
+      },
+      {
+        "question": "I would rather you ________ anyone about our confidential meeting yesterday.",
+        "options": [
+          "A. don't tell",
+          "B. didn't tell",
+          "C. hadn't told",
+          "D. not tell"
+        ],
+        "answer": 2,
+        "explanation": "Would rather có 2 chủ ngữ nói về sự việc trong quá khứ (yesterday) -> Dùng Quá khứ hoàn thành: 'hadn't told'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 30,
+    "id": "g30-as-if-as-though",
+    "number": "#30",
+    "title": "Giả định như thể là (As if / As though)",
+    "category": "conditionals_subjunctive",
+    "categoryLabel": "3. Điều kiện & Giả định",
+    "sectionTitle": "Phần 3: Câu Điều Kiện & Thể Giả Định",
+    "formula": "1. Giả định không có thật ở hiện tại:\n   S + V(hiện tại) + AS IF / AS THOUGH + S + V2/ed (were)\n2. Giả định không có thật ở quá khứ:\n   S + V(quá khứ) + AS IF / AS THOUGH + S + HAD + V3/ed\n3. Sự việc có thật / khả năng cao là đúng: chia theo thì thực tế",
+    "essence": "Diễn tả hành động hoặc trạng thái diễn ra 'như thể là', so sánh một tình huống với một giả thiết không có thật.",
+    "examples": [
+      {
+        "en": "He talks about artificial intelligence as if he were an expert in the field.",
+        "vi": "Anh ta nói về trí tuệ nhân tạo như thể anh ta là một chuyên gia trong lĩnh vực này vậy (thực tế anh ta không phải).",
+        "breakdown": "Giả thiết không có thật ở hiện tại: as if he WERE."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "She acts as though she ________ the director of the entire multinational corporation.",
+        "options": [
+          "A. is",
+          "B. were",
+          "C. has been",
+          "D. will be"
+        ],
+        "answer": 1,
+        "explanation": "Giả định không có thật ở hiện tại sau 'as though' -> Dùng 'were' cho mọi ngôi."
+      },
+      {
+        "question": "He described the accident in vivid detail as if he ________ there in person yesterday.",
+        "options": [
+          "A. had been",
+          "B. was",
+          "C. has been",
+          "D. would be"
+        ],
+        "answer": 0,
+        "explanation": "Giả định trái với sự thật trong quá khứ (yesterday anh ta không có mặt) sau 'as if' -> Lùi thì về Quá khứ hoàn thành (had been)."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 31,
+    "id": "g31-to-infinitive",
+    "number": "#31",
+    "title": "Động từ nguyên mẫu có \"to\" (To-Infinitive)",
+    "category": "verb_forms_modals",
+    "categoryLabel": "4. Dạng động từ & Modals",
+    "sectionTitle": "Phần 4: Dạng Thức Động Từ & Modals",
+    "formula": "1. Theo sau động từ chỉ mục đích/ý định:\n   decide, hope, expect, promise, agree, refuse, manage, afford, plan, tend, pretend, offer, demand + TO V_inf\n2. Theo sau tính từ:\n   S + be + Adj (happy, glad, eager, easy, difficult, ready...) + TO V_inf\n3. Cấu trúc đánh giá:\n   It + be + Adj + (of/for sb) + TO V_inf\n4. Theo sau từ để hỏi (trừ why):\n   know / ask / wonder / decide + what / where / how / when + TO V_inf",
+    "essence": "To-Infinitive thể hiện mục đích (để làm gì), quyết định, dự định hoặc một phản ứng sau tính từ.",
+    "examples": [
+      {
+        "en": "She decided to pursue a master's degree in environmental science.",
+        "vi": "Cô ấy đã quyết định theo đuổi bằng thạc sĩ về khoa học môi trường.",
+        "breakdown": "Decide + TO V_inf: decided to pursue."
+      },
+      {
+        "en": "It is essential for youngsters to cultivate independent learning habits.",
+        "vi": "Điều thiết yếu là người trẻ phải trau dồi thói quen tự học.",
+        "breakdown": "It is + Adj + for sb + TO V_inf: to cultivate."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The young entrepreneur managed ________ substantial funds for his renewable energy startup.",
+        "options": [
+          "A. raise",
+          "B. to raise",
+          "C. raising",
+          "D. raised"
+        ],
+        "answer": 1,
+        "explanation": "Động từ 'manage' đi với To-infinitive: manage to V (xoay xở/thành công làm gì) -> Dùng 'to raise'."
+      },
+      {
+        "question": "We were delighted ________ that our research proposal had won first prize.",
+        "options": [
+          "A. hear",
+          "B. to hear",
+          "C. hearing",
+          "D. heard"
+        ],
+        "answer": 1,
+        "explanation": "S + be + Adj (delighted) + TO V_inf -> Dùng 'to hear'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 32,
+    "id": "g32-bare-infinitive",
+    "number": "#32",
+    "title": "Động từ nguyên mẫu không \"to\" (Bare Infinitive)",
+    "category": "verb_forms_modals",
+    "categoryLabel": "4. Dạng động từ & Modals",
+    "sectionTitle": "Phần 4: Dạng Thức Động Từ & Modals",
+    "formula": "1. Sau động từ sai khiến / cho phép:\n   LET / MAKE + sb + V_inf (nguyên thể không to)\n   (Lưu ý bị động của MAKE: be made + TO V_inf)\n2. Sau động từ khuyết thiếu:\n   can, could, will, would, shall, should, must, may, might + V_inf\n3. Sau cụm khuyên nhủ / lựa chọn:\n   HAD BETTER + V_inf (nên làm gì)\n   WOULD RATHER + V_inf (thích làm gì hơn)\n4. Sau động từ giác quan (chứng kiến toàn bộ):\n   see, hear, watch, notice + O + V_inf",
+    "essence": "Bare Infinitive là dạng động từ nguyên thể trần trụi, đi kèm với các trợ động từ tình thái hoặc các cấu trúc mệnh lệnh, cho phép, ép buộc.",
+    "examples": [
+      {
+        "en": "The teacher made the students rewrite their essays carefully.",
+        "vi": "Giáo viên đã bắt học sinh phải viết lại bài luận một cách cẩn thận.",
+        "breakdown": "Make sb + V_inf: made the students rewrite."
+      },
+      {
+        "en": "You had better review all irregular verbs before the examination.",
+        "vi": "Tốt hơn hết bạn nên ôn tập lại toàn bộ động từ bất quy tắc trước kỳ thi.",
+        "breakdown": "Had better + V_inf: had better review."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The strict coach didn't let any athletes ________ the mandatory training session.",
+        "options": [
+          "A. to skip",
+          "B. skip",
+          "C. skipping",
+          "D. skipped"
+        ],
+        "answer": 1,
+        "explanation": "Cấu trúc LET + sb + V_inf -> Dùng 'skip'."
+      },
+      {
+        "question": "You had better ________ an umbrella; the weather forecast predicts sudden showers.",
+        "options": [
+          "A. to take",
+          "B. take",
+          "C. taking",
+          "D. took"
+        ],
+        "answer": 1,
+        "explanation": "Had better + V_inf -> Dùng 'take'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 33,
+    "id": "g33-gerunds",
+    "number": "#33",
+    "title": "Danh động từ (Gerunds - V-ing)",
+    "category": "verb_forms_modals",
+    "categoryLabel": "4. Dạng động từ & Modals",
+    "sectionTitle": "Phần 4: Dạng Thức Động Từ & Modals",
+    "formula": "1. Làm chủ ngữ hoặc tân ngữ trong câu:\n   V-ing + V(số ít)...\n2. Theo sau các động từ đặc trưng:\n   avoid, admit, deny, enjoy, keep, suggest, mind, consider, postpone, practice, appreciate, risk, tolerate + V-ing\n3. Theo sau tất cả các giới từ (in, on, at, about, with, without, of...):\n   Preposition + V-ing\n4. Các cụm thành ngữ cố định:\n   look forward to + V-ing, can't help / can't stand + V-ing, be/get used to + V-ing, it's no use / it's no good + V-ing, spend time + V-ing",
+    "essence": "Danh động từ có chức năng như một danh từ nhưng vẫn mang đặc tính của một động từ (có thể có tân ngữ theo sau).",
+    "examples": [
+      {
+        "en": "Reading academic English books every day expands your lexical resource.",
+        "vi": "Việc đọc sách tiếng Anh học thuật mỗi ngày giúp mở rộng vốn từ vựng của bạn.",
+        "breakdown": "V-ing làm chủ ngữ: Reading + expands (V số ít)."
+      },
+      {
+        "en": "She avoided making careless mistakes by proofreading her exam paper twice.",
+        "vi": "Cô ấy đã tránh phạm phải các lỗi sai bất cẩn bằng cách dò lại bài thi hai lần.",
+        "breakdown": "Avoid + V-ing: avoided making."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "We are sincerely looking forward to ________ your delegation at the upcoming summit.",
+        "options": [
+          "A. welcome",
+          "B. to welcome",
+          "C. welcoming",
+          "D. welcomed"
+        ],
+        "answer": 2,
+        "explanation": "Cấu trúc: look forward to + V-ing -> Dùng 'welcoming'."
+      },
+      {
+        "question": "The suspect finally admitted ________ the confidential financial records from the company server.",
+        "options": [
+          "A. to steal",
+          "B. stealing",
+          "C. steal",
+          "D. stole"
+        ],
+        "answer": 1,
+        "explanation": "Động từ 'admit' đi kèm danh động từ: admit + V-ing -> Dùng 'stealing'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 34,
+    "id": "g34-participles",
+    "number": "#34",
+    "title": "Hiện tại phân từ, Quá khứ phân từ và Phân từ hoàn thành (Participles)",
+    "category": "verb_forms_modals",
+    "categoryLabel": "4. Dạng động từ & Modals",
+    "sectionTitle": "Phần 4: Dạng Thức Động Từ & Modals",
+    "formula": "1. Hiện tại phân từ (Present Participle - V-ing):\n   - Mang nghĩa chủ động hoặc hành động đang diễn ra\n2. Quá khứ phân từ (Past Participle - V3/ed):\n   - Mang nghĩa bị động hoặc trạng thái chịu tác động\n3. Phân từ hoàn thành (Perfect Participle - HAVING + V3/ed):\n   - Nhấn mạnh một hành động đã hoàn tất trước một hành động khác trong quá khứ\n   - Dạng bị động: HAVING BEEN + V3/ed",
+    "essence": "Phân từ được dùng như tính từ miêu tả tính chất, trạng thái hoặc dùng để rút gọn các câu phức.",
+    "examples": [
+      {
+        "en": "Having graduated from Harvard University, she received multiple lucrative job offers.",
+        "vi": "Sau khi đã tốt nghiệp Đại học Harvard, cô ấy đã nhận được nhiều lời mời làm việc hấp dẫn.",
+        "breakdown": "Tốt nghiệp xong trước rồi mới nhận lời mời -> Having graduated."
+      },
+      {
+        "en": "The antique vase broken by the cat was worth thousands of dollars.",
+        "vi": "Chiếc bình cổ bị con mèo làm vỡ trị giá hàng ngàn đô la.",
+        "breakdown": "Bị động: The vase (which was) broken -> broken."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "________ all the entrance requirements, Mai was officially accepted into the medical school.",
+        "options": [
+          "A. Having fulfilled",
+          "B. Fulfilled",
+          "C. To fulfill",
+          "D. Fulfill"
+        ],
+        "answer": 0,
+        "explanation": "Hành động hoàn tất yêu cầu diễn ra trước khi được nhận nhập học -> Dùng Phân từ hoàn thành: 'Having fulfilled'."
+      },
+      {
+        "question": "The ancient artifacts ________ in the imperial citadel date back to the eleventh century.",
+        "options": [
+          "A. excavating",
+          "B. excavated",
+          "C. to excavate",
+          "D. have excavated"
+        ],
+        "answer": 1,
+        "explanation": "Cổ vật được khai quật (mang nghĩa bị động) -> Dùng Quá khứ phân từ: 'excavated'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 35,
+    "id": "g35-participle-clauses",
+    "number": "#35",
+    "title": "Mệnh đề phân từ / Rút gọn câu cùng chủ ngữ (Participle Clauses)",
+    "category": "verb_forms_modals",
+    "categoryLabel": "4. Dạng động từ & Modals",
+    "sectionTitle": "Phần 4: Dạng Thức Động Từ & Modals",
+    "formula": "Điều kiện tiên quyết: Hai mệnh đề PHẢI CÙNG CHỦ NGỮ (S1 = S2)\n1. Chủ động (đồng thời / liên tiếp):\n   V-ing..., S + V...\n2. Bị động:\n   V3/ed... (hoặc Being + V3/ed), S + V...\n3. Hành động xảy ra trước:\n   Having + V3/ed..., S + V...\n4. Bị động xảy ra trước:\n   Having been + V3/ed..., S + V...",
+    "essence": "Biến đổi một mệnh đề phụ (chỉ thời gian, nguyên nhân, sự nhượng bộ) thành một cụm phân từ ngắn gọn, học thuật.",
+    "examples": [
+      {
+        "en": "Opening the envelope with trembling fingers, he discovered the congratulatory scholarship letter.",
+        "vi": "Mở phong bì với những ngón tay run rẩy, cậu ấy phát hiện ra lá thư chúc mừng học bổng.",
+        "breakdown": "Cùng chủ ngữ 'he': When he opened... -> Opening the envelope..."
+      },
+      {
+        "en": "Situated on a scenic hill, the resort offers panoramic views of the entire bay.",
+        "vi": "Tọa lạc trên một ngọn đồi thơ mộng, khu nghỉ dưỡng đem lại tầm nhìn bao quát toàn bộ vịnh.",
+        "breakdown": "Bị động: Because the resort is situated... -> Situated on a scenic hill..."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "________ the crucial phone call from the hospital, Dr. Phong rushed to the emergency operating theatre.",
+        "options": [
+          "A. Receiving",
+          "B. Received",
+          "C. To receive",
+          "D. Having received"
+        ],
+        "answer": 0,
+        "explanation": "Hành động nhận cuộc gọi chủ động dẫn đến hành động chạy vào phòng mổ -> Dùng 'Receiving' (hoặc Having received)."
+      },
+      {
+        "question": "________ by millions of international tourists, Hoi An Ancient Town is celebrated for its historic architecture.",
+        "options": [
+          "A. Visiting",
+          "B. Visited",
+          "C. Having visited",
+          "D. To visit"
+        ],
+        "answer": 1,
+        "explanation": "Hội An được tham quan (bị động) -> Dùng Quá khứ phân từ: 'Visited by millions of tourists'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 36,
+    "id": "g36-modal-verbs-basic",
+    "number": "#36",
+    "title": "Động từ khuyết thiếu cơ bản (Modal Verbs: can, could, must, should...)",
+    "category": "verb_forms_modals",
+    "categoryLabel": "4. Dạng động từ & Modals",
+    "sectionTitle": "Phần 4: Dạng Thức Động Từ & Modals",
+    "formula": "S + MODAL + V_inf\n1. Khả năng (Ability): CAN (hiện tại), COULD (quá khứ), BE ABLE TO (mọi thì)\n2. Cho phép / Khả năng xảy ra: MAY, MIGHT (might khả năng thấp hơn may)\n3. Bắt buộc (Obligation): MUST (bắt buộc chủ quan/luật pháp), HAVE TO (bắt buộc khách quan do hoàn cảnh)\n4. Cấm đoán: MUSTN'T (tuyệt đối không được làm) >< DON'T HAVE TO (không cần thiết phải làm)\n5. Lời khuyên: SHOULD, OUGHT TO, HAD BETTER",
+    "essence": "Bổ sung các sắc thái ý nghĩa về khả năng, sự cho phép, sự bắt buộc, lời khuyên hoặc dự đoán vào động từ chính.",
+    "examples": [
+      {
+        "en": "You mustn't use unauthorized electronic devices during the national exam.",
+        "vi": "Bạn tuyệt đối không được sử dụng các thiết bị điện tử không được phép trong kỳ thi quốc gia.",
+        "breakdown": "Mustn't diễn tả sự cấm đoán tuyệt đối theo quy chế thi."
+      },
+      {
+        "en": "Tomorrow is a public holiday, so we don't have to get up early.",
+        "vi": "Ngày mai là ngày nghỉ lễ, vì vậy chúng tôi không cần phải dậy sớm.",
+        "breakdown": "Don't have to = không bắt buộc, không cần thiết."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Museum visitors ________ touch the fragile oil paintings on display under any circumstances.",
+        "options": [
+          "A. mustn't",
+          "B. needn't",
+          "C. don't have to",
+          "D. shouldn't"
+        ],
+        "answer": 0,
+        "explanation": "Quy định cấm đoán nghiêm ngặt 'under any circumstances' -> Dùng 'mustn't'."
+      },
+      {
+        "question": "Since the museum admission is completely free today, you ________ pay for entrance tickets.",
+        "options": [
+          "A. mustn't",
+          "B. don't have to",
+          "C. can't",
+          "D. couldn't"
+        ],
+        "answer": 1,
+        "explanation": "Vé vào cửa miễn phí nên 'không cần phải' mua vé -> Dùng 'don't have to'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 37,
+    "id": "g37-perfect-modals",
+    "number": "#37",
+    "title": "Động từ khuyết thiếu chỉ phỏng đoán trong quá khứ (Perfect Modals: must have, should have...)",
+    "category": "verb_forms_modals",
+    "categoryLabel": "4. Dạng động từ & Modals",
+    "sectionTitle": "Phần 4: Dạng Thức Động Từ & Modals",
+    "formula": "S + MODAL + HAVE + V3/ed\n1. MUST HAVE + V3/ed: Chắc chắn là đã làm gì (suy đoán chắc chắn 99% có bằng chứng trong quá khứ)\n2. CAN'T / COULDN'T HAVE + V3/ed: Chắc chắn là đã không làm gì\n3. SHOULD HAVE + V3/ed: Lẽ ra nên làm gì (nhưng thực tế đã không làm - diễn tả sự tiếc nuối/trách móc)\n4. SHOULDN'T HAVE + V3/ed: Lẽ ra không nên làm gì (nhưng thực tế đã lỡ làm)\n5. MAY / MIGHT / COULD HAVE + V3/ed: Có lẽ là đã làm gì (phỏng đoán không chắc chắn)\n6. NEEDN'T HAVE + V3/ed: Lẽ ra không cần phải làm gì (nhưng đã lỡ làm tốn công)",
+    "essence": "Chuyên đề cốt lõi xuất hiện liên tục trong đề thi THPTQG dùng để phỏng đoán hoặc bày tỏ sự đánh giá, tiếc nuối về một hành động đã diễn ra trong quá khứ.",
+    "examples": [
+      {
+        "en": "The streets are muddy and full of puddles. It must have rained heavily last night.",
+        "vi": "Đường phố lầy lội và đầy vũng nước. Chắc chắn đêm qua trời đã mưa rất to.",
+        "breakdown": "Có bằng chứng rõ ràng ở hiện tại (muddy, puddles) suy đoán về quá khứ: MUST HAVE RAINED."
+      },
+      {
+        "en": "I failed the physics test. I should have listened attentively to the teacher's lectures.",
+        "vi": "Tôi đã trượt bài kiểm tra vật lý. Lẽ ra tôi nên lắng nghe chăm chú các bài giảng của giáo viên.",
+        "breakdown": "Tiếc nuối vì thực tế đã không chăm chú: SHOULD HAVE LISTENED."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Nam's phone is switched off and his luggage is missing. He ________ for the airport.",
+        "options": [
+          "A. must leave",
+          "B. must have left",
+          "C. should have left",
+          "D. can leave"
+        ],
+        "answer": 1,
+        "explanation": "Có chứng cứ rõ ràng (tắt máy, vali biến mất) suy đoán chắc chắn về quá khứ -> Dùng 'must have left'."
+      },
+      {
+        "question": "You ________ so many fresh groceries; we are leaving for our week-long vacation tomorrow!",
+        "options": [
+          "A. needn't have bought",
+          "B. mustn't buy",
+          "C. can't buy",
+          "D. wouldn't buy"
+        ],
+        "answer": 0,
+        "explanation": "Lẽ ra không cần mua nhiều đồ ăn như thế (nhưng đã lỡ mua rồi) -> Dùng 'needn't have bought'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 38,
+    "id": "g38-linking-verbs",
+    "number": "#38",
+    "title": "Động từ nối (Linking Verbs: become, seem, look, taste, feel...)",
+    "category": "verb_forms_modals",
+    "categoryLabel": "4. Dạng động từ & Modals",
+    "sectionTitle": "Phần 4: Dạng Thức Động Từ & Modals",
+    "formula": "S + LINKING VERB + ADJECTIVE (Tính từ - KHÔNG dùng phó từ -ly)\nCác động từ nối thông dụng:\n1. Trạng thái tồn tại: BE, BECOME, GET, TURN, GROW, REMAIN, STAY\n2. Cảm giác / Giác quan: LOOK (trông có vẻ), SEEM / APPEAR (dường như), TASTE (có vị), SMELL (có mùi), SOUND (nghe có vẻ), FEEL (cảm thấy)",
+    "essence": "Động từ nối dùng để kết nối chủ ngữ với một tính từ mô tả trạng thái, đặc điểm của chủ ngữ đó, thay vì diễn tả một hành động thông thường.",
+    "examples": [
+      {
+        "en": "The soup tastes delicious and smells wonderful.",
+        "vi": "Món súp này có vị rất ngon và mùi thơm tuyệt vời.",
+        "breakdown": "Tastes, smells là linking verbs -> bổ nghĩa bằng tính từ delicious, wonderful (không dùng deliciously, wonderfully)."
+      },
+      {
+        "en": "Despite facing severe financial obstacles, the founder remained optimistic.",
+        "vi": "Dù đối mặt với những trở ngại tài chính nghiêm trọng, nhà sáng lập vẫn giữ thái độ lạc quan.",
+        "breakdown": "Remained là linking verb -> dùng tính từ optimistic."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Although the interview questions were tough, she stayed ________ throughout the entire session.",
+        "options": [
+          "A. calm",
+          "B. calmly",
+          "C. calmness",
+          "D. be calm"
+        ],
+        "answer": 0,
+        "explanation": "'stay' là động từ nối (linking verb) đi kèm tính từ -> Dùng tính từ 'calm'."
+      },
+      {
+        "question": "This newly baked strawberry cake smells ________ and appetizing.",
+        "options": [
+          "A. wonderfully",
+          "B. wonderful",
+          "C. wonder",
+          "D. wondering"
+        ],
+        "answer": 1,
+        "explanation": "'smell' là động từ nối chỉ giác quan -> đi với tính từ: 'wonderful'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 39,
+    "id": "g39-defining-relative",
+    "number": "#39",
+    "title": "Mệnh đề quan hệ xác định (Defining Relative Clauses)",
+    "category": "relative_clauses",
+    "categoryLabel": "5. Mệnh đề quan hệ",
+    "sectionTitle": "Phần 5: Mệnh Đề Quan Hệ Toàn Diện",
+    "formula": "S + Defining Relative Clause + V_main...\n- Không có dấu phẩy\n- Mệnh đề bắt buộc phải có để xác định danh từ phía trước\n- Có thể dùng đại từ \"THAT\" thay cho who, whom, which\n- Có thể lược bỏ đại từ quan hệ khi nó đóng vai trò làm tân ngữ (O)",
+    "essence": "Cung cấp thông tin thiết yếu để định danh chính xác đối tượng được nhắc đến. Nếu lược bỏ mệnh đề này, câu sẽ tối nghĩa hoặc không hoàn chỉnh.",
+    "examples": [
+      {
+        "en": "The scholarship that was awarded to Lan helped her cover all university tuition fees.",
+        "vi": "Suất học bổng được trao cho Lan đã giúp cô ấy trang trải toàn bộ học phí đại học.",
+        "breakdown": "Mệnh đề quan hệ xác định không có dấu phẩy, dùng 'that' thay cho 'which'."
+      },
+      {
+        "en": "The professor (whom) I interviewed yesterday has published over 50 scientific papers.",
+        "vi": "Vị giáo sư mà tôi phỏng vấn ngày hôm qua đã xuất bản hơn 50 bài báo khoa học.",
+        "breakdown": "Đại từ quan hệ làm tân ngữ (whom/that) có thể được lược bỏ."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The candidate ________ scored highest on the entrance exam received a full scholarship.",
+        "options": [
+          "A. who",
+          "B. which",
+          "C. whose",
+          "D. whom"
+        ],
+        "answer": 0,
+        "explanation": "Chủ ngữ chỉ người 'The candidate' làm chủ từ cho động từ 'scored' -> Dùng 'who' (hoặc that)."
+      },
+      {
+        "question": "The scientific software ________ my team developed won first prize in the national tech contest.",
+        "options": [
+          "A. which",
+          "B. who",
+          "C. whom",
+          "D. whose"
+        ],
+        "answer": 0,
+        "explanation": "Chỉ vật 'software' làm tân ngữ cho 'developed' -> Dùng 'which' (hoặc that)."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 40,
+    "id": "g40-non-defining-relative",
+    "number": "#40",
+    "title": "Mệnh đề quan hệ không xác định (Non-defining Relative Clauses)",
+    "category": "relative_clauses",
+    "categoryLabel": "5. Mệnh đề quan hệ",
+    "sectionTitle": "Phần 5: Mệnh Đề Quan Hệ Toàn Diện",
+    "formula": "S , Non-defining Relative Clause , V_main...\n- BẮT BUỘC có dấu phẩy ngăn cách\n- TUYỆT ĐỐI KHÔNG dùng đại từ \"THAT\"\n- TUYỆT ĐỐI KHÔNG được lược bỏ đại từ quan hệ\n- Dùng sau danh từ riêng, danh từ có this/that/these/those, hoặc sở hữu (my, his, their...)",
+    "essence": "Cung cấp thêm thông tin bổ trợ (extra information) cho một đối tượng vốn đã được xác định rõ ràng. Nếu bỏ mệnh đề này thì câu vẫn hoàn toàn đầy đủ nghĩa.",
+    "examples": [
+      {
+        "en": "Ha Long Bay, which was recognized by UNESCO as a World Natural Heritage site, attracts millions of visitors.",
+        "vi": "Vịnh Hạ Long, nơi được UNESCO công nhận là di sản thiên nhiên thế giới, thu hút hàng triệu du khách.",
+        "breakdown": "Ha Long Bay là danh từ riêng -> ngăn cách bằng 2 dấu phẩy, dùng 'which', không dùng 'that'."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Albert Einstein, ________ developed the theory of relativity, was awarded the Nobel Prize in Physics.",
+        "options": [
+          "A. who",
+          "B. that",
+          "C. whom",
+          "D. which"
+        ],
+        "answer": 0,
+        "explanation": "Tên riêng có dấu phẩy ngăn cách (Non-defining) chỉ người làm chủ từ -> Dùng 'who' (tuyệt đối không dùng that)."
+      },
+      {
+        "question": "My father's vintage car, ________ was manufactured in 1968, still operates smoothly.",
+        "options": [
+          "A. that",
+          "B. which",
+          "C. whom",
+          "D. who"
+        ],
+        "answer": 1,
+        "explanation": "Danh từ có sở hữu 'My father's vintage car' đi kèm dấu phẩy chỉ vật -> Dùng 'which'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 41,
+    "id": "g41-relative-pronouns-adverbs",
+    "number": "#41",
+    "title": "Đại từ quan hệ và Trạng từ quan hệ (Who, Whom, Which, That, Whose, Where, When, Why)",
+    "category": "relative_clauses",
+    "categoryLabel": "5. Mệnh đề quan hệ",
+    "sectionTitle": "Phần 5: Mệnh Đề Quan Hệ Toàn Diện",
+    "formula": "1. Đại từ quan hệ:\n- WHO: thay cho người (chủ ngữ hoặc tân ngữ)\n- WHOM: thay cho người (chỉ làm tân ngữ: Whom + S + V)\n- WHICH: thay cho vật (chủ ngữ hoặc tân ngữ)\n- THAT: thay cho who, whom, which trong mệnh đề xác định\n- WHOSE + Noun: chỉ sở hữu (người hoặc vật)\n2. Trạng từ quan hệ:\n- WHERE = in / at which (thay thế trạng từ nơi chốn)\n- WHEN = in / on / at which (thay thế trạng từ thời gian)\n- WHY = for which (thay thế lý do: the reason why)",
+    "essence": "Kết nối hai câu đơn thành một câu phức, thay thế cho danh từ hoặc trạng từ đứng trước để tránh lặp từ.",
+    "examples": [
+      {
+        "en": "The boy whose mother is a renowned neurosurgeon won the national science fair.",
+        "vi": "Cậu bé có mẹ là một bác sĩ phẫu thuật thần kinh nổi tiếng đã giành giải nhất hội thi khoa học quốc gia.",
+        "breakdown": "Whose + Noun (whose mother): sở hữu."
+      },
+      {
+        "en": "That was the memorable summer when we volunteered in the highlands.",
+        "vi": "Đó là mùa hè đáng nhớ khi chúng tôi đi làm tình nguyện ở vùng cao.",
+        "breakdown": "When = in which (thay cho thời gian the summer)."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The passionate environmentalist ________ organization planted one million trees was honored at the summit.",
+        "options": [
+          "A. whose",
+          "B. who",
+          "C. whom",
+          "D. which"
+        ],
+        "answer": 0,
+        "explanation": "Chỉ sở hữu 'tổ chức CỦA nhà môi trường' (whose organization) -> Dùng 'whose'."
+      },
+      {
+        "question": "This is the hospital ________ the clinical trials for the new vaccine were conducted.",
+        "options": [
+          "A. where",
+          "B. which",
+          "C. when",
+          "D. why"
+        ],
+        "answer": 0,
+        "explanation": "Chỉ nơi chốn nơi sự việc diễn ra (in the hospital) -> Dùng trạng từ quan hệ 'where'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 42,
+    "id": "g42-relative-prepositions",
+    "number": "#42",
+    "title": "Mệnh đề quan hệ với giới từ (Relative Clauses with Prepositions: Prep + Whom/Which)",
+    "category": "relative_clauses",
+    "categoryLabel": "5. Mệnh đề quan hệ",
+    "sectionTitle": "Phần 5: Mệnh Đề Quan Hệ Toàn Diện",
+    "formula": "1. Đưa giới từ lên trước đại từ quan hệ:\n- Với người: PREPOSITION + WHOM (tuyệt đối KHÔNG dùng who hoặc that sau giới từ)\n- Với vật: PREPOSITION + WHICH (tuyệt đối KHÔNG dùng that sau giới từ)\n2. Cụm từ chỉ số lượng / định lượng:\n- all of / none of / neither of / both of / either of / most of / some of / each of / one of + WHOM / WHICH",
+    "essence": "Phong cách học thuật chuẩn mực trong tiếng Anh trang trọng; rất thường xuyên xuất hiện trong các câu hỏi phân loại 8+ và 9+ của đề thi THPT Quốc Gia.",
+    "examples": [
+      {
+        "en": "The academic supervisor under whom she conducted research was a distinguished professor.",
+        "vi": "Người hướng dẫn học thuật mà dưới sự hướng dẫn của thầy cô ấy đã làm nghiên cứu là một vị giáo sư ưu tú.",
+        "breakdown": "Giới từ UNDER đứng trước đại từ chỉ người: under WHOM."
+      },
+      {
+        "en": "The university library acquired 500 new textbooks, all of which were imported from the UK.",
+        "vi": "Thư viện trường đại học đã mua thêm 500 cuốn giáo trình mới, tất cả số đó đều được nhập khẩu từ Vương quốc Anh.",
+        "breakdown": "Định lượng chỉ vật: all of WHICH."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The foreign diplomat to ________ the ambassador presented the credential credentials was warmly welcomed.",
+        "options": [
+          "A. whom",
+          "B. who",
+          "C. that",
+          "D. which"
+        ],
+        "answer": 0,
+        "explanation": "Sau giới từ 'to' chỉ người, bắt buộc dùng 'whom' -> Dùng 'to whom'."
+      },
+      {
+        "question": "The tech firm recruited twenty young engineers, most of ________ held degrees from prestigious universities.",
+        "options": [
+          "A. whom",
+          "B. which",
+          "C. that",
+          "D. who"
+        ],
+        "answer": 0,
+        "explanation": "Chỉ số lượng chỉ người 'most of...' -> Bắt buộc dùng 'most of whom'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 43,
+    "id": "g43-reduced-relative",
+    "number": "#43",
+    "title": "Rút gọn mệnh đề quan hệ (Reduced Relative Clauses: V-ing, V3/ed, To-V, Cụm danh từ)",
+    "category": "relative_clauses",
+    "categoryLabel": "5. Mệnh đề quan hệ",
+    "sectionTitle": "Phần 5: Mệnh Đề Quan Hệ Toàn Diện",
+    "formula": "1. Rút gọn bằng V-ING khi mệnh đề mang nghĩa CHỦ ĐỘNG:\n   The boy who sits next to me -> The boy SITTING next to me\n2. Rút gọn bằng V3/ED khi mệnh đề mang nghĩa BỊ ĐỘNG:\n   The books which were published in 2020 -> The books PUBLISHED in 2020\n3. Rút gọn bằng TO V_INF khi có từ bổ nghĩa: the first, the second, the last, the only, so sánh nhất:\n   Yuri Gagarin was the first man who flew into space -> Yuri Gagarin was the first man TO FLY into space\n4. Rút gọn bằng Cụm danh từ (Appositive):\n   Ha Long Bay, which is a natural wonder -> Ha Long Bay, A NATURAL WONDER...",
+    "essence": "Chuyên đề cốt lõi số 1 trong bài thi THPTQG giúp biến câu phức rườm rà thành câu súc tích, ngắn gọn và tự nhiên.",
+    "examples": [
+      {
+        "en": "Candidates arriving after the test commencement time will not be admitted.",
+        "vi": "Những thí sinh đến sau giờ bắt đầu làm bài sẽ không được vào phòng thi.",
+        "breakdown": "Chủ động: Candidates who arrive... -> Candidates arriving..."
+      },
+      {
+        "en": "Neil Armstrong was the first human to set foot on the Moon in 1969.",
+        "vi": "Neil Armstrong là con người đầu tiên đặt chân lên Mặt Trăng vào năm 1969.",
+        "breakdown": "Sau 'the first' -> rút gọn bằng TO V: to set foot."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The scientific paper ________ by our research team was published in a prestigious international journal.",
+        "options": [
+          "A. writing",
+          "B. written",
+          "C. to write",
+          "D. was written"
+        ],
+        "answer": 1,
+        "explanation": "Bài báo khoa học được viết (bị động: which was written) -> Rút gọn bằng Quá khứ phân từ: 'written'."
+      },
+      {
+        "question": "Marie Curie was the first woman ________ two Nobel Prizes in distinct scientific fields.",
+        "options": [
+          "A. winning",
+          "B. to win",
+          "C. won",
+          "D. was won"
+        ],
+        "answer": 1,
+        "explanation": "Có từ thứ tự 'the first woman' mang nghĩa chủ động -> Rút gọn bằng 'to win'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 44,
+    "id": "g44-reported-statements",
+    "number": "#44",
+    "title": "Tường thuật câu trần thuật (Reported Statements)",
+    "category": "reported_speech",
+    "categoryLabel": "6. Câu tường thuật",
+    "sectionTitle": "Phần 6: Câu Gián Tiếp & Tường Thuật",
+    "formula": "S + SAID (THAT) + S' + V (lùi thì)...\nS + TOLD SB (THAT) + S' + V (lùi thì)...\n* 3 Quy tắc biến đổi bắt buộc:\n1. LÙI THÌ:\n- Hiện tại đơn -> Quá khứ đơn\n- Hiện tại tiếp diễn -> Quá khứ tiếp diễn\n- Hiện tại hoàn thành -> Quá khứ hoàn thành\n- Quá khứ đơn -> Quá khứ hoàn thành\n- Will -> Would | Can -> Could | Must -> Had to\n2. ĐỔI ĐẠI TỪ: phù hợp với chủ ngữ và tân ngữ\n3. ĐỔI TRẠNG NGỮ:\n- here -> there | now -> then | today -> that day\n- yesterday -> the day before / the previous day\n- tomorrow -> the next day / the following day\n- this/these -> that/those | ago -> before",
+    "essence": "Thuật lại lời nói của một người khác dưới dạng gián tiếp, bảo đảm tính logic về thời gian và góc nhìn xưng hô.",
+    "examples": [
+      {
+        "en": "Direct: 'I am completing my final graduation project,' said Nam.\n-> Reported: Nam said that he was completing his final graduation project.",
+        "vi": "Nam nói rằng cậu ấy đang hoàn thành đồ án tốt nghiệp cuối khóa của mình.",
+        "breakdown": "Lùi thì: am completing -> was completing; đổi đại từ: I -> he, my -> his."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "'I finished the university application yesterday,' said Lan.\n-> Lan said that she ________ the university application the previous day.",
+        "options": [
+          "A. finished",
+          "B. had finished",
+          "C. has finished",
+          "D. was finishing"
+        ],
+        "answer": 1,
+        "explanation": "Quá khứ đơn (finished) lùi một thì thành Quá khứ hoàn thành -> Dùng 'had finished'."
+      },
+      {
+        "question": "The meteorologist announced that the tropical cyclone ________ landfall the following morning.",
+        "options": [
+          "A. will make",
+          "B. would make",
+          "C. makes",
+          "D. has made"
+        ],
+        "answer": 1,
+        "explanation": "Câu tường thuật gián tiếp trong quá khứ (announced) có 'the following morning' -> Lùi will thành 'would make'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 45,
+    "id": "g45-reported-questions",
+    "number": "#45",
+    "title": "Tường thuật câu hỏi Yes/No và Wh-questions (Reported Questions)",
+    "category": "reported_speech",
+    "categoryLabel": "6. Câu tường thuật",
+    "sectionTitle": "Phần 6: Câu Gián Tiếp & Tường Thuật",
+    "formula": "1. Câu hỏi Yes/No:\n   S + ASKED (SB) / WONDERED / WANTED TO KNOW + IF / WHETHER + S' + V (lùi thì, trật tự KHẲNG ĐỊNH)\n2. Câu hỏi có từ để hỏi (Wh-questions):\n   S + ASKED (SB) + WH-WORD (What/Where/When/Why/How) + S' + V (lùi thì, trật tự KHẲNG ĐỊNH)\n* QUY TẮC CỐT LÕI: KHÔNG dùng trợ động từ đảo ngữ (do/does/did) và KHÔNG còn dấu chấm hỏi (?).",
+    "essence": "Chuyển câu hỏi trực tiếp thành một mệnh đề danh từ tường thuật gián tiếp, giữ nguyên trật tự xuôi: Chủ ngữ + Động từ.",
+    "examples": [
+      {
+        "en": "Direct: 'Do you study abroad?' the interviewer asked.\n-> Reported: The interviewer asked me IF / WHETHER I studied abroad.",
+        "vi": "Người phỏng vấn hỏi tôi liệu tôi có đi du học hay không.",
+        "breakdown": "Dùng 'if/whether', bỏ trợ động từ do, lùi thì study -> studied."
+      },
+      {
+        "en": "Direct: 'Where did you purchase that dictionary?' asked Mai.\n-> Reported: Mai asked me WHERE I had purchased that dictionary.",
+        "vi": "Mai hỏi tôi nơi tôi đã mua cuốn từ điển đó.",
+        "breakdown": "Trật tự xuôi: Where + I + had purchased (không dùng Where did I buy)."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The immigration officer asked the traveller ________ a return flight ticket.",
+        "options": [
+          "A. if did he have",
+          "B. if he had",
+          "C. whether had he",
+          "D. that he had"
+        ],
+        "answer": 1,
+        "explanation": "Tường thuật câu hỏi Yes/No: asked + if + S + V (trật tự khẳng định, lùi thì) -> Dùng 'if he had'."
+      },
+      {
+        "question": "She asked her supervisor ________ to solve the software system malfunction.",
+        "options": [
+          "A. how could they",
+          "B. how they could",
+          "C. that how they could",
+          "D. how did they"
+        ],
+        "answer": 1,
+        "explanation": "Tường thuật câu hỏi Wh-question: asked + Wh-word + S + V -> Dùng 'how they could'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 46,
+    "id": "g46-reported-imperatives",
+    "number": "#46",
+    "title": "Tường thuật câu mệnh lệnh, yêu cầu, lời khuyên (Reported Imperatives / Requests)",
+    "category": "reported_speech",
+    "categoryLabel": "6. Câu tường thuật",
+    "sectionTitle": "Phần 6: Câu Gián Tiếp & Tường Thuật",
+    "formula": "1. Khẳng định:\n   S + TOLD / ASKED / ORDERED / REQUESTED / WARNED / ADVISED + O + TO V_inf\n2. Phủ định (Đừng làm gì):\n   S + TOLD / ASKED / ORDERED / WARNED + O + NOT TO V_inf\n(Ví dụ: 'Don't open the door' -> told me NOT TO OPEN the door)",
+    "essence": "Tường thuật một mệnh lệnh, yêu cầu lịch sự hoặc lời cảnh báo bằng cách sử dụng động từ nguyên mẫu có 'to' hoặc 'not to'.",
+    "examples": [
+      {
+        "en": "Direct: 'Please turn off your mobile devices during the exam,' the proctor said.\n-> Reported: The proctor asked all candidates TO TURN OFF their mobile devices during the exam.",
+        "vi": "Giám thị yêu cầu tất cả thí sinh tắt thiết bị di động trong giờ thi.",
+        "breakdown": "Asked + O + TO V_inf: asked all candidates to turn off."
+      },
+      {
+        "en": "Direct: 'Don't touch that live electric wire!' shouted the electrician.\n-> Reported: The electrician warned us NOT TO TOUCH that live electric wire.",
+        "vi": "Người thợ điện cảnh báo chúng tôi không được chạm vào sợi dây điện hở đó.",
+        "breakdown": "Warned + O + NOT TO V_inf."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "'Please fasten your seatbelts,' the flight attendant said to the passengers.\n-> The flight attendant told the passengers ________ their seatbelts.",
+        "options": [
+          "A. fasten",
+          "B. to fasten",
+          "C. fastening",
+          "D. fastened"
+        ],
+        "answer": 1,
+        "explanation": "Cấu trúc tường thuật câu mệnh lệnh: tell sb + TO V_inf -> Dùng 'to fasten'."
+      },
+      {
+        "question": "The police officer warned the speeding motorist ________ so recklessly in residential areas.",
+        "options": [
+          "A. not to drive",
+          "B. to not drive",
+          "C. not driving",
+          "D. don't drive"
+        ],
+        "answer": 0,
+        "explanation": "Cấu trúc: warn sb + NOT TO V_inf -> Dùng 'not to drive'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 47,
+    "id": "g47-reporting-verbs-special",
+    "number": "#47",
+    "title": "Tường thuật dùng động từ chỉ dẫn đặc biệt đi kèm To-V hoặc V-ing (Reporting Verbs)",
+    "category": "reported_speech",
+    "categoryLabel": "6. Câu tường thuật",
+    "sectionTitle": "Phần 6: Câu Gián Tiếp & Tường Thuật",
+    "formula": "1. V + TO V_inf:\n   - agree, refuse, offer, promise, threaten + TO V_inf\n2. V + O + TO V_inf:\n   - advise, invite, remind, encourage, urge, forbid + O + TO V_inf\n3. V + V-ing:\n   - admit, deny, suggest + V-ing\n4. V + PREPOSITION + V-ing:\n   - apologize (to sb) for + V-ing (xin lỗi vì đã làm gì)\n   - accuse sb of + V-ing (buộc tội ai vì đã làm gì)\n   - congratulate sb on + V-ing (chúc mừng ai vì đã làm gì)\n   - thank sb for + V-ing (cảm ơn ai vì đã làm gì)\n   - insist on + V-ing (khăng khăng đòi làm gì)",
+    "essence": "Thay vì lặp lại 'said that' nhàm chán, các động từ chỉ dẫn đặc biệt tóm lược chính xác hành động giao tiếp và thái độ của người nói một cách súc tích.",
+    "examples": [
+      {
+        "en": "Direct: 'I am so sorry for arriving late to the staff meeting,' said Peter.\n-> Reported: Peter apologized for arriving late to the staff meeting.",
+        "vi": "Peter đã xin lỗi vì đã đến muộn cuộc họp nhân viên.",
+        "breakdown": "Apologized for + V-ing."
+      },
+      {
+        "en": "Direct: 'Congratulations on winning first prize in the national contest!'\n-> Reported: The teacher congratulated Lan on winning first prize in the national contest.",
+        "vi": "Giáo viên đã chúc mừng Lan vì đã giành giải nhất trong kỳ thi quốc gia.",
+        "breakdown": "Congratulated + sb + ON + V-ing."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "'I definitely didn't leak the confidential exam paper,' said the teaching assistant.\n-> The teaching assistant denied ________ the confidential exam paper.",
+        "options": [
+          "A. to leak",
+          "B. leaking",
+          "C. of leaking",
+          "D. to have leaked"
+        ],
+        "answer": 1,
+        "explanation": "Động từ 'deny' đi kèm trực tiếp với danh động từ: deny + V-ing (phủ nhận đã làm gì) -> Dùng 'leaking'."
+      },
+      {
+        "question": "The principal congratulated all twelfth graders ________ passing their graduation exams with high distinction.",
+        "options": [
+          "A. on",
+          "B. for",
+          "C. at",
+          "D. with"
+        ],
+        "answer": 0,
+        "explanation": "Cấu trúc: congratulate sb ON V-ing (chúc mừng ai về việc gì) -> Giới từ bắt buộc là 'on'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 48,
+    "id": "g48-equal-comparison",
+    "number": "#48",
+    "title": "So sánh bằng và không bằng (Equal Comparison)",
+    "category": "comparisons",
+    "categoryLabel": "7. Cấu trúc so sánh",
+    "sectionTitle": "Phần 7: Các Cấu Trúc So Sánh",
+    "formula": "1. Khẳng định (Bằng nhau):\n   S1 + V + AS + adj / adv + AS + S2 / O\n   (Ví dụ: as diligent as, as fluently as)\n2. Phủ định (Không bằng nhau):\n   S1 + V(phủ định) + NOT AS / NOT SO + adj / adv + AS + S2 / O\n3. So sánh danh từ giống nhau:\n   S1 + V + THE SAME + (Noun) + AS + S2\n   (Ví dụ: the same age as, the same height as)",
+    "essence": "So sánh sự tương đồng hoặc khác biệt về tính chất, mức độ hoặc khả năng giữa hai người, hai sự vật hoặc hai hành động.",
+    "examples": [
+      {
+        "en": "Lan speaks English as fluently as a native speaker.",
+        "vi": "Lan nói tiếng Anh lưu loát như một người bản xứ.",
+        "breakdown": "So sánh trạng từ 'fluently' đi với động từ 'speaks': as fluently as."
+      },
+      {
+        "en": "Living in a quiet countryside village is not as stressful as living in a crowded metropolis.",
+        "vi": "Sống ở làng quê yên bình không căng thẳng bằng sống ở đại đô thị đông đúc.",
+        "breakdown": "So sánh không bằng: not as stressful as."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "This newly developed algorithm does not process massive data sets ________ that older program.",
+        "options": [
+          "A. as slow as",
+          "B. so slowly as",
+          "C. more slowly",
+          "D. slower than"
+        ],
+        "answer": 1,
+        "explanation": "Động từ 'process' cần trạng từ 'slowly'; câu phủ định (does not) dùng 'so slowly as' (hoặc as slowly as)."
+      },
+      {
+        "question": "Minh is the same age ________ my elder brother; both were born in 2006.",
+        "options": [
+          "A. as",
+          "B. like",
+          "C. with",
+          "D. to"
+        ],
+        "answer": 0,
+        "explanation": "Cấu trúc so sánh: the same + N + AS -> Dùng 'as'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 49,
+    "id": "g49-comparative",
+    "number": "#49",
+    "title": "So sánh hơn (Comparative)",
+    "category": "comparisons",
+    "categoryLabel": "7. Cấu trúc so sánh",
+    "sectionTitle": "Phần 7: Các Cấu Trúc So Sánh",
+    "formula": "1. Tính từ / Trạng từ ngắn (1 âm tiết, hoặc 2 âm tiết tận cùng -y, -le, -ow, -er):\n   S1 + V + Adj/Adv-ER + THAN + S2 / O\n   (Ví dụ: faster than, earlier than, simpler than)\n2. Tính từ / Trạng từ dài (2 âm tiết trở lên):\n   S1 + V + MORE + Adj/Adv + THAN + S2 / O\n   (Ví dụ: more convenient than, more diligently than)\n3. Từ nhấn mạnh mức độ chênh lệch (đứng trước so sánh hơn):\n   MUCH / FAR / A LOT / SIGNIFICANTLY (nhiều) | SLIGHTLY / A BIT (chút ít)\n   (Ví dụ: much more expensive, far better than)",
+    "essence": "Dùng để so sánh sự hơn kém giữa hai đối tượng về một đặc điểm hoặc một hành động cụ thể.",
+    "examples": [
+      {
+        "en": "Travelling by high-speed bullet train is far more convenient than taking a conventional bus.",
+        "vi": "Đi lại bằng tàu cao tốc tiện lợi hơn nhiều so với việc đi xe buýt thông thường.",
+        "breakdown": "Nhấn mạnh mức độ 'far' + so sánh hơn tính từ dài: far more convenient than."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Solar energy is becoming ________ cheaper and more accessible than traditional fossil fuels.",
+        "options": [
+          "A. much",
+          "B. more",
+          "C. very",
+          "D. so"
+        ],
+        "answer": 0,
+        "explanation": "Từ bổ nghĩa nhấn mạnh cho tính từ so sánh hơn (cheaper) là 'much' (hoặc far, a lot) -> Dùng 'much cheaper'."
+      },
+      {
+        "question": "The living expenses in Tokyo are significantly higher than ________ in rural towns.",
+        "options": [
+          "A. that",
+          "B. those",
+          "C. these",
+          "D. this"
+        ],
+        "answer": 1,
+        "explanation": "So sánh đối tượng số nhiều (living expenses) thay bằng đại từ 'those of / those in' -> Dùng 'those'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 50,
+    "id": "g50-superlative",
+    "number": "#50",
+    "title": "So sánh nhất (Superlative)",
+    "category": "comparisons",
+    "categoryLabel": "7. Cấu trúc so sánh",
+    "sectionTitle": "Phần 7: Các Cấu Trúc So Sánh",
+    "formula": "1. Tính từ / Trạng từ ngắn:\n   S + V + THE + Adj/Adv-EST + (in / of / among...)\n   (Ví dụ: the highest mountain in Vietnam)\n2. Tính từ / Trạng từ dài:\n   S + V + THE MOST + Adj/Adv + (in / of / among...)\n   (Ví dụ: the most influential scientist of our era)\n3. Thứ hạng (Thứ hai, thứ ba...):\n   S + V + the second / third / fourth + most Adj / Adj-est\n4. Một trong những... nhất:\n   one of the most Adj + N(số nhiều)",
+    "essence": "Dùng để so sánh một đối tượng vượt trội nhất trong một nhóm gồm từ ba đối tượng trở lên.",
+    "examples": [
+      {
+        "en": "Fansipan is celebrated as the highest mountain peak in Indochina.",
+        "vi": "Phan Xi Păng được ca ngợi là đỉnh núi cao nhất tại Đông Dương.",
+        "breakdown": "Tính từ ngắn: the highest + in Indochina (phạm vi nơi chốn dùng IN)."
+      },
+      {
+        "en": "Artificial intelligence is considered one of the most transformative technologies in human history.",
+        "vi": "Trí tuệ nhân tạo được coi là một trong những công nghệ mang tính biến đổi mạnh mẽ nhất trong lịch sử nhân loại.",
+        "breakdown": "One of the most transformative + N_plural (technologies)."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "Da Nang is frequently cited as one of the most ________ cities to live in Southeast Asia.",
+        "options": [
+          "A. livable",
+          "B. more livable",
+          "C. most livable",
+          "D. livably"
+        ],
+        "answer": 0,
+        "explanation": "Đã có 'one of the most' nên phía sau là tính từ nguyên mẫu: 'one of the most livable cities'."
+      },
+      {
+        "question": "Russia is by far ________ country in the world in terms of geographical land area.",
+        "options": [
+          "A. the largest",
+          "B. larger",
+          "C. largest",
+          "D. more large"
+        ],
+        "answer": 0,
+        "explanation": "So sánh nhất thế giới đi kèm từ nhấn mạnh 'by far' -> Bắt buộc có mạo từ THE: 'by far the largest'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 51,
+    "id": "g51-progressive-comparison",
+    "number": "#51",
+    "title": "So sánh lũy tiến / càng ngày càng (Comparative + and + Comparative)",
+    "category": "comparisons",
+    "categoryLabel": "7. Cấu trúc so sánh",
+    "sectionTitle": "Phần 7: Các Cấu Trúc So Sánh",
+    "formula": "1. Tính từ / Trạng từ ngắn:\n   Adj/Adv-ER + AND + Adj/Adv-ER\n   (Ví dụ: faster and faster, hotter and hotter, higher and higher)\n2. Tính từ / Trạng từ dài:\n   MORE AND MORE + Adj/Adv\n   (Ví dụ: more and more expensive, more and more complicated)",
+    "essence": "Diễn tả một tính chất, trạng thái đang tăng dần hoặc giảm dần liên tục theo thời gian (càng ngày càng...).",
+    "examples": [
+      {
+        "en": "As the final exam approaches, students feel more and more anxious.",
+        "vi": "Khi kỳ thi cuối kỳ đến gần, các học sinh cảm thấy càng ngày càng lo lắng.",
+        "breakdown": "Tính từ dài (anxious): more and more anxious."
+      },
+      {
+        "en": "Owing to global warming, summer temperatures are becoming hotter and hotter.",
+        "vi": "Do sự nóng lên toàn cầu, nhiệt độ mùa hè đang trở nên ngày càng nóng hơn.",
+        "breakdown": "Tính từ ngắn (hot): hotter and hotter."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "With the continuous inflation rate, essential living commodities are becoming ________ expensive.",
+        "options": [
+          "A. more and more",
+          "B. much and more",
+          "C. most and most",
+          "D. as and as"
+        ],
+        "answer": 0,
+        "explanation": "Cấu trúc so sánh lũy tiến với tính từ dài (expensive): 'more and more expensive'."
+      },
+      {
+        "question": "The athlete ran ________ as he neared the finish line of the race.",
+        "options": [
+          "A. faster and faster",
+          "B. more fast and fast",
+          "C. fast and faster",
+          "D. fast and fast"
+        ],
+        "answer": 0,
+        "explanation": "Trạng từ ngắn 'fast' đổi thành 'faster and faster' (càng ngày càng nhanh)."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  },
+  {
+    "order": 52,
+    "id": "g52-double-comparative",
+    "number": "#52",
+    "title": "So sánh kép / càng... thì càng... (Double Comparative: The more... the more...)",
+    "category": "comparisons",
+    "categoryLabel": "7. Cấu trúc so sánh",
+    "sectionTitle": "Phần 7: Các Cấu Trúc So Sánh",
+    "formula": "THE + Comparative + S1 + V1 , THE + Comparative + S2 + V2\n1. Với tính từ/trạng từ ngắn:\n   THE + Adj/Adv-er + S + V, THE + Adj/Adv-er + S + V\n2. Với tính từ/trạng từ dài:\n   THE MORE + Adj/Adv + S + V, THE MORE + Adj/Adv + S + V\n3. Với danh từ:\n   THE MORE + Noun + S + V, THE MORE + Noun + S + V\n4. Với động từ:\n   THE MORE + S + V, THE MORE + S + V",
+    "essence": "Diễn tả mối quan hệ nhân quả tương hỗ: Khi một vế biến đổi tăng/giảm thì vế kia cũng lập tức biến đổi theo mức độ tương ứng.",
+    "examples": [
+      {
+        "en": "The more diligently you practice English every day, the more fluently you can speak.",
+        "vi": "Bạn càng luyện tập tiếng Anh chăm chỉ mỗi ngày bao nhiêu, bạn càng nói lưu loát bấy nhiêu.",
+        "breakdown": "The more diligently S1 + V1, the more fluently S2 + V2."
+      },
+      {
+        "en": "The more congested the urban traffic becomes, the higher the citizens' stress level is.",
+        "vi": "Giao thông đô thị càng tắc nghẽn, mức độ căng thẳng của người dân càng tăng cao.",
+        "breakdown": "The more congested S1 + V1, the higher S2 + V2."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The more qualifications you possess, ________ job opportunities you will be offered.",
+        "options": [
+          "A. the more",
+          "B. the most",
+          "C. more",
+          "D. the greater"
+        ],
+        "answer": 0,
+        "explanation": "The more + Noun (qualifications)..., THE MORE + Noun (job opportunities)... -> Dùng 'the more'."
+      },
+      {
+        "question": "The harder you work on this project, ________ the final results will be.",
+        "options": [
+          "A. better",
+          "B. the best",
+          "C. the better",
+          "D. the more good"
+        ],
+        "answer": 2,
+        "explanation": "The harder + S + V, THE BETTER + S + V -> Bắt buộc có mạo từ 'the' và dạng so sánh hơn 'the better'."
+      }
+    ],
+    "isBookmarked": true,
+    "mastered": false
+  },
+  {
+    "order": 53,
+    "id": "g53-multiple-numbers-comparison",
+    "number": "#53",
+    "title": "So sánh gấp bội / số lần (Multiple Numbers Comparison: twice as... as, three times as... as)",
+    "category": "comparisons",
+    "categoryLabel": "7. Cấu trúc so sánh",
+    "sectionTitle": "Phần 7: Các Cấu Trúc So Sánh",
+    "formula": "S + V + MULTIPLE NUMBER + AS + adj / adv / much / many + AS + O\n* Từ chỉ số lần:\n- twice (gấp đôi - KHÔNG dùng two times)\n- three times / four times / five times... (gấp ba, gấp bốn...)\n- half (bằng một nửa)\n* Danh từ đếm được: AS MANY + N(số nhiều) + AS\n* Danh từ không đếm được: AS MUCH + N(không đếm được) + AS",
+    "essence": "Diễn tả một đối tượng có kích thước, số lượng, trọng lượng hoặc giá trị gấp bao nhiêu lần (hoặc bằng một nửa) so với đối tượng kia.",
+    "examples": [
+      {
+        "en": "The new luxury electric car costs twice as much as the standard model.",
+        "vi": "Chiếc xe điện hạng sang mới có giá đắt gấp đôi so với mẫu xe tiêu chuẩn.",
+        "breakdown": "Twice + as much as: gấp hai lần chi phí."
+      },
+      {
+        "en": "This modern warehouse holds three times as many goods as the old facility.",
+        "vi": "Nhà kho hiện đại này chứa lượng hàng hóa nhiều gấp ba lần so với cơ sở cũ.",
+        "breakdown": "Three times + as many goods as (hàng hóa đếm được)."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "question": "The tuition fee at this international school is ________ that of local public schools.",
+        "options": [
+          "A. three times as high as",
+          "B. as three times high as",
+          "C. higher three times than",
+          "D. three times higher as"
+        ],
+        "answer": 0,
+        "explanation": "Cấu trúc so sánh gấp bội: S + V + multiple number (three times) + AS + adj (high) + AS + O -> Dùng 'three times as high as'."
+      },
+      {
+        "question": "This newly developed solar battery stores ________ electricity as the previous prototype.",
+        "options": [
+          "A. twice as much",
+          "B. twice as many",
+          "C. two times much",
+          "D. as twice much"
+        ],
+        "answer": 0,
+        "explanation": "'electricity' là danh từ không đếm được, dùng 'twice as much electricity as' -> Dùng 'twice as much'."
+      }
+    ],
+    "isBookmarked": false,
+    "mastered": false
+  }
+]
