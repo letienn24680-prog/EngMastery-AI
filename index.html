@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.0 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.1 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -1084,6 +1084,13 @@
             </div>
 
             <!-- AI Proactive Search & Enroll Button -->
+                        <!-- Manual Multi-Word / Batch Input Toggle Button -->
+            <button type="button" onclick="app.toggleManualBatchVocabInput()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs hover:shadow-glow transition flex items-center justify-center space-x-1.5 shrink-0 shadow-sm active:scale-95" title="Nhập 1 hoặc nhiều từ vựng thủ công để AI dịch, tìm đồng/trái nghĩa, collocations & lưu vào hệ thống">
+              <i class="fa-solid fa-file-circle-plus"></i>
+              <span>+ Nhập Từ Thủ Công (Đơn / Đa Từ)</span>
+            </button>
+
+            <!-- AI Proactive Search & Enroll Button -->
             <button onclick="app.searchAndAutoEnrollWord(document.getElementById('hub-search-input').value)" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold text-xs hover:shadow-glow-primary transition flex items-center justify-center space-x-1.5 shrink-0" title="AI chủ động tra từ, lưu vào app và đưa vào danh sách Cần Ôn Tập">
               <i class="fa-solid fa-wand-magic-sparkles"></i>
               <span>AI Tra & Lưu Ôn</span>
@@ -1107,6 +1114,80 @@
               <option value="B2">Cấp độ B2 (Trung cao)</option>
               <option value="C1">Cấp độ C1 (Nâng cao / 9+)</option>
             </select>
+          </div>
+        </div>
+
+                <!-- KHỐI NHẬP TỪ VỰNG THỦ CÔNG & AI PHÂN TÍCH ĐA TỪ (SINGLE / BATCH IMPORT) -->
+        <div id="hub-manual-input-panel" class="hidden p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 dark:from-darkCard dark:via-darkCard dark:to-emerald-950/20 border border-slate-200 dark:border-slate-800 shadow-xl space-y-4 transition-all animate-scale-up">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-slate-200/80 dark:border-slate-800">
+            <div class="flex items-center space-x-2.5">
+              <span class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center shadow-md shrink-0">
+                <i class="fa-solid fa-pen-fancy text-sm"></i>
+              </span>
+              <div>
+                <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                  <span>Nhập Từ Vựng Thủ Công & AI Phân Tích Đa Từ</span>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">1 Từ hoặc Nhiều Từ</span>
+                </h3>
+                <p class="text-[11px] text-slate-400">Nhập 1 từ hoặc dán nhiều từ (ngăn cách bởi dấu phẩy, chấm phẩy hoặc xuống dòng). AI sẽ tự động dịch nghĩa, tìm đồng nghĩa, trái nghĩa, collocations & họ từ để lưu vào hệ thống.</p>
+              </div>
+            </div>
+            <button type="button" onclick="app.toggleManualBatchVocabInput(false)" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm shrink-0" title="Đóng ô nhập">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Textarea Input Area -->
+          <div class="space-y-2">
+            <div class="relative">
+              <textarea id="hub-manual-input-textarea" rows="3" oninput="app.onManualWordsInputChange(this.value)" onkeydown="if((event.ctrlKey || event.metaKey) && event.key==='Enter') app.submitManualBatchWords()" placeholder="Nhập 1 từ hoặc dán danh sách nhiều từ tiếng Anh tại đây (nhấn Ctrl+Enter để gửi)...&#10;Ví dụ: creative, resilience, sustainable, ambiguous, perseverance&#10;Hoặc mỗi từ một dòng..." class="w-full p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 text-slate-900 dark:text-white placeholder:text-slate-400 shadow-inner resize-y min-h-[95px]"></textarea>
+              <button type="button" onclick="app.clearManualWordsInput()" class="absolute right-3 bottom-3 text-slate-400 hover:text-rose-500 text-xs p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition" title="Xóa trắng ô nhập">
+                <i class="fa-solid fa-eraser"></i>
+              </button>
+            </div>
+
+            <!-- Helper Bar: Quick Pills & Word Counter -->
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+              <div class="flex items-center flex-wrap gap-1.5">
+                <span class="text-[11px] font-bold text-slate-400">💡 Thử mẫu:</span>
+                <button type="button" onclick="app.fillManualWordsSample('creative, resilience, sustainable')" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500/10 hover:text-emerald-500 text-slate-600 dark:text-slate-300 font-semibold text-[11px] transition">Mẫu 3 từ B2-C1</button>
+                <button type="button" onclick="app.fillManualWordsSample('passion, dedicate, perseverance, triumph')" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500/10 hover:text-emerald-500 text-slate-600 dark:text-slate-300 font-semibold text-[11px] transition">Mẫu Chủ đề Nỗ lực</button>
+                <button type="button" onclick="app.fillManualWordsSample('biodiversity, conservation, renewable, emission')" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500/10 hover:text-emerald-500 text-slate-600 dark:text-slate-300 font-semibold text-[11px] transition">Mẫu Môi trường THPTQG</button>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span id="hub-manual-words-count" class="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold text-[11px]">Đã nhận diện: 0 từ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons & Processing Feedback -->
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+            <div class="flex items-center space-x-2 text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+              <i class="fa-solid fa-sparkles text-amber-500"></i>
+              <span>AI tự động dịch nghĩa, tìm Đồng nghĩa, Trái nghĩa, Collocations & Họ từ (V-N-Adj-Adv)</span>
+            </div>
+            <div class="flex items-center space-x-2 w-full sm:w-auto justify-end">
+              <button type="button" onclick="app.toggleManualBatchVocabInput(false)" class="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition">Đóng lại</button>
+              <button id="btn-submit-manual-words" type="button" onclick="app.submitManualBatchWords()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-600 to-primary hover:from-emerald-600 hover:to-primary-hover text-white font-extrabold text-xs shadow-md hover:shadow-glow transition flex items-center justify-center space-x-2 active:scale-95 disabled:opacity-50">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Gửi Đi & AI Phân Tích Lưu Ngay</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Real-time Progress Bar Area (shows during analysis) -->
+          <div id="hub-manual-progress-box" class="hidden p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 space-y-2">
+            <div class="flex items-center justify-between text-xs font-bold text-emerald-600 dark:text-emerald-400">
+              <span id="hub-manual-progress-text" class="flex items-center gap-1.5">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                <span>Đang phân tích từ vựng...</span>
+              </span>
+              <span id="hub-manual-progress-pct" class="font-mono">0%</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+              <div id="hub-manual-progress-bar" class="bg-gradient-to-r from-emerald-500 to-teal-500 h-full w-0 transition-all duration-300"></div>
+            </div>
+            <p id="hub-manual-progress-sub" class="text-[11px] text-slate-500 dark:text-slate-400 italic">Đang bóc tách đồng nghĩa, trái nghĩa, collocation & lưu trữ...</p>
           </div>
         </div>
 
@@ -3385,7 +3466,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.0 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.1 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -32711,7 +32792,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.7.0';
+        this.appVersion = '1.7.1';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -38906,7 +38987,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.7.0')) return caches.delete(c);
+                if (!c.includes('v1.7.1')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -40799,6 +40880,234 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
       }
 
     
+
+      /* ========================================================================== */
+      /* MANUAL VOCABULARY INPUT & AI BATCH ANALYZER (ĐƠN & ĐA TỪ VỰNG KHO TỪ)      */
+      /* ========================================================================== */
+
+      toggleManualBatchVocabInput(forceState) {
+        const panel = document.getElementById('hub-manual-input-panel');
+        if (!panel) return;
+        const isHidden = panel.classList.contains('hidden');
+        const shouldShow = (typeof forceState === 'boolean') ? forceState : isHidden;
+
+        if (shouldShow) {
+          panel.classList.remove('hidden');
+          const textarea = document.getElementById('hub-manual-input-textarea');
+          if (textarea) {
+            setTimeout(() => {
+              textarea.focus();
+              panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+          }
+        } else {
+          panel.classList.add('hidden');
+        }
+      }
+
+      parseManualWordsInput(rawText) {
+        if (!rawText || typeof rawText !== 'string') return [];
+        const tokens = rawText.split(/[,;\n\r\t\/]+/);
+        const cleaned = [];
+        for (let t of tokens) {
+          let c = t.trim().replace(/^(?:\d+[\.\)]|\-|\*|["'“”‘’])+\s*/, '');
+          c = c.replace(/["'“”‘’]+$/, '').trim();
+          if (c.length >= 2 && !/^\d+$/.test(c)) {
+            cleaned.push(c);
+          }
+        }
+        const seen = new Set();
+        const result = [];
+        for (const w of cleaned) {
+          const low = w.toLowerCase();
+          if (!seen.has(low)) {
+            seen.add(low);
+            result.push(w);
+          }
+        }
+        return result;
+      }
+
+      onManualWordsInputChange(val) {
+        const words = this.parseManualWordsInput(val);
+        const counterEl = document.getElementById('hub-manual-words-count');
+        const submitBtn = document.getElementById('btn-submit-manual-words');
+        if (counterEl) {
+          counterEl.innerText = `Đã nhận diện: ${words.length} từ`;
+          if (words.length > 0) {
+            counterEl.className = 'px-2.5 py-1 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-extrabold text-[11px] animate-pulse';
+          } else {
+            counterEl.className = 'px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold text-[11px]';
+          }
+        }
+        if (submitBtn && !submitBtn.disabled) {
+          submitBtn.style.opacity = words.length > 0 ? '1' : '0.8';
+        }
+      }
+
+      clearManualWordsInput() {
+        const textarea = document.getElementById('hub-manual-input-textarea');
+        if (textarea) {
+          textarea.value = '';
+          this.onManualWordsInputChange('');
+          textarea.focus();
+        }
+      }
+
+      fillManualWordsSample(sampleText) {
+        const textarea = document.getElementById('hub-manual-input-textarea');
+        if (textarea) {
+          textarea.value = sampleText;
+          this.onManualWordsInputChange(sampleText);
+          textarea.focus();
+        }
+      }
+
+      async submitManualBatchWords() {
+        const textarea = document.getElementById('hub-manual-input-textarea');
+        if (!textarea) return;
+        const raw = textarea.value.trim();
+        const words = this.parseManualWordsInput(raw);
+
+        if (words.length === 0) {
+          this.showToast('Vui lòng nhập ít nhất 1 từ vựng hoặc cụm từ tiếng Anh!', 'warning');
+          textarea.focus();
+          return;
+        }
+
+        const submitBtn = document.getElementById('btn-submit-manual-words');
+        const progressBox = document.getElementById('hub-manual-progress-box');
+        const progressText = document.getElementById('hub-manual-progress-text');
+        const progressPct = document.getElementById('hub-manual-progress-pct');
+        const progressBar = document.getElementById('hub-manual-progress-bar');
+        const progressSub = document.getElementById('hub-manual-progress-sub');
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AI Đang Phân Tích & Lưu...</span>';
+        }
+        if (progressBox) progressBox.classList.remove('hidden');
+
+        const total = words.length;
+        let successCount = 0;
+        let lastCreatedCardId = null;
+        const processedWords = [];
+
+        this.showToast(`⚡ AI đang bắt đầu phân tích ${total} từ vựng (dịch nghĩa, bóc tách đồng/trái nghĩa, collocations)...`, 'info');
+
+        for (let i = 0; i < total; i++) {
+          const w = words[i];
+          const pct = Math.round(((i + 1) / total) * 100);
+
+          if (progressText) {
+            progressText.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-emerald-500"></i> <span>Đang xử lý ${i + 1}/${total}: "<strong>${w}</strong>"...</span>`;
+          }
+          if (progressPct) progressPct.innerText = `${pct}%`;
+          if (progressBar) progressBar.style.width = `${pct}%`;
+          if (progressSub) {
+            progressSub.innerText = `Bóc tách nghĩa tiếng Việt, CEFR (A1-C1), collocations & họ từ cho "${w}"...`;
+          }
+
+          try {
+            const norm = this.normalizeWordKey(w);
+            let existing = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
+
+            if (existing) {
+              // Từ đã có -> kích hoạt vào danh sách Cần Ôn Tập
+              existing.status = 'due';
+              existing.due = true;
+              existing.nextReviewDate = new Date().toISOString();
+              existing.lastSearchedAt = Date.now();
+              lastCreatedCardId = existing.id;
+              processedWords.push(existing.word);
+              successCount++;
+
+              // Đảm bảo có đủ đồng nghĩa, trái nghĩa, collocation, word family
+              this.autoEnrichModalWord(existing);
+            } else {
+              // Từ mới -> Phân tích toàn diện bằng Rich Lexical Engine
+              const rich = await this.fetchRichLexicalData(w);
+              if (rich) {
+                const newCard = this.upsertVocabCard({
+                  word: rich.word || w,
+                  type: rich.type || 'Word',
+                  ipa: rich.ipa || '',
+                  level: rich.level || this.guessCefrLevel(w),
+                  meaningVi: rich.meaningVi,
+                  meaningEn: rich.meaningEn,
+                  topic: 'topic_notebook',
+                  topicLabel: '✍️ Từ Nhập Thủ Công',
+                  example: rich.example,
+                  exampleVi: rich.exampleVi,
+                  synonyms: this.normalizeCefrField(rich.synonyms),
+                  antonyms: this.normalizeCefrField(rich.antonyms),
+                  collocations: rich.collocations,
+                  mnemonic: rich.mnemonic,
+                  deck: 'notebook',
+                  status: 'due',
+                  due: true,
+                  nextReviewDate: new Date().toISOString(),
+                  isFavorite: true
+                });
+
+                if (newCard && newCard.card) {
+                  lastCreatedCardId = newCard.card.id;
+                }
+
+                // Tự động phân tách và nạp thêm các từ Đồng nghĩa, Trái nghĩa, Collocations
+                this.enrollExtractedCefrWords(rich.word || w, rich.meaningVi, rich.type, rich.synonyms, rich.antonyms, rich.collocations);
+
+                // Tự động nhận diện và nạp Họ Từ Vựng (Word Family: V-N-Adj-Adv)
+                await this.enrollWordFamilyMembers(rich.word || w, rich.meaningVi, rich.type);
+
+                processedWords.push(rich.word || w);
+                successCount++;
+              }
+            }
+          } catch (err) {
+            console.warn(`Lỗi phân tích từ "${w}":`, err);
+          }
+
+          if (total > 1) {
+            await new Promise(r => setTimeout(r, 60));
+          }
+        }
+
+        // Hoàn tất
+        if (progressText) {
+          progressText.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500"></i> <span>Hoàn tất! Đã lưu thành công ${successCount}/${total} từ vựng.</span>`;
+        }
+        if (progressPct) progressPct.innerText = '100%';
+        if (progressBar) progressBar.style.width = '100%';
+
+        this.saveState();
+        this.updateFilterCounts();
+        this.renderDashboard();
+        this.hubCurrentPage = 1;
+        this.renderVocabHub();
+
+        // Xóa trắng ô nhập sau khi đã nạp thành công
+        textarea.value = '';
+        this.onManualWordsInputChange('');
+
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>Gửi Đi & AI Phân Tích Lưu Ngay</span>';
+        }
+
+        setTimeout(() => {
+          if (progressBox) progressBox.classList.add('hidden');
+        }, 3000);
+
+        const sampleWords = processedWords.slice(0, 3).join(', ') + (processedWords.length > 3 ? '...' : '');
+        this.showToast(`🎉 AI đã phân tích & lưu thành công ${successCount} từ (${sampleWords}) kèm nghĩa, đồng/trái nghĩa & collocations!`, 'success');
+
+        // Nếu người dùng chỉ nhập đúng 1 từ, tự động mở Word Detail Modal để xem ngay
+        if (total === 1 && lastCreatedCardId) {
+          this.openWordDetailModal(lastCreatedCardId);
+        }
+      }
+
 
       /* ========================================================================== */
       /* WORD FAMILY INTELLIGENCE ENGINE (HỌ TỪ VỰNG & BIẾN THỂ TỪ LOẠI V-N-ADJ-ADV) */
@@ -44409,7 +44718,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
           if (reg.waiting && window.app) {
             window.app.showUpdateBanner({
-              version: '1.7.0',
+              version: '1.7.1',
               title: 'Bản cập nhật mới đã sẵn sàng!',
               highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
             });
@@ -44423,7 +44732,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   if (window.app) {
                     window.app.showUpdateBanner({
-                      version: '1.7.0',
+                      version: '1.7.1',
                       title: 'Đã có bản cập nhật mới!',
                       highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
                     });
@@ -44975,7 +45284,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.0</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.1</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
