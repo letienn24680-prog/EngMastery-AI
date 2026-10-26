@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.2 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.3 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -862,6 +862,9 @@
                   <button onclick="event.stopPropagation(); app.speakCurrentWord();" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 hover:bg-primary/20 text-primary-light flex items-center justify-center transition" title="Nghe phát âm chuẩn (Phím S)">
                     <i class="fa-solid fa-volume-high text-xs sm:text-base"></i>
                   </button>
+                  <button type="button" onclick="event.stopPropagation(); app.deleteCurrentFlashcard();" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 flex items-center justify-center transition" title="Xóa thẻ từ này khỏi kho">
+                    <i class="fa-solid fa-trash-can text-xs sm:text-sm"></i>
+                  </button>
                   <!-- MICROPHONE CHẤM ĐIỂM PHÁT ÂM (TÍNH NĂNG 3) -->
                   <button onclick="event.stopPropagation(); app.startPronunciationPractice();" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white flex items-center justify-center transition shadow-sm" title="Luyện phát âm qua Micro & Chấm Điểm">
                     <i class="fa-solid fa-microphone text-xs sm:text-base"></i>
@@ -1101,6 +1104,12 @@
             <button onclick="app.searchAndAutoEnrollWord(document.getElementById('hub-search-input').value)" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold text-xs hover:shadow-glow-primary transition flex items-center justify-center space-x-1.5 shrink-0" title="AI chủ động tra từ, lưu vào app và đưa vào danh sách Cần Ôn Tập">
               <i class="fa-solid fa-wand-magic-sparkles"></i>
               <span>AI Tra & Lưu Ôn</span>
+            </button>
+
+            <!-- Clean Junk / Invalid Words Button -->
+            <button type="button" onclick="app.cleanInvalidVocabEntries(true)" class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white border border-rose-500/20 font-bold text-xs transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Quét toàn bộ hệ thống, tự động giữ lại từ vựng hợp lệ và xóa sạch các từ rác (như số thứ tự 81, 88, mã 2a, B2...)">
+              <i class="fa-solid fa-broom"></i>
+              <span>Quét & Dọn Từ Rác</span>
             </button>
 
             <!-- Sort Selector (Alphabet A-Z default) -->
@@ -3160,9 +3169,15 @@
       </div>
 
       <!-- Modal Footer -->
-      <div class="pt-2 flex items-center justify-end space-x-2 border-t border-slate-100 dark:border-slate-800">
-        <button onclick="app.closeWordDetailModal()" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold">Đóng</button>
-        <button id="modal-detail-practice-btn" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-hover shadow-glow-primary transition">Học Trong Flashcard</button>
+      <div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 flex-wrap gap-2">
+        <button type="button" onclick="app.deleteActiveModalWord()" class="px-3.5 py-2 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white font-bold text-xs transition flex items-center space-x-1.5 cursor-pointer shadow-xs" title="Xóa thẻ từ này khỏi kho từ vựng">
+          <i class="fa-solid fa-trash-can"></i>
+          <span>Xóa Thẻ Này</span>
+        </button>
+        <div class="flex items-center space-x-2">
+          <button onclick="app.closeWordDetailModal()" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold cursor-pointer">Đóng</button>
+          <button id="modal-detail-practice-btn" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-hover shadow-glow-primary transition cursor-pointer">Học Trong Flashcard</button>
+        </div>
       </div>
     </div>
   </div>
@@ -3596,7 +3611,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.2 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.3 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -3627,6 +3642,10 @@
               <span>Nạp 1.060+ Từ Gốc</span>
             </button>
           </div>
+          <button type="button" onclick="app.cleanInvalidVocabEntries(true)" class="w-full py-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-xs cursor-pointer">
+            <i class="fa-solid fa-broom"></i>
+            <span>🧹 Quét & Tự Động Xóa Từ Rác (Số thứ tự, mã 2a, B2...)</span>
+          </button>
         </div>
 
         <!-- Export & Import Vocab Data (Gộp từ tránh trùng) -->
@@ -32941,7 +32960,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.7.2';
+        this.appVersion = '1.7.3';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -35275,6 +35294,8 @@ Yêu cầu output STRICTLY là một JSON object:
             const parsed = JSON.parse(storedVocab);
             if (Array.isArray(parsed) && parsed.length > 0) {
               this.vocabList = parsed;
+              // Tự động quét và loại bỏ ngay các từ rác / không hợp lệ (số thứ tự, mã 2a, B2...)
+              this.cleanInvalidVocabEntries(false);
               // Luôn đối chiếu và tự động bù đắp toàn bộ 1.060+ từ gốc chuẩn Bộ GD&ĐT còn thiếu
               if (typeof DEFAULT_VOCABULARY !== 'undefined' && Array.isArray(DEFAULT_VOCABULARY)) {
                 const existingKeys = new Set(this.vocabList.map(v => this.normalizeWordKey(v && v.word ? v.word : '')));
@@ -36247,10 +36268,15 @@ Yêu cầu output STRICTLY là một JSON object:
             </div>
 
             <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-              <button onclick="app.openWordDetailModal('${item.id}')" class="text-slate-400 hover:text-primary-light font-bold flex items-center space-x-1">
-                <i class="fa-regular fa-eye"></i>
-                <span>Chi tiết</span>
-              </button>
+              <div class="flex items-center space-x-2">
+                <button onclick="app.openWordDetailModal('${item.id}')" class="text-slate-400 hover:text-primary-light font-bold flex items-center space-x-1">
+                  <i class="fa-regular fa-eye"></i>
+                  <span>Chi tiết</span>
+                </button>
+                <button type="button" onclick="event.stopPropagation(); app.deleteVocabCard('${item.id}')" class="p-1 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition text-xs cursor-pointer" title="Xóa thẻ từ này khỏi kho">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
               <button onclick="app.studySpecificCardInFlashcard('${item.id}')" class="px-3 py-1.5 rounded-xl bg-primary/10 hover:bg-primary text-primary-light hover:text-white font-bold transition flex items-center space-x-1">
                 <span>Học thẻ này</span>
                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -38767,6 +38793,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       /* =================================================== */
       upsertVocabCard(cardData) {
         if (!cardData || !cardData.word) return { isNew: false, merged: false };
+        if (!this.isValidEnglishVocab(cardData.word)) return { isNew: false, merged: false };
         const normKey = this.normalizeWordKey(cardData.word);
         if (!normKey) return { isNew: false, merged: false };
 
@@ -38993,6 +39020,167 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       /* =================================================== */
+      /* BỘ LỌC KIỂM DUYỆT TỪ VỰNG & DỌN DẸP TỪ RÁC THÔNG MINH */
+      /* =================================================== */
+      isValidEnglishVocab(word) {
+        if (!word || typeof word !== 'string') return false;
+        const trimmed = word.trim().replace(/^["'`“”‘’(\[{]+|[)"'“”‘’\]}.,;:!?]+$/g, '').trim();
+        if (!trimmed) return false;
+
+        // Cho phép 2 từ 1 ký tự hợp lệ trong tiếng Anh là 'a' và 'I', các từ khác phải >= 2 ký tự
+        if (trimmed.length < 2 && !['a', 'i'].includes(trimmed.toLowerCase())) return false;
+
+        // 1. Loại bỏ số nguyên thuần túy (VD: '81', '88', '98', '32', '2024')
+        if (/^\d+$/.test(trimmed)) return false;
+
+        // 2. Loại bỏ số thứ tự câu hỏi hoặc đánh dấu mục (VD: '2a', '1b', '3c', 'q1', '12a')
+        if (/^\d+[a-zA-Z]$|^[a-zA-Z]\d+$/i.test(trimmed)) return false;
+
+        // 3. Loại bỏ mã phân cấp CEFR đứng riêng lẻ (VD: 'A1', 'A2', 'B1', 'B2', 'C1', 'C2')
+        if (/^[a-cA-C][1-2]$/.test(trimmed)) return false;
+
+        // 4. Loại bỏ từ loại viết tắt đứng riêng lẻ (VD: 'n.', 'v.', 'adj', 'adv', 'prep')
+        if (/^(noun|verb|adj|adv|prep|pron|conj|interj|n|v|adj\.|adv\.|prep\.|phr\s*v)$/i.test(trimmed)) return false;
+
+        // 5. Bắt buộc phải chứa ít nhất 1 chữ cái tiếng Anh [a-zA-Z]
+        if (!/[a-zA-Z]/.test(trimmed)) return false;
+
+        // 6. Loại bỏ các nhãn tiêu đề hệ thống (VD: 'synonym', 'antonym', 'collocation', 'definition')
+        if (/^(synonym|synonyms|antonym|antonyms|collocation|collocations|definition|meaning|example|vietnamese|english|word|level|symbol)$/i.test(trimmed)) return false;
+
+        return true;
+      }
+
+      cleanInvalidVocabEntries(showFeedback = true) {
+        if (!this.vocabList || !Array.isArray(this.vocabList)) return 0;
+
+        const initialCount = this.vocabList.length;
+        const removedSamples = [];
+
+        // Lọc sạch các thẻ từ rác / không hợp lệ
+        this.vocabList = this.vocabList.filter(card => {
+          if (!card || !card.word) return false;
+          const isValid = this.isValidEnglishVocab(card.word);
+          if (!isValid) {
+            if (removedSamples.length < 6) removedSamples.push(card.word);
+            return false;
+          }
+          // Loại bỏ các thẻ bị lỗi nội dung đệ quy (VD: nghĩa tiếng Việt chứa 'Đồng nghĩa (A1) với "B2": B2')
+          if (card.meaningVi && (card.meaningVi.includes('với "B2": B2') || card.meaningVi.includes('với "A1": A1'))) {
+            if (removedSamples.length < 6) removedSamples.push(card.word);
+            return false;
+          }
+          return true;
+        });
+
+        // Đảm bảo luôn bảo lưu 1.060+ từ gốc chuẩn Bộ GD&ĐT
+        if (typeof DEFAULT_VOCABULARY !== 'undefined' && Array.isArray(DEFAULT_VOCABULARY)) {
+          const existingKeys = new Set(this.vocabList.map(v => this.normalizeWordKey(v && v.word ? v.word : '')));
+          DEFAULT_VOCABULARY.forEach(masterWord => {
+            if (masterWord && masterWord.word && !existingKeys.has(this.normalizeWordKey(masterWord.word))) {
+              this.vocabList.push({ ...masterWord });
+              existingKeys.add(this.normalizeWordKey(masterWord.word));
+            }
+          });
+        }
+
+        const removedCount = initialCount - this.vocabList.length;
+
+        // Lưu lại dữ liệu sạch vào localStorage
+        try {
+          localStorage.setItem('engMastery_vocab_v6', JSON.stringify(this.vocabList));
+        } catch (e) {
+          console.warn('Lỗi lưu trữ sau khi dọn dẹp:', e);
+        }
+
+        // Cập nhật lại toàn bộ giao diện và bộ lọc
+        this.updateFilterCounts();
+        this.updateFilterBadges();
+        this.applyVocabTopicFilter(this.currentVocabTopicFilter || 'all');
+        if (this.currentCardIndex >= this.filteredCards.length) {
+          this.currentCardIndex = Math.max(0, this.filteredCards.length - 1);
+        }
+        this.renderFlashcard();
+        if (this.currentView === 'vocab-hub') {
+          this.renderVocabHub();
+        }
+
+        // Cập nhật số lượng hiển thị trong modal Cloud Sync
+        const syncCountEl = document.getElementById('sync-current-vocab-count');
+        if (syncCountEl) syncCountEl.innerText = this.vocabList.length.toLocaleString('vi-VN');
+
+        if (showFeedback) {
+          if (removedCount > 0) {
+            const samplesStr = removedSamples.join(', ');
+            this.showToast(`🧹 Đã quét và tự động loại bỏ ${removedCount} từ rác / không hợp lệ (như ${samplesStr}...)! Kho từ hiện có ${this.vocabList.length.toLocaleString('vi-VN')} từ vựng chuẩn.`, 'success');
+          } else {
+            this.showToast(`✨ Tuyệt vời! Toàn bộ ${this.vocabList.length.toLocaleString('vi-VN')} từ vựng trong kho của bạn đều hợp lệ và sạch sẽ!`, 'info');
+          }
+        }
+
+        return removedCount;
+      }
+
+      deleteVocabCard(cardId, confirmPrompt = true) {
+        if (!cardId) return;
+        const itemIdx = this.vocabList.findIndex(v => v.id === cardId);
+        if (itemIdx === -1) {
+          this.showToast('Không tìm thấy thẻ từ vựng cần xóa!', 'warning');
+          return;
+        }
+
+        const item = this.vocabList[itemIdx];
+        if (confirmPrompt) {
+          const ok = confirm(`Bạn có chắc chắn muốn xóa thẻ từ vựng "${item.word}" (${item.meaningVi}) khỏi kho lưu trữ?`);
+          if (!ok) return;
+        }
+
+        // Xóa khỏi vocabList
+        this.vocabList.splice(itemIdx, 1);
+
+        // Xóa khỏi filteredCards
+        const fIdx = this.filteredCards.findIndex(v => v.id === cardId);
+        if (fIdx !== -1) {
+          this.filteredCards.splice(fIdx, 1);
+        }
+
+        // Lưu vào localStorage
+        this.saveState();
+
+        // Đóng modal chi tiết nếu đang mở từ này
+        if (this.activeModalWord && this.activeModalWord.id === cardId) {
+          this.closeWordDetailModal();
+        }
+
+        // Cập nhật giao diện
+        this.updateFilterCounts();
+        this.updateFilterBadges();
+        if (this.currentView === 'vocab-hub') {
+          this.renderVocabHub();
+        } else if (this.currentView === 'flashcards') {
+          if (this.currentCardIndex >= this.filteredCards.length) {
+            this.currentCardIndex = Math.max(0, this.filteredCards.length - 1);
+          }
+          this.renderFlashcard();
+        }
+
+        this.showToast(`🗑️ Đã xóa thành công từ "${item.word}" khỏi kho từ vựng!`, 'success');
+      }
+
+      deleteActiveModalWord() {
+        if (this.activeModalWord && this.activeModalWord.id) {
+          this.deleteVocabCard(this.activeModalWord.id, true);
+        }
+      }
+
+      deleteCurrentFlashcard() {
+        if (this.filteredCards && this.filteredCards.length > 0 && this.filteredCards[this.currentCardIndex]) {
+          const card = this.filteredCards[this.currentCardIndex];
+          this.deleteVocabCard(card.id, true);
+        }
+      }
+
+      /* =================================================== */
       /* CLOUD SYNC VAULT (ĐỒNG BỘ ĐA THIẾT BỊ 1-CHẠM)      */
       /* =================================================== */
       getCloudSyncCode() {
@@ -39086,7 +39274,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
         try {
           const cleanTopic = 'engmastery_sync_' + savedCode.toLowerCase().replace(/[^a-z0-9_-]/g, '');
           const payload = {
-            version: '1.7.2',
+            version: '1.7.3',
             appVersion: this.appVersion,
             syncCode: savedCode,
             timestamp: Date.now(),
@@ -39439,7 +39627,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.7.2')) return caches.delete(c);
+                if (!c.includes('v1.7.3')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -41364,7 +41552,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         for (let t of tokens) {
           let c = t.trim().replace(/^(?:\d+[\.\)]|\-|\*|["'“”‘’])+\s*/, '');
           c = c.replace(/["'“”‘’]+$/, '').trim();
-          if (c.length >= 2 && !/^\d+$/.test(c)) {
+          if (this.isValidEnglishVocab(c)) {
             cleaned.push(c);
           }
         }
@@ -43028,7 +43216,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
           for (const [level, words] of Object.entries(synLevels)) {
             words.forEach(w => {
               const cleanW = w.trim().replace(/^["']+|["']+$/g, '');
-              if (!cleanW || cleanW.length < 2) return;
+              if (!cleanW || !this.isValidEnglishVocab(cleanW)) return;
               const norm = this.normalizeWordKey(cleanW);
               if (norm === rootNorm) return;
 
@@ -43069,7 +43257,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
           for (const [level, words] of Object.entries(antLevels)) {
             words.forEach(w => {
               const cleanW = w.trim().replace(/^["']+|["']+$/g, '');
-              if (!cleanW || cleanW.length < 2) return;
+              if (!cleanW || !this.isValidEnglishVocab(cleanW)) return;
               const norm = this.normalizeWordKey(cleanW);
               if (norm === rootNorm) return;
 
@@ -45170,7 +45358,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
           if (reg.waiting && window.app) {
             window.app.showUpdateBanner({
-              version: '1.7.2',
+              version: '1.7.3',
               title: 'Bản cập nhật mới đã sẵn sàng!',
               highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
             });
@@ -45184,7 +45372,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   if (window.app) {
                     window.app.showUpdateBanner({
-                      version: '1.7.2',
+                      version: '1.7.3',
                       title: 'Đã có bản cập nhật mới!',
                       highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
                     });
@@ -45736,7 +45924,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.2</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.3</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

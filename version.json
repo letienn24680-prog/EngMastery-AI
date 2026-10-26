@@ -1,13 +1,13 @@
 {
-  "version": "1.7.2",
-  "versionCode": 10612,
+  "version": "1.7.3",
+  "versionCode": 10613,
   "releaseDate": "2026-10-26",
-  "title": "Bản Cập Nhật v1.7.2: Hệ Thống Đồng Bộ Đám Mây Đa Thiết Bị & Khắc Phục Lỗi Hiển Thị 1.060+ Từ Vựng",
+  "title": "Bản Cập Nhật v1.7.3: Tính Năng Xóa Thẻ Thủ Công & Quét Tự Động Lọc Từ Rác / Không Hợp Lệ (2a, 32, 81, B2...)",
   "highlights": [
-    "Hệ thống Đồng Bộ Đám Mây 1-Chạm (Cloud Sync Vault) với Mã Đồng Bộ 6 ký tự cá nhân: Đồng bộ tức thì toàn bộ 1.060+ từ vựng, từ tự thêm và tiến độ học tập giữa Điện Thoại và Máy Tính",
-    "Khắc phục triệt để lỗi thiết bị chỉ hiển thị ~200 từ: Tự động đối chiếu bù đắp từ gốc khi khởi động và bổ sung nút 'Nạp Đầy Đủ 1.060+ Từ Gốc Master 1-Chạm'",
-    "Bổ sung nút lọc '🌟 Tất Cả (1.060+ Từ)' mặc định trong chế độ Flashcards giúp người học nắm bắt trọn vẹn kho từ vựng",
-    "Chuyển đổi chiến lược Service Worker sang Network-First cho HTML: Thiết bị di động luôn nhận phiên bản mới nhất ngay khi mở app",
-    "Khắc phục lỗi hiển thị co hẹp thẻ đề thi Lớp 12 đã lưu trên màn hình di động"
+    "Bổ sung nút 'Xóa Thẻ Này' trực tiếp trên từng thẻ từ vựng trong Kho Từ Vựng, Modal Chi Tiết và ngay trên thanh điều khiển Flashcards",
+    "Hệ thống Quét Lọc Từ Vựng Thông Minh: Tự động nhận diện và quét sạch các từ rác (như số thứ tự 81, 88, 98, mã ký tự câu hỏi 2a, B2, a1...) mà không làm ảnh hưởng đến từ vựng chuẩn",
+    "Bổ sung nút 1-chạm '🧹 Quét & Dọn Từ Rác' ngay trên thanh công cụ Kho Từ Vựng và trong Cài Đặt",
+    "Tự động chạy cơ chế dọn dẹp khi khởi động ứng dụng: Giúp tài khoản đang bị phình to (như Sổ Tay 2.482 từ) thu gọn về số lượng từ vựng thực tế chuẩn xác",
+    "Bộ lọc kiểm duyệt đầu vào nghiêm ngặt: Ngăn chặn triệt để việc AI hoặc người dùng vô tình dán số thứ tự, mã câu hỏi làm thẻ từ vựng mới"
   ]
 }
