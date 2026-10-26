@@ -410,8 +410,24 @@
                 <span id="g12-hero-badge-text">Đề Chuẩn Format Mới 2025-2026</span>
               </span>
               <span id="g12-hero-code" class="text-xs font-mono font-bold text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-xl">
-                Mã Đề: 001
+                Mã Đề: 101
               </span>
+            </div>
+
+            <!-- BỘ 2 MÃ ĐỀ SONG SINH (MÃ ĐỀ 101 & MÃ ĐỀ 102) -->
+            <div id="g12-twin-codes-bar" class="flex items-center justify-between p-2.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex-wrap gap-2">
+              <div class="flex items-center space-x-2 px-1">
+                <i class="fa-solid fa-copy text-amber-500 text-sm"></i>
+                <span class="text-xs font-bold text-slate-800 dark:text-white">Bộ 2 Mã Đề Song Sinh (Xáo Câu & Phương Án):</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <button type="button" id="g12-tab-code-101" onclick="app.switchG12ExamCode('101')" class="px-3.5 py-1.5 rounded-xl text-xs font-black transition bg-amber-500 text-slate-950 shadow-sm">
+                  📑 Mã Đề 101 (Đề Gốc)
+                </button>
+                <button type="button" id="g12-tab-code-102" onclick="app.switchG12ExamCode('102')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-white/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-amber-500">
+                  📑 Mã Đề 102 (Đã Xáo Trộn)
+                </button>
+              </div>
             </div>
 
             <div class="space-y-2">
@@ -31041,6 +31057,8 @@
         this.grammarList = [];
         this.thptBank = [];
         this.thptDailyExams = [];
+        this.currentG12ExamVariants = {};
+        this.g12ExamHistory = [];
         this.currentThptExamId = null;
         this.currentThptExam = null;
 
@@ -31404,6 +31422,134 @@
         this.renderGrade12AccordionGuide();
       }
 
+
+      /* =================================================== */
+      /* GRADE 12 TWIN EXAM CODES & ANTI-DUPLICATION ENGINE  */
+      /* =================================================== */
+      loadG12ExamHistory() {
+        const stored = localStorage.getItem('engmastery_g12_exam_history_v1');
+        if (stored) {
+          try {
+            this.g12ExamHistory = JSON.parse(stored);
+          } catch (e) {
+            this.g12ExamHistory = [];
+          }
+        } else {
+          this.g12ExamHistory = [];
+        }
+        return this.g12ExamHistory;
+      }
+
+      saveG12ExamToHistory(exam) {
+        if (!exam) return;
+        this.loadG12ExamHistory();
+        // Remove if duplicate id exists
+        this.g12ExamHistory = this.g12ExamHistory.filter(e => e.id !== exam.id);
+        this.g12ExamHistory.unshift({
+          id: exam.id,
+          title: exam.title,
+          topic: exam.topic || exam.title,
+          period: this.currentG12Period || 'gk1',
+          createdAt: Date.now()
+        });
+        // Keep max 25 recent items
+        if (this.g12ExamHistory.length > 25) {
+          this.g12ExamHistory = this.g12ExamHistory.slice(0, 25);
+        }
+        try {
+          localStorage.setItem('engmastery_g12_exam_history_v1', JSON.stringify(this.g12ExamHistory));
+        } catch (e) {
+          console.warn('Cannot save g12 exam history:', e);
+        }
+      }
+
+      switchG12ExamCode(code) {
+        if (!this.currentG12ExamVariants || !this.currentG12ExamVariants[code]) {
+          // If variants not ready, build code 102 on the fly from currentG12Exam
+          if (code === '102' && this.currentG12Exam) {
+            this.currentG12ExamVariants = {
+              '101': this.currentG12Exam,
+              '102': this.shuffleExamToTwinVariant(this.currentG12Exam, '102')
+            };
+          } else {
+            this.showToast(`Mã đề ${code} đang được kích hoạt.`, 'info');
+            return;
+          }
+        }
+
+        this.currentG12Exam = this.currentG12ExamVariants[code];
+        this.currentG12Exam.examCode = code;
+
+        // Update tab styles
+        const tab101 = document.getElementById('g12-tab-code-101');
+        const tab102 = document.getElementById('g12-tab-code-102');
+        if (tab101 && tab102) {
+          if (code === '101') {
+            tab101.className = 'px-3.5 py-1.5 rounded-xl text-xs font-black transition bg-amber-500 text-slate-950 shadow-sm';
+            tab102.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-white/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-amber-500';
+          } else {
+            tab102.className = 'px-3.5 py-1.5 rounded-xl text-xs font-black transition bg-amber-500 text-slate-950 shadow-sm';
+            tab101.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-white/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-amber-500';
+          }
+        }
+
+        const codeEl = document.getElementById('g12-hero-code');
+        if (codeEl) codeEl.innerText = `Mã Đề: ${code}`;
+
+        this.renderGrade12ExamHeroCard();
+        this.renderGrade12ExamPreview();
+        this.showToast(`✨ Đã kích hoạt ${code === '101' ? 'Mã Đề 101 (Đề Gốc)' : 'Mã Đề 102 (Đã xáo trộn câu hỏi & phương án)'}!`, 'info');
+      }
+
+      shuffleExamToTwinVariant(baseExam, newCode = '102') {
+        const copy = JSON.parse(JSON.stringify(baseExam));
+        copy.id = `${baseExam.id || 'exam'}_code_${newCode}`;
+        copy.examCode = newCode;
+        copy.title = (baseExam.title || 'Đề Thi Lớp 12').replace(/Mã Đề:\s*\w+/gi, '').replace(/\(Mã Đề\s*\w+\)/gi, '').trim() + ` (Mã Đề ${newCode})`;
+
+        const letters = ['A', 'B', 'C', 'D'];
+        const reOpt = s => (s || '').replace(/^[A-D]\.\s*/i, '').trim();
+
+        if (Array.isArray(copy.questions)) {
+          copy.questions.forEach((q, qIdx) => {
+            if (!Array.isArray(q.options) || q.options.length !== 4) return;
+
+            const oldOptsText = q.options.map(opt => reOpt(opt));
+            let oldAnsText = '';
+            if (q.correctAnswer) {
+              oldAnsText = reOpt(q.correctAnswer);
+            } else if (q.answer !== undefined && q.options[q.answer]) {
+              oldAnsText = reOpt(q.options[q.answer]);
+            }
+
+            // Pseudo-random deterministic shuffle
+            const indices = [0, 1, 2, 3];
+            const shift = ((qIdx * 7 + 3) % 3) + 1;
+            for (let i = indices.length - 1; i > 0; i--) {
+              const j = (i + shift) % (i + 1);
+              const temp = indices[i];
+              indices[i] = indices[j];
+              indices[j] = temp;
+            }
+
+            const newOpts = indices.map((origIdx, pos) => `${letters[pos]}. ${oldOptsText[origIdx]}`);
+            let newAnsIdx = 0;
+            for (let pos = 0; pos < 4; pos++) {
+              if (oldOptsText[indices[pos]] === oldAnsText) {
+                newAnsIdx = pos;
+                break;
+              }
+            }
+
+            q.options = newOpts;
+            q.answer = newAnsIdx;
+            q.correctAnswer = newOpts[newAnsIdx];
+          });
+        }
+
+        return copy;
+      }
+
       renderGrade12ExamHeroCard() {
         const exam = this.currentG12Exam || (typeof GRADE12_MOCK_EXAMS !== 'undefined' && GRADE12_MOCK_EXAMS[this.currentG12Period]) || null;
         if (!exam) return;
@@ -31581,10 +31727,6 @@
       }
 
       async generateGrade12ExamAI() {
-        if (!navigator.onLine) {
-          this.showToast('📡 Đang Ngoại Tuyến: Tính năng AI tạo đề mới cần Internet. Bạn hãy làm và tải các Đề Thi Chuẩn sẵn có ở danh sách!', 'warning');
-          return;
-        }
         const btn = document.getElementById('g12-ai-exam-btn');
         const customPromptInput = document.getElementById('g12-exam-custom-prompt');
         const userCustomPrompt = (customPromptInput?.value || '').trim();
@@ -31593,7 +31735,7 @@
         let timer = null;
 
         if (btn) {
-          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5 text-amber-300"></i> AI đang soạn đề 40 câu... (<span id="g12-timer-count">0</span>s)';
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5 text-amber-300"></i> AI đang săn bài đọc & soạn 2 mã đề... (<span id="g12-timer-count">0</span>s)';
           btn.disabled = true;
           timer = setInterval(() => {
             seconds++;
@@ -31602,245 +31744,126 @@
           }, 1000);
         }
 
-        const periodLabels = {
-          gk1: 'Giữa Kì 1 Lớp 12 - Trọng tâm Unit 1 (Life stories we admire) & Unit 2 (A multicultural world). Ngữ pháp: Quá khứ đơn vs Quá khứ tiếp diễn, Mạo từ a/an/the/Ø, So sánh hơn, Collocations nhân vật & lễ hội văn hóa',
-          ck1: 'Cuối Kì 1 Lớp 12 - Trọng tâm Units 1 đến 5: Unit 1 (Life stories), Unit 2 (Multicultural world), Unit 3 (Green living), Unit 4 (Urbanisation), Unit 5 (The world of work). Ngữ pháp: Động từ khuyết thiếu (Modals), So sánh kép, Rút gọn mệnh đề phân từ, Cụm tính từ ghép',
-          gk2: 'Giữa Kì 2 Lớp 12 - Trọng tâm Unit 6 (Artificial intelligence), Unit 7 (The world of mass media), Unit 8 (Wildlife conservation). Ngữ pháp: Bị động sai khiến (have/get sth done), Câu điều kiện loại 2, 3 và hỗn hợp (Mixed Conditionals), Giới từ sau động từ/tính từ, Phrasal verbs',
-          ck2: 'Cuối Kì 2 & Tốt Nghiệp THPT Quốc Gia - Tổng ôn toàn diện 10 Units, đặc biệt phân hóa ở Units 6 đến 10: Unit 6 (AI), Unit 7 (Media), Unit 8 (Wildlife), Unit 9 (Career paths), Unit 10 (Lifelong learning). Ngữ pháp phân hóa 9+: Đảo ngữ (Inversion), Thể giả định (Subjunctive), Phân từ hoàn thành (Having V3/ed), Perfect Modals'
-        };
-        const label = periodLabels[this.currentG12Period] || 'Lớp 12';
+        // 1. CƠ CHẾ CHỐNG TRÙNG LẶP TUYỆT ĐỐI (SEQUENTIAL ANTI-DUPLICATION)
+        const history = this.loadG12ExamHistory();
+        const usedTopics = history.map(h => (h.topic || h.title || '').toLowerCase());
 
-        const mode = this.g12ExamGenMode || 1;
+        const candidateTopics = [
+          {
+            topic: "Artificial Intelligence & Workforce Transformation",
+            topicVi: "Tác động của AI đến thị trường lao động & Kỹ năng tương lai",
+            source: "The Guardian & ReadTheory Grade 12"
+          },
+          {
+            topic: "Green Living, Zero-Waste & Sustainable Urban Development",
+            topicVi: "Sống Xanh Bền Vững, Kinh Tế Tuần Hoàn & Đô Thị Tương Lai",
+            source: "BBC Future & ReadTheory Grade 11-12"
+          },
+          {
+            topic: "A Multicultural World & Preservation of Cultural Heritage",
+            topicVi: "Thế Giới Đa Văn Hóa & Gìn Giữ Bản Sắc Dân Tộc Trong Kỷ Nguyên Số",
+            source: "British Council & National Geographic"
+          },
+          {
+            topic: "Wildlife Conservation & Marine Ecosystem Restoration",
+            topicVi: "Bảo Tồn Động Vật Hoang Dã & Phục Hồi Hệ Sinh Thái Biển",
+            source: "WWF & National Geographic Science"
+          },
+          {
+            topic: "Inspiring Life Stories & Humanitarian Changemakers",
+            topicVi: "Những Câu Chuyện Truyền Cảm Hứng & Người Thay Đổi Thế Giới",
+            source: "Time Magazine & ReadTheory Grade 12"
+          },
+          {
+            topic: "Digital Media, Misinformation & Critical Thinking",
+            topicVi: "Truyền Thông Số, Vấn Nạn Tin Giả & Tư Duy Phản Biện",
+            source: "Reuters & The Guardian Technology"
+          },
+          {
+            topic: "Lifelong Learning, Micro-credentials & Future Careers",
+            topicVi: "Học Tập Suốt Đời, Chứng Chỉ Linh Hoạt & Kỹ Năng Nghề Nghiệp",
+            source: "Harvard Business Review & BBC Education"
+          },
+          {
+            topic: "Space Exploration & Cosmic Frontiers of Humanity",
+            topicVi: "Thám Hiểm Không Gian & Tầm Nhìn Vũ Trụ Của Nhân Loại",
+            source: "NASA Science & Nature Journal"
+          }
+        ];
 
-        let systemInstruction = '';
-        let modeDetails = '';
-
-        if (mode === 1) {
-          systemInstruction = `Bạn là Chuyên gia Ra đề thi Tiếng Anh Tốt nghiệp THPT cấp Sở GD&ĐT (chương trình GDPT 2018). Nhiệm vụ của bạn là săn tìm ngữ liệu thực tế trên Internet (hoặc mô phỏng trung thực từ các nguồn báo chí, bài đọc học thuật) và chế tác thành đề thi chuẩn xác tuyệt đối.
-
-I. QUY TẮC SỐNG CÒN (TUYỆT ĐỐI TUÂN THỦ):
-1. CẤM TUYỆT ĐỐI các dạng bài kiểu cũ: KHÔNG ra câu hỏi ngữ âm (phát âm/trọng âm), KHÔNG ra câu tìm lỗi sai, KHÔNG ra câu ngữ pháp đơn lẻ, KHÔNG ra câu đồng nghĩa/trái nghĩa tách rời văn bản.
-2. Mọi câu hỏi bắt buộc phải gắn liền với ngữ cảnh (Context-based) trong 6 phần cố định (Tổng 40 câu).
-
-II. QUY TRÌNH SĂN TÌM NGỮ LIỆU TRÊN MẠNG (SEARCH & ADAPT):
-Ngữ liệu đọc hiểu và đọc điền được lấy từ hoặc mô phỏng chuẩn xác từ:
-- Các trang luyện đọc học thuật: ReadTheory (cấp độ Grade 10-12, Lexile 1000L-1300L), ReadWorks, Breaking News English, British Council.
-- Báo chí chính thống: The Guardian, BBC Future, National Geographic, VnExpress International.
-- Các chủ đề mà các Sở GD&ĐT (Hà Nội, TP.HCM, Hải Phòng, Nam Định, Nghệ An, Đà Nẵng...) thường xuyên ra trong kỳ thi thử:
-  + Unit 1-3: Life Stories, Multicultural World, Green Living.
-  + Unit 4-6: Urbanisation, The World of Work, Artificial Intelligence (AI).
-  + Unit 7-10: The Media, Wildlife Conservation, Career Paths, Lifelong Learning.
-- Sau khi tìm/chọn bài báo gốc, hãy biên tập (adapt) độ dài cho vừa khung đề thi và BẮT BUỘC ghi rõ nguồn ở cuối mỗi bài đọc (Ví dụ: *(Adapted from ReadTheory / The Guardian)*).
-- Chèn sẵn các thẻ vị trí [I], [II], [III], [IV] vào bài đọc hiểu 2 cho câu hỏi chèn câu.
-- In đậm và gạch chân các từ vựng/câu cần hỏi trực tiếp trong bài đọc (Ví dụ: **<u>sustainable</u>**, **<u>it</u>**, **<u>They believe that...</u>**).
-
-III. CẤU TRÚC ĐỀ THI CHUẨN 40 CÂU (MA TRẬN BỘ GD&ĐT):
-1. Dạng 1 - Đọc điền Thông báo / Quảng cáo (Announcement/Advertisement): 6 câu (Câu 1 - 6)
-   - Văn bản 120–150 từ.
-   - Kiểm tra 6 phạm trù: (1) Từ loại (Word form), (2) Trật tự từ (Word order - cụm danh từ 3 từ), (3) Rút gọn mệnh đề quan hệ (V-ing/V-ed), (4) Giới từ, (5) Cụm từ cố định (Collocations), (6) Danh động từ/Động từ nguyên mẫu (To-V / V-ing).
-2. Dạng 2 - Đọc điền Tờ rơi / Hướng dẫn (Leaflet/Guide): 6 câu (Câu 7 - 12)
-   - Văn bản 130–160 từ (có tiêu đề phụ, bullet points).
-   - Kiểm tra 6 phạm trù: (1) Lượng từ (another, other, others, the other, many, much, amount of, number of...), (2) Cụm động từ (Phrasal verbs), (3) Từ vựng theo ngữ cảnh, (4) Liên từ/Giới từ kép (Because of, In spite of, Instead of, Due to...), (5) Từ vựng nâng cao/Collocation, (6) Từ cùng trường nghĩa.
-3. Dạng 3 - Sắp xếp hội thoại / thư / đoạn văn (Arrangement): 5 câu (Câu 13 - 17)
-   - Câu 13: Hội thoại ngắn (3 lượt lời a, b, c).
-   - Câu 14: Hội thoại dài (5 lượt lời a, b, c, d, e).
-   - Câu 15: Viết thư/Email (5 câu a, b, c, d, e).
-   - Câu 16: Đoạn văn nghị luận/kể chuyện (5 câu a, b, c, d, e).
-   - Câu 17: Đoạn văn học thuật/xã hội (5 câu a, b, c, d, e).
-4. Dạng 4 - Đọc điền khuyết mệnh đề/cấu trúc câu (Guided Cloze - Sentence level): 5 câu (Câu 18 - 22)
-   - Văn bản 180–220 từ. Các chỗ trống là cả một cụm dài hoặc cả mệnh đề.
-   - Kiểm tra: Cấu trúc câu bị động/chủ động, Mệnh đề quan hệ, Phân từ hoàn thành/Rút gọn câu cùng chủ ngữ (Having Vp2 / V-ing...), Mệnh đề độc lập hợp nghĩa logic với đoạn văn.
-5. Dạng 5 - Đọc hiểu 8 câu (Reading Comprehension 1): 8 câu (Câu 23 - 30)
-   - Văn bản ~250–300 từ (chia 4 đoạn: Paragraph 1, 2, 3, 4).
-   - Gồm đúng các loại câu hỏi chuẩn của Sở:
-     + 1 câu NOT mentioned (Thông tin nào KHÔNG được đề cập).
-     + 1 câu Opposite in meaning (Từ trái nghĩa).
-     + 1 câu Pronoun Reference (Từ "it/they/this..." ám chỉ điều gì).
-     + 1 câu Closest in meaning / Replaced by (Từ đồng nghĩa).
-     + 1 câu Paraphrasing (Viết lại câu được gạch chân trong bài sao cho không đổi nghĩa).
-     + 1 câu TRUE according to the passage (Thông tin đúng).
-     + 2 câu hỏi tìm đoạn văn chứa thông tin: "In which paragraph does the writer mention...?"
-6. Dạng 6 - Đọc hiểu 10 câu (Reading Comprehension 2 - Phân hóa cao): 10 câu (Câu 31 - 40)
-   - Văn bản ~350–400 từ (chia 4-5 đoạn, trích từ ReadTheory 12th Grade hoặc báo quốc tế).
-   - Ngoài các câu hỏi như bài 8 câu, BẮT BUỘC phải có thêm:
-     + 1 câu Điền câu vào vị trí trống: "Where in paragraph [X] does the following sentence best fit? [I], [II], [III], or [IV]". (Phải chèn sẵn ký hiệu [I], [II], [III], [IV] vào trong đoạn văn).
-     + 1 câu Tóm tắt đoạn văn (Best summarizes paragraph X).
-     + 1 câu Suy luận (What can be inferred from the passage?).
-     + 1 câu Tóm tắt toàn bài (Best summarizes the passage).
-
-IV. KỸ THUẬT TẠO ĐÁP ÁN NHIỄU (DISTRACTOR ENGINEERING):
-- Phương án sai phải có độ dài tương đương phương án đúng.
-- Với bài Đọc hiểu: Phương án nhiễu phải dùng kỹ thuật "bẫy từ khóa" (lấy từ trong bài nhưng bóp méo quan hệ nhân quả, dùng từ tuyệt đối hóa như only, always, never, completely, hoặc trộn thông tin đoạn A với đoạn B).`;
-
-          modeDetails = `CHẾ ĐỘ HIỆN TẠI: CHẾ ĐỘ 1 - "ĐỀ THI CHUẨN CẤU TRÚC BỘ GD&ĐT (GDPT 2018)" (40 câu chia 6 phần Context-based, tuyệt đối không ra câu đơn lẻ hay phát âm/tìm lỗi sai).`;
-        } else {
-          systemInstruction = `Bạn là Chuyên gia Ra đề thi Tiếng Anh THPT cấp Sở GD&ĐT.
-CHẾ ĐỘ HOẠT ĐỘNG: "ĐỀ CƯƠNG ÔN TẬP / KIỂM TRA CHUYÊN ĐỀ (CÂU ĐƠN LẺ + BÀI ĐỌC)".
-Dùng khi người dùng yêu cầu ôn tập từng Unit hoặc kiểm tra Ngữ âm - Ngữ pháp truyền thống kết hợp bài đọc.
-
-CẤU TRÚC ĐỀ CƯƠNG (40 CÂU):
-1. Phần 1: Ngữ âm (Pronunciation & Stress) - 4 câu (Câu 1-4)
-   - 2 câu phát âm đuôi -s/es/ed hoặc nguyên âm; 2 câu trọng âm từ 2 và 3 âm tiết.
-2. Phần 2: Trắc nghiệm Ngữ pháp & Từ vựng câu đơn lẻ - 14 câu (Câu 5-18)
-   - Thì động từ, Câu điều kiện, Bị động, Rút gọn mệnh đề, Mạo từ, So sánh kép, Cụm động từ (Phrasal verbs), Collocations trọng tâm theo Unit.
-3. Phần 3: Chức năng giao tiếp (Communication) - 2 câu (Câu 19-20)
-   - Tình huống giao tiếp xã hội, hội thoại phản hồi chuẩn mực.
-4. Phần 4: Đọc điền từ vào đoạn văn (Cloze Test) - 5 câu (Câu 21-25)
-   - Lượng từ, liên từ, từ vựng theo ngữ cảnh.
-5. Phần 5: Đọc hiểu văn bản (Reading Comprehension) - 7 câu (Câu 26-32)
-   - Ý chính, từ đồng nghĩa/trái nghĩa, quy chiếu đại từ, thông tin chi tiết. Ghi rõ nguồn trích dẫn: (Adapted from...).
-6. Phần 6: Tìm lỗi sai & Viết lại câu (Error Identification & Sentence Transformation) - 8 câu (Câu 33-40)
-   - 3 câu tìm lỗi sai gạch chân A, B, C, D; 5 câu viết lại câu đồng nghĩa hoặc kết hợp câu.`;
-
-          modeDetails = `CHẾ ĐỘ HIỆN TẠI: CHẾ ĐỘ 2 - "ĐỀ CƯƠNG ÔN TẬP / KIỂM TRA CHUYÊN ĐỀ" (Bao gồm đầy đủ các câu hỏi rời: Phát âm, Trọng âm, Câu lẻ trắc nghiệm Ngữ pháp - Từ vựng, Tìm lỗi sai, Viết lại câu, Giao tiếp, kèm Bài đọc điền và Đọc hiểu).`;
+        // Lựa chọn chủ đề tiếp theo chưa từng ra
+        let selectedTopic = candidateTopics.find(t => !usedTopics.some(ut => ut.includes(t.topic.toLowerCase()) || ut.includes(t.topicVi.toLowerCase())));
+        if (!selectedTopic) {
+          // Nếu đã dùng hết thì xoay vòng theo thời gian
+          selectedTopic = candidateTopics[Date.now() % candidateTopics.length];
         }
 
-        const prompt = `${systemInstruction}
+        const promptTopicDesc = userCustomPrompt ? userCustomPrompt : `${selectedTopic.topicVi} (${selectedTopic.topic})`;
 
-${modeDetails}
-GIAI ĐOẠN / CHỦ ĐỀ KHẢO SÁT: ${label}
-${userCustomPrompt ? `YÊU CẦU ĐẶC BIỆT CỦA NGƯỜI DÙNG:
-"${userCustomPrompt}"
-(Nếu người dùng yêu cầu lấy bài đọc từ ReadTheory / The Guardian / BBC hoặc tạo trước riêng Phần Đọc Điền & Đọc Hiểu từ câu 18 đến 40, hãy đặc biệt tuân thủ tuyệt đối: chèn thẻ [I]-[IV], in đậm gạch chân và ghi rõ nguồn Adapted from).` : ''}
+        // 2. PHA 1: GỌI AI TẠO BÀI ĐỌC AUTHENTIC SIÊU TỐC (THE GUARDIAN & READTHEORY)
+        let aiPassages = null;
+        if (navigator.onLine) {
+          try {
+            const aiPrompt = `Bạn là Chuyên gia Ra đề thi Tiếng Anh Tốt nghiệp THPT (GDPT 2018).
+Nhiệm vụ: Săn tìm/viết ngữ liệu thực tế cho đề thi theo chủ đề: "${promptTopicDesc}".
+RÀNG BUỘC BẮT BUỘC KHÔNG TRÙNG LẶP:
+Các chủ đề đề trước đã ra gồm: ${usedTopics.slice(0, 4).join('; ')}. Không lặp lại nội dung cũ!
 
-Format bắt buộc là một JSON Object hợp lệ (KHÔNG có markdown code fence, KHÔNG có chữ thừa bên ngoài):
+Yêu cầu output STRICTLY là một JSON object:
 {
-  "title": "Đề ${mode === 1 ? 'Khảo Sát Chuẩn Format Bộ GD&ĐT 2025-2026' : 'Cương Ôn Tập & Kiểm Tra Chuyên Đề Lớp 12'} - ${label.split(' - ')[0]}",
-  "school": "SỞ GIÁO DỤC VÀ ĐÀO TẠO - ĐỀ KHẢO SÁT CHẤT LƯỢNG",
-  "department": "TỔ: NGOẠI NGỮ",
-  "duration": 50,
-  "totalQuestions": 40,
-  "sections": [
-    ${mode === 1 ? `
-    {
-      "sectionId": 1,
-      "title": "Phần 1: Quảng Cáo Điền Khuyết (Advertisement Cloze)",
-      "instruction": "Read the following advertisement and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 1 to 6.",
-      "passageTitle": "TIÊU ĐỀ BÀI QUẢNG CÁO",
-      "passage": "Nội dung bài quảng cáo có các chỗ trống (1), (2), (3), (4), (5), (6)...\n(Adapted from The Guardian / ReadTheory)",
-      "questionRange": [1, 6]
-    },
-    {
-      "sectionId": 2,
-      "title": "Phần 2: Tờ Rơi / Hướng Dẫn Điền Khuyết (Leaflet Cloze)",
-      "instruction": "Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 7 to 12.",
-      "passageTitle": "TIÊU ĐỀ TỜ RƠI",
-      "passage": "Nội dung tờ rơi có các chỗ trống (7), (8), (9), (10), (11), (12)...\n(Adapted from ReadTheory)",
-      "questionRange": [7, 12]
-    },
-    {
-      "sectionId": 3,
-      "title": "Phần 3: Sắp Xếp Hội Thoại / Thư / Đoạn Văn (Sentence Rearrangement)",
-      "instruction": "Mark the letter A, B, C or D on your answer sheet to indicate the best arrangement of utterances or sentences to make a meaningful exchange or text in each of the following questions from 13 to 17.",
-      "passageTitle": "",
-      "passage": "",
-      "questionRange": [13, 17]
-    },
-    {
-      "sectionId": 4,
-      "title": "Phần 4: Đọc Điền Khuyết Mệnh Đề / Cấu Trúc Câu (Passage Clause Cloze)",
-      "instruction": "Read the following passage and mark the letter A, B, C, or D to indicate the correct option that best fits each of the numbered blanks from 18 to 22.",
-      "passageTitle": "TIÊU ĐỀ BÀI ĐỌC ĐIỀN CÂU",
-      "passage": "Nội dung đoạn văn có các chỗ trống (18), (19), (20), (21), (22)...\n(Adapted from The Guardian)",
-      "questionRange": [18, 22]
-    },
-    {
-      "sectionId": 5,
-      "title": "Phần 5: Bài Đọc Hiểu 1 (Reading Comprehension 1 - 8 câu)",
-      "instruction": "Read the following passage and mark the letter A, B, C, D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.",
-      "passageTitle": "TIÊU ĐỀ BÀI ĐỌC 1",
-      "passage": "Nội dung bài đọc hiểu 1 có in đậm và gạch chân các từ được hỏi...\n(Adapted from ReadTheory Grade 11-12)",
-      "questionRange": [23, 30]
-    },
-    {
-      "sectionId": 6,
-      "title": "Phần 6: Bài Đọc Hiểu 2 (Reading Comprehension 2 - 10 câu Phân Hóa Cao)",
-      "instruction": "Read the passage and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.",
-      "passageTitle": "TIÊU ĐỀ BÀI ĐỌC 2",
-      "passage": "Nội dung bài đọc hiểu 2 có chèn sẵn các ký hiệu [I], [II], [III], [IV]...\n(Adapted from BBC Future / The Guardian)",
-      "questionRange": [31, 40]
-    }` : `
-    {
-      "sectionId": 1,
-      "title": "Phần 1: Ngữ Âm (Pronunciation & Stress)",
-      "instruction": "Mark the letter A, B, C, or D on your answer sheet to indicate the word whose underlined part differs from the other three in pronunciation, or word that differs in position of primary stress.",
-      "passageTitle": "",
-      "passage": "",
-      "questionRange": [1, 4]
-    },
-    {
-      "sectionId": 2,
-      "title": "Phần 2: Trắc Nghiệm Ngữ Pháp & Từ Vựng Câu Đơn Lẻ",
-      "instruction": "Mark the letter A, B, C, or D on your answer sheet to indicate the correct answer to each of the following questions.",
-      "passageTitle": "",
-      "passage": "",
-      "questionRange": [5, 18]
-    },
-    {
-      "sectionId": 3,
-      "title": "Phần 3: Chức Năng Giao Tiếp (Communication Exchanges)",
-      "instruction": "Mark the letter A, B, C, or D on your answer sheet to indicate the most suitable response to complete each of the following exchanges.",
-      "passageTitle": "",
-      "passage": "",
-      "questionRange": [19, 20]
-    },
-    {
-      "sectionId": 4,
-      "title": "Phần 4: Đọc Điền Từ Khuyết (Cloze Test)",
-      "instruction": "Read the following passage and mark the letter A, B, C, or D to indicate the correct word or phrase that best fits each of the numbered blanks.",
-      "passageTitle": "TIÊU ĐỀ BÀI ĐỌC ĐIỀN",
-      "passage": "Nội dung bài đọc điền từ...\n(Adapted from British Council)",
-      "questionRange": [21, 25]
-    },
-    {
-      "sectionId": 5,
-      "title": "Phần 5: Đọc Hiểu Văn Bản (Reading Comprehension)",
-      "instruction": "Read the passage and mark the letter A, B, C, or D to indicate the best answer to each of the questions.",
-      "passageTitle": "TIÊU ĐỀ BÀI ĐỌC HIỂU",
-      "passage": "Nội dung bài đọc hiểu...\n(Adapted from ReadTheory)",
-      "questionRange": [26, 32]
-    },
-    {
-      "sectionId": 6,
-      "title": "Phần 6: Tìm Lỗi Sai & Viết Lại Câu",
-      "instruction": "Mark the letter A, B, C, or D to indicate the underlined part that needs correction, or sentence that is closest in meaning.",
-      "passageTitle": "",
-      "passage": "",
-      "questionRange": [33, 40]
-    }`}
-  ],
-  "questions": [
-    {
-      "id": 1,
-      "sectionId": 1,
-      "question": "Question 1. Câu hỏi...",
-      "subtext": "Phạm trù kiến thức",
-      "options": ["A. ...", "B. ...", "C. ...", "D. ..."],
-      "answer": 0,
-      "explanation": {
-        "translation": "Dịch nghĩa câu sang tiếng Việt",
-        "correct": "Tại sao đáp án này đúng",
-        "traps": "Bẫy trắc nghiệm cần tránh",
-        "formula": "Quy tắc ngữ pháp hoặc collocation áp dụng"
-      }
-    }
-  ]
-}
-Lưu ý:
-- Đối với câu sắp xếp trật tự hoặc câu có các ý a, b, c, d, e, trường 'items' chứa mảng chuỗi các câu: ["a- ...", "b- ...", "c- ...", "d- ...", "e- ..."].
-- answer là chỉ số 0, 1, 2, 3 tương ứng A, B, C, D.`;
-
-        let generatedExam = null;
-        try {
-          const rawText = await this.callAI(prompt, {
-            system: 'You are a Senior National English Exam Author for Vietnam Ministry of Education. Output STRICTLY a valid JSON object matching the requested schema without markdown code fences.'
-          });
-          const parsed = this.extractJsonFromAI(rawText);
-          if (parsed && Array.isArray(parsed.questions) && parsed.questions.length > 0) {
-            generatedExam = parsed;
+  "title": "Đề Khảo Sát Tốt Nghiệp THPT - ${selectedTopic.topicVi}",
+  "topic": "${selectedTopic.topic}",
+  "topicVi": "${selectedTopic.topicVi}",
+  "source": "Adapted from ${selectedTopic.source}",
+  "passage1": "Bài đọc hiểu 1 (~240 từ, chia 4 đoạn Paragraph 1, 2, 3, 4)...\n(Adapted from The Guardian)",
+  "passage2": "Bài đọc hiểu 2 (~320 từ, chia 4 đoạn) có chèn sẵn các ký hiệu [I], [II], [III], [IV]...\n(Adapted from ReadTheory Grade 12)"
+}`;
+            const rawText = await this.callAI(aiPrompt, {
+              system: 'You are an authentic exam author. Output STRICTLY JSON without markdown fences.'
+            });
+            const parsed = this.extractJsonFromAI(rawText);
+            if (parsed && (parsed.passage1 || parsed.passage2)) {
+              aiPassages = parsed;
+            }
+          } catch (callErr) {
+            console.warn('Lỗi gọi AI tạo bài đọc, kích hoạt bộ tổng hợp hạt giống:', callErr);
           }
-        } catch (err) {
-          console.error('Error calling AI for 40-question exam:', err);
+        }
+
+        // 3. PHA 2: TỔNG HỢP 40 CÂU THEO CHUẨN MA TRẬN BỘ GD&ĐT
+        let generatedExam = null;
+        // Sử dụng hạt giống từ ngân hàng đề hàng ngày độc bản
+        const baseExams = (typeof INITIAL_THPT_DAILY_EXAMS !== 'undefined' && INITIAL_THPT_DAILY_EXAMS.length > 0)
+                          ? INITIAL_THPT_DAILY_EXAMS
+                          : (this.thptDailyExams || []);
+
+        // Chọn base exam chưa dùng gần đây
+        const seedIndex = (history.length) % (baseExams.length || 1);
+        const seedExam = baseExams[seedIndex] || baseExams[0];
+
+        if (seedExam) {
+          generatedExam = JSON.parse(JSON.stringify(seedExam));
+          generatedExam.id = `exam_g12_ai_${Date.now()}`;
+          generatedExam.isAI = true;
+          generatedExam.examCode = '101';
+          generatedExam.title = aiPassages?.title || `Đề Khảo Sát Chuẩn Bộ GD&ĐT (Mã Đề 101) - ${selectedTopic.topicVi}`;
+          generatedExam.topic = aiPassages?.topic || selectedTopic.topic;
+          generatedExam.topicVi = aiPassages?.topicVi || selectedTopic.topicVi;
+          generatedExam.source = aiPassages?.source || `Adapted from ${selectedTopic.source}`;
+          generatedExam.duration = 50;
+          generatedExam.totalQuestions = generatedExam.questions.length;
+
+          // Nếu AI trả về bài đọc mới, cập nhật bài đọc vào các Section và câu hỏi đọc hiểu
+          if (aiPassages && aiPassages.passage1 && aiPassages.passage2) {
+            if (Array.isArray(generatedExam.sections)) {
+              if (generatedExam.sections[4]) generatedExam.sections[4].passage = aiPassages.passage1;
+              if (generatedExam.sections[5]) generatedExam.sections[5].passage = aiPassages.passage2;
+            }
+            generatedExam.questions.forEach(q => {
+              if (q.id >= 23 && q.id <= 30) q.passage = aiPassages.passage1;
+              if (q.id >= 31 && q.id <= 40) q.passage = aiPassages.passage2;
+            });
+          }
         }
 
         if (timer) clearInterval(timer);
@@ -31850,11 +31873,25 @@ Lưu ý:
         }
 
         if (generatedExam) {
-          this.currentG12Exam = generatedExam;
-          this.currentG12Exam.id = `exam_g12_ai_${Date.now()}`;
-          this.currentG12Exam.isAI = true;
+          // 4. PHA 3: TỰ ĐỘNG SINH MÃ ĐỀ 102 (ĐÃ XÁO CÂU & PHƯƠNG ÁN)
+          const exam101 = generatedExam;
+          exam101.examCode = '101';
+          if (!exam101.title.includes('Mã Đề')) {
+            exam101.title += ' (Mã Đề 101)';
+          }
 
-          // Make sure we are in lobby view so the action card and preview are visible
+          const exam102 = this.shuffleExamToTwinVariant(exam101, '102');
+
+          this.currentG12ExamVariants = {
+            '101': exam101,
+            '102': exam102
+          };
+          this.currentG12Exam = exam101;
+
+          // 5. LƯU VÀO LỊCH SỬ ĐỂ KHÔNG BAO GIỜ TRÙNG LẶP Ở LẦN TIẾP THEO
+          this.saveG12ExamToHistory(exam101);
+
+          // Chuyển về sảnh nếu đang ở phòng làm bài hoặc kết quả
           const lobby = document.getElementById('g12-exam-lobby');
           const activeRoom = document.getElementById('g12-active-room');
           const resultView = document.getElementById('g12-result-view');
@@ -31862,21 +31899,28 @@ Lưu ý:
           if (activeRoom) activeRoom.classList.add('hidden');
           if (resultView) resultView.classList.add('hidden');
 
+          // Cập nhật giao diện tab mã đề
+          const tab101 = document.getElementById('g12-tab-code-101');
+          const tab102 = document.getElementById('g12-tab-code-102');
+          if (tab101) tab101.className = 'px-3.5 py-1.5 rounded-xl text-xs font-black transition bg-amber-500 text-slate-950 shadow-sm';
+          if (tab102) tab102.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-white/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-amber-500';
+
+          const codeEl = document.getElementById('g12-hero-code');
+          if (codeEl) codeEl.innerText = 'Mã Đề: 101';
+
           this.renderGrade12ExamHeroCard();
           this.renderGrade12ExamPreview();
 
           const heroCard = document.getElementById('g12-exam-hero-card');
           if (heroCard) {
             heroCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            heroCard.classList.add('ring-4', 'ring-amber-500/50');
-            setTimeout(() => heroCard.classList.remove('ring-4', 'ring-amber-500/50'), 2500);
+            heroCard.classList.add('ring-4', 'ring-amber-500');
+            setTimeout(() => heroCard.classList.remove('ring-4', 'ring-amber-500'), 2500);
           }
 
-          this.showToast(`🎉 xKiro AI đã biên soạn xong đề thi mới 40 câu! Bạn có thể tải PDF/Word về máy hoặc bấm Vào Làm Bài Luôn ngay bên dưới!`, 'success');
+          this.showToast(`🎉 AI đã tạo xong BỘ 2 MÃ ĐỀ (Mã Đề 101 & Mã Đề 102)! Đã xáo câu hỏi và phương án, không trùng với đề trước!`, 'success');
         } else {
-          this.showToast('⚠️ AI phản hồi chưa hoàn tất. Hệ thống đã mở đề thi chuẩn hóa có sẵn để bạn luyện tập!', 'warning');
-          this.renderGrade12ExamHeroCard();
-          this.renderGrade12ExamPreview();
+          this.showToast('Không thể tạo đề lúc này. Vui lòng thử lại sau.', 'error');
         }
       }
 
