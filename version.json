@@ -1,12 +1,13 @@
 {
-  "version": "1.6.6",
-  "versionCode": 10606,
+  "version": "1.6.7",
+  "versionCode": 10607,
   "releaseDate": "2026-10-26",
-  "title": "Bản Cập Nhật v1.6.6: Chuẩn Hóa Cấu Trúc 6 Phần Đề Thi Lớp 12 (GDPT 2018)",
+  "title": "Bản Cập Nhật v1.6.7: Tối Ưu Tốc Độ & Loại Bỏ Hoàn Toàn Delay",
   "highlights": [
-    "Chuẩn hóa trọn vẹn 100% cấu trúc 6 phần đề thi theo ma trận Bộ GD&ĐT",
-    "Khắc phục triệt để lỗi thiếu bài đọc / ngữ cảnh và lỗi hiển thị undefined ở câu hỏi",
-    "Tự động chuẩn hóa toàn bộ đề thi AI, đề thi thử hàng ngày và kho đề lưu trữ",
-    "Hỗ trợ bộ 2 mã đề song sinh 101/102 đầy đủ bài đọc, bảng đối chiếu và lời giải 4 trụ cột"
+    "Loại bỏ triệt để độ trễ (0ms delay) khi bấm chọn đáp án trắc nghiệm đề thi",
+    "Tối ưu khởi động ứng dụng siêu tốc, nạp theo yêu cầu (lazy loading) cho kho từ vựng và ngữ pháp",
+    "Phân trang thông minh 36 thẻ cho Kho Từ Vựng, triệt tiêu giật lag trên thiết bị di động",
+    "Debounce tìm kiếm từ vựng và ngữ pháp, ngăn chặn tình trạng đơ giật khi gõ phím nhanh",
+    "Chuyển tab và điều hướng tức thời, mượt mà chuẩn 60fps"
   ]
 }

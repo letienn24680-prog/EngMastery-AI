@@ -65,6 +65,18 @@
   </script>
 
   <style>
+    /* Mobile Touch Optimization & High-Performance Rendering */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    button, a, input, select, textarea {
+      touch-action: manipulation;
+    }
+    .cv-auto {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 280px;
+    }
+
     /* Print Styles for Official Ministry Exam Paper */
     @media print {
       body * {
@@ -278,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.6.6 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.6.7 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3299,7 +3311,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.6.6 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.6.7 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -32625,7 +32637,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.6.6';
+        this.appVersion = '1.6.7';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -33998,7 +34010,7 @@ Yêu cầu output STRICTLY là một JSON object:
               ${q.options.map((opt, optIdx) => {
                 const isChecked = selectedAns === optIdx;
                 return `
-                  <button type="button" onclick="app.selectGrade12Answer(${qIdx}, ${optIdx})" class="p-3.5 rounded-2xl border text-left text-xs font-semibold transition flex items-center space-x-3 ${isChecked ? 'bg-primary text-white border-primary shadow-glow-primary' : 'bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary/50'}">
+                  <button type="button" data-q="${qIdx}" data-opt="${optIdx}" onclick="app.selectGrade12Answer(${qIdx}, ${optIdx})" class="g12-opt-btn-${qIdx} p-3.5 rounded-2xl border text-left text-xs font-semibold transition flex items-center space-x-3 ${isChecked ? 'bg-primary text-white border-primary shadow-glow-primary' : 'bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary/50'}">
                     <span class="w-6 h-6 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 ${isChecked ? 'bg-white text-primary' : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}">
                       ${String.fromCharCode(65 + optIdx)}
                     </span>
@@ -34013,8 +34025,26 @@ Yêu cầu output STRICTLY là một JSON object:
 
       selectGrade12Answer(qIdx, optIdx) {
         this.g12UserAnswers[qIdx] = optIdx;
-        this.renderGrade12ExamQuestions();
-        this.renderGrade12Palette();
+
+        // Siêu tốc: Cập nhật trực tiếp 4 nút phương án mà không re-render toàn bộ 40 câu hỏi (0ms latency)
+        const optBtns = document.querySelectorAll(`.g12-opt-btn-${qIdx}`);
+        optBtns.forEach((btn, idx) => {
+          const isChecked = (idx === optIdx);
+          const badge = btn.firstElementChild;
+          if (isChecked) {
+            btn.className = `g12-opt-btn-${qIdx} p-3.5 rounded-2xl border text-left text-xs font-semibold transition flex items-center space-x-3 bg-primary text-white border-primary shadow-glow-primary`;
+            if (badge) badge.className = 'w-6 h-6 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 bg-white text-primary';
+          } else {
+            btn.className = `g12-opt-btn-${qIdx} p-3.5 rounded-2xl border text-left text-xs font-semibold transition flex items-center space-x-3 bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-primary/50`;
+            if (badge) badge.className = 'w-6 h-6 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
+          }
+        });
+
+        // Siêu tốc: Cập nhật trực tiếp nút bảng câu hỏi bên phải (0ms latency)
+        const palBtn = document.getElementById(`g12-pal-btn-${qIdx}`);
+        if (palBtn) {
+          palBtn.className = 'w-full aspect-square rounded-xl text-xs font-bold transition flex items-center justify-center bg-primary text-white shadow-sm';
+        }
 
         const answeredCount = Object.keys(this.g12UserAnswers).length;
         const total = this.currentG12Exam ? this.currentG12Exam.questions.length : 0;
@@ -34035,7 +34065,7 @@ Yêu cầu output STRICTLY là một JSON object:
         palette.innerHTML = this.currentG12Exam.questions.map((q, qIdx) => {
           const isAnswered = this.g12UserAnswers.hasOwnProperty(qIdx);
           return `
-            <button type="button" onclick="app.jumpToGrade12Question(${qIdx})" class="w-full aspect-square rounded-xl text-xs font-bold transition flex items-center justify-center ${isAnswered ? 'bg-primary text-white shadow-sm' : 'border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-primary'}">
+            <button type="button" id="g12-pal-btn-${qIdx}" onclick="app.jumpToGrade12Question(${qIdx})" class="w-full aspect-square rounded-xl text-xs font-bold transition flex items-center justify-center ${isAnswered ? 'bg-primary text-white shadow-sm' : 'border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-primary'}">
               ${qIdx + 1}
             </button>
           `;
@@ -34890,8 +34920,7 @@ Yêu cầu output STRICTLY là một JSON object:
         this.setupKeyboardShortcuts();
         this.checkStreak();
         this.renderDashboard();
-        this.renderGrammarCards();
-        this.renderVocabHub();
+        // Tối ưu tải trang: renderGrammarCards() và renderVocabHub() được nạp lazy khi chuyển tab
         this.initQuizSetup();
         this.updateThemeUI();
         this.initProfileSystem();
@@ -34902,22 +34931,35 @@ Yêu cầu output STRICTLY là một JSON object:
         this.initSavedG12Exams();
         this.initAutoUpdateSystem();
 
-        // Scroll to top button listener (hỗ trợ cả cuộn main lẫn cuộn window, an toàn với mobile bottom nav)
+        // Throttled 60fps Scroll listener với passive mode chống lag
+        let scrollTicking = false;
+        let lastScrollVisible = false;
         const updateScrollBtn = (currentY) => {
-          const btn = document.getElementById('scroll-to-top');
-          if (!btn) return;
-          if (currentY > 280) {
-            btn.classList.remove('hidden', 'opacity-0', 'pointer-events-none', 'scale-75');
-            btn.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
-          } else {
-            btn.classList.add('hidden', 'opacity-0', 'pointer-events-none', 'scale-75');
-            btn.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+          if (!scrollTicking) {
+            requestAnimationFrame(() => {
+              const btn = document.getElementById('scroll-to-top');
+              if (btn) {
+                const shouldBeVisible = currentY > 280;
+                if (shouldBeVisible !== lastScrollVisible) {
+                  lastScrollVisible = shouldBeVisible;
+                  if (shouldBeVisible) {
+                    btn.classList.remove('hidden', 'opacity-0', 'pointer-events-none', 'scale-75');
+                    btn.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+                  } else {
+                    btn.classList.add('hidden', 'opacity-0', 'pointer-events-none', 'scale-75');
+                    btn.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+                  }
+                }
+              }
+              scrollTicking = false;
+            });
+            scrollTicking = true;
           }
         };
-        window.addEventListener('scroll', () => updateScrollBtn(window.scrollY));
+        window.addEventListener('scroll', () => updateScrollBtn(window.scrollY), { passive: true });
         const mainEl = document.querySelector('main');
         if (mainEl) {
-          mainEl.addEventListener('scroll', () => updateScrollBtn(mainEl.scrollTop));
+          mainEl.addEventListener('scroll', () => updateScrollBtn(mainEl.scrollTop), { passive: true });
         }
       }
 
@@ -35004,10 +35046,17 @@ Yêu cầu output STRICTLY là một JSON object:
       }
 
       saveState() {
-        localStorage.setItem('engMastery_vocab_v6', JSON.stringify(this.vocabList));
-        localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList));
-        localStorage.setItem('engMastery_settings', JSON.stringify(this.settings));
-        localStorage.setItem('engMastery_stats', JSON.stringify(this.stats));
+        if (this._saveStateTimer) clearTimeout(this._saveStateTimer);
+        this._saveStateTimer = setTimeout(() => {
+          try {
+            localStorage.setItem('engMastery_vocab_v6', JSON.stringify(this.vocabList));
+            localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList));
+            localStorage.setItem('engMastery_settings', JSON.stringify(this.settings));
+            localStorage.setItem('engMastery_stats', JSON.stringify(this.stats));
+          } catch (e) {
+            console.warn('Lỗi lưu state:', e);
+          }
+        }, 250);
       }
 
       setupKeyboardShortcuts() {
@@ -35152,8 +35201,8 @@ Yêu cầu output STRICTLY là một JSON object:
         }
 
         const mainEl = document.querySelector('main');
-        if (mainEl) mainEl.scrollTo({ top: 0, behavior: 'smooth' });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (mainEl) mainEl.scrollTop = 0;
+        window.scrollTo(0, 0);
       }
 
       openSidebar() {
@@ -35307,20 +35356,23 @@ Yêu cầu output STRICTLY là một JSON object:
       }
 
       onFlashcardSearch(query) {
-        const q = query.trim().toLowerCase();
-        if (!q) {
-          this.setVocabTopicFilter(this.currentVocabTopicFilter || 'topic_notebook');
-        } else {
-          this.filteredCards = this.vocabList.filter(v =>
-            v.word.toLowerCase().includes(q) ||
-            v.meaningVi.toLowerCase().includes(q) ||
-            (v.collocations && v.collocations.toLowerCase().includes(q)) ||
-            (v.synonyms && v.synonyms.toLowerCase().includes(q))
-          );
-        }
-        this.currentCardIndex = 0;
-        this.isCardFlipped = false;
-        this.renderFlashcard();
+        if (this._flashcardSearchTimeout) clearTimeout(this._flashcardSearchTimeout);
+        this._flashcardSearchTimeout = setTimeout(() => {
+          const q = (query || '').trim().toLowerCase();
+          if (!q) {
+            this.setVocabTopicFilter(this.currentVocabTopicFilter || 'topic_notebook');
+          } else {
+            this.filteredCards = this.vocabList.filter(v =>
+              v.word.toLowerCase().includes(q) ||
+              v.meaningVi.toLowerCase().includes(q) ||
+              (v.collocations && v.collocations.toLowerCase().includes(q)) ||
+              (v.synonyms && v.synonyms.toLowerCase().includes(q))
+            );
+          }
+          this.currentCardIndex = 0;
+          this.isCardFlipped = false;
+          this.renderFlashcard();
+        }, 160);
       }
 
       toggleCardFlip() {
@@ -35782,8 +35834,14 @@ Yêu cầu output STRICTLY là một JSON object:
           return;
         }
 
-        container.innerHTML = list.map(item => `
-          <div class="p-5 rounded-3xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-bento hover:border-primary-light/50 transition flex flex-col justify-between space-y-4">
+        // Tối ưu hóa phân trang: nạp 36 từ mỗi đợt, tránh lag giật khi tải 1050 từ cùng lúc
+        const PAGE_SIZE = 36;
+        this.hubCurrentPage = this.hubCurrentPage || 1;
+        const totalMatching = list.length;
+        const displayedList = list.slice(0, this.hubCurrentPage * PAGE_SIZE);
+
+        let cardsHtml = displayedList.map(item => `
+          <div class="cv-auto p-5 rounded-3xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-bento hover:border-primary-light/50 transition flex flex-col justify-between space-y-4">
             <div>
               <div class="flex items-start justify-between">
                 <div>
@@ -35801,7 +35859,7 @@ Yêu cầu output STRICTLY là một JSON object:
                   <button onclick="app.toggleStarWord('${item.id}')" class="p-1.5 text-xs transition ${item.isFavorite ? 'text-amber-500' : 'text-slate-400 hover:text-amber-500'}" title="Đánh dấu sao">
                     <i class="${item.isFavorite ? 'fa-solid fa-star' : 'fa-regular fa-star'}"></i>
                   </button>
-                  <button onclick="app.speakText('${item.word.replace(/'/g, "\'")}', 'en')" class="p-1.5 text-slate-400 hover:text-primary-light text-xs" title="Phát âm">
+                  <button onclick="app.speakText('${item.word.replace(/'/g, "\\'")}', 'en')" class="p-1.5 text-slate-400 hover:text-primary-light text-xs" title="Phát âm">
                     <i class="fa-solid fa-volume-high"></i>
                   </button>
                 </div>
@@ -35838,9 +35896,28 @@ Yêu cầu output STRICTLY là một JSON object:
             </div>
           </div>
         `).join('');
+
+        if (totalMatching > displayedList.length) {
+          cardsHtml += `
+            <div class="col-span-full py-6 text-center">
+              <button type="button" onclick="app.loadMoreVocabHub()" class="px-6 py-3 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 text-xs font-bold text-primary-light hover:bg-primary/10 transition shadow-sm inline-flex items-center space-x-2 active:scale-95">
+                <i class="fa-solid fa-angles-down animate-bounce text-amber-500"></i>
+                <span>Tải Thêm Từ Vựng (Đang hiện ${displayedList.length} / ${totalMatching} từ)</span>
+              </button>
+            </div>
+          `;
+        }
+
+        container.innerHTML = cardsHtml;
+      }
+
+      loadMoreVocabHub() {
+        this.hubCurrentPage = (this.hubCurrentPage || 1) + 1;
+        this.renderVocabHub();
       }
 
       setHubTopic(topicId) {
+        this.hubCurrentPage = 1;
         this.hubCurrentTopic = topicId;
         document.querySelectorAll('.hub-topic-btn').forEach(btn => {
           if (btn.dataset.topic === topicId) {
@@ -35855,26 +35932,35 @@ Yêu cầu output STRICTLY là một JSON object:
       }
 
       openTopicInHub(topicId) {
+        this.hubCurrentPage = 1;
         this.navigate('vocab-hub');
         this.setHubTopic(topicId);
       }
 
       searchVocabHub(val) {
         this.hubSearchQuery = val;
-        this.renderVocabHub();
+        if (this._searchVocabTimeout) clearTimeout(this._searchVocabTimeout);
+        this._searchVocabTimeout = setTimeout(() => {
+          this.hubCurrentPage = 1;
+          this.renderVocabHub();
+        }, 160);
       }
 
       filterVocabHubLevel(val) {
+        this.hubCurrentPage = 1;
         this.hubCurrentLevel = val;
         this.renderVocabHub();
       }
 
       resetHubFilters() {
+        this.hubCurrentPage = 1;
         this.hubCurrentTopic = 'all';
         this.hubCurrentLevel = 'all';
         this.hubSearchQuery = '';
-        document.getElementById('hub-search-input').value = '';
-        document.getElementById('hub-level-filter').value = 'all';
+        const searchInput = document.getElementById('hub-search-input');
+        if (searchInput) searchInput.value = '';
+        const levelFilter = document.getElementById('hub-level-filter');
+        if (levelFilter) levelFilter.value = 'all';
         this.setHubTopic('all');
       }
 
@@ -36203,7 +36289,10 @@ ${item.formula}
       }
 
       searchGrammar(query) {
-        this.renderGrammarCards();
+        if (this._searchGrammarTimeout) clearTimeout(this._searchGrammarTimeout);
+        this._searchGrammarTimeout = setTimeout(() => {
+          this.renderGrammarCards();
+        }, 160);
       }
 
       toggleBookmarkGrammar(id) {
@@ -38289,7 +38378,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.6.6')) return caches.delete(c);
+                if (!c.includes('v1.6.7')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -42495,7 +42584,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
           if (reg.waiting && window.app) {
             window.app.showUpdateBanner({
-              version: '1.6.6',
+              version: '1.6.7',
               title: 'Bản cập nhật mới đã sẵn sàng!',
               highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
             });
@@ -42509,7 +42598,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   if (window.app) {
                     window.app.showUpdateBanner({
-                      version: '1.6.6',
+                      version: '1.6.7',
                       title: 'Đã có bản cập nhật mới!',
                       highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
                     });
@@ -43061,7 +43150,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.6.6</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.6.7</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

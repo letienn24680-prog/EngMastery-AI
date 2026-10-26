@@ -1,5 +1,5 @@
 // EngMastery AI - Service Worker for PWA Offline & Multi-Device Isolation
-const CACHE_NAME = 'engmastery-v1.6.6';
+const CACHE_NAME = 'engmastery-v1.6.7';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
