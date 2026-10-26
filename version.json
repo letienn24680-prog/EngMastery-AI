@@ -1,12 +1,12 @@
 {
-  "version": "1.6.4",
-  "versionCode": 10604,
+  "version": "1.6.5",
+  "versionCode": 10605,
   "releaseDate": "2026-10-26",
-  "title": "Bản Cập Nhật v1.6.4: Lưu Trữ Vĩnh Viễn Kho Đề AI Đã Tạo",
+  "title": "Bản Cập Nhật v1.6.5: Tối Ưu Giao Diện Kho Đề Thi Mobile",
   "highlights": [
-    "Tự động lưu trữ vĩnh viễn 100% đề thi do AI biên soạn vào kho đề của bạn",
-    "Giao diện Kho Đề AI Đã Tạo giúp học sinh chọn làm lại bất kỳ đề nào đã tạo trước đó",
-    "Giữ nguyên vẹn cả 2 Mã Đề Song Sinh (101 & 102), bài đọc gốc và lời giải 4 trụ cột",
-    "Không bao giờ bị mất đề cũ khi bấm AI Tạo Đề Mới"
+    "Sửa triệt để lỗi thẻ đề thi bị ép thành cột chữ dọc trên điện thoại",
+    "Tách biệt hàng nút điều khiển Mở Đề / Vào Thi / Xóa giúp chạm bấm dễ dàng",
+    "Khóa chống ngắt dòng toàn bộ huy hiệu 2 Mã Đề và thời gian",
+    "Giao diện chuẩn responsive 100% trên mọi dòng điện thoại di động"
   ]
 }

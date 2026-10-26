@@ -278,7 +278,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.6.4 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.6.5 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3299,7 +3299,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.6.4 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.6.5 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -32625,7 +32625,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.6.4';
+        this.appVersion = '1.6.5';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -33090,50 +33090,57 @@
                 ? 'border-amber-500/70 bg-gradient-to-r from-amber-500/10 via-indigo-500/5 to-transparent dark:bg-slate-900/80 shadow-md ring-1 ring-amber-500/30'
                 : 'border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/40 hover:border-slate-300 dark:hover:border-slate-700'
             } space-y-3">
-              <div class="flex items-start justify-between gap-3 flex-wrap">
-                <div class="space-y-1 min-w-0 flex-1">
-                  <div class="flex items-center gap-1.5 flex-wrap text-[11px]">
-                    <span class="px-2 py-0.5 rounded-md font-mono font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 flex items-center gap-1">
-                      <i class="fa-solid fa-copy text-[10px]"></i>
-                      <span>2 Mã Đề (101 & 102)</span>
-                    </span>
-                    <span class="text-slate-400 font-medium">🕒 ${dateStr}</span>
-                    <span class="text-slate-400 font-medium hidden sm:inline">• ⏱️ ${exam.duration || 50} phút</span>
-                    <span class="text-slate-400 font-medium hidden sm:inline">• 📝 ${exam.totalQuestions || 40} câu</span>
-                    ${
-                      isActive
-                        ? '<span class="px-2 py-0.5 rounded-md font-extrabold bg-emerald-500 text-white text-[10px] shadow-xs flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> ĐANG MỞ Ở SẢNH</span>'
-                        : ''
-                    }
-                  </div>
-                  <h5 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white leading-snug">
-                    ${exam.title || 'Đề Thi Lớp 12'}
-                  </h5>
-                  <p class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
-                    <i class="fa-solid fa-newspaper text-slate-400 text-[10px]"></i>
-                    <span>${exam.source || 'Adapted from ReadTheory / The Guardian'}</span>
-                  </p>
+              <!-- Top Content (Full Width - Chống ép cột trên Mobile) -->
+              <div class="space-y-2 w-full">
+                <!-- Badges & Timestamps -->
+                <div class="flex items-center gap-1.5 flex-wrap text-[11px]">
+                  <span class="px-2 py-0.5 rounded-md font-mono font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 flex items-center gap-1 whitespace-nowrap shrink-0">
+                    <i class="fa-solid fa-copy text-[10px]"></i>
+                    <span>2 Mã Đề (101 & 102)</span>
+                  </span>
+                  <span class="text-slate-400 font-medium whitespace-nowrap shrink-0">🕒 ${dateStr}</span>
+                  <span class="text-slate-400 font-medium whitespace-nowrap shrink-0">• ⏱️ ${exam.duration || 50} phút</span>
+                  <span class="text-slate-400 font-medium whitespace-nowrap shrink-0">• 📝 ${exam.totalQuestions || 40} câu</span>
+                  ${
+                    isActive
+                      ? '<span class="px-2 py-0.5 rounded-md font-extrabold bg-emerald-500 text-white text-[10px] shadow-xs flex items-center gap-1 whitespace-nowrap shrink-0"><span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> ĐANG MỞ Ở SẢNH</span>'
+                      : ''
+                  }
                 </div>
 
-                <div class="flex items-center space-x-2 shrink-0 self-end sm:self-auto">
-                  <button type="button" onclick="app.loadSavedG12Exam('${exam.id}')" class="px-3 py-1.5 rounded-xl ${
+                <!-- Exam Title -->
+                <h5 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white leading-snug w-full break-words">
+                  ${exam.title || 'Đề Thi Lớp 12'}
+                </h5>
+
+                <!-- Exam Source -->
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 w-full truncate">
+                  <i class="fa-solid fa-newspaper text-slate-400 text-[10px] shrink-0"></i>
+                  <span class="truncate">${exam.source || 'Adapted from ReadTheory / The Guardian'}</span>
+                </p>
+              </div>
+
+              <!-- Bottom Actions Bar (Tách biệt hàng riêng bên dưới, dàn nút đều đẹp trên Mobile) -->
+              <div class="pt-2.5 border-t border-slate-200/70 dark:border-slate-800/80 flex items-center justify-between gap-2 w-full flex-wrap">
+                <div class="flex items-center space-x-2 flex-1 sm:flex-initial">
+                  <button type="button" onclick="app.loadSavedG12Exam('${exam.id}')" class="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl ${
                     isActive
                       ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
                       : 'bg-white dark:bg-darkCard hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-bold'
-                  } text-xs transition flex items-center space-x-1.5 shadow-xs">
+                  } text-xs transition flex items-center justify-center space-x-1.5 shadow-xs whitespace-nowrap">
                     <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                     <span>${isActive ? 'Đang Mở Đề Này' : 'Mở Đề Này'}</span>
                   </button>
 
-                  <button type="button" onclick="app.startSavedG12Exam('${exam.id}')" class="px-3 py-1.5 rounded-xl bg-primary hover:bg-primary-hover text-white font-extrabold text-xs shadow-glow-primary transition flex items-center space-x-1">
+                  <button type="button" onclick="app.startSavedG12Exam('${exam.id}')" class="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl bg-primary hover:bg-primary-hover text-white font-extrabold text-xs shadow-glow-primary transition flex items-center justify-center space-x-1.5 whitespace-nowrap">
                     <i class="fa-solid fa-play text-[10px]"></i>
                     <span>Vào Thi</span>
                   </button>
-
-                  <button type="button" onclick="app.deleteSavedG12Exam('${exam.id}')" class="p-2 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition text-xs" title="Xóa đề này">
-                    <i class="fa-solid fa-trash-can"></i>
-                  </button>
                 </div>
+
+                <button type="button" onclick="app.deleteSavedG12Exam('${exam.id}')" class="p-2 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition text-xs shrink-0" title="Xóa đề này khỏi kho">
+                  <i class="fa-solid fa-trash-can text-sm"></i>
+                </button>
               </div>
             </div>
           `;
@@ -38054,7 +38061,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.6.4')) return caches.delete(c);
+                if (!c.includes('v1.6.5')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -42260,7 +42267,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
           if (reg.waiting && window.app) {
             window.app.showUpdateBanner({
-              version: '1.6.4',
+              version: '1.6.5',
               title: 'Bản cập nhật mới đã sẵn sàng!',
               highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
             });
@@ -42274,7 +42281,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   if (window.app) {
                     window.app.showUpdateBanner({
-                      version: '1.6.4',
+                      version: '1.6.5',
                       title: 'Đã có bản cập nhật mới!',
                       highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
                     });
@@ -42826,7 +42833,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.6.4</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.6.5</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
