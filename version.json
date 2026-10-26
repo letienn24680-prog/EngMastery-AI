@@ -1,0 +1,12 @@
+{
+  "version": "1.6.2",
+  "versionCode": 10602,
+  "releaseDate": "2026-10-26",
+  "title": "Bản Cập Nhật v1.6.2: Tự Động Cập Nhật & Đóng Gói App",
+  "highlights": [
+    "Tự động phát hiện phiên bản mới và thông báo nổi bật trên màn hình",
+    "Giao diện cài đặt App PWA toàn diện (Android, iOS Safari, PC/Mac)",
+    "Gia cố bảo vệ bộ nhớ và bóc tách dữ liệu AI chống crash",
+    "Tối ưu hóa vòng đời timer và tiết kiệm pin thiết bị di động"
+  ]
+}

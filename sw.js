@@ -1,5 +1,5 @@
 // EngMastery AI - Service Worker for PWA Offline & Multi-Device Isolation
-const CACHE_NAME = 'engmastery-v1.6.1';
+const CACHE_NAME = 'engmastery-v1.6.2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -14,9 +14,9 @@ const ASSETS_TO_CACHE = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[SW] Pre-caching offline assets...');
+      console.log('[SW] Pre-caching offline assets for', CACHE_NAME);
       return cache.addAll(ASSETS_TO_CACHE);
-    }).then(() => self.skipWaiting())
+    })
   );
 });
 
@@ -40,8 +40,10 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Bypass API calls (xKiro, Google, external AI) from cache
-  if (url.origin.includes('api.xkiro.com') || url.origin.includes('generativelanguage.googleapis.com')) {
+  // Bypass API calls and live version check from cache
+  if (url.origin.includes('api.xkiro.com') || 
+      url.origin.includes('generativelanguage.googleapis.com') || 
+      url.pathname.endsWith('version.json')) {
     return;
   }
 
@@ -72,6 +74,7 @@ self.addEventListener('fetch', (event) => {
 // Listen for messages from client
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
+    console.log('[SW] Received SKIP_WAITING signal, activating immediately...');
     self.skipWaiting();
   }
 });

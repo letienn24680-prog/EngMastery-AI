@@ -274,6 +274,17 @@
         <span class="text-[11px] font-bold text-amber-500 font-mono">+50 XP</span>
       </div>
 
+      <!-- App Version Badge & Quick Install Shortcut -->
+      <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
+        <div class="flex items-center space-x-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.6.2 Pro</span>
+        </div>
+        <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
+          <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
+        </button>
+      </div>
+
       <!-- Action buttons -->
       <div class="flex items-center justify-between pt-1">
         <button onclick="app.toggleTheme()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-primary-light text-xs font-medium transition flex items-center space-x-1.5" title="Đổi giao diện">
@@ -3095,6 +3106,136 @@
   <!-- ============================================== -->
   <!-- MODAL: SETTINGS & GEMINI API KEY               -->
   <!-- ============================================== -->
+  <!-- ============================================== -->
+  <!-- MODAL: PWA APP INSTALL & OFFLINE PACKAGING     -->
+  <!-- ============================================== -->
+  <div id="modal-pwa-install" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 animate-fade-in">
+    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-lg w-full p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 text-white flex items-center justify-center shadow-md">
+            <i class="fa-solid fa-mobile-screen-button text-base"></i>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100">Cài Đặt App EngMastery AI</h3>
+            <p class="text-[11px] text-slate-400">Ứng dụng học offline, toàn màn hình và tốc độ cao</p>
+          </div>
+        </div>
+        <button onclick="app.closePWAInstallModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-lg">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
+      </div>
+
+      <!-- Quick 1-Click Install Button (When prompt is available) -->
+      <div id="btn-pwa-oneclick-install" class="hidden">
+        <button onclick="app.promptPWAInstall()" class="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-primary to-indigo-600 hover:from-primary-hover hover:to-indigo-500 text-white font-extrabold text-sm shadow-glow-primary transition flex items-center justify-center space-x-2 active:scale-98">
+          <i class="fa-solid fa-download text-base animate-bounce"></i>
+          <span>Cài Đặt Ứng Dụng Ngay (1 Chạm)</span>
+        </button>
+        <div class="flex items-center justify-center my-3">
+          <div class="border-t border-slate-200 dark:border-slate-800 flex-1"></div>
+          <span class="px-3 text-[10px] text-slate-400 font-bold uppercase tracking-wider">Hoặc xem hướng dẫn cài đặt</span>
+          <div class="border-t border-slate-200 dark:border-slate-800 flex-1"></div>
+        </div>
+      </div>
+
+      <!-- Device Tabs Selector -->
+      <div class="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-slate-800/80">
+        <button id="tab-btn-install-android" onclick="app.switchPWAInstallTab('android')" class="flex-1 py-2 rounded-xl bg-primary text-white font-bold text-xs shadow-sm transition flex items-center justify-center space-x-1.5">
+          <i class="fa-brands fa-android text-sm"></i>
+          <span>Android</span>
+        </button>
+        <button id="tab-btn-install-ios" onclick="app.switchPWAInstallTab('ios')" class="flex-1 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-white font-bold text-xs transition flex items-center justify-center space-x-1.5">
+          <i class="fa-brands fa-apple text-sm"></i>
+          <span>iPhone / iPad</span>
+        </button>
+        <button id="tab-btn-install-pc" onclick="app.switchPWAInstallTab('pc')" class="flex-1 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-white font-bold text-xs transition flex items-center justify-center space-x-1.5">
+          <i class="fa-solid fa-desktop text-xs"></i>
+          <span>Máy Tính PC</span>
+        </button>
+      </div>
+
+      <!-- Tab Content: Android -->
+      <div id="tab-content-install-android" class="space-y-3 text-xs">
+        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 space-y-2.5">
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">1</span>
+            <p class="text-slate-700 dark:text-slate-200">Mở trang web bằng trình duyệt <strong>Google Chrome</strong> hoặc <strong>Cốc Cốc</strong>.</p>
+          </div>
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">2</span>
+            <p class="text-slate-700 dark:text-slate-200">Bấm biểu tượng <strong>3 dấu chấm (⋮)</strong> ở góc trên bên phải thanh địa chỉ trình duyệt.</p>
+          </div>
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">3</span>
+            <p class="text-slate-700 dark:text-slate-200">Chọn <strong>"Cài đặt ứng dụng"</strong> (Install app) hoặc <strong>"Thêm vào Màn hình chính"</strong>.</p>
+          </div>
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">4</span>
+            <p class="text-slate-700 dark:text-slate-200">Nhấn <strong>"Cài đặt"</strong>. Biểu tượng EngMastery AI sẽ xuất hiện trên màn hình điện thoại như một ứng dụng độc lập!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: iOS (iPhone / iPad) -->
+      <div id="tab-content-install-ios" class="space-y-3 text-xs hidden">
+        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 space-y-2.5">
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">1</span>
+            <p class="text-slate-700 dark:text-slate-200">Mở trang web bằng trình duyệt <strong>Safari</strong> (bắt buộc trên iOS để tạo ứng dụng).</p>
+          </div>
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">2</span>
+            <p class="text-slate-700 dark:text-slate-200">Nhấn vào nút <strong>Chia sẻ</strong> (biểu tượng ô vuông có mũi tên hướng lên <i class="fa-solid fa-arrow-up-from-bracket text-primary-light"></i> ở thanh công cụ dưới cùng Safari).</p>
+          </div>
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">3</span>
+            <p class="text-slate-700 dark:text-slate-200">Vuốt xuống và chọn dòng <strong>"Thêm vào MH chính"</strong> (Add to Home Screen).</p>
+          </div>
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">4</span>
+            <p class="text-slate-700 dark:text-slate-200">Nhấn <strong>"Thêm"</strong> (Add) ở góc trên bên phải. Xong! Ứng dụng sẽ chạy mượt toàn màn hình không có thanh URL.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Máy Tính (PC / Laptop / Mac) -->
+      <div id="tab-content-install-pc" class="space-y-3 text-xs hidden">
+        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 space-y-2.5">
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">1</span>
+            <p class="text-slate-700 dark:text-slate-200">Mở web trên <strong>Google Chrome</strong> hoặc <strong>Microsoft Edge</strong>.</p>
+          </div>
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">2</span>
+            <p class="text-slate-700 dark:text-slate-200">Nhìn vào góc phải thanh địa chỉ URL, nhấn vào biểu tượng <strong>Cài đặt ứng dụng</strong> (hình chiếc màn hình nhỏ có mũi tên hướng xuống).</p>
+          </div>
+          <div class="flex items-start space-x-2.5">
+            <span class="w-5 h-5 rounded-full bg-primary/20 text-primary-light font-bold text-[11px] flex items-center justify-center shrink-0">3</span>
+            <p class="text-slate-700 dark:text-slate-200">Bấm <strong>"Cài đặt"</strong> (Install). App sẽ có lối tắt riêng trên Desktop & Taskbar!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- APK Packaging info -->
+      <div class="p-3 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-200/50 dark:border-indigo-800/50 text-[11px] text-slate-600 dark:text-slate-300">
+        <p class="font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5 mb-1">
+          <i class="fa-solid fa-box-archive"></i>
+          <span>Muốn xuất file cài đặt APK cho Android?</span>
+        </p>
+        <p class="leading-relaxed">
+          EngMastery AI đã được chuẩn hóa 100% PWA. Bạn có thể đóng gói thành file <strong>.apk</strong> cài trực tiếp bằng công cụ chính thức <strong>PWABuilder (của Microsoft)</strong> tại <code class="text-primary-light font-mono">pwabuilder.com</code> bằng cách nhập link web của bạn!
+        </p>
+      </div>
+
+      <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+        <button onclick="app.closePWAInstallModal()" class="px-5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div id="modal-settings" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white dark:bg-darkCard rounded-3xl max-w-md w-full p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
       <div class="flex items-center justify-between border-b pb-3">
@@ -3123,13 +3264,16 @@
 
         <!-- PWA App Installation & Updates -->
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
-          <span class="font-bold text-slate-800 dark:text-slate-200 block">📲 Ứng Dụng (PWA) & Cập Nhật:</span>
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.6.2 (EdTech Pro)</span>
+          </div>
           <div class="grid grid-cols-2 gap-2">
-            <button id="btn-settings-install-app" onclick="app.promptPWAInstall()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
+            <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
               <i class="fa-solid fa-mobile-screen-button"></i>
               <span>Cài Đặt App</span>
             </button>
-            <button onclick="app.checkForPWAUpdates()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-primary-light font-bold transition flex items-center justify-center space-x-1.5 text-xs">
+            <button onclick="app.checkForAppUpdates(true)" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-primary-light font-bold transition flex items-center justify-center space-x-1.5 text-xs">
               <i class="fa-solid fa-arrows-rotate"></i>
               <span>Kiểm Tra Cập Nhật</span>
             </button>
@@ -32448,6 +32592,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
+        this.appVersion = '1.6.2';
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
         this.thptTimerSeconds = 0;
@@ -34261,6 +34406,7 @@ Yêu cầu output STRICTLY là một JSON object:
         this.initPhotoTutor();
         this.updateMistakeBadge();
         this.initThptDailySystem();
+        this.initAutoUpdateSystem();
 
         // Scroll to top button listener (hỗ trợ cả cuộn main lẫn cuộn window, an toàn với mobile bottom nav)
         const updateScrollBtn = (currentY) => {
@@ -37503,56 +37649,227 @@ Trả về DUY NHẤT một JSON hợp lệ:
       /* =================================================== */
       /* PWA APP INSTALL & INSTANT UPDATES CONTROLLER        */
       /* =================================================== */
+      /* =================================================== */
+      /* PWA APP INSTALL & LIVE AUTO-UPDATE CONTROLLER       */
+      /* =================================================== */
+      initAutoUpdateSystem() {
+        // Kiểm tra xem người dùng vừa nâng cấp thành công không
+        try {
+          const lastSeenVer = localStorage.getItem('engMastery_last_seen_version');
+          if (lastSeenVer && lastSeenVer !== this.appVersion) {
+            setTimeout(() => {
+              this.showToast(`🎉 Chúc mừng! Bạn đang sử dụng EngMastery AI v${this.appVersion}!`, 'success');
+            }, 1200);
+          }
+          localStorage.setItem('engMastery_last_seen_version', this.appVersion);
+        } catch (e) {}
+
+        // Tự động kiểm tra bản cập nhật sau 2 giây khi mở ứng dụng
+        setTimeout(() => {
+          this.checkForAppUpdates(false);
+        }, 2000);
+
+        // Tự động kiểm tra mỗi khi học sinh quay lại app (mở khóa điện thoại / chuyển tab)
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') {
+            this.checkForAppUpdates(false);
+          }
+        });
+
+        // Tự động kiểm tra khi có kết nối mạng trở lại
+        window.addEventListener('online', () => {
+          this.checkForAppUpdates(false);
+        });
+
+        // Định kỳ kiểm tra ngầm mỗi 10 phút một lần
+        setInterval(() => {
+          this.checkForAppUpdates(false);
+        }, 10 * 60 * 1000);
+      }
+
+      async checkForAppUpdates(isManual = false) {
+        if (isManual) {
+          this.showToast('🔄 Đang kiểm tra phiên bản mới từ máy chủ...', 'info');
+        }
+
+        let hasNewVersion = false;
+        let updateData = null;
+
+        try {
+          // Bỏ qua cache để kiểm tra file version.json thời gian thực
+          const res = await fetch(`./version.json?_t=${Date.now()}`, { cache: 'no-store' });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.version && data.version !== this.appVersion) {
+              hasNewVersion = true;
+              updateData = data;
+            }
+          }
+        } catch (err) {
+          console.log('[Update Check] Bỏ qua kiểm tra version.json (offline hoặc mạng yếu):', err);
+        }
+
+        // Kiểm tra song song Service Worker
+        if ('serviceWorker' in navigator) {
+          try {
+            const reg = await navigator.serviceWorker.getRegistration();
+            if (reg) {
+              if (reg.waiting) {
+                hasNewVersion = true;
+                if (!updateData) {
+                  updateData = {
+                    version: 'Mới nhất',
+                    title: 'Bản cập nhật mới đã sẵn sàng!',
+                    highlights: ['Tính năng tự động cập nhật', 'Gia cố dữ liệu học tập']
+                  };
+                }
+              } else {
+                reg.update().catch(() => {});
+              }
+            }
+          } catch (e) {}
+        }
+
+        if (hasNewVersion && updateData) {
+          this.showUpdateBanner(updateData);
+        } else if (isManual) {
+          this.showToast(`✨ Bạn đang sử dụng phiên bản mới nhất (v${this.appVersion})!`, 'success');
+        }
+      }
+
+      checkForPWAUpdates() {
+        this.checkForAppUpdates(true);
+      }
+
+      showUpdateBanner(data) {
+        const banner = document.getElementById('pwa-update-banner');
+        if (!banner) return;
+
+        const versionTag = document.getElementById('pwa-update-version-tag');
+        const titleEl = document.getElementById('pwa-update-title');
+        const descEl = document.getElementById('pwa-update-desc');
+
+        if (versionTag && data.version) {
+          versionTag.textContent = `Bản Mới v${data.version}`;
+        }
+        if (titleEl && data.title) {
+          titleEl.textContent = data.title;
+        }
+        if (descEl && data.highlights && Array.isArray(data.highlights) && data.highlights.length > 0) {
+          descEl.innerHTML = data.highlights.map(h => 
+            `<div class="flex items-center space-x-1.5 text-[11px] text-indigo-200 mt-0.5"><i class="fa-solid fa-circle-check text-emerald-400 text-[10px]"></i><span>${h}</span></div>`
+          ).join('');
+        }
+
+        banner.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          banner.classList.remove('-translate-y-6', 'opacity-0');
+          banner.classList.add('translate-y-0', 'opacity-100');
+        });
+      }
+
+      dismissUpdateBanner() {
+        const banner = document.getElementById('pwa-update-banner');
+        if (!banner) return;
+        banner.classList.remove('translate-y-0', 'opacity-100');
+        banner.classList.add('-translate-y-6', 'opacity-0');
+        setTimeout(() => banner.classList.add('hidden'), 500);
+      }
+
+      async applyPWAUpdate() {
+        const btn = document.getElementById('btn-apply-update');
+        if (btn) {
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang tải...';
+          btn.disabled = true;
+        }
+        this.showToast('🚀 Đang kích hoạt bản cập nhật mới nhất...', 'info');
+
+        if ('serviceWorker' in navigator) {
+          try {
+            const reg = await navigator.serviceWorker.getRegistration();
+            if (reg && reg.waiting) {
+              reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+            }
+            if ('caches' in window) {
+              const cacheNames = await caches.keys();
+              await Promise.all(cacheNames.map(c => {
+                if (!c.includes('v1.6.2')) return caches.delete(c);
+              }));
+            }
+          } catch (e) {}
+        }
+
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 500);
+      }
+
+      openPWAInstallModal() {
+        this.closeSidebar();
+        const modal = document.getElementById('modal-pwa-install');
+        if (!modal) return;
+
+        // Tự động chuyển tab theo thiết bị của người dùng
+        const ua = navigator.userAgent || '';
+        const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        const isAndroid = /Android/.test(ua);
+
+        if (isIOS) {
+          this.switchPWAInstallTab('ios');
+        } else if (isAndroid) {
+          this.switchPWAInstallTab('android');
+        } else {
+          this.switchPWAInstallTab('pc');
+        }
+
+        // Hiện nút Cài đặt 1 Chạm nếu trình duyệt kích hoạt beforeinstallprompt
+        const oneClickBtn = document.getElementById('btn-pwa-oneclick-install');
+        if (oneClickBtn) {
+          if (window.deferredPWAInstallPrompt) {
+            oneClickBtn.classList.remove('hidden');
+          } else {
+            oneClickBtn.classList.add('hidden');
+          }
+        }
+
+        modal.classList.remove('hidden');
+      }
+
+      closePWAInstallModal() {
+        const modal = document.getElementById('modal-pwa-install');
+        if (modal) modal.classList.add('hidden');
+      }
+
+      switchPWAInstallTab(tabId) {
+        ['android', 'ios', 'pc'].forEach(t => {
+          const tabBtn = document.getElementById(`tab-btn-install-${t}`);
+          const tabContent = document.getElementById(`tab-content-install-${t}`);
+          if (t === tabId) {
+            if (tabBtn) {
+              tabBtn.className = 'flex-1 py-2 rounded-xl bg-primary text-white font-bold text-xs shadow-sm transition flex items-center justify-center space-x-1.5';
+            }
+            if (tabContent) tabContent.classList.remove('hidden');
+          } else {
+            if (tabBtn) {
+              tabBtn.className = 'flex-1 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-white font-bold text-xs transition flex items-center justify-center space-x-1.5';
+            }
+            if (tabContent) tabContent.classList.add('hidden');
+          }
+        });
+      }
+
       promptPWAInstall() {
         if (window.deferredPWAInstallPrompt) {
           window.deferredPWAInstallPrompt.prompt();
           window.deferredPWAInstallPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
               this.showToast('✨ Cảm ơn bạn đã cài đặt EngMastery AI vào thiết bị!', 'success');
+              this.closePWAInstallModal();
             }
             window.deferredPWAInstallPrompt = null;
           });
         } else {
-          // Guide for iOS Safari or already installed
-          const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-          if (isIOS) {
-            alert('📲 HƯỚNG DẪN CÀI ĐẶT TRÊN IPHONE / IPAD:\n\n1. Nhấn vào nút Chia sẻ (biểu tượng ô vuông có mũi tên trỏ lên ở thanh dưới Safari).\n2. Cuộn xuống và chọn "Thêm vào MH chính" (Add to Home Screen).\n3. Nhấn "Thêm" ở góc phải để dùng EngMastery như 1 App thực thụ!');
-          } else {
-            this.showToast('Ứng dụng đã được cài đặt hoặc đang mở ở chế độ App!', 'info');
-          }
-        }
-      }
-
-      checkForPWAUpdates() {
-        if (!('serviceWorker' in navigator)) {
-          this.showToast('Trình duyệt hiện tại chưa hỗ trợ Service Worker.', 'info');
-          return;
-        }
-
-        this.showToast('🔄 Đang kiểm tra phiên bản mới từ máy chủ...', 'info');
-        navigator.serviceWorker.getRegistration().then((reg) => {
-          if (reg) {
-            reg.update().then(() => {
-              this.showToast('✨ Ứng dụng đã được đồng bộ với phiên bản mới nhất!', 'success');
-            }).catch(() => {
-              this.showToast('Bạn đang sử dụng phiên bản mới nhất.', 'success');
-            });
-          } else {
-            this.showToast('Bạn đang sử dụng phiên bản mới nhất.', 'success');
-          }
-        });
-      }
-
-      applyPWAUpdate() {
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.getRegistration().then((reg) => {
-            if (reg && reg.waiting) {
-              reg.waiting.postMessage({ type: 'SKIP_WAITING' });
-            }
-            window.location.reload();
-          });
-        } else {
-          window.location.reload();
+          this.openPWAInstallModal();
         }
       }
 
@@ -41669,20 +41986,43 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         navigator.serviceWorker.register('./sw.js').then((reg) => {
           console.log('[PWA] Service Worker registered with scope:', reg.scope);
 
-          // Check if an update is found
+          // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
+          if (reg.waiting && window.app) {
+            window.app.showUpdateBanner({
+              version: '1.6.2',
+              title: 'Bản cập nhật mới đã sẵn sàng!',
+              highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
+            });
+          }
+
+          // Theo dõi khi Service Worker tìm thấy bản mới
           reg.addEventListener('updatefound', () => {
             const newWorker = reg.installing;
             if (newWorker) {
               newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  const banner = document.getElementById('pwa-update-banner');
-                  if (banner) banner.classList.remove('hidden');
+                  if (window.app) {
+                    window.app.showUpdateBanner({
+                      version: '1.6.2',
+                      title: 'Đã có bản cập nhật mới!',
+                      highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
+                    });
+                  }
                 }
               });
             }
           });
         }).catch((err) => {
           console.log('[PWA] Service Worker registration skipped or failed:', err);
+        });
+
+        // Tự động làm mới khi controller thay đổi
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!refreshing) {
+            refreshing = true;
+            window.location.reload();
+          }
         });
       }
 
@@ -41692,8 +42032,10 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         window.deferredPWAInstallPrompt = e;
         const btnHeader = document.getElementById('btn-header-install-app');
         const btnSettings = document.getElementById('btn-settings-install-app');
+        const oneClickBtn = document.getElementById('btn-pwa-oneclick-install');
         if (btnHeader) btnHeader.classList.remove('hidden');
         if (btnSettings) btnSettings.classList.remove('hidden');
+        if (oneClickBtn) oneClickBtn.classList.remove('hidden');
       });
 
       window.addEventListener('appinstalled', () => {
@@ -42204,18 +42546,37 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
     </div>
   </div>
 
-  <!-- FLOATING PWA UPDATE NOTIFICATION BANNER -->
-  <div id="pwa-update-banner" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900/95 dark:bg-slate-800/95 border border-primary/50 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center space-x-3 transition-all duration-300 hidden backdrop-blur-md">
-    <div class="w-8 h-8 rounded-xl bg-primary/20 text-primary-light flex items-center justify-center shrink-0">
-      <i class="fa-solid fa-arrows-rotate fa-spin"></i>
+  <!-- FLOATING PWA UPDATE NOTIFICATION BANNER (Nổi bật trên màn hình, không bị che bởi Bottom Nav) -->
+  <div id="pwa-update-banner" class="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-[100] w-[94%] max-w-lg bg-gradient-to-r from-slate-900/98 via-indigo-950/98 to-slate-900/98 border-2 border-indigo-500/60 text-white p-4 sm:p-5 rounded-3xl shadow-[0_20px_60px_rgba(79,70,229,0.45)] backdrop-blur-2xl transition-all duration-500 hidden transform -translate-y-6 opacity-0">
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex items-start space-x-3 sm:space-x-3.5">
+        <div class="w-10 h-10 rounded-2xl bg-indigo-500/20 border border-indigo-400/40 text-indigo-400 flex items-center justify-center shrink-0 shadow-glow-primary">
+          <i class="fa-solid fa-cloud-arrow-down text-lg animate-bounce"></i>
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center space-x-2">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.6.2</span>
+            <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
+          </div>
+          <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
+          <div class="text-xs text-slate-300 mt-1 leading-relaxed" id="pwa-update-desc">
+            Cập nhật ngay để nhận các tính năng tối ưu, đề thi THPTQG mới và bộ từ vựng mới nhất.
+          </div>
+        </div>
+      </div>
+      <button onclick="app.dismissUpdateBanner()" class="text-slate-400 hover:text-white p-1 rounded-lg transition" title="Để sau">
+        <i class="fa-solid fa-xmark text-base"></i>
+      </button>
     </div>
-    <div class="text-xs">
-      <p class="font-bold">Đã có bản cập nhật mới!</p>
-      <p class="text-[11px] text-slate-300">Cập nhật ngay để nhận các từ vựng và tính năng mới nhất.</p>
+    <div class="mt-3.5 pt-3 border-t border-slate-800/80 flex items-center justify-end space-x-2.5">
+      <button onclick="app.dismissUpdateBanner()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+        Để Sau
+      </button>
+      <button id="btn-apply-update" onclick="app.applyPWAUpdate()" class="px-4 sm:px-5 py-2 rounded-xl bg-gradient-to-r from-primary to-indigo-600 hover:from-primary-hover hover:to-indigo-500 text-white font-extrabold text-xs shadow-glow-primary transition flex items-center space-x-1.5 active:scale-95">
+        <i class="fa-solid fa-bolt text-amber-300"></i>
+        <span>Cập Nhật Ngay</span>
+      </button>
     </div>
-    <button onclick="app.applyPWAUpdate()" class="px-3.5 py-1.5 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-xs shadow-glow-primary transition">
-      Cập Nhật Ngay
-    </button>
   </div>
 
   <!-- ============================================== -->
