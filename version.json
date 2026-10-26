@@ -1,13 +1,13 @@
 {
-  "version": "1.6.7",
-  "versionCode": 10607,
+  "version": "1.6.8",
+  "versionCode": 10608,
   "releaseDate": "2026-10-26",
-  "title": "Bản Cập Nhật v1.6.7: Tối Ưu Tốc Độ & Loại Bỏ Hoàn Toàn Delay",
+  "title": "Bản Cập Nhật v1.6.8: Tự Động Phân Cấp Đầy Đủ Đồng Nghĩa, Trái Nghĩa & Collocation",
   "highlights": [
-    "Loại bỏ triệt để độ trễ (0ms delay) khi bấm chọn đáp án trắc nghiệm đề thi",
-    "Tối ưu khởi động ứng dụng siêu tốc, nạp theo yêu cầu (lazy loading) cho kho từ vựng và ngữ pháp",
-    "Phân trang thông minh 36 thẻ cho Kho Từ Vựng, triệt tiêu giật lag trên thiết bị di động",
-    "Debounce tìm kiếm từ vựng và ngữ pháp, ngăn chặn tình trạng đơ giật khi gõ phím nhanh",
-    "Chuyển tab và điều hướng tức thời, mượt mà chuẩn 60fps"
+    "Tự động phân cấp đầy đủ Đồng nghĩa & Trái nghĩa theo 5 tầng chuẩn CEFR (A1 ➔ C1) khi tra từ mới",
+    "Tự động tạo 4–6 cụm Collocations thông dụng, bài học ngữ cảnh và ví dụ tiếng Anh tự nhiên",
+    "Tích hợp công cụ Lexical Intelligence độc lập giúp phân cấp thành công 100% không phụ thuộc API AI bên ngoài",
+    "Tự động phục hồi và làm giàu dữ liệu cho tất cả các từ vựng tra cứu trước đây bị thiếu dữ liệu khi mở xem thẻ",
+    "Tự động đồng bộ và nạp tất cả các từ mở rộng A1–C1 vào kho từ vựng học tập của học sinh"
   ]
 }
