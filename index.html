@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.6.9 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.0 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -969,6 +969,20 @@
                       <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-rose-500/15 text-rose-600 dark:text-rose-400">A1 ➔ C1</span>
                     </div>
                     <div id="fc-antonyms" class="space-y-1.5 mt-1 text-xs"></div>
+                  </div>
+                </div>
+
+                                <!-- Họ Từ Vựng (Word Family - V / N / Adj / Adv) -->
+                <div class="p-2.5 rounded-2xl bg-indigo-500/5 dark:bg-indigo-500/10 border border-indigo-500/20 text-xs space-y-1.5">
+                  <div class="flex items-center justify-between pb-1 border-b border-indigo-500/10">
+                    <span class="font-extrabold text-xs text-indigo-600 dark:text-indigo-400 flex items-center space-x-1.5">
+                      <i class="fa-solid fa-sitemap text-[11px]"></i>
+                      <span>Họ Từ Vựng (Word Family - V / N / Adj / Adv)</span>
+                    </span>
+                    <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-indigo-500/15 text-indigo-600 dark:text-indigo-400">Trọng Tâm THPTQG</span>
+                  </div>
+                  <div id="fc-word-family" class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs pt-0.5">
+                    <span class="text-xs text-slate-400 italic">Đang tải họ từ...</span>
                   </div>
                 </div>
 
@@ -3032,6 +3046,20 @@
           </div>
         </div>
 
+                <!-- Họ Từ Vựng / Biến Thể Từ Loại (Word Family - Trọng Tâm THPTQG) -->
+        <div class="p-3.5 rounded-2xl bg-gradient-to-r from-blue-500/5 via-indigo-500/5 to-purple-500/5 border border-indigo-500/20 space-y-2">
+          <div class="flex items-center justify-between pb-1 border-b border-indigo-500/10">
+            <span class="font-extrabold text-xs text-indigo-600 dark:text-indigo-400 flex items-center space-x-1.5">
+              <i class="fa-solid fa-sitemap text-[11px]"></i>
+              <span>Họ Từ Vựng / Biến Thể Từ Loại (Word Family - Trọng Tâm THPTQG)</span>
+            </span>
+            <span class="px-2 py-0.5 rounded text-[9px] font-extrabold bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 uppercase">V - N - Adj - Adv</span>
+          </div>
+          <div id="modal-detail-word-family" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
+            <span class="text-xs text-slate-400 italic">Đang phân tích họ từ vựng...</span>
+          </div>
+        </div>
+
         <div class="p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
           <span class="font-bold text-primary-light">Collocations thường gặp:</span>
           <p id="modal-detail-collocations" class="text-slate-700 dark:text-slate-300 mt-0.5"></p>
@@ -3357,7 +3385,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.6.9 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.0 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -32683,7 +32711,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.6.9';
+        this.appVersion = '1.7.0';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -35616,6 +35644,9 @@ Yêu cầu output STRICTLY là một JSON object:
         document.getElementById('fc-collocations').innerText = (card.collocations && card.collocations !== card.word) ? card.collocations : (card.word ? 'Đang cập nhật collocations...' : '');
         document.getElementById('fc-mnemonic').innerText = card.mnemonic || 'Liên hệ từ vựng với hình ảnh hoặc ngữ cảnh thực tế.';
 
+        // Render Họ Từ Vựng trên mặt sau Flashcard
+        this.renderFcWordFamily(card);
+
         // Tự động làm giàu dữ liệu thẻ học nếu đang thiếu đồng nghĩa, trái nghĩa, collocation
         const isCardMissingCefr = !card.synonyms || card.synonyms.includes('Chưa có') ||
                                   !card.antonyms || card.antonyms.includes('Chưa có') ||
@@ -36415,6 +36446,7 @@ Yêu cầu output STRICTLY là một JSON object:
 
           // Tự động nạp các từ vựng này vào danh sách thẻ học của học sinh
           this.enrollExtractedCefrWords(item.word, item.meaningVi, item.type, item.synonyms, item.antonyms, item.collocations);
+          await this.enrollWordFamilyMembers(item.word, item.meaningVi, item.type);
 
           this.showToast(`✨ Đã tự động cập nhật đầy đủ từ đồng nghĩa, trái nghĩa & collocations cho "${item.word}"!`, 'success');
         } catch (e) {
@@ -36452,6 +36484,9 @@ Yêu cầu output STRICTLY là một JSON object:
         if (modalAntEl) modalAntEl.innerHTML = this.formatCefrSynAntHtml(item.antonyms, 'ant');
         document.getElementById('modal-detail-collocations').innerText = (item.collocations && item.collocations !== item.word) ? item.collocations : (item.word ? 'Đang cập nhật collocations...' : '');
         document.getElementById('modal-detail-mnemonic').innerText = item.mnemonic || 'Ghi nhớ theo ngữ cảnh câu ví dụ.';
+
+        // Render Họ Từ Vựng (Word Family V-N-Adj-Adv)
+        this.renderModalWordFamily(item);
 
         const practiceBtn = document.getElementById('modal-detail-practice-btn');
         practiceBtn.onclick = () => {
@@ -38871,7 +38906,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.6.9')) return caches.delete(c);
+                if (!c.includes('v1.7.0')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -39665,6 +39700,7 @@ Bắt buộc phân chia các từ đồng nghĩa và trái nghĩa theo các cấ
 
           // === TỰ ĐỘNG THÊM CÁC TỪ ĐỒNG NGHĨA/TRÁI NGHĨA/COLLOCATIONS VÀO APP ===
           this.enrollExtractedCefrWords(cardData.word || kw, cardData.meaningVi, cardData.type, cardData.synonyms, cardData.antonyms, cardData.collocations);
+          await this.enrollWordFamilyMembers(cardData.word || kw, cardData.meaningVi, cardData.type);
 
           this.showToast(`✨ AI đã chủ động tra nghĩa và lưu từ "${cardData.word || kw}" vào danh sách Cần Ôn Tập!`, 'success');
 
@@ -39711,6 +39747,7 @@ Bắt buộc phân chia các từ đồng nghĩa và trái nghĩa theo các cấ
             });
 
             this.enrollExtractedCefrWords(rich.word || kw, rich.meaningVi, rich.type, rich.synonyms, rich.antonyms, rich.collocations);
+            await this.enrollWordFamilyMembers(rich.word || kw, rich.meaningVi, rich.type);
 
             this.showToast(`✨ Đã tự động lưu từ "${kw}" (${rich.meaningVi}) kèm đồng nghĩa, trái nghĩa & collocations!`, 'success');
             if (targetView === 'flashcards') {
@@ -40762,6 +40799,1285 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
       }
 
     
+
+      /* ========================================================================== */
+      /* WORD FAMILY INTELLIGENCE ENGINE (HỌ TỪ VỰNG & BIẾN THỂ TỪ LOẠI V-N-ADJ-ADV) */
+      /* ========================================================================== */
+
+      getBuiltinWordFamilies() {
+        if (this._builtinWordFamilies) return this._builtinWordFamilies;
+        this._builtinWordFamilies = [
+  {
+    "root": "create",
+    "verb": "create",
+    "verbVi": "tạo ra, sáng tạo",
+    "noun": "creation, creativity, creator",
+    "nounVi": "sự tạo ra, sự sáng tạo, người sáng tạo",
+    "adj": "creative",
+    "adjVi": "sáng tạo, giàu tính sáng tạo",
+    "adv": "creatively",
+    "advVi": "một cách sáng tạo"
+  },
+  {
+    "root": "succeed",
+    "verb": "succeed",
+    "verbVi": "thành công, kế nghiệp",
+    "noun": "success",
+    "nounVi": "sự thành công, thắng lợi",
+    "adj": "successful",
+    "adjVi": "thành công, có kết quả tốt",
+    "adv": "successfully",
+    "advVi": "một cách thành công"
+  },
+  {
+    "root": "decide",
+    "verb": "decide",
+    "verbVi": "quyết định",
+    "noun": "decision",
+    "nounVi": "sự quyết định, phán quyết",
+    "adj": "decisive, decided",
+    "adjVi": "mang tính quyết định, quả quyết",
+    "adv": "decisively",
+    "advVi": "một cách dứt khoát/quả quyết"
+  },
+  {
+    "root": "pollute",
+    "verb": "pollute",
+    "verbVi": "làm ô nhiễm",
+    "noun": "pollution, pollutant",
+    "nounVi": "sự ô nhiễm, chất gây ô nhiễm",
+    "adj": "polluted",
+    "adjVi": "bị ô nhiễm",
+    "adv": "pollutingly",
+    "advVi": "gây ô nhiễm"
+  },
+  {
+    "root": "beauty",
+    "verb": "beautify",
+    "verbVi": "làm đẹp, tô điểm",
+    "noun": "beauty, beautician",
+    "nounVi": "vẻ đẹp, người đẹp, chuyên viên làm đẹp",
+    "adj": "beautiful",
+    "adjVi": "xinh đẹp, tuyệt đẹp",
+    "adv": "beautifully",
+    "advVi": "một cách tuyệt đẹp"
+  },
+  {
+    "root": "compete",
+    "verb": "compete",
+    "verbVi": "cạnh tranh, tranh tài",
+    "noun": "competition, competitor",
+    "nounVi": "cuộc thi, đối thủ cạnh tranh",
+    "adj": "competitive",
+    "adjVi": "mang tính cạnh tranh",
+    "adv": "competitively",
+    "advVi": "một cách cạnh tranh"
+  },
+  {
+    "root": "passion",
+    "verb": "impassion",
+    "verbVi": "làm say mê, làm xúc động mạnh",
+    "noun": "passion",
+    "nounVi": "niềm đam mê, ngọn lửa nhiệt huyết",
+    "adj": "passionate",
+    "adjVi": "say đắm, nồng nàn, đầy nhiệt huyết",
+    "adv": "passionately",
+    "advVi": "một cách say đắm, nồng nhiệt"
+  },
+  {
+    "root": "educate",
+    "verb": "educate",
+    "verbVi": "giáo dục, rèn luyện",
+    "noun": "education, educator",
+    "nounVi": "nền giáo dục, nhà giáo dục",
+    "adj": "educational, educated",
+    "adjVi": "thuộc giáo dục, có học thức",
+    "adv": "educationally",
+    "advVi": "về phương diện giáo dục"
+  },
+  {
+    "root": "differ",
+    "verb": "differ, differentiate",
+    "verbVi": "khác biệt, phân biệt",
+    "noun": "difference",
+    "nounVi": "sự khác biệt",
+    "adj": "different",
+    "adjVi": "khác, khác biệt",
+    "adv": "differently",
+    "advVi": "một cách khác biệt"
+  },
+  {
+    "root": "depend",
+    "verb": "depend",
+    "verbVi": "phụ thuộc, dựa vào",
+    "noun": "dependence, independence",
+    "nounVi": "sự phụ thuộc, nền độc lập",
+    "adj": "dependent, independent",
+    "adjVi": "phụ thuộc, độc lập",
+    "adv": "dependently, independently",
+    "advVi": "một cách độc lập / phụ thuộc"
+  },
+  {
+    "root": "attract",
+    "verb": "attract",
+    "verbVi": "thu hút, lôi cuốn",
+    "noun": "attraction, attractiveness",
+    "nounVi": "sự thu hút, điểm hấp dẫn",
+    "adj": "attractive",
+    "adjVi": "hấp dẫn, lôi cuốn",
+    "adv": "attractively",
+    "advVi": "một cách hấp dẫn, quyến rũ"
+  },
+  {
+    "root": "produce",
+    "verb": "produce",
+    "verbVi": "sản xuất, chế tạo",
+    "noun": "production, product, productivity, producer",
+    "nounVi": "sự sản xuất, sản phẩm, năng suất, nhà sản xuất",
+    "adj": "productive",
+    "adjVi": "năng suất, hiệu quả",
+    "adv": "productively",
+    "advVi": "một cách năng suất, hiệu quả"
+  },
+  {
+    "root": "protect",
+    "verb": "protect",
+    "verbVi": "bảo vệ, che chở",
+    "noun": "protection, protector",
+    "nounVi": "sự bảo vệ, người bảo vệ",
+    "adj": "protective, protected",
+    "adjVi": "mang tính bảo vệ, được bảo vệ",
+    "adv": "protectively",
+    "advVi": "một cách bảo bọc"
+  },
+  {
+    "root": "satisfy",
+    "verb": "satisfy",
+    "verbVi": "làm hài lòng, thỏa mãn",
+    "noun": "satisfaction",
+    "nounVi": "sự thỏa mãn, sự hài lòng",
+    "adj": "satisfactory, satisfied",
+    "adjVi": "thỏa đáng, hài lòng",
+    "adv": "satisfactorily",
+    "advVi": "một cách thỏa đáng"
+  },
+  {
+    "root": "destroy",
+    "verb": "destroy",
+    "verbVi": "phá hủy, tiêu diệt",
+    "noun": "destruction",
+    "nounVi": "sự phá hủy, cảnh tàn phá",
+    "adj": "destructive",
+    "adjVi": "mang tính phá hoại, hủy diệt",
+    "adv": "destructively",
+    "advVi": "một cách hủy diệt"
+  },
+  {
+    "root": "origin",
+    "verb": "originate",
+    "verbVi": "bắt nguồn, khởi nguồn",
+    "noun": "origin, originality",
+    "nounVi": "nguồn gốc, tính độc đáo",
+    "adj": "original",
+    "adjVi": "nguyên bản, độc đáo",
+    "adv": "originally",
+    "advVi": "ban đầu, vốn dĩ"
+  },
+  {
+    "root": "environment",
+    "verb": "environmentalize",
+    "verbVi": "bảo vệ môi trường",
+    "noun": "environment, environmentalist",
+    "nounVi": "môi trường, nhà bảo vệ môi trường",
+    "adj": "environmental",
+    "adjVi": "thuộc về môi trường",
+    "adv": "environmentally",
+    "advVi": "về mặt môi trường"
+  },
+  {
+    "root": "economy",
+    "verb": "economize",
+    "verbVi": "tiết kiệm",
+    "noun": "economy, economics, economist",
+    "nounVi": "nền kinh tế, kinh tế học, nhà kinh tế",
+    "adj": "economic, economical",
+    "adjVi": "thuộc kinh tế, tiết kiệm",
+    "adv": "economically",
+    "advVi": "về mặt kinh tế, một cách tiết kiệm"
+  },
+  {
+    "root": "courage",
+    "verb": "encourage, discourage",
+    "verbVi": "khuyến khích, làm nản lòng",
+    "noun": "courage, encouragement",
+    "nounVi": "lòng dũng cảm, sự động viên",
+    "adj": "courageous",
+    "adjVi": "dũng cảm, can đảm",
+    "adv": "courageously",
+    "advVi": "một cách dũng cảm"
+  },
+  {
+    "root": "danger",
+    "verb": "endanger",
+    "verbVi": "gây nguy hiểm, đe dọa",
+    "noun": "danger",
+    "nounVi": "mối hiểm họa, sự nguy hiểm",
+    "adj": "dangerous",
+    "adjVi": "nguy hiểm",
+    "adv": "dangerously",
+    "advVi": "một cách nguy hiểm"
+  },
+  {
+    "root": "able",
+    "verb": "enable, disable",
+    "verbVi": "cho phép, vô hiệu hóa",
+    "noun": "ability, disability",
+    "nounVi": "khả năng, sự khuyết tật",
+    "adj": "able, disabled",
+    "adjVi": "có khả năng, tàn tật",
+    "adv": "ably",
+    "advVi": "một cách tài tình, khéo léo"
+  },
+  {
+    "root": "nation",
+    "verb": "nationalize",
+    "verbVi": "quốc hữu hóa",
+    "noun": "nation, nationality",
+    "nounVi": "quốc gia, quốc tịch",
+    "adj": "national, international",
+    "adjVi": "thuộc quốc gia, quốc tế",
+    "adv": "nationally, internationally",
+    "advVi": "trên toàn quốc, trên bình diện quốc tế"
+  },
+  {
+    "root": "nature",
+    "verb": "naturalize",
+    "verbVi": "nhập tịch, thuần hóa",
+    "noun": "nature",
+    "nounVi": "thiên nhiên, bản chất",
+    "adj": "natural, unnatural",
+    "adjVi": "tự nhiên, không tự nhiên",
+    "adv": "naturally",
+    "advVi": "một cách tự nhiên, đương nhiên"
+  },
+  {
+    "root": "tradition",
+    "verb": "traditionalize",
+    "verbVi": "biến thành truyền thống",
+    "noun": "tradition, traditionalist",
+    "nounVi": "truyền thống, người theo truyền thống",
+    "adj": "traditional",
+    "adjVi": "thuộc truyền thống, cổ truyền",
+    "adv": "traditionally",
+    "advVi": "theo truyền thống"
+  },
+  {
+    "root": "science",
+    "verb": "scientize",
+    "verbVi": "khoa học hóa",
+    "noun": "science, scientist",
+    "nounVi": "khoa học, nhà khoa học",
+    "adj": "scientific",
+    "adjVi": "thuộc khoa học, có tính khoa học",
+    "adv": "scientifically",
+    "advVi": "một cách khoa học"
+  },
+  {
+    "root": "vary",
+    "verb": "vary",
+    "verbVi": "thay đổi, biến đổi, đa dạng",
+    "noun": "variety, variation",
+    "nounVi": "sự đa dạng, sự biến thể",
+    "adj": "various, variable, varied",
+    "adjVi": "đa dạng, nhiều loại, có thể thay đổi",
+    "adv": "variously",
+    "advVi": "khác nhau, theo nhiều cách"
+  },
+  {
+    "root": "care",
+    "verb": "care",
+    "verbVi": "quan tâm, chăm sóc",
+    "noun": "care, carefulness, carelessness",
+    "nounVi": "sự chăm sóc, sự cẩn thận, sự bất cẩn",
+    "adj": "careful, careless",
+    "adjVi": "cẩn thận, bất cẩn",
+    "adv": "carefully, carelessly",
+    "advVi": "một cách cẩn thận / bất cẩn"
+  },
+  {
+    "root": "use",
+    "verb": "use",
+    "verbVi": "sử dụng, dùng",
+    "noun": "usage, usefulness, uselessness",
+    "nounVi": "cách dùng, sự hữu ích, sự vô dụng",
+    "adj": "useful, useless",
+    "adjVi": "hữu ích, vô ích",
+    "adv": "usefully, uselessly",
+    "advVi": "một cách hữu ích / vô ích"
+  },
+  {
+    "root": "harm",
+    "verb": "harm",
+    "verbVi": "làm hại, gây tổn hại",
+    "noun": "harm",
+    "nounVi": "tác hại, sự tổn hại",
+    "adj": "harmful, harmless",
+    "adjVi": "có hại, vô hại",
+    "adv": "harmfully, harmlessly",
+    "advVi": "một cách có hại / vô hại"
+  },
+  {
+    "root": "peace",
+    "verb": "pacify",
+    "verbVi": "dẹp yên, làm yên bình",
+    "noun": "peace",
+    "nounVi": "hòa bình, sự bình yên",
+    "adj": "peaceful",
+    "adjVi": "hòa bình, thanh bình",
+    "adv": "peacefully",
+    "advVi": "một cách thanh bình, yên bình"
+  },
+  {
+    "root": "power",
+    "verb": "empower",
+    "verbVi": "trao quyền, tiếp sức mạnh",
+    "noun": "power",
+    "nounVi": "quyền lực, sức mạnh",
+    "adj": "powerful, powerless",
+    "adjVi": "hùng mạnh, bất lực",
+    "adv": "powerfully",
+    "advVi": "một cách mạnh mẽ, đầy uy lực"
+  },
+  {
+    "root": "value",
+    "verb": "value, evaluate",
+    "verbVi": "định giá, coi trọng, đánh giá",
+    "noun": "value, valuation",
+    "nounVi": "giá trị, sự định giá",
+    "adj": "valuable, invaluable",
+    "adjVi": "quý giá, vô giá",
+    "adv": "valuably",
+    "advVi": "có giá trị"
+  },
+  {
+    "root": "comfort",
+    "verb": "comfort",
+    "verbVi": "an ủi, dỗ dành",
+    "noun": "comfort, discomfort",
+    "nounVi": "sự thoải mái, sự khó chịu",
+    "adj": "comfortable, uncomfortable",
+    "adjVi": "thoải mái, khó chịu",
+    "adv": "comfortably, uncomfortably",
+    "advVi": "một cách thoải mái / khó chịu"
+  },
+  {
+    "root": "convenience",
+    "verb": "convenience",
+    "verbVi": "làm cho tiện lợi",
+    "noun": "convenience, inconvenience",
+    "nounVi": "sự tiện lợi, sự bất tiện",
+    "adj": "convenient, inconvenient",
+    "adjVi": "tiện lợi, bất tiện",
+    "adv": "conveniently, inconveniently",
+    "advVi": "một cách tiện lợi / bất tiện"
+  },
+  {
+    "root": "confidence",
+    "verb": "confide",
+    "verbVi": "tâm sự, giãi bày, tin tưởng",
+    "noun": "confidence",
+    "nounVi": "sự tự tin, lòng tin cậy",
+    "adj": "confident",
+    "adjVi": "tự tin",
+    "adv": "confidently",
+    "advVi": "một cách tự tin"
+  },
+  {
+    "root": "rely",
+    "verb": "rely",
+    "verbVi": "dựa vào, tin tưởng vào",
+    "noun": "reliance, reliability",
+    "nounVi": "sự tin cậy, độ tin cậy",
+    "adj": "reliable, unreliable",
+    "adjVi": "đáng tin cậy, không đáng tin",
+    "adv": "reliably",
+    "advVi": "một cách đáng tin cậy"
+  },
+  {
+    "root": "responsible",
+    "verb": "respond",
+    "verbVi": "phản hồi, đáp ứng",
+    "noun": "responsibility",
+    "nounVi": "trách nhiệm, nghĩa vụ",
+    "adj": "responsible, irresponsible",
+    "adjVi": "có trách nhiệm, vô trách nhiệm",
+    "adv": "responsibly, irresponsibly",
+    "advVi": "một cách có trách nhiệm"
+  },
+  {
+    "root": "active",
+    "verb": "activate",
+    "verbVi": "kích hoạt",
+    "noun": "action, activity, activist",
+    "nounVi": "hành động, hoạt động, nhà hoạt động",
+    "adj": "active, inactive",
+    "adjVi": "năng động, chủ động, thụ động",
+    "adv": "actively",
+    "advVi": "một cách tích cực, chủ động"
+  },
+  {
+    "root": "develop",
+    "verb": "develop",
+    "verbVi": "phát triển, mở rộng",
+    "noun": "development, developer",
+    "nounVi": "sự phát triển, nhà phát triển",
+    "adj": "developing, developed",
+    "adjVi": "đang phát triển, phát triển",
+    "adv": "developmentally",
+    "advVi": "về mặt phát triển"
+  },
+  {
+    "root": "improve",
+    "verb": "improve",
+    "verbVi": "cải thiện, nâng cao",
+    "noun": "improvement",
+    "nounVi": "sự cải thiện, bước tiến bộ",
+    "adj": "improved, improvable",
+    "adjVi": "được cải thiện",
+    "adv": "improvably",
+    "advVi": "có thể cải thiện"
+  },
+  {
+    "root": "conclude",
+    "verb": "conclude",
+    "verbVi": "kết luận, kết thúc",
+    "noun": "conclusion",
+    "nounVi": "kết luận, phần kết bài",
+    "adj": "conclusive, concluding",
+    "adjVi": "thuyết phục, mang tính quyết định",
+    "adv": "conclusively",
+    "advVi": "một cách thuyết phục, dứt khoát"
+  },
+  {
+    "root": "explain",
+    "verb": "explain",
+    "verbVi": "giải thích, phân trần",
+    "noun": "explanation",
+    "nounVi": "lời giải thích, sự minh bạch",
+    "adj": "explanatory, explainable",
+    "adjVi": "có tính giải thích",
+    "adv": "explanatorily",
+    "advVi": "để giải thích"
+  },
+  {
+    "root": "describe",
+    "verb": "describe",
+    "verbVi": "mô tả, miêu tả",
+    "noun": "description",
+    "nounVi": "sự miêu tả, đặc điểm",
+    "adj": "descriptive",
+    "adjVi": "mang tính miêu tả",
+    "adv": "descriptively",
+    "advVi": "một cách miêu tả"
+  },
+  {
+    "root": "appear",
+    "verb": "appear, disappear",
+    "verbVi": "xuất hiện, biến mất",
+    "noun": "appearance, disappearance",
+    "nounVi": "diện mạo, sự xuất hiện, sự biến mất",
+    "adj": "apparent",
+    "adjVi": "rõ ràng, bề ngoài",
+    "adv": "apparently",
+    "advVi": "hình như, dường như, rõ ràng"
+  },
+  {
+    "root": "agree",
+    "verb": "agree, disagree",
+    "verbVi": "đồng ý, bất đồng",
+    "noun": "agreement, disagreement",
+    "nounVi": "sự đồng thuận, hợp đồng, sự bất đồng",
+    "adj": "agreeable",
+    "adjVi": "dễ chịu, tán thành",
+    "adv": "agreeably",
+    "advVi": "một cách dễ chịu, đồng lòng"
+  },
+  {
+    "root": "obey",
+    "verb": "obey, disobey",
+    "verbVi": "vâng lời, tuân lệnh, không tuân lệnh",
+    "noun": "obedience, disobedience",
+    "nounVi": "sự vâng lời, sự bất tuân",
+    "adj": "obedient, disobedient",
+    "adjVi": "ngoan ngoãn, bất tuân",
+    "adv": "obediently, disobediently",
+    "advVi": "một cách ngoan ngoãn / bất tuân"
+  },
+  {
+    "root": "friend",
+    "verb": "befriend",
+    "verbVi": "kết bạn",
+    "noun": "friend, friendship",
+    "nounVi": "bạn bè, tình bạn",
+    "adj": "friendly, unfriendly",
+    "adjVi": "thân thiện, không thân thiện",
+    "adv": "friendlily",
+    "advVi": "một cách thân thiện"
+  },
+  {
+    "root": "kind",
+    "verb": "kindle",
+    "verbVi": "nhen nhóm",
+    "noun": "kindness, unkindness",
+    "nounVi": "lòng tốt, sự tử tế",
+    "adj": "kind, unkind",
+    "adjVi": "tốt bụng, tử tế",
+    "adv": "kindly",
+    "advVi": "một cách tử tế, vui lòng"
+  },
+  {
+    "root": "polite",
+    "verb": "polish",
+    "verbVi": "trau chuốt",
+    "noun": "politeness, impoliteness",
+    "nounVi": "sự lịch sự, sự bất lịch sự",
+    "adj": "polite, impolite",
+    "adjVi": "lịch sự, lễ phép, bất lịch sự",
+    "adv": "politely, impolitely",
+    "advVi": "một cách lịch sự / thô lỗ"
+  },
+  {
+    "root": "honest",
+    "verb": "honor",
+    "verbVi": "tôn vinh",
+    "noun": "honesty, dishonesty",
+    "nounVi": "tính trung thực, sự bất chính",
+    "adj": "honest, dishonest",
+    "adjVi": "trung thực, gian dối",
+    "adv": "honestly, dishonestly",
+    "advVi": "thật lòng, một cách trung thực"
+  },
+  {
+    "root": "patient",
+    "verb": "patient",
+    "verbVi": "kiên nhẫn",
+    "noun": "patience, impatience",
+    "nounVi": "lòng kiên nhẫn, sự thiếu kiên nhẫn",
+    "adj": "patient, impatient",
+    "adjVi": "kiên nhẫn, nóng vội",
+    "adv": "patiently, impatiently",
+    "advVi": "một cách kiên nhẫn / nôn nóng"
+  },
+  {
+    "root": "possible",
+    "verb": "enable",
+    "verbVi": "làm cho có thể",
+    "noun": "possibility, impossibility",
+    "nounVi": "khả năng, điều bất khả thi",
+    "adj": "possible, impossible",
+    "adjVi": "có thể, bất khả thi",
+    "adv": "possibly, impossibly",
+    "advVi": "có thể, không thể nào"
+  },
+  {
+    "root": "real",
+    "verb": "realize",
+    "verbVi": "nhận ra, hiện thực hóa",
+    "noun": "reality, realization",
+    "nounVi": "thực tế, sự nhận thức",
+    "adj": "real, realistic",
+    "adjVi": "thực tế, chân thực",
+    "adv": "really, realistically",
+    "advVi": "thực sự, một cách thực tế"
+  },
+  {
+    "root": "pure",
+    "verb": "purify",
+    "verbVi": "lọc sạch, làm tinh khiết",
+    "noun": "purity, purification",
+    "nounVi": "sự thuần khiết, sự thanh lọc",
+    "adj": "pure, impure",
+    "adjVi": "tinh khiết, không nguyên chất",
+    "adv": "purely",
+    "advVi": "hoàn toàn, chỉ đơn thuần"
+  },
+  {
+    "root": "simple",
+    "verb": "simplify",
+    "verbVi": "đơn giản hóa",
+    "noun": "simplicity, simplification",
+    "nounVi": "sự giản dị, sự tối giản",
+    "adj": "simple",
+    "adjVi": "đơn giản, dễ hiểu",
+    "adv": "simply",
+    "advVi": "đơn giản chỉ là"
+  },
+  {
+    "root": "strong",
+    "verb": "strengthen",
+    "verbVi": "củng cố, tăng cường",
+    "noun": "strength",
+    "nounVi": "sức mạnh, điểm mạnh",
+    "adj": "strong",
+    "adjVi": "mạnh mẽ, kiên cường",
+    "adv": "strongly",
+    "advVi": "một cách mạnh mẽ, quyết liệt"
+  },
+  {
+    "root": "weak",
+    "verb": "weaken",
+    "verbVi": "làm suy yếu",
+    "noun": "weakness",
+    "nounVi": "điểm yếu, sự yếu đuối",
+    "adj": "weak",
+    "adjVi": "yếu ớt",
+    "adv": "weakly",
+    "advVi": "một cách yếu ớt"
+  },
+  {
+    "root": "deep",
+    "verb": "deepen",
+    "verbVi": "làm sâu sắc thêm",
+    "noun": "depth",
+    "nounVi": "độ sâu, chiều sâu",
+    "adj": "deep",
+    "adjVi": "sâu sắc, sâu",
+    "adv": "deeply",
+    "advVi": "một cách sâu sắc, sâu đậm"
+  },
+  {
+    "root": "high",
+    "verb": "heighten",
+    "verbVi": "nâng cao, gia tăng",
+    "noun": "height",
+    "nounVi": "chiều cao, đỉnh cao",
+    "adj": "high",
+    "adjVi": "cao, cấp cao",
+    "adv": "highly",
+    "advVi": "rất, được đánh giá cao"
+  },
+  {
+    "root": "wide",
+    "verb": "widen",
+    "verbVi": "mở rộng",
+    "noun": "width",
+    "nounVi": "chiều rộng, bề rộng",
+    "adj": "wide",
+    "adjVi": "rộng lớn, đa dạng",
+    "adv": "widely",
+    "advVi": "rộng rãi, phổ biến"
+  },
+  {
+    "root": "long",
+    "verb": "lengthen",
+    "verbVi": "kéo dài",
+    "noun": "length",
+    "nounVi": "chiều dài, độ dài",
+    "adj": "long",
+    "adjVi": "dài, lâu dài",
+    "adv": "lengthily",
+    "advVi": "một cách dài dòng"
+  },
+  {
+    "root": "short",
+    "verb": "shorten",
+    "verbVi": "rút ngắn",
+    "noun": "shortage",
+    "nounVi": "sự thiếu hụt",
+    "adj": "short",
+    "adjVi": "ngắn, thiếu hụt",
+    "adv": "shortly",
+    "advVi": "chẳng bao lâu, sớm"
+  },
+  {
+    "root": "impress",
+    "verb": "impress",
+    "verbVi": "gây ấn tượng",
+    "noun": "impression",
+    "nounVi": "ấn tượng",
+    "adj": "impressive, unimpressive",
+    "adjVi": "ấn tượng, sâu sắc",
+    "adv": "impressively",
+    "advVi": "một cách ấn tượng"
+  },
+  {
+    "root": "inform",
+    "verb": "inform",
+    "verbVi": "thông báo, cung cấp tin tức",
+    "noun": "information, informant",
+    "nounVi": "thông tin, người báo tin",
+    "adj": "informative, informed",
+    "adjVi": "nhiều thông tin bổ ích, hiểu biết",
+    "adv": "informatively",
+    "advVi": "cung cấp nhiều thông tin"
+  },
+  {
+    "root": "express",
+    "verb": "express",
+    "verbVi": "bày tỏ, biểu đạt",
+    "noun": "expression",
+    "nounVi": "sự biểu cảm, biểu thức",
+    "adj": "expressive",
+    "adjVi": "giàu cảm xúc, biểu cảm",
+    "adv": "expressively",
+    "advVi": "một cách diễn cảm"
+  },
+  {
+    "root": "connect",
+    "verb": "connect, disconnect",
+    "verbVi": "kết nối, ngắt kết nối",
+    "noun": "connection, connectivity",
+    "nounVi": "mối liên hệ, sự kết nối",
+    "adj": "connected",
+    "adjVi": "được kết nối, có quan hệ",
+    "adv": "connectively",
+    "advVi": "mang tính liên kết"
+  },
+  {
+    "root": "invent",
+    "verb": "invent",
+    "verbVi": "phát minh, sáng chế",
+    "noun": "invention, inventor",
+    "nounVi": "phát minh, nhà phát minh",
+    "adj": "inventive",
+    "adjVi": "đầy sáng tạo, tài phát minh",
+    "adv": "inventively",
+    "advVi": "một cách sáng tạo"
+  },
+  {
+    "root": "explore",
+    "verb": "explore",
+    "verbVi": "khám phá, thám hiểm",
+    "noun": "exploration, explorer",
+    "nounVi": "chuyến thám hiểm, nhà thám hiểm",
+    "adj": "exploratory",
+    "adjVi": "mang tính thăm dò",
+    "adv": "exploratorily",
+    "advVi": "để thăm dò"
+  },
+  {
+    "root": "imagine",
+    "verb": "imagine",
+    "verbVi": "tưởng tượng, hình dung",
+    "noun": "imagination",
+    "nounVi": "trí tưởng tượng",
+    "adj": "imaginative, imaginary, imaginable",
+    "adjVi": "giàu trí tưởng tượng, hư cấu, có thể tưởng tượng",
+    "adv": "imaginatively",
+    "advVi": "một cách sáng tạo, bay bổng"
+  },
+  {
+    "root": "hesitate",
+    "verb": "hesitate",
+    "verbVi": "do dự, ngập ngừng",
+    "noun": "hesitation",
+    "nounVi": "sự do dự, ngập ngừng",
+    "adj": "hesitant",
+    "adjVi": "do dự, phân vân",
+    "adv": "hesitantly",
+    "advVi": "một cách do dự"
+  },
+  {
+    "root": "signify",
+    "verb": "signify",
+    "verbVi": "biểu thị, có ý nghĩa",
+    "noun": "significance",
+    "nounVi": "tầm quan trọng, ý nghĩa",
+    "adj": "significant, insignificant",
+    "adjVi": "quan trọng, to lớn, không đáng kể",
+    "adv": "significantly, insignificantly",
+    "advVi": "một cách đáng kể"
+  },
+  {
+    "root": "fame",
+    "verb": "fame",
+    "verbVi": "làm nổi danh",
+    "noun": "fame",
+    "nounVi": "danh tiếng, sự nổi tiếng",
+    "adj": "famous, infamous",
+    "adjVi": "nổi tiếng, tai tiếng",
+    "adv": "famously",
+    "advVi": "rất nổi tiếng, lừng danh"
+  },
+  {
+    "root": "glory",
+    "verb": "glorify",
+    "verbVi": "tôn vinh, ca ngợi",
+    "noun": "glory",
+    "nounVi": "vinh quang",
+    "adj": "glorious",
+    "adjVi": "vinh quang, rực rỡ",
+    "adv": "gloriously",
+    "advVi": "một cách vẻ vang"
+  },
+  {
+    "root": "pride",
+    "verb": "pride",
+    "verbVi": "tự hào",
+    "noun": "pride",
+    "nounVi": "niềm tự hào, lòng kiêu hãnh",
+    "adj": "proud",
+    "adjVi": "tự hào, hãnh diện",
+    "adv": "proudly",
+    "advVi": "một cách tự hào"
+  },
+  {
+    "root": "fright",
+    "verb": "frighten",
+    "verbVi": "làm hoảng sợ",
+    "noun": "fright",
+    "nounVi": "nỗi sợ hãi",
+    "adj": "frightening, frightened",
+    "adjVi": "đáng sợ, khiếp sợ",
+    "adv": "frighteningly",
+    "advVi": "đến phát sợ"
+  },
+  {
+    "root": "broad",
+    "verb": "broaden",
+    "verbVi": "mở rộng",
+    "noun": "breadth",
+    "nounVi": "bề rộng, sự bao quát",
+    "adj": "broad",
+    "adjVi": "rộng rãi, khái quát",
+    "adv": "broadly",
+    "advVi": "nhìn chung, rộng rãi"
+  },
+  {
+    "root": "rich",
+    "verb": "enrich",
+    "verbVi": "làm giàu, bồi dưỡng",
+    "noun": "richness",
+    "nounVi": "sự phong phú, giàu có",
+    "adj": "rich",
+    "adjVi": "giàu có, phong phú",
+    "adv": "richly",
+    "advVi": "một cách phong phú, xứng đáng"
+  },
+  {
+    "root": "sharp",
+    "verb": "sharpen",
+    "verbVi": "mài sắc, làm nhạy bén",
+    "noun": "sharpness",
+    "nounVi": "độ sắc bén",
+    "adj": "sharp",
+    "adjVi": "sắc bén, nhọn, đột ngột",
+    "adv": "sharply",
+    "advVi": "một cách sắc bén, đột ngột"
+  },
+  {
+    "root": "loose",
+    "verb": "loosen",
+    "verbVi": "nới lỏng",
+    "noun": "looseness",
+    "nounVi": "độ lỏng lẻo",
+    "adj": "loose",
+    "adjVi": "lỏng, rộng",
+    "adv": "loosely",
+    "advVi": "một cách lỏng lẻo"
+  },
+  {
+    "root": "tight",
+    "verb": "tighten",
+    "verbVi": "thắt chặt, siết chặt",
+    "noun": "tightness",
+    "nounVi": "sự chặt chẽ",
+    "adj": "tight",
+    "adjVi": "chặt chẽ, bó sát",
+    "adv": "tightly",
+    "advVi": "một cách chặt chẽ"
+  },
+  {
+    "root": "bright",
+    "verb": "brighten",
+    "verbVi": "làm bừng sáng",
+    "noun": "brightness",
+    "nounVi": "độ sáng, sự thông minh",
+    "adj": "bright",
+    "adjVi": "sáng sủa, thông minh",
+    "adv": "brightly",
+    "advVi": "một cách sáng ngời"
+  },
+  {
+    "root": "threat",
+    "verb": "threaten",
+    "verbVi": "đe dọa",
+    "noun": "threat",
+    "nounVi": "mối đe dọa",
+    "adj": "threatening",
+    "adjVi": "mang tính đe dọa",
+    "adv": "threateningly",
+    "advVi": "vẻ đe dọa"
+  },
+  {
+    "root": "hope",
+    "verb": "hope",
+    "verbVi": "hy vọng",
+    "noun": "hope",
+    "nounVi": "niềm hy vọng",
+    "adj": "hopeful, hopeless",
+    "adjVi": "đầy hy vọng, tuyệt vọng",
+    "adv": "hopefully, hopelessly",
+    "advVi": "hy vọng rằng / trong tuyệt vọng"
+  },
+  {
+    "root": "help",
+    "verb": "help",
+    "verbVi": "giúp đỡ",
+    "noun": "help, helper",
+    "nounVi": "sự giúp đỡ, người trợ giúp",
+    "adj": "helpful, helpless",
+    "adjVi": "hữu ích, bất lực",
+    "adv": "helpfully, helplessly",
+    "advVi": "một cách hữu ích / bất lực"
+  },
+  {
+    "root": "thought",
+    "verb": "think",
+    "verbVi": "suy nghĩ",
+    "noun": "thought, thinker",
+    "nounVi": "suy nghĩ, nhà tư tưởng",
+    "adj": "thoughtful, thoughtless",
+    "adjVi": "chu đáo, trầm ngâm, vô tâm",
+    "adv": "thoughtfully, thoughtlessly",
+    "advVi": "một cách chu đáo / vô tâm"
+  },
+  {
+    "root": "pain",
+    "verb": "pain",
+    "verbVi": "làm đau đớn",
+    "noun": "pain",
+    "nounVi": "nỗi đau, cơn đau",
+    "adj": "painful, painless",
+    "adjVi": "đau đớn, không đau",
+    "adv": "painfully, painlessly",
+    "advVi": "một cách đau đớn / êm ái"
+  }
+];
+        return this._builtinWordFamilies;
+      }
+
+      getWordFamilyIndex() {
+        if (this._wordFamilyIndex) return this._wordFamilyIndex;
+        this._wordFamilyIndex = {};
+        const list = this.getBuiltinWordFamilies();
+        for (const fam of list) {
+          const keys = [];
+          if (fam.root) keys.push(fam.root.toLowerCase());
+          for (const pos of ['verb', 'noun', 'adj', 'adv']) {
+            if (fam[pos]) {
+              fam[pos].split(/[,;\/]/).forEach(w => {
+                const c = w.trim().toLowerCase();
+                if (c && c !== 'none') keys.push(c);
+              });
+            }
+          }
+          keys.forEach(k => {
+            this._wordFamilyIndex[k] = fam;
+          });
+        }
+        return this._wordFamilyIndex;
+      }
+
+      getFastWordFamily(word) {
+        if (!word) return null;
+        const clean = word.trim().toLowerCase().replace(/[^a-z]/g, '');
+        if (!clean) return null;
+        const idx = this.getWordFamilyIndex();
+        if (idx[clean]) return idx[clean];
+
+        // 1. Phân rã hậu tố trạng từ -ly
+        if (clean.endsWith('ly')) {
+          const adjStem = clean.replace(/ly$/, '');
+          if (idx[adjStem]) return idx[adjStem];
+          const adjStemI = adjStem.replace(/i$/, 'y');
+          if (idx[adjStemI]) return idx[adjStemI];
+          const adjStemIc = adjStem.replace(/al$/, '');
+          if (idx[adjStemIc]) return idx[adjStemIc];
+        }
+
+        // 2. Phân rã hậu tố danh từ / tính từ phổ biến
+        if (clean.endsWith('tion') || clean.endsWith('sion') || clean.endsWith('ment') || clean.endsWith('ness') || clean.endsWith('ity')) {
+          const baseStem = clean.replace(/(?:tion|sion|ment|ness|ity)$/, '');
+          for (const k of Object.keys(idx)) {
+            if (k.startsWith(baseStem) && baseStem.length >= 3) return idx[k];
+          }
+        }
+
+        if (clean.endsWith('ive') || clean.endsWith('ful') || clean.endsWith('able') || clean.endsWith('ible')) {
+          const baseStem = clean.replace(/(?:ive|ful|able|ible)$/, '');
+          for (const k of Object.keys(idx)) {
+            if (k.startsWith(baseStem) && baseStem.length >= 3) return idx[k];
+          }
+        }
+
+        return null;
+      }
+
+      async deriveWordFamily(word, meaningVi = '', detectedPos = 'Word') {
+        const clean = (word || '').trim().toLowerCase().replace(/[^a-z]/g, '');
+        if (!clean || clean.length < 3) return null;
+
+        const stem = clean.length >= 5 ? clean.slice(0, 4) : clean;
+        let fam = {
+          root: clean,
+          verb: '', verbVi: '',
+          noun: '', nounVi: '',
+          adj: '', adjVi: '',
+          adv: '', advVi: ''
+        };
+
+        try {
+          const res = await fetch(`https://api.datamuse.com/words?sp=${encodeURIComponent(stem)}*&md=dp&max=40`);
+          if (res.ok) {
+            const data = await res.json();
+            const verbs = new Set(), nouns = new Set(), adjs = new Set(), advs = new Set();
+            for (const item of data) {
+              const w = (item.word || '').trim().toLowerCase();
+              if (!w || w.includes(' ') || w.includes('-')) continue;
+              const tags = item.tags || [];
+              if (tags.includes('v') && verbs.size < 2) verbs.add(w);
+              if (tags.includes('n') && nouns.size < 3) nouns.add(w);
+              if (tags.includes('adj') && adjs.size < 2) adjs.add(w);
+              if (tags.includes('adv') && advs.size < 2) advs.add(w);
+            }
+            if (verbs.size > 0) fam.verb = Array.from(verbs).join(', ');
+            if (nouns.size > 0) fam.noun = Array.from(nouns).join(', ');
+            if (adjs.size > 0) fam.adj = Array.from(adjs).join(', ');
+            if (advs.size > 0) fam.adv = Array.from(advs).join(', ');
+          }
+        } catch (e) {
+          console.warn('Datamuse word family derive warn:', e);
+        }
+
+        if (clean.endsWith('ly')) {
+          if (!fam.adv) fam.adv = clean;
+          const adj = clean.endsWith('ily') ? clean.slice(0, -3) + 'y' : clean.slice(0, -2);
+          if (!fam.adj) fam.adj = adj;
+        } else if (clean.endsWith('tion') || clean.endsWith('ment') || clean.endsWith('ness') || clean.endsWith('ity')) {
+          if (!fam.noun) fam.noun = clean;
+        } else if (clean.endsWith('ive') || clean.endsWith('ful') || clean.endsWith('less') || clean.endsWith('able') || clean.endsWith('al') || clean.endsWith('ous')) {
+          if (!fam.adj) fam.adj = clean;
+          if (!fam.adv) fam.adv = clean.endsWith('le') ? clean.slice(0, -1) + 'y' : (clean.endsWith('ic') ? clean + 'ally' : clean + 'ly');
+        }
+
+        if (!fam.adv && fam.adj) {
+          const firstAdj = fam.adj.split(',')[0].trim();
+          if (firstAdj.endsWith('y')) fam.adv = firstAdj.slice(0, -1) + 'ily';
+          else if (firstAdj.endsWith('le')) fam.adv = firstAdj.slice(0, -1) + 'y';
+          else if (firstAdj.endsWith('ic')) fam.adv = firstAdj + 'ally';
+          else fam.adv = firstAdj + 'ly';
+        }
+
+        fam.verbVi = fam.verb ? `Động từ tạo tác/hành động của "${clean}"` : '';
+        fam.nounVi = fam.noun ? `Danh từ/khái niệm của "${clean}"` : '';
+        fam.adjVi = fam.adj ? `Tính từ chỉ đặc điểm của "${clean}"` : '';
+        fam.advVi = fam.adv ? `Trạng từ phương thức của "${clean}"` : '';
+
+        return fam;
+      }
+
+      async resolveWordFamily(word, meaningVi = '', detectedPos = 'Word') {
+        if (!word) return null;
+        const fast = this.getFastWordFamily(word);
+        if (fast) return fast;
+        return await this.deriveWordFamily(word, meaningVi, detectedPos);
+      }
+
+      formatWordFamilyHtml(family, activeWord = '', compact = false) {
+        if (!family) {
+          return '<span class="text-slate-400 italic text-xs">Chưa có dữ liệu họ từ vựng</span>';
+        }
+
+        const activeClean = (activeWord || '').trim().toLowerCase();
+        const configs = [
+          { key: 'verb', viKey: 'verbVi', label: 'Động từ (Verb)', tag: 'V', icon: 'fa-bolt', color: 'sky', border: 'border-sky-500/25', bg: 'bg-sky-500/5', text: 'text-sky-600 dark:text-sky-400', badge: 'bg-sky-500/15 text-sky-600 dark:text-sky-400' },
+          { key: 'noun', viKey: 'nounVi', label: 'Danh từ (Noun)', tag: 'N', icon: 'fa-cube', color: 'purple', border: 'border-purple-500/25', bg: 'bg-purple-500/5', text: 'text-purple-600 dark:text-purple-400', badge: 'bg-purple-500/15 text-purple-600 dark:text-purple-400' },
+          { key: 'adj', viKey: 'adjVi', label: 'Tính từ (Adjective)', tag: 'Adj', icon: 'fa-gem', color: 'emerald', border: 'border-emerald-500/25', bg: 'bg-emerald-500/5', text: 'text-emerald-600 dark:text-emerald-400', badge: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400' },
+          { key: 'adv', viKey: 'advVi', label: 'Trạng từ (Adverb)', tag: 'Adv', icon: 'fa-wind', color: 'amber', border: 'border-amber-500/25', bg: 'bg-amber-500/5', text: 'text-amber-600 dark:text-amber-400', badge: 'bg-amber-500/15 text-amber-600 dark:text-amber-400' }
+        ];
+
+        let html = '';
+        let hasAny = false;
+
+        for (const cfg of configs) {
+          const rawVal = family[cfg.key];
+          if (!rawVal || rawVal.toLowerCase() === 'none') continue;
+          hasAny = true;
+          const words = rawVal.split(/[,;\/]/).map(w => w.trim()).filter(Boolean);
+          const viVal = family[cfg.viKey] || '';
+
+          const wordsHtml = words.map(w => {
+            const isCur = (w.toLowerCase() === activeClean);
+            const activeStyle = isCur
+              ? 'ring-2 ring-primary bg-primary/10 text-primary-light font-black shadow-xs'
+              : 'bg-white/90 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 hover:border-primary/50 font-bold';
+
+            return `
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs transition group/wf ${activeStyle}">
+                <span onclick="app.quickLookupWord('${w.replace(/'/g, "\\\'")}')" class="cursor-pointer hover:underline hover:text-primary-light transition-colors" title="Nhấn để xem chi tiết & học từ '${w}'">${w}</span>
+                <button type="button" onclick="app.speakText('${w.replace(/'/g, "\\\'")}', 'en'); event.stopPropagation();" class="text-slate-400 hover:text-primary-light transition-colors p-0.5 ml-0.5" title="Nghe phát âm">
+                  <i class="fa-solid fa-volume-high text-[9px]"></i>
+                </button>
+                ${isCur ? '<span class="text-[8px] font-black uppercase px-1 py-0.2 rounded bg-primary text-white">Đang xem</span>' : ''}
+              </span>
+            `;
+          }).join('');
+
+          html += `
+            <div class="p-2.5 rounded-2xl ${cfg.bg} border ${cfg.border} space-y-1.5">
+              <div class="flex items-center justify-between pb-1 border-b border-slate-200/40 dark:border-slate-700/40">
+                <span class="font-black text-[11px] ${cfg.text} flex items-center space-x-1.5">
+                  <i class="fa-solid ${cfg.icon} text-[10px]"></i>
+                  <span>${cfg.label}</span>
+                </span>
+                <span class="px-1.5 py-0.2 rounded text-[9px] font-extrabold ${cfg.badge}">${cfg.tag}</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                ${wordsHtml}
+              </div>
+              ${(!compact && viVal) ? `<div class="text-[10px] text-slate-500 dark:text-slate-400 italic pt-0.5 pl-0.5">${viVal}</div>` : ''}
+            </div>
+          `;
+        }
+
+        return hasAny ? html : '<span class="text-slate-400 italic text-xs">Chưa có dữ liệu họ từ vựng</span>';
+      }
+
+      async renderModalWordFamily(item) {
+        if (!item) return;
+        const container = document.getElementById('modal-detail-word-family');
+        if (!container) return;
+
+        // 1. Thử hiển thị tức thì nếu có trong từ điển gốc
+        const fast = this.getFastWordFamily(item.word);
+        if (fast) {
+          container.innerHTML = this.formatWordFamilyHtml(fast, item.word);
+          item.wordFamily = fast;
+          this.enrollWordFamilyMembers(item.word, fast);
+          return;
+        }
+
+        // 2. Tra cứu động nếu từ mới
+        container.innerHTML = '<span class="text-xs text-indigo-400 animate-pulse font-semibold flex items-center gap-1.5"><i class="fa-solid fa-spinner fa-spin"></i><span>AI đang phân tích Họ Từ Vựng (V - N - Adj - Adv)...</span></span>';
+
+        try {
+          const family = await this.resolveWordFamily(item.word, item.meaningVi, item.type);
+          if (family && this.activeModalWord && this.activeModalWord.id === item.id) {
+            container.innerHTML = this.formatWordFamilyHtml(family, item.word);
+            item.wordFamily = family;
+            this.enrollWordFamilyMembers(item.word, family);
+          }
+        } catch (e) {
+          console.warn('Lỗi render word family:', e);
+          if (container) container.innerHTML = '<span class="text-xs text-slate-400 italic">Không thể tải họ từ vựng lúc này</span>';
+        }
+      }
+
+      async renderFcWordFamily(card) {
+        if (!card) return;
+        const container = document.getElementById('fc-word-family');
+        if (!container) return;
+
+        const fast = this.getFastWordFamily(card.word);
+        if (fast) {
+          container.innerHTML = this.formatWordFamilyHtml(fast, card.word, true);
+          return;
+        }
+
+        this.resolveWordFamily(card.word, card.meaningVi, card.type).then(fam => {
+          if (fam && this.currentView === 'flashcards' && this.filteredCards[this.currentCardIndex]?.id === card.id) {
+            container.innerHTML = this.formatWordFamilyHtml(fam, card.word, true);
+          }
+        }).catch(() => {});
+      }
+
+      async enrollWordFamilyMembers(rootWord, familyInput, detectedType = '') {
+        if (!rootWord) return 0;
+        let family = null;
+        if (typeof familyInput === 'object' && familyInput !== null) {
+          family = familyInput;
+        } else {
+          family = await this.resolveWordFamily(rootWord, familyInput || '', detectedType);
+        }
+        if (!family) return 0;
+
+        const rootNorm = this.normalizeWordKey(rootWord);
+        const canonicalRoot = family.root || rootWord;
+        let addedCount = 0;
+        const addedWords = [];
+
+        const posConfigs = [
+          { key: 'verb', viKey: 'verbVi', pos: 'Verb' },
+          { key: 'noun', viKey: 'nounVi', pos: 'Noun' },
+          { key: 'adj', viKey: 'adjVi', pos: 'Adjective' },
+          { key: 'adv', viKey: 'advVi', pos: 'Adverb' }
+        ];
+
+        for (const cfg of posConfigs) {
+          const raw = family[cfg.key];
+          if (!raw || raw.toLowerCase() === 'none') continue;
+          const words = raw.split(/[,;\/]/).map(w => w.trim()).filter(Boolean);
+          const viVal = family[cfg.viKey] || '';
+
+          for (const w of words) {
+            const cleanW = w.trim().replace(/^["']+|["']+$/g, '');
+            if (!cleanW || cleanW.length < 2) continue;
+            const norm = this.normalizeWordKey(cleanW);
+
+            if (norm === rootNorm) continue; // Bỏ qua từ đang xem
+
+            const existing = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
+            if (existing) {
+              // Kích hoạt từ liên quan vào Cần Ôn Tập
+              existing.status = 'due';
+              existing.due = true;
+              existing.nextReviewDate = new Date().toISOString();
+            } else {
+              // Tự động tạo và nạp thẻ mới cho từ trong Họ Từ Vựng
+              const newCard = {
+                id: `wf_${Date.now()}_${Math.floor(Math.random() * 100000)}`,
+                word: cleanW,
+                type: cfg.pos,
+                ipa: '',
+                level: this.guessCefrLevel(cleanW),
+                topic: 'topic_notebook',
+                topicLabel: `✨ Họ Từ: ${canonicalRoot}`,
+                meaningVi: viVal || `[${cfg.pos}] Dạng từ vựng thuộc họ từ "${canonicalRoot}"`,
+                meaningEn: `Word family member (${cfg.pos}) of "${canonicalRoot}"`,
+                cloze: `In this sentence, the correct word form of "${canonicalRoot}" is [ ${cleanW} ].`,
+                example: `Pay attention to the word form "${cleanW}" (${cfg.pos}) in the National High School Exam.`,
+                exampleVi: `Lưu ý phân loại từ loại "${cleanW}" (${cfg.pos}) trong các đề thi THPT Quốc Gia.`,
+                synonyms: '',
+                antonyms: '',
+                collocations: `${cleanW}, ${canonicalRoot}`,
+                mnemonic: `Họ từ vựng của "${canonicalRoot}": ${cfg.pos} ➔ "${cleanW}". Chuyên đề biến thể từ loại trong đề thi THPTQG.`,
+                deck: 'notebook',
+                status: 'due',
+                due: true,
+                nextReviewDate: new Date().toISOString(),
+                isFavorite: false,
+                wordFamilyRoot: canonicalRoot
+              };
+              this.vocabList.unshift(newCard);
+              addedWords.push(cleanW);
+              addedCount++;
+            }
+          }
+        }
+
+        if (addedCount > 0) {
+          this.saveState();
+          this.updateFilterCounts();
+          this.renderDashboard();
+          const displaySample = addedWords.slice(0, 3).join(', ') + (addedWords.length > 3 ? '...' : '');
+          this.showToast(`✨ AI đã tự động tìm Họ Từ (Word Family) và lưu +${addedCount} từ vựng liên quan (${displaySample}) vào sổ tay Cần Ôn Tập!`, 'success');
+        }
+
+        return addedCount;
+      }
+
+
       /* ========================================================================== */
       /* CEFR A1 - C1 SYNONYMS & ANTONYMS ENGINE (PHÂN CẤP TỪ ĐỒNG/TRÁI NGHĨA)      */
       /* ========================================================================== */
@@ -43093,7 +44409,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
           if (reg.waiting && window.app) {
             window.app.showUpdateBanner({
-              version: '1.6.9',
+              version: '1.7.0',
               title: 'Bản cập nhật mới đã sẵn sàng!',
               highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
             });
@@ -43107,7 +44423,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   if (window.app) {
                     window.app.showUpdateBanner({
-                      version: '1.6.9',
+                      version: '1.7.0',
                       title: 'Đã có bản cập nhật mới!',
                       highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
                     });
@@ -43659,7 +44975,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.6.9</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.0</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

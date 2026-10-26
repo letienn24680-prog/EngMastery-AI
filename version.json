@@ -1,12 +1,12 @@
 {
-  "version": "1.6.9",
-  "versionCode": 10609,
+  "version": "1.7.0",
+  "versionCode": 10610,
   "releaseDate": "2026-10-26",
-  "title": "Bản Cập Nhật v1.6.9: Sắp Xếp Kho Từ Vựng Theo Thứ Tự Alphabet (A ➔ Z)",
+  "title": "Bản Cập Nhật v1.7.0: Tự Động Nhận Diện & Học Trọn Bộ Họ Từ Vựng (Word Family)",
   "highlights": [
-    "Tự động sắp xếp toàn bộ hơn 1.060+ từ vựng trong Kho Từ Vựng theo thứ tự bảng chữ cái Alphabet (A ➔ Z) mặc định",
-    "Bổ sung thanh điều hướng nhanh chữ cái (A, B, C... Z) giúp nhảy nhanh đến các từ bắt đầu bằng chữ cái mong muốn",
-    "Tích hợp bộ chọn sắp xếp linh hoạt: Alphabet A-Z, Z-A, Từ đánh dấu sao, Cấp độ CEFR, Mới nạp thẻ",
-    "Tối ưu hóa tìm kiếm kết hợp chữ cái và chủ đề mượt mà, trực quan"
+    "Tự động nhận diện đầy đủ Họ Từ Vựng (Word Family: Động từ - Danh từ - Tính từ - Trạng từ) cho bất kỳ từ nào được tra cứu trong Kho Từ Vựng",
+    "Tự động tìm kiếm, tạo thẻ và lưu trọn bộ các biến thể từ vựng liên quan (ví dụ: tra 'creative' AI tự động nạp 'create', 'creativity', 'creation', 'creatively') vào danh sách Cần Ôn Tập",
+    "Hiển thị chuyên mục Họ Từ Vựng trực quan trong Cửa Sổ Chi Tiết Từ và Mặt Sau Thẻ Flashcard kèm phát âm và tra cứu nhanh 1-chạm",
+    "Tích hợp từ điển chuyên sâu hơn 100+ họ từ vựng trọng tâm hay xuất hiện nhất trong các đề thi THPT Quốc Gia"
   ]
 }
