@@ -1,12 +1,12 @@
 {
-  "version": "1.6.5",
-  "versionCode": 10605,
+  "version": "1.6.6",
+  "versionCode": 10606,
   "releaseDate": "2026-10-26",
-  "title": "Bản Cập Nhật v1.6.5: Tối Ưu Giao Diện Kho Đề Thi Mobile",
+  "title": "Bản Cập Nhật v1.6.6: Chuẩn Hóa Cấu Trúc 6 Phần Đề Thi Lớp 12 (GDPT 2018)",
   "highlights": [
-    "Sửa triệt để lỗi thẻ đề thi bị ép thành cột chữ dọc trên điện thoại",
-    "Tách biệt hàng nút điều khiển Mở Đề / Vào Thi / Xóa giúp chạm bấm dễ dàng",
-    "Khóa chống ngắt dòng toàn bộ huy hiệu 2 Mã Đề và thời gian",
-    "Giao diện chuẩn responsive 100% trên mọi dòng điện thoại di động"
+    "Chuẩn hóa trọn vẹn 100% cấu trúc 6 phần đề thi theo ma trận Bộ GD&ĐT",
+    "Khắc phục triệt để lỗi thiếu bài đọc / ngữ cảnh và lỗi hiển thị undefined ở câu hỏi",
+    "Tự động chuẩn hóa toàn bộ đề thi AI, đề thi thử hàng ngày và kho đề lưu trữ",
+    "Hỗ trợ bộ 2 mã đề song sinh 101/102 đầy đủ bài đọc, bảng đối chiếu và lời giải 4 trụ cột"
   ]
 }

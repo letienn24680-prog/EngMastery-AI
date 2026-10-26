@@ -31,15 +31,12 @@
         "correctAnswer": "B. revolutionizing",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Chọn dạng đúng của từ: 'that are revolutionizing industries' (đang cách mạng hóa các ngành công nghiệp).",
-          "grammarFormula": "Thì Hiện tại tiếp diễn: S + be + V-ing diễn tả hành động đang biến đổi nhanh chóng.",
-          "whyCorrect": "Sau động từ to be 'are' cần V-ing để tạo thành thì hiện tại tiếp diễn với tân ngữ 'industries'.",
-          "whyOthersWrong": [
-            "A là động từ nguyên mẫu",
-            "C là tính từ",
-            "D là danh từ"
-          ]
-        }
+          "translation": "Chọn dạng đúng của từ: 'that are revolutionizing industries' (đang cách mạng hóa các ngành công nghiệp).",
+          "correct": "Sau động từ to be 'are' cần V-ing để tạo thành thì hiện tại tiếp diễn với tân ngữ 'industries'.",
+          "traps": "A là động từ nguyên mẫu; C là tính từ; D là danh từ",
+          "formula": "Thì Hiện tại tiếp diễn: S + be + V-ing diễn tả hành động đang biến đổi nhanh chóng."
+        },
+        "question": "Question 1: Mark the letter A, B, C or D to indicate the correct word to fill in blank (1)."
       },
       {
         "id": 2,
@@ -58,13 +55,12 @@
         "correctAnswer": "A. renowned international scholars",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Chọn trật tự tính từ/danh từ: 'những học giả quốc tế nổi tiếng'.",
-          "grammarFormula": "Trật tự từ: Opinion (renowned) + Origin/Classification (international) + Noun (scholars).",
-          "whyCorrect": "Tính từ chỉ quan điểm/đánh giá 'renowned' đứng trước tính từ phân loại/nguồn gốc 'international'.",
-          "whyOthersWrong": [
-            "B, C, D sai quy tắc sắp xếp cụm danh từ trong tiếng Anh."
-          ]
-        }
+          "translation": "Chọn trật tự tính từ/danh từ: 'những học giả quốc tế nổi tiếng'.",
+          "correct": "Tính từ chỉ quan điểm/đánh giá 'renowned' đứng trước tính từ phân loại/nguồn gốc 'international'.",
+          "traps": "B, C, D sai quy tắc sắp xếp cụm danh từ trong tiếng Anh.",
+          "formula": "Trật tự từ: Opinion (renowned) + Origin/Classification (international) + Noun (scholars)."
+        },
+        "question": "Question 2: Mark the letter A, B, C or D to indicate the correct phrase to fill in blank (2)."
       },
       {
         "id": 3,
@@ -83,15 +79,12 @@
         "correctAnswer": "B. conducted",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Rút gọn mệnh đề quan hệ dạng bị động: 'practical skills in machine learning, which are conducted by top engineers'.",
-          "grammarFormula": "Rút gọn mệnh đề quan hệ thể bị động dùng Quá khứ phân từ (V-ed/V3).",
-          "whyCorrect": "Kỹ năng được giảng dạy/hướng dẫn bởi các kỹ sư hàng đầu nên dùng phân từ quá khứ 'conducted'.",
-          "whyOthersWrong": [
-            "A là chủ động (V-ing)",
-            "C chỉ mục đích",
-            "D thừa động từ to be khi chưa có đại từ quan hệ"
-          ]
-        }
+          "translation": "Rút gọn mệnh đề quan hệ dạng bị động: 'practical skills in machine learning, which are conducted by top engineers'.",
+          "correct": "Kỹ năng được giảng dạy/hướng dẫn bởi các kỹ sư hàng đầu nên dùng phân từ quá khứ 'conducted'.",
+          "traps": "A là chủ động (V-ing); C chỉ mục đích; D thừa động từ to be khi chưa có đại từ quan hệ",
+          "formula": "Rút gọn mệnh đề quan hệ thể bị động dùng Quá khứ phân từ (V-ed/V3)."
+        },
+        "question": "Question 3: Mark the letter A, B, C or D to indicate the correct option for blank (3)."
       },
       {
         "id": 4,
@@ -110,13 +103,12 @@
         "correctAnswer": "A. at",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cụm cố định: 'at the forefront of' (ở vị trí tiên phong, dẫn đầu).",
-          "grammarFormula": "Idiom/Prepositional phrase: at the forefront of sth = dẫn đầu trong lĩnh vực nào.",
-          "whyCorrect": "Đi với cụm 'the forefront of' bắt buộc dùng giới từ 'at'.",
-          "whyOthersWrong": [
-            "B, C, D không kết hợp với 'the forefront of'."
-          ]
-        }
+          "translation": "Cụm cố định: 'at the forefront of' (ở vị trí tiên phong, dẫn đầu).",
+          "correct": "Đi với cụm 'the forefront of' bắt buộc dùng giới từ 'at'.",
+          "traps": "B, C, D không kết hợp với 'the forefront of'.",
+          "formula": "Idiom/Prepositional phrase: at the forefront of sth = dẫn đầu trong lĩnh vực nào."
+        },
+        "question": "Question 4: Mark the letter A, B, C or D to indicate the correct preposition for blank (4)."
       },
       {
         "id": 5,
@@ -135,13 +127,12 @@
         "correctAnswer": "B. make",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Cụm từ cố định: 'make an informed decision' (đưa ra quyết định sáng suốt/có căn cứ).",
-          "grammarFormula": "Collocation: make a decision (đưa ra quyết định).",
-          "whyCorrect": "'decision' luôn đi với động từ 'make'.",
-          "whyOthersWrong": [
-            "take/give/do không tạo thành collocation chuẩn với decision trong ngữ cảnh này."
-          ]
-        }
+          "translation": "Cụm từ cố định: 'make an informed decision' (đưa ra quyết định sáng suốt/có căn cứ).",
+          "correct": "'decision' luôn đi với động từ 'make'.",
+          "traps": "take/give/do không tạo thành collocation chuẩn với decision trong ngữ cảnh này.",
+          "formula": "Collocation: make a decision (đưa ra quyết định)."
+        },
+        "question": "Question 5: Mark the letter A, B, C or D to indicate the correct verb for blank (5)."
       },
       {
         "id": 6,
@@ -160,13 +151,12 @@
         "correctAnswer": "B. to gain",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Cấu trúc danh từ chỉ cơ hội: 'opportunity to do sth' (cơ hội để làm gì).",
-          "grammarFormula": "Noun + to-infinitive: opportunity / chance + To-V.",
-          "whyCorrect": "Sau 'opportunity' dùng 'to gain' để chỉ mục đích hoặc nội dung của cơ hội.",
-          "whyOthersWrong": [
-            "A, C, D không đúng cấu trúc ngữ pháp chuẩn sau danh từ opportunity."
-          ]
-        }
+          "translation": "Cấu trúc danh từ chỉ cơ hội: 'opportunity to do sth' (cơ hội để làm gì).",
+          "correct": "Sau 'opportunity' dùng 'to gain' để chỉ mục đích hoặc nội dung của cơ hội.",
+          "traps": "A, C, D không đúng cấu trúc ngữ pháp chuẩn sau danh từ opportunity.",
+          "formula": "Noun + to-infinitive: opportunity / chance + To-V."
+        },
+        "question": "Question 6: Mark the letter A, B, C or D to indicate the correct form for blank (6)."
       },
       {
         "id": 7,
@@ -185,15 +175,12 @@
         "correctAnswer": "A. other",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Lượng từ đi với danh từ đếm được số nhiều 'areas': 'other areas' (những lĩnh vực khác).",
-          "grammarFormula": "Other + N(plural) = những cái/người khác.",
-          "whyCorrect": "'areas' là danh từ đếm được số nhiều nên chọn 'other'.",
-          "whyOthersWrong": [
-            "B (another) đi với danh từ số ít",
-            "C (every) đi với danh từ số ít",
-            "D (much) đi với danh từ không đếm được"
-          ]
-        }
+          "translation": "Lượng từ đi với danh từ đếm được số nhiều 'areas': 'other areas' (những lĩnh vực khác).",
+          "correct": "'areas' là danh từ đếm được số nhiều nên chọn 'other'.",
+          "traps": "B (another) đi với danh từ số ít; C (every) đi với danh từ số ít; D (much) đi với danh từ không đếm được",
+          "formula": "Other + N(plural) = những cái/người khác."
+        },
+        "question": "Question 7: Mark the letter A, B, C or D to indicate the correct quantifier for blank (7)."
       },
       {
         "id": 8,
@@ -212,15 +199,12 @@
         "correctAnswer": "A. take up",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cụm động từ: 'take up a course' (bắt đầu tham gia một khóa học / sở thích mới).",
-          "grammarFormula": "Take up sth = bắt đầu một hoạt động/học một môn mới.",
-          "whyCorrect": "'take up new online courses' mang nghĩa chủ động theo học các khóa học mới.",
-          "whyOthersWrong": [
-            "B. look up: tra cứu",
-            "C. give up: từ bỏ",
-            "D. put out: dập tắt"
-          ]
-        }
+          "translation": "Cụm động từ: 'take up a course' (bắt đầu tham gia một khóa học / sở thích mới).",
+          "correct": "'take up new online courses' mang nghĩa chủ động theo học các khóa học mới.",
+          "traps": "B. look up: tra cứu; C. give up: từ bỏ; D. put out: dập tắt",
+          "formula": "Take up sth = bắt đầu một hoạt động/học một môn mới."
+        },
+        "question": "Question 8: Mark the letter A, B, C or D to indicate the correct phrasal verb for blank (8)."
       },
       {
         "id": 9,
@@ -239,15 +223,12 @@
         "correctAnswer": "B. agility",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Ngữ cảnh: 'cognitive agility' (sự linh hoạt/nhạy bén trong tư duy nhận thức).",
-          "grammarFormula": "Collocation học thuật: cognitive agility = khả năng thích ứng nhận thức linh hoạt.",
-          "whyCorrect": "Người lao động có tư duy nhạy bén (agility) sẽ dễ dàng chuyển đổi sang các vai trò mới.",
-          "whyOthersWrong": [
-            "A. hesitation: do dự",
-            "C. ignorance: sự thiếu hiểu biết",
-            "D. reluctance: sự miễn cưỡng"
-          ]
-        }
+          "translation": "Ngữ cảnh: 'cognitive agility' (sự linh hoạt/nhạy bén trong tư duy nhận thức).",
+          "correct": "Người lao động có tư duy nhạy bén (agility) sẽ dễ dàng chuyển đổi sang các vai trò mới.",
+          "traps": "A. hesitation: do dự; C. ignorance: sự thiếu hiểu biết; D. reluctance: sự miễn cưỡng",
+          "formula": "Collocation học thuật: cognitive agility = khả năng thích ứng nhận thức linh hoạt."
+        },
+        "question": "Question 9: Mark the letter A, B, C or D to indicate the correct word for blank (9)."
       },
       {
         "id": 10,
@@ -266,14 +247,12 @@
         "correctAnswer": "A. In spite of",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mệnh đề chỉ sự nhượng bộ đi với cụm danh từ: 'In spite of the rapid pace...' (Mặc cho tốc độ thay đổi nhanh chóng...).",
-          "grammarFormula": "In spite of + Noun Phrase (thay vì Although + Clause).",
-          "whyCorrect": "Phía sau là cụm danh từ 'the rapid pace of technological disruption' và mang nghĩa nhượng bộ, người học chủ động vẫn tìm thấy cơ hội.",
-          "whyOthersWrong": [
-            "B và C phải đi với một mệnh đề có S + V",
-            "D (Instead of) sai nghĩa (thay vì)"
-          ]
-        }
+          "translation": "Mệnh đề chỉ sự nhượng bộ đi với cụm danh từ: 'In spite of the rapid pace...' (Mặc cho tốc độ thay đổi nhanh chóng...).",
+          "correct": "Phía sau là cụm danh từ 'the rapid pace of technological disruption' và mang nghĩa nhượng bộ, người học chủ động vẫn tìm thấy cơ hội.",
+          "traps": "B và C phải đi với một mệnh đề có S + V; D (Instead of) sai nghĩa (thay vì)",
+          "formula": "In spite of + Noun Phrase (thay vì Although + Clause)."
+        },
+        "question": "Question 10: Mark the letter A, B, C or D to indicate the correct connector for blank (10)."
       },
       {
         "id": 11,
@@ -292,15 +271,12 @@
         "correctAnswer": "B. connect",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Cụm từ: 'connect with mentors' (kết nối với những người thầy/cố vấn).",
-          "grammarFormula": "Connect with sb = thiết lập mối quan hệ liên lạc, kết nối.",
-          "whyCorrect": "Trong xây dựng mạng lưới nghề nghiệp, 'connect with' là cách diễn đạt tự nhiên và chính xác nhất.",
-          "whyOthersWrong": [
-            "A. interact with thường dùng cho tương tác tức thời",
-            "C. collide with: va chạm",
-            "D. conflict with: xung đột"
-          ]
-        }
+          "translation": "Cụm từ: 'connect with mentors' (kết nối với những người thầy/cố vấn).",
+          "correct": "Trong xây dựng mạng lưới nghề nghiệp, 'connect with' là cách diễn đạt tự nhiên và chính xác nhất.",
+          "traps": "A. interact with thường dùng cho tương tác tức thời; C. collide with: va chạm; D. conflict with: xung đột",
+          "formula": "Connect with sb = thiết lập mối quan hệ liên lạc, kết nối."
+        },
+        "question": "Question 11: Mark the letter A, B, C or D to indicate the correct phrase for blank (11)."
       },
       {
         "id": 12,
@@ -319,15 +295,12 @@
         "correctAnswer": "A. innovations",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ vựng: 'digital innovations' (các sáng kiến / đột phá kỹ thuật số).",
-          "grammarFormula": "Collocation: digital innovations = các đổi mới sáng tạo công nghệ.",
-          "whyCorrect": "Phù hợp với chủ đề công nghệ và trí tuệ nhân tạo.",
-          "whyOthersWrong": [
-            "B. appliances: đồ gia dụng",
-            "C. ingredients: nguyên liệu nấu ăn",
-            "D. instruments: nhạc cụ/dụng cụ đo"
-          ]
-        }
+          "translation": "Từ vựng: 'digital innovations' (các sáng kiến / đột phá kỹ thuật số).",
+          "correct": "Phù hợp với chủ đề công nghệ và trí tuệ nhân tạo.",
+          "traps": "B. appliances: đồ gia dụng; C. ingredients: nguyên liệu nấu ăn; D. instruments: nhạc cụ/dụng cụ đo",
+          "formula": "Collocation: digital innovations = các đổi mới sáng tạo công nghệ."
+        },
+        "question": "Question 12: Mark the letter A, B, C or D to indicate the correct noun for blank (12)."
       },
       {
         "id": 13,
@@ -348,13 +321,12 @@
         "correctAnswer": "A. b - a - c",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Sắp xếp logic: (b) Nêu dự định học khoa học dữ liệu -> (a) Khen ngợi và hỏi đã chọn khóa nào chưa -> (c) Trả lời đã đăng ký khóa Python.",
-          "grammarFormula": "Nguyên lý hội thoại: Statement of intention -> Follow-up question -> Direct answer.",
-          "whyCorrect": "Thứ tự b - a - c tạo mạch hội thoại mạch lạc và chuẩn ngữ dụng học.",
-          "whyOthersWrong": [
-            "B, C, D đều đảo lộn câu trả lời trước câu hỏi hoặc đặt câu hỏi trước khi người nói nêu chủ đề."
-          ]
-        }
+          "translation": "Sắp xếp logic: (b) Nêu dự định học khoa học dữ liệu -> (a) Khen ngợi và hỏi đã chọn khóa nào chưa -> (c) Trả lời đã đăng ký khóa Python.",
+          "correct": "Thứ tự b - a - c tạo mạch hội thoại mạch lạc và chuẩn ngữ dụng học.",
+          "traps": "B, C, D đều đảo lộn câu trả lời trước câu hỏi hoặc đặt câu hỏi trước khi người nói nêu chủ đề.",
+          "formula": "Nguyên lý hội thoại: Statement of intention -> Follow-up question -> Direct answer."
+        },
+        "question": "Question 13: Mark the letter A, B, C or D to indicate the correct arrangement of utterances to make a meaningful exchange:\n\na. That's a great initiative! Have you decided which online course to enroll in?\nb. I'm planning to enhance my data science skills this summer to prepare for future jobs.\nc. Yes, I've just signed up for an advanced Python course recommended by my tutor."
       },
       {
         "id": 14,
@@ -377,13 +349,12 @@
         "correctAnswer": "A. b - d - c - a - e",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mạch hội thoại: (b) Đặt câu hỏi AI có thay thế con người không -> (d) Trả lời không hoàn toàn vì thiếu thấu cảm -> (c) Đồng ý vì chiều sâu cảm xúc không thể lập trình -> (a) Khẳng định thêm tác vụ lặp đi lặp lại đã bị thay -> (e) Kết luận cần rèn kỹ năng giao tiếp.",
-          "grammarFormula": "Cấu trúc trao đổi quan điểm phản biện (Discussion & Concurrence).",
-          "whyCorrect": "Thứ tự b - d - c - a - e phát triển ý tăng dần và kết luận thuyết phục.",
-          "whyOthersWrong": [
-            "B, C, D làm đứt gãy tính liên kết nhân quả giữa câu hỏi và phản hồi trực tiếp."
-          ]
-        }
+          "translation": "Mạch hội thoại: (b) Đặt câu hỏi AI có thay thế con người không -> (d) Trả lời không hoàn toàn vì thiếu thấu cảm -> (c) Đồng ý vì chiều sâu cảm xúc không thể lập trình -> (a) Khẳng định thêm tác vụ lặp đi lặp lại đã bị thay -> (e) Kết luận cần rèn kỹ năng giao tiếp.",
+          "correct": "Thứ tự b - d - c - a - e phát triển ý tăng dần và kết luận thuyết phục.",
+          "traps": "B, C, D làm đứt gãy tính liên kết nhân quả giữa câu hỏi và phản hồi trực tiếp.",
+          "formula": "Cấu trúc trao đổi quan điểm phản biện (Discussion & Concurrence)."
+        },
+        "question": "Question 14: Mark the letter A, B, C or D to indicate the correct arrangement of utterances to make a meaningful conversation:\n\na. Definitely. In fact, many repetitive tasks are already handled by software.\nb. Do you think AI will replace all human workers in the creative sector?\nc. I agree. Emotional depth and authentic human experiences cannot be coded.\nd. Not entirely, because machines still lack genuine empathy and cultural nuances.\ne. Exactly, which is why future professionals must hone interpersonal skills."
       },
       {
         "id": 15,
@@ -406,13 +377,12 @@
         "correctAnswer": "A. b - d - a - e - c",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Trật tự thư xin việc: (b) Lời chào & mục đích viết thư -> (d) Lý do quan tâm đến dự án -> (a) Nêu năng lực chuyên môn bổ sung -> (e) Bày tỏ mong muốn phỏng vấn -> (c) Lời cảm ơn kết thư.",
-          "grammarFormula": "Chuẩn mực viết thư học thuật (Formal Cover Letter Structure).",
-          "whyCorrect": "b - d - a - e - c tuân thủ đúng chuẩn cấu trúc mở - thân - kết của một email trang trọng.",
-          "whyOthersWrong": [
-            "B, C, D sắp xếp sai vị trí mở đầu hoặc lời kết cảm ơn."
-          ]
-        }
+          "translation": "Trật tự thư xin việc: (b) Lời chào & mục đích viết thư -> (d) Lý do quan tâm đến dự án -> (a) Nêu năng lực chuyên môn bổ sung -> (e) Bày tỏ mong muốn phỏng vấn -> (c) Lời cảm ơn kết thư.",
+          "correct": "b - d - a - e - c tuân thủ đúng chuẩn cấu trúc mở - thân - kết của một email trang trọng.",
+          "traps": "B, C, D sắp xếp sai vị trí mở đầu hoặc lời kết cảm ơn.",
+          "formula": "Chuẩn mực viết thư học thuật (Formal Cover Letter Structure)."
+        },
+        "question": "Question 15: Mark the letter A, B, C or D to indicate the correct order of sentences to form a coherent formal email:\n\na. Furthermore, my academic background in computer science has equipped me with solid analytical skills.\nb. Dear Dr. Harrison, I am writing to express my eager interest in the AI Research Assistant position.\nc. Thank you very much for your time and consideration of my application.\nd. Having followed your lab's publications on ethical algorithms, I am eager to contribute to your ongoing project.\ne. I look forward to the possibility of discussing my qualifications in an interview."
       },
       {
         "id": 16,
@@ -435,13 +405,12 @@
         "correctAnswer": "A. b - d - a - c - e",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mạch nghị luận: (b) Nêu hiện tượng tự động hóa -> (d) Hệ quả trực tiếp là kỹ năng cũ lỗi thời -> (a) Người lao động buộc phải học tập liên tục -> (c) Chính phủ cần hỗ trợ đào tạo bổ sung -> (e) Cảnh báo nếu không hành động khoảng cách giàu nghèo sẽ gia tăng.",
-          "grammarFormula": "Problem -> Immediate effect -> Individual response -> Policy solution -> Warning/Conclusion.",
-          "whyCorrect": "b - d - a - c - e tạo thành đoạn văn lập luận chặt chẽ và logic.",
-          "whyOthersWrong": [
-            "B, C, D đặt hệ quả và giải pháp không tương ứng với các từ nối Consequently / In addition."
-          ]
-        }
+          "translation": "Mạch nghị luận: (b) Nêu hiện tượng tự động hóa -> (d) Hệ quả trực tiếp là kỹ năng cũ lỗi thời -> (a) Người lao động buộc phải học tập liên tục -> (c) Chính phủ cần hỗ trợ đào tạo bổ sung -> (e) Cảnh báo nếu không hành động khoảng cách giàu nghèo sẽ gia tăng.",
+          "correct": "b - d - a - c - e tạo thành đoạn văn lập luận chặt chẽ và logic.",
+          "traps": "B, C, D đặt hệ quả và giải pháp không tương ứng với các từ nối Consequently / In addition.",
+          "formula": "Problem -> Immediate effect -> Individual response -> Policy solution -> Warning/Conclusion."
+        },
+        "question": "Question 16: Mark the letter A, B, C or D to indicate the best arrangement of sentences to create a cohesive paragraph:\n\na. Consequently, workers are compelled to embrace continuous education throughout their careers.\nb. Technological automation is transforming modern workplace environments at a staggering rate.\nc. In addition, governments should establish subsidized training programs to assist displaced laborers.\nd. This rapid disruption often results in the immediate obsolescence of traditional job functions.\ne. Without such proactive interventions, the socioeconomic gap between skilled and unskilled workers will widen."
       },
       {
         "id": 17,
@@ -464,13 +433,12 @@
         "correctAnswer": "A. c - d - a - b - e",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Trật tự học thuật: (c) Câu chủ đề về đạo đức AI -> (d) Luận điểm 1: Dữ liệu huấn luyện thiên vị -> (a) Luận điểm 2: Thiếu tính minh bạch -> (b) Yêu cầu giải pháp giám sát -> (e) Kết luận thành lập ủy ban liên ngành.",
-          "grammarFormula": "Topic sentence -> Primary argument -> Secondary argument -> General solution -> Concrete recommendation.",
-          "whyCorrect": "c - d - a - b - e đảm bảo tính mạch lạc tuyệt đối với các liên từ Primarily -> Secondly -> Therefore.",
-          "whyOthersWrong": [
-            "B, C, D sai thứ tự liệt kê giữa Primarily (trước hết) và Secondly (thứ hai)."
-          ]
-        }
+          "translation": "Trật tự học thuật: (c) Câu chủ đề về đạo đức AI -> (d) Luận điểm 1: Dữ liệu huấn luyện thiên vị -> (a) Luận điểm 2: Thiếu tính minh bạch -> (b) Yêu cầu giải pháp giám sát -> (e) Kết luận thành lập ủy ban liên ngành.",
+          "correct": "c - d - a - b - e đảm bảo tính mạch lạc tuyệt đối với các liên từ Primarily -> Secondly -> Therefore.",
+          "traps": "B, C, D sai thứ tự liệt kê giữa Primarily (trước hết) và Secondly (thứ hai).",
+          "formula": "Topic sentence -> Primary argument -> Secondary argument -> General solution -> Concrete recommendation."
+        },
+        "question": "Question 17: Mark the letter A, B, C or D to indicate the best arrangement of sentences to build an academic text:\n\na. Secondly, algorithmic decisions often lack transparency, making accountability elusive.\nb. Addressing these intertwined challenges requires robust regulatory oversight and ethical guidelines.\nc. The integration of artificial intelligence into public services raises urgent ethical questions.\nd. Primarily, biased training data can reinforce historical inequalities in judicial decisions.\ne. Therefore, interdisciplinary committees must oversee algorithmic deployments in sensitive sectors."
       },
       {
         "id": 18,
@@ -489,15 +457,12 @@
         "correctAnswer": "A. enabling professionals to achieve unprecedented levels of productivity",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Rút gọn mệnh đề kết quả: '..., enabling professionals to achieve...' (cho phép các chuyên gia đạt được năng suất chưa từng thấy).",
-          "grammarFormula": "V-ing chỉ kết quả kéo theo của mệnh đề đứng trước; enable sb to do sth.",
-          "whyCorrect": "Mệnh đề phân từ 'enabling sb to do sth' diễn tả kết quả trực tiếp của việc công cụ AI khuếch đại năng lực con người.",
-          "whyOthersWrong": [
-            "B sai cấu trúc enables sb doing",
-            "C dùng having enabled không hợp ngữ cảnh hiện tại",
-            "D sai cấu trúc enabled... to achieving"
-          ]
-        }
+          "translation": "Rút gọn mệnh đề kết quả: '..., enabling professionals to achieve...' (cho phép các chuyên gia đạt được năng suất chưa từng thấy).",
+          "correct": "Mệnh đề phân từ 'enabling sb to do sth' diễn tả kết quả trực tiếp của việc công cụ AI khuếch đại năng lực con người.",
+          "traps": "B sai cấu trúc enables sb doing; C dùng having enabled không hợp ngữ cảnh hiện tại; D sai cấu trúc enabled... to achieving",
+          "formula": "V-ing chỉ kết quả kéo theo của mệnh đề đứng trước; enable sb to do sth."
+        },
+        "question": "Question 18: Mark the letter A, B, C or D to indicate the option that best fits blank (18)."
       },
       {
         "id": 19,
@@ -516,14 +481,12 @@
         "correctAnswer": "A. As an inevitable consequence of this time-saving advantage",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mệnh đề chuyển tiếp chỉ hệ quả logic: 'Như một hệ quả tất yếu của lợi thế tiết kiệm thời gian này, nhân viên giờ đây có thể dành nhiều thời gian hơn...'.",
-          "grammarFormula": "Transition phrase expressing logical result.",
-          "whyCorrect": "Liên kết trực tiếp với câu trước đó nói về việc tiết kiệm một nửa thời gian làm việc.",
-          "whyOthersWrong": [
-            "B, C mang nghĩa tương phản không phù hợp",
-            "D chỉ mục đích không tạo mạch văn tự nhiên"
-          ]
-        }
+          "translation": "Mệnh đề chuyển tiếp chỉ hệ quả logic: 'Như một hệ quả tất yếu của lợi thế tiết kiệm thời gian này, nhân viên giờ đây có thể dành nhiều thời gian hơn...'.",
+          "correct": "Liên kết trực tiếp với câu trước đó nói về việc tiết kiệm một nửa thời gian làm việc.",
+          "traps": "B, C mang nghĩa tương phản không phù hợp; D chỉ mục đích không tạo mạch văn tự nhiên",
+          "formula": "Transition phrase expressing logical result."
+        },
+        "question": "Question 19: Mark the letter A, B, C or D to indicate the option that best fits blank (19)."
       },
       {
         "id": 20,
@@ -542,15 +505,12 @@
         "correctAnswer": "A. which can result in catastrophic errors if accepted uncritically",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mệnh đề quan hệ bổ nghĩa cho 'subtle hallucinations': 'những lỗi ảo giác có thể dẫn đến sai sót thảm khốc nếu tiếp nhận thiếu suy xét phản biện'.",
-          "grammarFormula": "Non-defining relative clause: which + V + in...",
-          "whyCorrect": "which thay thế cho cả cụm hallucinations và giữ vai trò chủ ngữ của động từ can result in.",
-          "whyOthersWrong": [
-            "B thiếu động từ chính (chỉ có V-ing)",
-            "C dùng where không chỉ nơi chốn",
-            "D dùng whose sai nghĩa"
-          ]
-        }
+          "translation": "Mệnh đề quan hệ bổ nghĩa cho 'subtle hallucinations': 'những lỗi ảo giác có thể dẫn đến sai sót thảm khốc nếu tiếp nhận thiếu suy xét phản biện'.",
+          "correct": "which thay thế cho cả cụm hallucinations và giữ vai trò chủ ngữ của động từ can result in.",
+          "traps": "B thiếu động từ chính (chỉ có V-ing); C dùng where không chỉ nơi chốn; D dùng whose sai nghĩa",
+          "formula": "Non-defining relative clause: which + V + in..."
+        },
+        "question": "Question 20: Mark the letter A, B, C or D to indicate the option that best fits blank (20)."
       },
       {
         "id": 21,
@@ -569,15 +529,12 @@
         "correctAnswer": "A. By mastering both algorithmic capabilities and critical reasoning",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cụm giới từ chỉ phương thức: 'Bằng cách làm chủ cả năng lực thuật toán lẫn tư duy phản biện, những người trẻ tìm việc sẽ được trao quyền...'.",
-          "grammarFormula": "By + V-ing = bằng cách thức nào đó.",
-          "whyCorrect": "Chỉ phương thức hành động để đạt được kết quả ở mệnh đề chính.",
-          "whyOthersWrong": [
-            "B (neither... nor) phủ định sai nghĩa",
-            "C mang nghĩa tương phản",
-            "D sai cấu trúc ngữ pháp"
-          ]
-        }
+          "translation": "Cụm giới từ chỉ phương thức: 'Bằng cách làm chủ cả năng lực thuật toán lẫn tư duy phản biện, những người trẻ tìm việc sẽ được trao quyền...'.",
+          "correct": "Chỉ phương thức hành động để đạt được kết quả ở mệnh đề chính.",
+          "traps": "B (neither... nor) phủ định sai nghĩa; C mang nghĩa tương phản; D sai cấu trúc ngữ pháp",
+          "formula": "By + V-ing = bằng cách thức nào đó."
+        },
+        "question": "Question 21: Mark the letter A, B, C or D to indicate the option that best fits blank (21)."
       },
       {
         "id": 22,
@@ -596,13 +553,12 @@
         "correctAnswer": "A. but to humans who skillfully collaborate with intelligent systems",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cấu trúc song hành tương phản: 'not to... but to...' (tương lai không thuộc về riêng AI, mà thuộc về những con người biết khéo léo cộng tác với hệ thống thông minh).",
-          "grammarFormula": "Parallel structure: not to X, but to Y.",
-          "whyCorrect": "Cặp cấu trúc song hành kinh điển 'not to... but to...' truyền tải thông điệp nhân văn đắt giá của bài viết.",
-          "whyOthersWrong": [
-            "B, C, D bóp méo thông điệp của tác giả và vi phạm cấu trúc song hành."
-          ]
-        }
+          "translation": "Cấu trúc song hành tương phản: 'not to... but to...' (tương lai không thuộc về riêng AI, mà thuộc về những con người biết khéo léo cộng tác với hệ thống thông minh).",
+          "correct": "Cặp cấu trúc song hành kinh điển 'not to... but to...' truyền tải thông điệp nhân văn đắt giá của bài viết.",
+          "traps": "B, C, D bóp méo thông điệp của tác giả và vi phạm cấu trúc song hành.",
+          "formula": "Parallel structure: not to X, but to Y."
+        },
+        "question": "Question 22: Mark the letter A, B, C or D to indicate the option that best fits blank (22)."
       },
       {
         "id": 23,
@@ -621,12 +577,12 @@
         "correctAnswer": "D. Autonomous vehicle manufacturing",
         "answer": 3,
         "explanation": {
-          "viTranslation": "Thông tin không được đề cập trong Đoạn 1: Sản xuất xe tự hành (D) không xuất hiện trong danh sách các ứng dụng được liệt kê.",
-          "whyCorrect": "Đoạn 1 chỉ đề cập: automated customer support (A), algorithmic financial forecasting (B), predictive healthcare analytics (C).",
-          "whyOthersWrong": [
-            "A, B, C đều có trong bài đọc."
-          ]
-        }
+          "translation": "Thông tin không được đề cập trong Đoạn 1: Sản xuất xe tự hành (D) không xuất hiện trong danh sách các ứng dụng được liệt kê.",
+          "correct": "Đoạn 1 chỉ đề cập: automated customer support (A), algorithmic financial forecasting (B), predictive healthcare analytics (C).",
+          "traps": "A, B, C đều có trong bài đọc.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 23: Which of the following is NOT mentioned in paragraph 1 as an application of artificial intelligence?"
       },
       {
         "id": 24,
@@ -645,14 +601,12 @@
         "correctAnswer": "B. contemporary",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Từ 'obsolete' (lỗi thời, không còn được dùng) TRÁI NGHĨA với 'contemporary' (hiện đại, đương thời).",
-          "whyCorrect": "Obsolete = no longer produced or used, out of date <-> Contemporary = modern, up-to-date.",
-          "whyOthersWrong": [
-            "A. outdated (đồng nghĩa)",
-            "C. redundant (dư thừa)",
-            "D. ineffective (không hiệu quả)"
-          ]
-        }
+          "translation": "Từ 'obsolete' (lỗi thời, không còn được dùng) TRÁI NGHĨA với 'contemporary' (hiện đại, đương thời).",
+          "correct": "Obsolete = no longer produced or used, out of date <-> Contemporary = modern, up-to-date.",
+          "traps": "A. outdated (đồng nghĩa); C. redundant (dư thừa); D. ineffective (không hiệu quả)",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 24: The word 'obsolete' in paragraph 2 is OPPOSITE in meaning to ______."
       },
       {
         "id": 25,
@@ -671,12 +625,12 @@
         "correctAnswer": "B. Critics",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Từ quy chiếu: 'Critics argue that generative tools threaten... They believe that...' -> 'They' quy chiếu về 'Critics' (các nhà phê bình/người chỉ trích).",
-          "whyCorrect": "Đại từ nhân xưng 'They' thay thế cho danh từ số nhiều đứng trước là 'Critics'.",
-          "whyOthersWrong": [
-            "A, C, D không phải chủ thể đưa ra nhận định phê bình trong câu."
-          ]
-        }
+          "translation": "Từ quy chiếu: 'Critics argue that generative tools threaten... They believe that...' -> 'They' quy chiếu về 'Critics' (các nhà phê bình/người chỉ trích).",
+          "correct": "Đại từ nhân xưng 'They' thay thế cho danh từ số nhiều đứng trước là 'Critics'.",
+          "traps": "A, C, D không phải chủ thể đưa ra nhận định phê bình trong câu.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 25: The word 'They' in paragraph 2 refers to ______."
       },
       {
         "id": 26,
@@ -695,14 +649,12 @@
         "correctAnswer": "A. flourishing",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ 'burgeoning' (đang phát triển bùng nổ, gia tăng mạnh mẽ) ĐỒNG NGHĨA với 'flourishing' (nở rộ, phát triển thịnh vượng).",
-          "whyCorrect": "Burgeoning = growing or developing rapidly = flourishing.",
-          "whyOthersWrong": [
-            "B. diminishing: giảm dần",
-            "C. stagnating: đình trệ",
-            "D. fluctuating: biến động lên xuống"
-          ]
-        }
+          "translation": "Từ 'burgeoning' (đang phát triển bùng nổ, gia tăng mạnh mẽ) ĐỒNG NGHĨA với 'flourishing' (nở rộ, phát triển thịnh vượng).",
+          "correct": "Burgeoning = growing or developing rapidly = flourishing.",
+          "traps": "B. diminishing: giảm dần; C. stagnating: đình trệ; D. fluctuating: biến động lên xuống",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 26: The word 'burgeoning' in paragraph 3 is CLOSEST in meaning to ______."
       },
       {
         "id": 27,
@@ -721,14 +673,12 @@
         "correctAnswer": "A. Instead of depriving humans of control, AI is reshaping the core duties of existing careers.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Viết lại câu: Thay vì tước bỏ vai trò của con người, AI đang tái định hình bản chất cốt lõi của công việc.",
-          "whyCorrect": "Câu A diễn đạt chính xác nghĩa của câu gốc: Instead of depriving humans of control (= Rather than eliminating human agency), reshaping the core duties (= transforming the fundamental nature of job responsibilities).",
-          "whyOthersWrong": [
-            "B sai nghĩa (will definitely remove)",
-            "C sai nghĩa (remain unchanged)",
-            "D đảo lộn quan hệ nhân quả"
-          ]
-        }
+          "translation": "Viết lại câu: Thay vì tước bỏ vai trò của con người, AI đang tái định hình bản chất cốt lõi của công việc.",
+          "correct": "Câu A diễn đạt chính xác nghĩa của câu gốc: Instead of depriving humans of control (= Rather than eliminating human agency), reshaping the core duties (= transforming the fundamental nature of job responsibilities).",
+          "traps": "B sai nghĩa (will definitely remove); C sai nghĩa (remain unchanged); D đảo lộn quan hệ nhân quả",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 27: Which of the following best paraphrases the underlined sentence in paragraph 3: 'Rather than eliminating human agency, artificial intelligence is transforming the fundamental nature of job responsibilities.'?"
       },
       {
         "id": 28,
@@ -747,12 +697,12 @@
         "correctAnswer": "B. It initially triggered public anxiety but ultimately spawned new economic fields.",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Thông tin đúng: Đoạn 3 nêu rõ cơ giới hóa nông nghiệp ban đầu gây ra lo lắng tương tự nhưng cuối cùng thúc đẩy các ngành kinh tế hoàn toàn mới.",
-          "whyCorrect": "Khớp với câu: 'initially spurred comparable anxieties, yet both transitions ultimately fostered entirely new economic sectors.'",
-          "whyOthersWrong": [
-            "A, C, D mâu thuẫn trực tiếp với dẫn chứng trong bài."
-          ]
-        }
+          "translation": "Thông tin đúng: Đoạn 3 nêu rõ cơ giới hóa nông nghiệp ban đầu gây ra lo lắng tương tự nhưng cuối cùng thúc đẩy các ngành kinh tế hoàn toàn mới.",
+          "correct": "Khớp với câu: 'initially spurred comparable anxieties, yet both transitions ultimately fostered entirely new economic sectors.'",
+          "traps": "A, C, D mâu thuẫn trực tiếp với dẫn chứng trong bài.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 28: According to paragraph 3, what happened during the historical mechanization of agriculture?"
       },
       {
         "id": 29,
@@ -771,12 +721,12 @@
         "correctAnswer": "A. Paragraph 1",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tìm đoạn: Đóng góp tài chính của AI (hơn 15 nghìn tỷ USD) được đề cập ở Đoạn 1.",
-          "whyCorrect": "Đoạn 1 viết: 'contribute over fifteen trillion dollars to the global economy.'",
-          "whyOthersWrong": [
-            "Các đoạn 2, 3, 4 không nói về con số đóng góp tài chính tổng thể."
-          ]
-        }
+          "translation": "Tìm đoạn: Đóng góp tài chính của AI (hơn 15 nghìn tỷ USD) được đề cập ở Đoạn 1.",
+          "correct": "Đoạn 1 viết: 'contribute over fifteen trillion dollars to the global economy.'",
+          "traps": "Các đoạn 2, 3, 4 không nói về con số đóng góp tài chính tổng thể.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 29: In which paragraph does the writer discuss the financial contribution of AI to the worldwide economy?"
       },
       {
         "id": 30,
@@ -795,12 +745,12 @@
         "correctAnswer": "D. Paragraph 4",
         "answer": 3,
         "explanation": {
-          "viTranslation": "Tìm đoạn: Năng lực khác biệt của con người (đồng cảm, tư duy đạo đức, phân định văn hóa) được đề cập ở Đoạn 4.",
-          "whyCorrect": "Đoạn 4 nêu: 'they lack empathy, ethical reasoning, and nuanced cultural discernment.'",
-          "whyOthersWrong": [
-            "Đoạn 1, 2, 3 không đi sâu vào các phẩm chất độc bản của trí tuệ con người."
-          ]
-        }
+          "translation": "Tìm đoạn: Năng lực khác biệt của con người (đồng cảm, tư duy đạo đức, phân định văn hóa) được đề cập ở Đoạn 4.",
+          "correct": "Đoạn 4 nêu: 'they lack empathy, ethical reasoning, and nuanced cultural discernment.'",
+          "traps": "Đoạn 1, 2, 3 không đi sâu vào các phẩm chất độc bản của trí tuệ con người.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 30: In which paragraph does the writer mention distinct human capabilities that machines cannot easily imitate?"
       },
       {
         "id": 31,
@@ -819,12 +769,12 @@
         "correctAnswer": "A. [I]",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Điền câu vào vị trí: Vị trí [I] ở cuối đoạn 1 là hợp lý nhất vì câu trước đang nói về việc đánh giá lại mục tiêu nền tảng của giáo dục.",
-          "whyCorrect": "Câu trước đó: 'prompted educators and policymakers to re-evaluate the foundational objectives of secondary and higher education.' Câu được điền kết nối bằng liên từ 'Consequently' chỉ kết quả trực tiếp.",
-          "whyOthersWrong": [
-            "Các vị trí [II], [III], [IV] thuộc về các khía cạnh tâm lý học hoặc thị trường lao động."
-          ]
-        }
+          "translation": "Điền câu vào vị trí: Vị trí [I] ở cuối đoạn 1 là hợp lý nhất vì câu trước đang nói về việc đánh giá lại mục tiêu nền tảng của giáo dục.",
+          "correct": "Câu trước đó: 'prompted educators and policymakers to re-evaluate the foundational objectives of secondary and higher education.' Câu được điền kết nối bằng liên từ 'Consequently' chỉ kết quả trực tiếp.",
+          "traps": "Các vị trí [II], [III], [IV] thuộc về các khía cạnh tâm lý học hoặc thị trường lao động.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 31: Where in the passage does the following sentence best fit?\n'Consequently, schools must transition from assessing memorized data to cultivating autonomous critical inquiry.'\n[I], [II], [III], or [IV]?"
       },
       {
         "id": 32,
@@ -843,12 +793,12 @@
         "correctAnswer": "A. Instant digital answers risk depriving students of the vital intellectual struggle necessary for brain development.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tóm tắt Đoạn 2: Câu trả lời kỹ thuật số ăn sẵn có nguy cơ tước đi sự nỗ lực tư duy cần thiết để phát triển não bộ.",
-          "whyCorrect": "Đoạn 2 tập trung vào nguy cơ xói mòn tư duy sâu và tầm quan trọng của 'intellectual perseverance'.",
-          "whyOthersWrong": [
-            "B, C, D đều mang nghĩa trái ngược hoặc xuyên tạc nội dung đoạn văn."
-          ]
-        }
+          "translation": "Tóm tắt Đoạn 2: Câu trả lời kỹ thuật số ăn sẵn có nguy cơ tước đi sự nỗ lực tư duy cần thiết để phát triển não bộ.",
+          "correct": "Đoạn 2 tập trung vào nguy cơ xói mòn tư duy sâu và tầm quan trọng của 'intellectual perseverance'.",
+          "traps": "B, C, D đều mang nghĩa trái ngược hoặc xuyên tạc nội dung đoạn văn.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 32: Which of the following best summarizes Paragraph 2?"
       },
       {
         "id": 33,
@@ -867,14 +817,12 @@
         "correctAnswer": "B. Engaging critically with flawed AI outputs can actually strengthen students' evaluative skills.",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Suy luận: Việc chủ động soi xét các câu trả lời chưa hoàn thiện của AI sẽ giúp củng cố kỹ năng đánh giá phản biện của sinh viên.",
-          "whyCorrect": "Đoạn 3 chỉ ra: 'students are tasked with scrutinizing AI-generated texts, identifying factual errors, and exposing subtle algorithmic biases... foster metacognitive awareness.'",
-          "whyOthersWrong": [
-            "A trái ngược tinh thần bài viết",
-            "C sai sự thật",
-            "D trái ngược hoàn toàn."
-          ]
-        }
+          "translation": "Suy luận: Việc chủ động soi xét các câu trả lời chưa hoàn thiện của AI sẽ giúp củng cố kỹ năng đánh giá phản biện của sinh viên.",
+          "correct": "Đoạn 3 chỉ ra: 'students are tasked with scrutinizing AI-generated texts, identifying factual errors, and exposing subtle algorithmic biases... foster metacognitive awareness.'",
+          "traps": "A trái ngược tinh thần bài viết; C sai sự thật; D trái ngược hoàn toàn.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 33: What can be inferred from Paragraph 3 regarding the use of AI in universities?"
       },
       {
         "id": 34,
@@ -893,12 +841,12 @@
         "correctAnswer": "A. While AI presents challenges to traditional schooling, it ultimately underscores the enduring value of uniquely human qualities and adaptable thinking.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tóm tắt toàn bài: Dù AI đặt ra nhiều thách thức cho học đường truyền thống, nó càng làm nổi bật giá trị trường tồn của những phẩm chất người và tư duy linh hoạt thích ứng.",
-          "whyCorrect": "Bao quát toàn diện cả thách thức lẫn cơ hội, hướng đến thông điệp nhân văn ở đoạn kết.",
-          "whyOthersWrong": [
-            "B, C, D đều mang tính cực đoan và không phản ánh giọng điệu học thuật của tác giả."
-          ]
-        }
+          "translation": "Tóm tắt toàn bài: Dù AI đặt ra nhiều thách thức cho học đường truyền thống, nó càng làm nổi bật giá trị trường tồn của những phẩm chất người và tư duy linh hoạt thích ứng.",
+          "correct": "Bao quát toàn diện cả thách thức lẫn cơ hội, hướng đến thông điệp nhân văn ở đoạn kết.",
+          "traps": "B, C, D đều mang tính cực đoan và không phản ánh giọng điệu học thuật của tác giả.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 34: Which of the following best summarizes the entire passage?"
       },
       {
         "id": 35,
@@ -917,14 +865,12 @@
         "correctAnswer": "A. essential",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ 'indispensable' (không thể thiếu, tối quan trọng) ĐỒNG NGHĨA với 'essential'.",
-          "whyCorrect": "Indispensable = absolutely necessary = essential.",
-          "whyOthersWrong": [
-            "B. superfluous: thừa thãi",
-            "C. optional: tùy ý",
-            "D. negligible: không đáng kể"
-          ]
-        }
+          "translation": "Từ 'indispensable' (không thể thiếu, tối quan trọng) ĐỒNG NGHĨA với 'essential'.",
+          "correct": "Indispensable = absolutely necessary = essential.",
+          "traps": "B. superfluous: thừa thãi; C. optional: tùy ý; D. negligible: không đáng kể",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 35: The word 'indispensable' in paragraph 2 is CLOSEST in meaning to ______."
       },
       {
         "id": 36,
@@ -943,12 +889,12 @@
         "correctAnswer": "A. proactive",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ 'passive' (thụ động) TRÁI NGHĨA với 'proactive' (chủ động, tiên phong).",
-          "whyCorrect": "Passive = receiving action without active response <-> Proactive = taking the initiative.",
-          "whyOthersWrong": [
-            "B, C, D đều mang nét nghĩa tiêu cực hoặc thụ động tương đương."
-          ]
-        }
+          "translation": "Từ 'passive' (thụ động) TRÁI NGHĨA với 'proactive' (chủ động, tiên phong).",
+          "correct": "Passive = receiving action without active response <-> Proactive = taking the initiative.",
+          "traps": "B, C, D đều mang nét nghĩa tiêu cực hoặc thụ động tương đương.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 36: The word 'passive' in paragraph 2 is OPPOSITE in meaning to ______."
       },
       {
         "id": 37,
@@ -967,12 +913,12 @@
         "correctAnswer": "A. Collaborative learning environments",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ quy chiếu: 'In these collaborative learning environments...' -> 'These' quy chiếu trực tiếp về các môi trường học tập tương tác cộng tác.",
-          "whyCorrect": "Xuất hiện trực tiếp trong cụm danh từ 'these collaborative learning environments'.",
-          "whyOthersWrong": [
-            "B, C, D không khớp với ngữ cảnh diễn đạt trong đoạn 3."
-          ]
-        }
+          "translation": "Từ quy chiếu: 'In these collaborative learning environments...' -> 'These' quy chiếu trực tiếp về các môi trường học tập tương tác cộng tác.",
+          "correct": "Xuất hiện trực tiếp trong cụm danh từ 'these collaborative learning environments'.",
+          "traps": "B, C, D không khớp với ngữ cảnh diễn đạt trong đoạn 3.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 37: The word 'These' in paragraph 3 refers to ______."
       },
       {
         "id": 38,
@@ -991,12 +937,12 @@
         "correctAnswer": "B. The ability to learn, unlearn, and relearn with agility",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Thông tin đúng: Đoạn 4 nêu rõ điều giữ giá trị vĩnh viễn là khả năng học hỏi, loại bỏ cái cũ và học lại một cách linh hoạt.",
-          "whyCorrect": "Khớp câu: 'What remains permanently valuable is the capacity to learn, unlearn, and relearn with speed and flexibility.'",
-          "whyOthersWrong": [
-            "A, C, D trái ngược hoàn toàn với lời khuyên thích ứng của đoạn văn."
-          ]
-        }
+          "translation": "Thông tin đúng: Đoạn 4 nêu rõ điều giữ giá trị vĩnh viễn là khả năng học hỏi, loại bỏ cái cũ và học lại một cách linh hoạt.",
+          "correct": "Khớp câu: 'What remains permanently valuable is the capacity to learn, unlearn, and relearn with speed and flexibility.'",
+          "traps": "A, C, D trái ngược hoàn toàn với lời khuyên thích ứng của đoạn văn.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 38: According to paragraph 4, what quality remains permanently valuable in the modern job market?"
       },
       {
         "id": 39,
@@ -1015,12 +961,12 @@
         "correctAnswer": "A. To advocate for cultivating critical agility and unique human empathy alongside AI.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mục đích của tác giả: Kêu gọi rèn luyện sự linh hoạt phản biện và lòng thấu cảm độc bản của con người bên cạnh sự phát triển của AI.",
-          "whyCorrect": "Xuyên suốt bài đọc, tác giả hướng tới việc biến AI thành công cụ thúc đẩy tiềm năng sáng tạo của con người.",
-          "whyOthersWrong": [
-            "B, C, D là các quan điểm sai lệch và cực đoan không có trong bài."
-          ]
-        }
+          "translation": "Mục đích của tác giả: Kêu gọi rèn luyện sự linh hoạt phản biện và lòng thấu cảm độc bản của con người bên cạnh sự phát triển của AI.",
+          "correct": "Xuyên suốt bài đọc, tác giả hướng tới việc biến AI thành công cụ thúc đẩy tiềm năng sáng tạo của con người.",
+          "traps": "B, C, D là các quan điểm sai lệch và cực đoan không có trong bài.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 39: What is the primary purpose of the author in this passage?"
       },
       {
         "id": 40,
@@ -1039,13 +985,80 @@
         "correctAnswer": "A. The Age of Algorithms: Rethinking Education and Human Potential",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tiêu đề phù hợp nhất: Kỷ Nguyên Của Thuật Toán: Tái Định Hình Giáo Dục Và Tiềm Năng Con Người.",
-          "whyCorrect": "Tiêu đề này bao hàm đầy đủ khía cạnh học thuật, giáo dục và tiềm năng nhân bản được phân tích trong bài.",
-          "whyOthersWrong": [
-            "B, C mang tính giật gân sai lệch",
-            "D quá hạn hẹp về mặt lịch sử"
-          ]
-        }
+          "translation": "Tiêu đề phù hợp nhất: Kỷ Nguyên Của Thuật Toán: Tái Định Hình Giáo Dục Và Tiềm Năng Con Người.",
+          "correct": "Tiêu đề này bao hàm đầy đủ khía cạnh học thuật, giáo dục và tiềm năng nhân bản được phân tích trong bài.",
+          "traps": "B, C mang tính giật gân sai lệch; D quá hạn hẹp về mặt lịch sử",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 40: Which of the following is the most suitable title for the passage?"
+      }
+    ],
+    "sections": [
+      {
+        "sectionId": 1,
+        "title": "Phần 1: Quảng Cáo Điền Khuyết (Advertisement Cloze)",
+        "instruction": "Read the following advertisement and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 1 to 6.",
+        "questionRange": [
+          1,
+          6
+        ],
+        "passageTitle": "GLOBAL AI & TECH CAREER SUMMIT 2026",
+        "passage": "GLOBAL AI & TECH CAREER SUMMIT 2026\nAre you ready to future-proof your career in the era of artificial intelligence? Join us at the National Convention Center for an inspiring three-day event!\n• Explore breakthrough AI tools that are (1) ______ industries worldwide.\n• Attend keynotes delivered by (2) ______ from leading tech institutes.\n• Learn practical skills in machine learning, (3) ______ by top engineers.\n• Network with industry leaders (4) ______ the forefront of technological innovation.\n• We are committed to helping you (5) ______ an informed decision about your future career path.\n• Don't miss this rare opportunity (6) ______ hands-on experience with cutting-edge technologies!\nRegister online before November 15 to secure your early-bird ticket!\n(Adapted from The Guardian Tech)"
+      },
+      {
+        "sectionId": 2,
+        "title": "Phần 2: Tờ Rơi / Thông Báo Điền Khuyết (Leaflet Cloze)",
+        "instruction": "Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 7 to 12.",
+        "questionRange": [
+          7,
+          12
+        ],
+        "passageTitle": "NAVIGATING THE AI-DRIVEN WORKPLACE",
+        "passage": "NAVIGATING THE AI-DRIVEN WORKPLACE: A GUIDE FOR STUDENTS\nAs automation transforms modern industries, students need essential strategies to thrive alongside intelligent technologies:\n• Cultivate Unique Human Skills: While algorithms excel at calculating numbers, (7) ______ areas like emotional intelligence and creative design remain uniquely human.\n• Embrace Lifelong Learning: Don't hesitate to (8) ______ new online courses to upgrade your technical capabilities regularly.\n• Adaptability is Key: Workers who show high cognitive (9) ______ can easily transition into emerging job roles.\n• Overcoming Challenges: (10) ______ the rapid pace of technological disruption, proactive learners find abundant opportunities.\n• Professional Networks: Make sure you (11) ______ with mentors who can offer practical guidance.\n• Ethical Responsibility: Maintain a strong sense of integrity to avoid biased outcomes when deploying digital (12) ______.\n(Adapted from ReadTheory Grade 11-12)"
+      },
+      {
+        "sectionId": 3,
+        "title": "Phần 3: Sắp Xếp Trật Tự Câu / Đoạn Văn / Hội Thoại (Sentence Rearrangement)",
+        "instruction": "Mark the letter A, B, C or D on your answer sheet to indicate the correct arrangement of sentences to make a meaningful conversation or paragraph.",
+        "questionRange": [
+          13,
+          17
+        ],
+        "passageTitle": null,
+        "passage": ""
+      },
+      {
+        "sectionId": 4,
+        "title": "Phần 4: Điền Mệnh Đề / Cụm Từ Vào Đoạn Văn (Passage Clause Cloze)",
+        "instruction": "Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.",
+        "questionRange": [
+          18,
+          22
+        ],
+        "passageTitle": "THE RISE OF COGNITIVE COLLABORATION",
+        "passage": "THE RISE OF COGNITIVE COLLABORATION\nThe workplace of the twenty-first century is experiencing a profound paradigm shift driven by generative artificial intelligence. Rather than completely replacing human labor, emerging tools are designed to amplify human capabilities, (18) ______. \nRecent surveys across multinational corporations reveal that professionals who leverage artificial intelligence can complete routine assignments in half the standard time. (19) ______, employees are now able to allocate more working hours to complex strategic planning and creative experimentation. \nHowever, this symbiotic relationship between humans and algorithms requires critical supervision. Experts caution that autonomous systems are prone to generating subtle hallucinations, (20) ______. \nTherefore, educational institutions are fundamentally revamping their curricula to equip future graduates with digital literacy. (21) ______, young jobseekers will be empowered to direct intelligent software effectively while safeguarding ethical standards. Ultimately, the future belongs not to artificial intelligence alone, (22) ______.\n(Adapted from BBC Future)"
+      },
+      {
+        "sectionId": 5,
+        "title": "Phần 5: Bài Đọc Hiểu 1 (Reading Comprehension 1 - 8 câu)",
+        "instruction": "Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the correct answer to each of the questions from 23 to 30.",
+        "questionRange": [
+          23,
+          30
+        ],
+        "passageTitle": "ARTIFICIAL INTELLIGENCE IN GLOBAL COMMERCE",
+        "passage": "Paragraph 1:\nIn recent years, artificial intelligence has ceased to be a futuristic concept confined to science fiction laboratories; it has firmly embedded itself into the core operations of global commerce. From automated customer support and algorithmic financial forecasting to predictive healthcare analytics, modern enterprises are harnessing computing algorithms to streamline workflow efficiency. Analysts estimate that by the end of the decade, artificial intelligence could contribute over fifteen trillion dollars to the global economy.\n\nParagraph 2:\nNevertheless, this technological revolution is sparking vigorous debates regarding the future of human employment. Critics argue that generative tools threaten to render millions of white-collar positions obsolete, particularly in administrative processing, legal documentation, and entry-level programming. They believe that without strict regulatory oversight, the rapid pace of corporate automation could exacerbate socioeconomic inequality and trigger widespread labor displacement.\n\nParagraph 3:\nConversely, technological optimists maintain that automation historically creates far more jobs than it eliminates. The mechanization of agriculture and the advent of the personal computer initially spurred comparable anxieties, yet both transitions ultimately fostered entirely new economic sectors. In the current era, demand is burgeoning for prompt designers, AI ethics compliance officers, and human-machine collaboration facilitators. Rather than eliminating human agency, artificial intelligence is transforming the fundamental nature of job responsibilities.\n\nParagraph 4:\nTo thrive in this evolving environment, workers must cultivate skills that machines cannot readily replicate. While neural networks can process vast datasets with astonishing velocity, they lack empathy, ethical reasoning, and nuanced cultural discernment. Educational systems worldwide are consequently shifting emphasis away from rote memorization toward critical thinking, emotional intelligence, and interdisciplinary problem-solving.\n(Adapted from The Guardian)"
+      },
+      {
+        "sectionId": 6,
+        "title": "Phần 6: Bài Đọc Hiểu 2 (Reading Comprehension 2 - 10 câu Phân Hóa Cao)",
+        "instruction": "Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the correct answer to each of the questions from 31 to 40.",
+        "questionRange": [
+          31,
+          40
+        ],
+        "passageTitle": "COGNITIVE AGILITY IN THE AUTOMATED ERA",
+        "passage": "Paragraph 1:\nThe exponential development of generative artificial intelligence has brought humanity to an unprecedented civilizational crossroad. Unlike prior waves of industrial mechanization that predominantly targeted repetitive manual tasks, contemporary cognitive algorithms are capable of drafting persuasive essays, synthesizing complex medical research, and composing sophisticated computer software. [I] This unprecedented capability has prompted educators and policymakers to re-evaluate the foundational objectives of secondary and higher education.\n\nParagraph 2:\nA central concern among educational psychologists is the potential erosion of deep analytical thinking among young students. When automated platforms can effortlessly produce syntactically polished answers to complex assignments in seconds, students may become passive consumers of pre-digested answers rather than active investigators. [II] Recent cognitive studies indicate that intellectual perseverance—the cognitive struggle required to solve multifaceted challenges—is indispensable for constructing durable neurological neural pathways.\n\nParagraph 3:\nHowever, completely banning artificial intelligence from academic institutions is neither feasible nor pedagogically desirable. Forward-thinking universities are instead pioneering pedagogical frameworks that treat generative tools as interactive intellectual sparring partners. In these collaborative learning environments, students are tasked with scrutinizing AI-generated texts, identifying factual errors, and exposing subtle algorithmic biases. [III] By transforming students into critical interrogators rather than passive recipients, educators foster metacognitive awareness.\n\nParagraph 4:\nFurthermore, the modern employment landscape demands a transition from static expertise toward dynamic cognitive agility. In a corporate environment where software languages and marketing algorithms evolve continuously, the specific knowledge acquired in college may become outdated within a few years. What remains permanently valuable is the capacity to learn, unlearn, and relearn with speed and flexibility. [IV] \n\nParagraph 5:\nUltimately, the advent of artificial intelligence invites humanity to reflect upon what distinguishes human consciousness from synthetic computation. While algorithms can mimic linguistic patterns, only humans possess existential empathy, social responsibility, and moral courage. If harnessed conscientiously, artificial intelligence will not diminish human potential; rather, it will liberate humanity from drudgery, unlocking unprecedented realms of creative and philosophical exploration.\n(Adapted from ReadTheory Grade 12)"
       }
     ]
   },
@@ -1081,15 +1094,12 @@
         "correctAnswer": "A. dramatically reducing",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Chọn trạng từ + V-ing: 'are dramatically reducing' (đang giảm thiểu khí thải một cách rõ rệt).",
-          "grammarFormula": "Thì Hiện tại tiếp diễn: S + be + V-ing diễn tả hành động đang biến đổi nhanh chóng.",
-          "whyCorrect": "Sau động từ to be 'are' cần V-ing để tạo thành thì hiện tại tiếp diễn với tân ngữ 'industries'.",
-          "whyOthersWrong": [
-            "A là động từ nguyên mẫu",
-            "C là tính từ",
-            "D là danh từ"
-          ]
-        }
+          "translation": "Chọn trạng từ + V-ing: 'are dramatically reducing' (đang giảm thiểu khí thải một cách rõ rệt).",
+          "correct": "Sau động từ to be 'are' cần V-ing để tạo thành thì hiện tại tiếp diễn với tân ngữ 'industries'.",
+          "traps": "A là động từ nguyên mẫu; C là tính từ; D là danh từ",
+          "formula": "Thì Hiện tại tiếp diễn: S + be + V-ing diễn tả hành động đang biến đổi nhanh chóng."
+        },
+        "question": "Question 1: Mark the letter A, B, C or D to indicate the correct word to fill in blank (1)."
       },
       {
         "id": 2,
@@ -1108,13 +1118,12 @@
         "correctAnswer": "A. prominent environmental experts",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Trật tự từ: Opinion (prominent - xuất chúng) + Field (environmental) + Noun (experts).",
-          "grammarFormula": "Trật tự từ: Opinion (renowned) + Origin/Classification (international) + Noun (scholars).",
-          "whyCorrect": "Tính từ chỉ quan điểm/đánh giá 'renowned' đứng trước tính từ phân loại/nguồn gốc 'international'.",
-          "whyOthersWrong": [
-            "B, C, D sai quy tắc sắp xếp cụm danh từ trong tiếng Anh."
-          ]
-        }
+          "translation": "Trật tự từ: Opinion (prominent - xuất chúng) + Field (environmental) + Noun (experts).",
+          "correct": "Tính từ chỉ quan điểm/đánh giá 'renowned' đứng trước tính từ phân loại/nguồn gốc 'international'.",
+          "traps": "B, C, D sai quy tắc sắp xếp cụm danh từ trong tiếng Anh.",
+          "formula": "Trật tự từ: Opinion (renowned) + Origin/Classification (international) + Noun (scholars)."
+        },
+        "question": "Question 2: Mark the letter A, B, C or D to indicate the correct phrase to fill in blank (2)."
       },
       {
         "id": 3,
@@ -1133,15 +1142,12 @@
         "correctAnswer": "B. developed",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Rút gọn mệnh đề quan hệ bị động: 'devices developed by local green start-ups'.",
-          "grammarFormula": "Rút gọn mệnh đề quan hệ thể bị động dùng Quá khứ phân từ (V-ed/V3).",
-          "whyCorrect": "Kỹ năng được giảng dạy/hướng dẫn bởi các kỹ sư hàng đầu nên dùng phân từ quá khứ 'conducted'.",
-          "whyOthersWrong": [
-            "A là chủ động (V-ing)",
-            "C chỉ mục đích",
-            "D thừa động từ to be khi chưa có đại từ quan hệ"
-          ]
-        }
+          "translation": "Rút gọn mệnh đề quan hệ bị động: 'devices developed by local green start-ups'.",
+          "correct": "Kỹ năng được giảng dạy/hướng dẫn bởi các kỹ sư hàng đầu nên dùng phân từ quá khứ 'conducted'.",
+          "traps": "A là chủ động (V-ing); C chỉ mục đích; D thừa động từ to be khi chưa có đại từ quan hệ",
+          "formula": "Rút gọn mệnh đề quan hệ thể bị động dùng Quá khứ phân từ (V-ed/V3)."
+        },
+        "question": "Question 3: Mark the letter A, B, C or D to indicate the correct option for blank (3)."
       },
       {
         "id": 4,
@@ -1160,13 +1166,12 @@
         "correctAnswer": "A. in",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cụm cố định: 'in the defense of' (để bảo vệ môi trường).",
-          "grammarFormula": "Idiom/Prepositional phrase: at the forefront of sth = dẫn đầu trong lĩnh vực nào.",
-          "whyCorrect": "Đi với cụm 'the forefront of' bắt buộc dùng giới từ 'at'.",
-          "whyOthersWrong": [
-            "B, C, D không kết hợp với 'the forefront of'."
-          ]
-        }
+          "translation": "Cụm cố định: 'in the defense of' (để bảo vệ môi trường).",
+          "correct": "Đi với cụm 'the forefront of' bắt buộc dùng giới từ 'at'.",
+          "traps": "B, C, D không kết hợp với 'the forefront of'.",
+          "formula": "Idiom/Prepositional phrase: at the forefront of sth = dẫn đầu trong lĩnh vực nào."
+        },
+        "question": "Question 4: Mark the letter A, B, C or D to indicate the correct preposition for blank (4)."
       },
       {
         "id": 5,
@@ -1185,13 +1190,12 @@
         "correctAnswer": "B. make",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Collocation: 'make a contribution to sth' (đóng góp vào việc trồng rừng).",
-          "grammarFormula": "Collocation: make a decision (đưa ra quyết định).",
-          "whyCorrect": "'decision' luôn đi với động từ 'make'.",
-          "whyOthersWrong": [
-            "take/give/do không tạo thành collocation chuẩn với decision trong ngữ cảnh này."
-          ]
-        }
+          "translation": "Collocation: 'make a contribution to sth' (đóng góp vào việc trồng rừng).",
+          "correct": "'decision' luôn đi với động từ 'make'.",
+          "traps": "take/give/do không tạo thành collocation chuẩn với decision trong ngữ cảnh này.",
+          "formula": "Collocation: make a decision (đưa ra quyết định)."
+        },
+        "question": "Question 5: Mark the letter A, B, C or D to indicate the correct verb for blank (5)."
       },
       {
         "id": 6,
@@ -1210,13 +1214,12 @@
         "correctAnswer": "B. to receive",
         "answer": 1,
         "explanation": {
-          "viTranslation": "To-V chỉ mục đích: 'Register today to receive insightful materials'.",
-          "grammarFormula": "Noun + to-infinitive: opportunity / chance + To-V.",
-          "whyCorrect": "Sau 'opportunity' dùng 'to gain' để chỉ mục đích hoặc nội dung của cơ hội.",
-          "whyOthersWrong": [
-            "A, C, D không đúng cấu trúc ngữ pháp chuẩn sau danh từ opportunity."
-          ]
-        }
+          "translation": "To-V chỉ mục đích: 'Register today to receive insightful materials'.",
+          "correct": "Sau 'opportunity' dùng 'to gain' để chỉ mục đích hoặc nội dung của cơ hội.",
+          "traps": "A, C, D không đúng cấu trúc ngữ pháp chuẩn sau danh từ opportunity.",
+          "formula": "Noun + to-infinitive: opportunity / chance + To-V."
+        },
+        "question": "Question 6: Mark the letter A, B, C or D to indicate the correct form for blank (6)."
       },
       {
         "id": 7,
@@ -1235,15 +1238,12 @@
         "correctAnswer": "A. unnecessary",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Lượng từ đi với danh từ đếm được số nhiều 'areas': 'other areas' (những lĩnh vực khác).",
-          "grammarFormula": "Other + N(plural) = những cái/người khác.",
-          "whyCorrect": "'areas' là danh từ đếm được số nhiều nên chọn 'other'.",
-          "whyOthersWrong": [
-            "B (another) đi với danh từ số ít",
-            "C (every) đi với danh từ số ít",
-            "D (much) đi với danh từ không đếm được"
-          ]
-        }
+          "translation": "Lượng từ đi với danh từ đếm được số nhiều 'areas': 'other areas' (những lĩnh vực khác).",
+          "correct": "'areas' là danh từ đếm được số nhiều nên chọn 'other'.",
+          "traps": "B (another) đi với danh từ số ít; C (every) đi với danh từ số ít; D (much) đi với danh từ không đếm được",
+          "formula": "Other + N(plural) = những cái/người khác."
+        },
+        "question": "Question 7: Mark the letter A, B, C or D to indicate the correct quantifier for blank (7)."
       },
       {
         "id": 8,
@@ -1262,15 +1262,12 @@
         "correctAnswer": "A. set up",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cụm động từ: set up home composting = bắt đầu thiết lập việc ủ phân hữu cơ tại nhà.",
-          "grammarFormula": "Take up sth = bắt đầu một hoạt động/học một môn mới.",
-          "whyCorrect": "'take up new online courses' mang nghĩa chủ động theo học các khóa học mới.",
-          "whyOthersWrong": [
-            "B. look up: tra cứu",
-            "C. give up: từ bỏ",
-            "D. put out: dập tắt"
-          ]
-        }
+          "translation": "Cụm động từ: set up home composting = bắt đầu thiết lập việc ủ phân hữu cơ tại nhà.",
+          "correct": "'take up new online courses' mang nghĩa chủ động theo học các khóa học mới.",
+          "traps": "B. look up: tra cứu; C. give up: từ bỏ; D. put out: dập tắt",
+          "formula": "Take up sth = bắt đầu một hoạt động/học một môn mới."
+        },
+        "question": "Question 8: Mark the letter A, B, C or D to indicate the correct phrasal verb for blank (8)."
       },
       {
         "id": 9,
@@ -1289,15 +1286,12 @@
         "correctAnswer": "A. consumption",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Collocation: 'household energy consumption' (mức tiêu thụ năng lượng gia đình).",
-          "grammarFormula": "Collocation học thuật: cognitive agility = khả năng thích ứng nhận thức linh hoạt.",
-          "whyCorrect": "Người lao động có tư duy nhạy bén (agility) sẽ dễ dàng chuyển đổi sang các vai trò mới.",
-          "whyOthersWrong": [
-            "A. hesitation: do dự",
-            "C. ignorance: sự thiếu hiểu biết",
-            "D. reluctance: sự miễn cưỡng"
-          ]
-        }
+          "translation": "Collocation: 'household energy consumption' (mức tiêu thụ năng lượng gia đình).",
+          "correct": "Người lao động có tư duy nhạy bén (agility) sẽ dễ dàng chuyển đổi sang các vai trò mới.",
+          "traps": "A. hesitation: do dự; C. ignorance: sự thiếu hiểu biết; D. reluctance: sự miễn cưỡng",
+          "formula": "Collocation học thuật: cognitive agility = khả năng thích ứng nhận thức linh hoạt."
+        },
+        "question": "Question 9: Mark the letter A, B, C or D to indicate the correct word for blank (9)."
       },
       {
         "id": 10,
@@ -1316,14 +1310,12 @@
         "correctAnswer": "A. In spite of",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mệnh đề chỉ sự nhượng bộ đi với cụm danh từ: 'In spite of the rapid pace...' (Mặc cho tốc độ thay đổi nhanh chóng...).",
-          "grammarFormula": "In spite of + Noun Phrase (thay vì Although + Clause).",
-          "whyCorrect": "Phía sau là cụm danh từ 'the rapid pace of technological disruption' và mang nghĩa nhượng bộ, người học chủ động vẫn tìm thấy cơ hội.",
-          "whyOthersWrong": [
-            "B và C phải đi với một mệnh đề có S + V",
-            "D (Instead of) sai nghĩa (thay vì)"
-          ]
-        }
+          "translation": "Mệnh đề chỉ sự nhượng bộ đi với cụm danh từ: 'In spite of the rapid pace...' (Mặc cho tốc độ thay đổi nhanh chóng...).",
+          "correct": "Phía sau là cụm danh từ 'the rapid pace of technological disruption' và mang nghĩa nhượng bộ, người học chủ động vẫn tìm thấy cơ hội.",
+          "traps": "B và C phải đi với một mệnh đề có S + V; D (Instead of) sai nghĩa (thay vì)",
+          "formula": "In spite of + Noun Phrase (thay vì Although + Clause)."
+        },
+        "question": "Question 10: Mark the letter A, B, C or D to indicate the correct connector for blank (10)."
       },
       {
         "id": 11,
@@ -1342,15 +1334,12 @@
         "correctAnswer": "A. align",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Collocation: 'align with the principles' (phù hợp với nguyên tắc kinh tế tuần hoàn).",
-          "grammarFormula": "Connect with sb = thiết lập mối quan hệ liên lạc, kết nối.",
-          "whyCorrect": "Trong xây dựng mạng lưới nghề nghiệp, 'connect with' là cách diễn đạt tự nhiên và chính xác nhất.",
-          "whyOthersWrong": [
-            "A. interact with thường dùng cho tương tác tức thời",
-            "C. collide with: va chạm",
-            "D. conflict with: xung đột"
-          ]
-        }
+          "translation": "Collocation: 'align with the principles' (phù hợp với nguyên tắc kinh tế tuần hoàn).",
+          "correct": "Trong xây dựng mạng lưới nghề nghiệp, 'connect with' là cách diễn đạt tự nhiên và chính xác nhất.",
+          "traps": "A. interact with thường dùng cho tương tác tức thời; C. collide with: va chạm; D. conflict with: xung đột",
+          "formula": "Connect with sb = thiết lập mối quan hệ liên lạc, kết nối."
+        },
+        "question": "Question 11: Mark the letter A, B, C or D to indicate the correct phrase for blank (11)."
       },
       {
         "id": 12,
@@ -1369,15 +1358,12 @@
         "correctAnswer": "A. wastage",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Collocation: 'food wastage' (lãng phí thực phẩm thừa).",
-          "grammarFormula": "Collocation: digital innovations = các đổi mới sáng tạo công nghệ.",
-          "whyCorrect": "Phù hợp với chủ đề công nghệ và trí tuệ nhân tạo.",
-          "whyOthersWrong": [
-            "B. appliances: đồ gia dụng",
-            "C. ingredients: nguyên liệu nấu ăn",
-            "D. instruments: nhạc cụ/dụng cụ đo"
-          ]
-        }
+          "translation": "Collocation: 'food wastage' (lãng phí thực phẩm thừa).",
+          "correct": "Phù hợp với chủ đề công nghệ và trí tuệ nhân tạo.",
+          "traps": "B. appliances: đồ gia dụng; C. ingredients: nguyên liệu nấu ăn; D. instruments: nhạc cụ/dụng cụ đo",
+          "formula": "Collocation: digital innovations = các đổi mới sáng tạo công nghệ."
+        },
+        "question": "Question 12: Mark the letter A, B, C or D to indicate the correct noun for blank (12)."
       },
       {
         "id": 13,
@@ -1398,13 +1384,12 @@
         "correctAnswer": "A. b - a - c",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Sắp xếp logic: (b) Nêu dự định học khoa học dữ liệu -> (a) Khen ngợi và hỏi đã chọn khóa nào chưa -> (c) Trả lời đã đăng ký khóa Python.",
-          "grammarFormula": "Nguyên lý hội thoại: Statement of intention -> Follow-up question -> Direct answer.",
-          "whyCorrect": "Thứ tự b - a - c tạo mạch hội thoại mạch lạc và chuẩn ngữ dụng học.",
-          "whyOthersWrong": [
-            "B, C, D đều đảo lộn câu trả lời trước câu hỏi hoặc đặt câu hỏi trước khi người nói nêu chủ đề."
-          ]
-        }
+          "translation": "Sắp xếp logic: (b) Nêu dự định học khoa học dữ liệu -> (a) Khen ngợi và hỏi đã chọn khóa nào chưa -> (c) Trả lời đã đăng ký khóa Python.",
+          "correct": "Thứ tự b - a - c tạo mạch hội thoại mạch lạc và chuẩn ngữ dụng học.",
+          "traps": "B, C, D đều đảo lộn câu trả lời trước câu hỏi hoặc đặt câu hỏi trước khi người nói nêu chủ đề.",
+          "formula": "Nguyên lý hội thoại: Statement of intention -> Follow-up question -> Direct answer."
+        },
+        "question": "Question 13: Mark the letter A, B, C or D to indicate the correct arrangement of utterances to make a meaningful exchange:\n\na. That sounds wonderful! Does it produce enough vegetables for daily cooking?\nb. We have just converted our apartment balcony into a small organic herb garden.\nc. Yes, we pick fresh basil and mint every morning for our family breakfast."
       },
       {
         "id": 14,
@@ -1427,13 +1412,12 @@
         "correctAnswer": "A. b - d - c - a - e",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mạch hội thoại: (b) Đặt câu hỏi AI có thay thế con người không -> (d) Trả lời không hoàn toàn vì thiếu thấu cảm -> (c) Đồng ý vì chiều sâu cảm xúc không thể lập trình -> (a) Khẳng định thêm tác vụ lặp đi lặp lại đã bị thay -> (e) Kết luận cần rèn kỹ năng giao tiếp.",
-          "grammarFormula": "Cấu trúc trao đổi quan điểm phản biện (Discussion & Concurrence).",
-          "whyCorrect": "Thứ tự b - d - c - a - e phát triển ý tăng dần và kết luận thuyết phục.",
-          "whyOthersWrong": [
-            "B, C, D làm đứt gãy tính liên kết nhân quả giữa câu hỏi và phản hồi trực tiếp."
-          ]
-        }
+          "translation": "Mạch hội thoại: (b) Đặt câu hỏi AI có thay thế con người không -> (d) Trả lời không hoàn toàn vì thiếu thấu cảm -> (c) Đồng ý vì chiều sâu cảm xúc không thể lập trình -> (a) Khẳng định thêm tác vụ lặp đi lặp lại đã bị thay -> (e) Kết luận cần rèn kỹ năng giao tiếp.",
+          "correct": "Thứ tự b - d - c - a - e phát triển ý tăng dần và kết luận thuyết phục.",
+          "traps": "B, C, D làm đứt gãy tính liên kết nhân quả giữa câu hỏi và phản hồi trực tiếp.",
+          "formula": "Cấu trúc trao đổi quan điểm phản biện (Discussion & Concurrence)."
+        },
+        "question": "Question 14: Mark the letter A, B, C or D to indicate the correct arrangement of utterances to make a meaningful conversation:\n\na. Definitely. In fact, many repetitive tasks are already handled by software.\nb. Do you think AI will replace all human workers in the creative sector?\nc. I agree. Emotional depth and authentic human experiences cannot be coded.\nd. Not entirely, because machines still lack genuine empathy and cultural nuances.\ne. Exactly, which is why future professionals must hone interpersonal skills."
       },
       {
         "id": 15,
@@ -1456,13 +1440,12 @@
         "correctAnswer": "A. b - d - a - e - c",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Trật tự thư xin việc: (b) Lời chào & mục đích viết thư -> (d) Lý do quan tâm đến dự án -> (a) Nêu năng lực chuyên môn bổ sung -> (e) Bày tỏ mong muốn phỏng vấn -> (c) Lời cảm ơn kết thư.",
-          "grammarFormula": "Chuẩn mực viết thư học thuật (Formal Cover Letter Structure).",
-          "whyCorrect": "b - d - a - e - c tuân thủ đúng chuẩn cấu trúc mở - thân - kết của một email trang trọng.",
-          "whyOthersWrong": [
-            "B, C, D sắp xếp sai vị trí mở đầu hoặc lời kết cảm ơn."
-          ]
-        }
+          "translation": "Trật tự thư xin việc: (b) Lời chào & mục đích viết thư -> (d) Lý do quan tâm đến dự án -> (a) Nêu năng lực chuyên môn bổ sung -> (e) Bày tỏ mong muốn phỏng vấn -> (c) Lời cảm ơn kết thư.",
+          "correct": "b - d - a - e - c tuân thủ đúng chuẩn cấu trúc mở - thân - kết của một email trang trọng.",
+          "traps": "B, C, D sắp xếp sai vị trí mở đầu hoặc lời kết cảm ơn.",
+          "formula": "Chuẩn mực viết thư học thuật (Formal Cover Letter Structure)."
+        },
+        "question": "Question 15: Mark the letter A, B, C or D to indicate the correct order of sentences to form a coherent formal email:\n\na. Furthermore, my academic background in computer science has equipped me with solid analytical skills.\nb. Dear Dr. Harrison, I am writing to express my eager interest in the AI Research Assistant position.\nc. Thank you very much for your time and consideration of my application.\nd. Having followed your lab's publications on ethical algorithms, I am eager to contribute to your ongoing project.\ne. I look forward to the possibility of discussing my qualifications in an interview."
       },
       {
         "id": 16,
@@ -1485,13 +1468,12 @@
         "correctAnswer": "A. b - d - a - c - e",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mạch nghị luận: (b) Nêu hiện tượng tự động hóa -> (d) Hệ quả trực tiếp là kỹ năng cũ lỗi thời -> (a) Người lao động buộc phải học tập liên tục -> (c) Chính phủ cần hỗ trợ đào tạo bổ sung -> (e) Cảnh báo nếu không hành động khoảng cách giàu nghèo sẽ gia tăng.",
-          "grammarFormula": "Problem -> Immediate effect -> Individual response -> Policy solution -> Warning/Conclusion.",
-          "whyCorrect": "b - d - a - c - e tạo thành đoạn văn lập luận chặt chẽ và logic.",
-          "whyOthersWrong": [
-            "B, C, D đặt hệ quả và giải pháp không tương ứng với các từ nối Consequently / In addition."
-          ]
-        }
+          "translation": "Mạch nghị luận: (b) Nêu hiện tượng tự động hóa -> (d) Hệ quả trực tiếp là kỹ năng cũ lỗi thời -> (a) Người lao động buộc phải học tập liên tục -> (c) Chính phủ cần hỗ trợ đào tạo bổ sung -> (e) Cảnh báo nếu không hành động khoảng cách giàu nghèo sẽ gia tăng.",
+          "correct": "b - d - a - c - e tạo thành đoạn văn lập luận chặt chẽ và logic.",
+          "traps": "B, C, D đặt hệ quả và giải pháp không tương ứng với các từ nối Consequently / In addition.",
+          "formula": "Problem -> Immediate effect -> Individual response -> Policy solution -> Warning/Conclusion."
+        },
+        "question": "Question 16: Mark the letter A, B, C or D to indicate the best arrangement of sentences to create a cohesive paragraph:\n\na. Consequently, workers are compelled to embrace continuous education throughout their careers.\nb. Technological automation is transforming modern workplace environments at a staggering rate.\nc. In addition, governments should establish subsidized training programs to assist displaced laborers.\nd. This rapid disruption often results in the immediate obsolescence of traditional job functions.\ne. Without such proactive interventions, the socioeconomic gap between skilled and unskilled workers will widen."
       },
       {
         "id": 17,
@@ -1514,13 +1496,12 @@
         "correctAnswer": "A. c - d - a - b - e",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Trật tự học thuật: (c) Câu chủ đề về đạo đức AI -> (d) Luận điểm 1: Dữ liệu huấn luyện thiên vị -> (a) Luận điểm 2: Thiếu tính minh bạch -> (b) Yêu cầu giải pháp giám sát -> (e) Kết luận thành lập ủy ban liên ngành.",
-          "grammarFormula": "Topic sentence -> Primary argument -> Secondary argument -> General solution -> Concrete recommendation.",
-          "whyCorrect": "c - d - a - b - e đảm bảo tính mạch lạc tuyệt đối với các liên từ Primarily -> Secondly -> Therefore.",
-          "whyOthersWrong": [
-            "B, C, D sai thứ tự liệt kê giữa Primarily (trước hết) và Secondly (thứ hai)."
-          ]
-        }
+          "translation": "Trật tự học thuật: (c) Câu chủ đề về đạo đức AI -> (d) Luận điểm 1: Dữ liệu huấn luyện thiên vị -> (a) Luận điểm 2: Thiếu tính minh bạch -> (b) Yêu cầu giải pháp giám sát -> (e) Kết luận thành lập ủy ban liên ngành.",
+          "correct": "c - d - a - b - e đảm bảo tính mạch lạc tuyệt đối với các liên từ Primarily -> Secondly -> Therefore.",
+          "traps": "B, C, D sai thứ tự liệt kê giữa Primarily (trước hết) và Secondly (thứ hai).",
+          "formula": "Topic sentence -> Primary argument -> Secondary argument -> General solution -> Concrete recommendation."
+        },
+        "question": "Question 17: Mark the letter A, B, C or D to indicate the best arrangement of sentences to build an academic text:\n\na. Secondly, algorithmic decisions often lack transparency, making accountability elusive.\nb. Addressing these intertwined challenges requires robust regulatory oversight and ethical guidelines.\nc. The integration of artificial intelligence into public services raises urgent ethical questions.\nd. Primarily, biased training data can reinforce historical inequalities in judicial decisions.\ne. Therefore, interdisciplinary committees must oversee algorithmic deployments in sensitive sectors."
       },
       {
         "id": 18,
@@ -1539,15 +1520,12 @@
         "correctAnswer": "A. enabling professionals to achieve unprecedented levels of productivity",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Rút gọn mệnh đề kết quả: '..., enabling professionals to achieve...' (cho phép các chuyên gia đạt được năng suất chưa từng thấy).",
-          "grammarFormula": "V-ing chỉ kết quả kéo theo của mệnh đề đứng trước; enable sb to do sth.",
-          "whyCorrect": "Mệnh đề phân từ 'enabling sb to do sth' diễn tả kết quả trực tiếp của việc công cụ AI khuếch đại năng lực con người.",
-          "whyOthersWrong": [
-            "B sai cấu trúc enables sb doing",
-            "C dùng having enabled không hợp ngữ cảnh hiện tại",
-            "D sai cấu trúc enabled... to achieving"
-          ]
-        }
+          "translation": "Rút gọn mệnh đề kết quả: '..., enabling professionals to achieve...' (cho phép các chuyên gia đạt được năng suất chưa từng thấy).",
+          "correct": "Mệnh đề phân từ 'enabling sb to do sth' diễn tả kết quả trực tiếp của việc công cụ AI khuếch đại năng lực con người.",
+          "traps": "B sai cấu trúc enables sb doing; C dùng having enabled không hợp ngữ cảnh hiện tại; D sai cấu trúc enabled... to achieving",
+          "formula": "V-ing chỉ kết quả kéo theo của mệnh đề đứng trước; enable sb to do sth."
+        },
+        "question": "Question 18: Mark the letter A, B, C or D to indicate the option that best fits blank (18)."
       },
       {
         "id": 19,
@@ -1566,14 +1544,12 @@
         "correctAnswer": "A. As an inevitable consequence of this time-saving advantage",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mệnh đề chuyển tiếp chỉ hệ quả logic: 'Như một hệ quả tất yếu của lợi thế tiết kiệm thời gian này, nhân viên giờ đây có thể dành nhiều thời gian hơn...'.",
-          "grammarFormula": "Transition phrase expressing logical result.",
-          "whyCorrect": "Liên kết trực tiếp với câu trước đó nói về việc tiết kiệm một nửa thời gian làm việc.",
-          "whyOthersWrong": [
-            "B, C mang nghĩa tương phản không phù hợp",
-            "D chỉ mục đích không tạo mạch văn tự nhiên"
-          ]
-        }
+          "translation": "Mệnh đề chuyển tiếp chỉ hệ quả logic: 'Như một hệ quả tất yếu của lợi thế tiết kiệm thời gian này, nhân viên giờ đây có thể dành nhiều thời gian hơn...'.",
+          "correct": "Liên kết trực tiếp với câu trước đó nói về việc tiết kiệm một nửa thời gian làm việc.",
+          "traps": "B, C mang nghĩa tương phản không phù hợp; D chỉ mục đích không tạo mạch văn tự nhiên",
+          "formula": "Transition phrase expressing logical result."
+        },
+        "question": "Question 19: Mark the letter A, B, C or D to indicate the option that best fits blank (19)."
       },
       {
         "id": 20,
@@ -1592,15 +1568,12 @@
         "correctAnswer": "A. which can result in catastrophic errors if accepted uncritically",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mệnh đề quan hệ bổ nghĩa cho 'subtle hallucinations': 'những lỗi ảo giác có thể dẫn đến sai sót thảm khốc nếu tiếp nhận thiếu suy xét phản biện'.",
-          "grammarFormula": "Non-defining relative clause: which + V + in...",
-          "whyCorrect": "which thay thế cho cả cụm hallucinations và giữ vai trò chủ ngữ của động từ can result in.",
-          "whyOthersWrong": [
-            "B thiếu động từ chính (chỉ có V-ing)",
-            "C dùng where không chỉ nơi chốn",
-            "D dùng whose sai nghĩa"
-          ]
-        }
+          "translation": "Mệnh đề quan hệ bổ nghĩa cho 'subtle hallucinations': 'những lỗi ảo giác có thể dẫn đến sai sót thảm khốc nếu tiếp nhận thiếu suy xét phản biện'.",
+          "correct": "which thay thế cho cả cụm hallucinations và giữ vai trò chủ ngữ của động từ can result in.",
+          "traps": "B thiếu động từ chính (chỉ có V-ing); C dùng where không chỉ nơi chốn; D dùng whose sai nghĩa",
+          "formula": "Non-defining relative clause: which + V + in..."
+        },
+        "question": "Question 20: Mark the letter A, B, C or D to indicate the option that best fits blank (20)."
       },
       {
         "id": 21,
@@ -1619,15 +1592,12 @@
         "correctAnswer": "A. By mastering both algorithmic capabilities and critical reasoning",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cụm giới từ chỉ phương thức: 'Bằng cách làm chủ cả năng lực thuật toán lẫn tư duy phản biện, những người trẻ tìm việc sẽ được trao quyền...'.",
-          "grammarFormula": "By + V-ing = bằng cách thức nào đó.",
-          "whyCorrect": "Chỉ phương thức hành động để đạt được kết quả ở mệnh đề chính.",
-          "whyOthersWrong": [
-            "B (neither... nor) phủ định sai nghĩa",
-            "C mang nghĩa tương phản",
-            "D sai cấu trúc ngữ pháp"
-          ]
-        }
+          "translation": "Cụm giới từ chỉ phương thức: 'Bằng cách làm chủ cả năng lực thuật toán lẫn tư duy phản biện, những người trẻ tìm việc sẽ được trao quyền...'.",
+          "correct": "Chỉ phương thức hành động để đạt được kết quả ở mệnh đề chính.",
+          "traps": "B (neither... nor) phủ định sai nghĩa; C mang nghĩa tương phản; D sai cấu trúc ngữ pháp",
+          "formula": "By + V-ing = bằng cách thức nào đó."
+        },
+        "question": "Question 21: Mark the letter A, B, C or D to indicate the option that best fits blank (21)."
       },
       {
         "id": 22,
@@ -1646,13 +1616,12 @@
         "correctAnswer": "A. but to humans who skillfully collaborate with intelligent systems",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cấu trúc song hành tương phản: 'not to... but to...' (tương lai không thuộc về riêng AI, mà thuộc về những con người biết khéo léo cộng tác với hệ thống thông minh).",
-          "grammarFormula": "Parallel structure: not to X, but to Y.",
-          "whyCorrect": "Cặp cấu trúc song hành kinh điển 'not to... but to...' truyền tải thông điệp nhân văn đắt giá của bài viết.",
-          "whyOthersWrong": [
-            "B, C, D bóp méo thông điệp của tác giả và vi phạm cấu trúc song hành."
-          ]
-        }
+          "translation": "Cấu trúc song hành tương phản: 'not to... but to...' (tương lai không thuộc về riêng AI, mà thuộc về những con người biết khéo léo cộng tác với hệ thống thông minh).",
+          "correct": "Cặp cấu trúc song hành kinh điển 'not to... but to...' truyền tải thông điệp nhân văn đắt giá của bài viết.",
+          "traps": "B, C, D bóp méo thông điệp của tác giả và vi phạm cấu trúc song hành.",
+          "formula": "Parallel structure: not to X, but to Y."
+        },
+        "question": "Question 22: Mark the letter A, B, C or D to indicate the option that best fits blank (22)."
       },
       {
         "id": 23,
@@ -1671,12 +1640,12 @@
         "correctAnswer": "C. The commercial exhaustion of all global coal deposits",
         "answer": 2,
         "explanation": {
-          "viTranslation": "Thông tin không được đề cập trong Đoạn 1: Sản xuất xe tự hành (D) không xuất hiện trong danh sách các ứng dụng được liệt kê.",
-          "whyCorrect": "Đoạn 1 chỉ đề cập: automated customer support (A), algorithmic financial forecasting (B), predictive healthcare analytics (C).",
-          "whyOthersWrong": [
-            "A, B, C đều có trong bài đọc."
-          ]
-        }
+          "translation": "Thông tin không được đề cập trong Đoạn 1: Sản xuất xe tự hành (D) không xuất hiện trong danh sách các ứng dụng được liệt kê.",
+          "correct": "Đoạn 1 chỉ đề cập: automated customer support (A), algorithmic financial forecasting (B), predictive healthcare analytics (C).",
+          "traps": "A, B, C đều có trong bài đọc.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 23: Which of the following is NOT mentioned in paragraph 1 as driving the renewable energy transition?"
       },
       {
         "id": 24,
@@ -1695,14 +1664,12 @@
         "correctAnswer": "B. contemporary",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Từ 'obsolete' (lỗi thời, không còn được dùng) TRÁI NGHĨA với 'contemporary' (hiện đại, đương thời).",
-          "whyCorrect": "Obsolete = no longer produced or used, out of date <-> Contemporary = modern, up-to-date.",
-          "whyOthersWrong": [
-            "A. outdated (đồng nghĩa)",
-            "C. redundant (dư thừa)",
-            "D. ineffective (không hiệu quả)"
-          ]
-        }
+          "translation": "Từ 'obsolete' (lỗi thời, không còn được dùng) TRÁI NGHĨA với 'contemporary' (hiện đại, đương thời).",
+          "correct": "Obsolete = no longer produced or used, out of date <-> Contemporary = modern, up-to-date.",
+          "traps": "A. outdated (đồng nghĩa); C. redundant (dư thừa); D. ineffective (không hiệu quả)",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 24: The word 'obsolete' in paragraph 2 is OPPOSITE in meaning to ______."
       },
       {
         "id": 25,
@@ -1721,12 +1688,12 @@
         "correctAnswer": "B. Critics",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Từ quy chiếu: 'Critics argue that generative tools threaten... They believe that...' -> 'They' quy chiếu về 'Critics' (các nhà phê bình/người chỉ trích).",
-          "whyCorrect": "Đại từ nhân xưng 'They' thay thế cho danh từ số nhiều đứng trước là 'Critics'.",
-          "whyOthersWrong": [
-            "A, C, D không phải chủ thể đưa ra nhận định phê bình trong câu."
-          ]
-        }
+          "translation": "Từ quy chiếu: 'Critics argue that generative tools threaten... They believe that...' -> 'They' quy chiếu về 'Critics' (các nhà phê bình/người chỉ trích).",
+          "correct": "Đại từ nhân xưng 'They' thay thế cho danh từ số nhiều đứng trước là 'Critics'.",
+          "traps": "A, C, D không phải chủ thể đưa ra nhận định phê bình trong câu.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 25: The word 'They' in paragraph 2 refers to ______."
       },
       {
         "id": 26,
@@ -1745,14 +1712,12 @@
         "correctAnswer": "A. flourishing",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ 'burgeoning' (đang phát triển bùng nổ, gia tăng mạnh mẽ) ĐỒNG NGHĨA với 'flourishing' (nở rộ, phát triển thịnh vượng).",
-          "whyCorrect": "Burgeoning = growing or developing rapidly = flourishing.",
-          "whyOthersWrong": [
-            "B. diminishing: giảm dần",
-            "C. stagnating: đình trệ",
-            "D. fluctuating: biến động lên xuống"
-          ]
-        }
+          "translation": "Từ 'burgeoning' (đang phát triển bùng nổ, gia tăng mạnh mẽ) ĐỒNG NGHĨA với 'flourishing' (nở rộ, phát triển thịnh vượng).",
+          "correct": "Burgeoning = growing or developing rapidly = flourishing.",
+          "traps": "B. diminishing: giảm dần; C. stagnating: đình trệ; D. fluctuating: biến động lên xuống",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 26: The word 'burgeoning' in paragraph 3 is CLOSEST in meaning to ______."
       },
       {
         "id": 27,
@@ -1771,14 +1736,12 @@
         "correctAnswer": "A. Instead of depriving humans of control, AI is reshaping the core duties of existing careers.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Viết lại câu: Thay vì tước bỏ vai trò của con người, AI đang tái định hình bản chất cốt lõi của công việc.",
-          "whyCorrect": "Câu A diễn đạt chính xác nghĩa của câu gốc: Instead of depriving humans of control (= Rather than eliminating human agency), reshaping the core duties (= transforming the fundamental nature of job responsibilities).",
-          "whyOthersWrong": [
-            "B sai nghĩa (will definitely remove)",
-            "C sai nghĩa (remain unchanged)",
-            "D đảo lộn quan hệ nhân quả"
-          ]
-        }
+          "translation": "Viết lại câu: Thay vì tước bỏ vai trò của con người, AI đang tái định hình bản chất cốt lõi của công việc.",
+          "correct": "Câu A diễn đạt chính xác nghĩa của câu gốc: Instead of depriving humans of control (= Rather than eliminating human agency), reshaping the core duties (= transforming the fundamental nature of job responsibilities).",
+          "traps": "B sai nghĩa (will definitely remove); C sai nghĩa (remain unchanged); D đảo lộn quan hệ nhân quả",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 27: Which of the following best paraphrases the underlined sentence in paragraph 3: 'Rather than eliminating human agency, artificial intelligence is transforming the fundamental nature of job responsibilities.'?"
       },
       {
         "id": 28,
@@ -1797,12 +1760,12 @@
         "correctAnswer": "B. It initially triggered public anxiety but ultimately spawned new economic fields.",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Thông tin đúng: Đoạn 3 nêu rõ cơ giới hóa nông nghiệp ban đầu gây ra lo lắng tương tự nhưng cuối cùng thúc đẩy các ngành kinh tế hoàn toàn mới.",
-          "whyCorrect": "Khớp với câu: 'initially spurred comparable anxieties, yet both transitions ultimately fostered entirely new economic sectors.'",
-          "whyOthersWrong": [
-            "A, C, D mâu thuẫn trực tiếp với dẫn chứng trong bài."
-          ]
-        }
+          "translation": "Thông tin đúng: Đoạn 3 nêu rõ cơ giới hóa nông nghiệp ban đầu gây ra lo lắng tương tự nhưng cuối cùng thúc đẩy các ngành kinh tế hoàn toàn mới.",
+          "correct": "Khớp với câu: 'initially spurred comparable anxieties, yet both transitions ultimately fostered entirely new economic sectors.'",
+          "traps": "A, C, D mâu thuẫn trực tiếp với dẫn chứng trong bài.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 28: According to paragraph 3, what happened during the historical mechanization of agriculture?"
       },
       {
         "id": 29,
@@ -1821,12 +1784,12 @@
         "correctAnswer": "A. Paragraph 1",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tìm đoạn: Đóng góp tài chính của AI (hơn 15 nghìn tỷ USD) được đề cập ở Đoạn 1.",
-          "whyCorrect": "Đoạn 1 viết: 'contribute over fifteen trillion dollars to the global economy.'",
-          "whyOthersWrong": [
-            "Các đoạn 2, 3, 4 không nói về con số đóng góp tài chính tổng thể."
-          ]
-        }
+          "translation": "Tìm đoạn: Đóng góp tài chính của AI (hơn 15 nghìn tỷ USD) được đề cập ở Đoạn 1.",
+          "correct": "Đoạn 1 viết: 'contribute over fifteen trillion dollars to the global economy.'",
+          "traps": "Các đoạn 2, 3, 4 không nói về con số đóng góp tài chính tổng thể.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 29: In which paragraph does the writer discuss the financial contribution of AI to the worldwide economy?"
       },
       {
         "id": 30,
@@ -1845,12 +1808,12 @@
         "correctAnswer": "D. Paragraph 4",
         "answer": 3,
         "explanation": {
-          "viTranslation": "Tìm đoạn: Năng lực khác biệt của con người (đồng cảm, tư duy đạo đức, phân định văn hóa) được đề cập ở Đoạn 4.",
-          "whyCorrect": "Đoạn 4 nêu: 'they lack empathy, ethical reasoning, and nuanced cultural discernment.'",
-          "whyOthersWrong": [
-            "Đoạn 1, 2, 3 không đi sâu vào các phẩm chất độc bản của trí tuệ con người."
-          ]
-        }
+          "translation": "Tìm đoạn: Năng lực khác biệt của con người (đồng cảm, tư duy đạo đức, phân định văn hóa) được đề cập ở Đoạn 4.",
+          "correct": "Đoạn 4 nêu: 'they lack empathy, ethical reasoning, and nuanced cultural discernment.'",
+          "traps": "Đoạn 1, 2, 3 không đi sâu vào các phẩm chất độc bản của trí tuệ con người.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 30: In which paragraph does the writer mention distinct human capabilities that machines cannot easily imitate?"
       },
       {
         "id": 31,
@@ -1869,12 +1832,12 @@
         "correctAnswer": "A. [I]",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Điền câu vào vị trí: Vị trí [I] ở cuối đoạn 1 là hợp lý nhất vì câu trước đang nói về việc đánh giá lại mục tiêu nền tảng của giáo dục.",
-          "whyCorrect": "Câu trước đó: 'prompted educators and policymakers to re-evaluate the foundational objectives of secondary and higher education.' Câu được điền kết nối bằng liên từ 'Consequently' chỉ kết quả trực tiếp.",
-          "whyOthersWrong": [
-            "Các vị trí [II], [III], [IV] thuộc về các khía cạnh tâm lý học hoặc thị trường lao động."
-          ]
-        }
+          "translation": "Điền câu vào vị trí: Vị trí [I] ở cuối đoạn 1 là hợp lý nhất vì câu trước đang nói về việc đánh giá lại mục tiêu nền tảng của giáo dục.",
+          "correct": "Câu trước đó: 'prompted educators and policymakers to re-evaluate the foundational objectives of secondary and higher education.' Câu được điền kết nối bằng liên từ 'Consequently' chỉ kết quả trực tiếp.",
+          "traps": "Các vị trí [II], [III], [IV] thuộc về các khía cạnh tâm lý học hoặc thị trường lao động.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 31: Where in the passage does the following sentence best fit?\n'Consequently, urban dwellers face exacerbated physiological discomfort during prolonged summer heatwaves.'\n[I], [II], [III], or [IV]?"
       },
       {
         "id": 32,
@@ -1893,12 +1856,12 @@
         "correctAnswer": "A. Instant digital answers risk depriving students of the vital intellectual struggle necessary for brain development.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tóm tắt Đoạn 2: Câu trả lời kỹ thuật số ăn sẵn có nguy cơ tước đi sự nỗ lực tư duy cần thiết để phát triển não bộ.",
-          "whyCorrect": "Đoạn 2 tập trung vào nguy cơ xói mòn tư duy sâu và tầm quan trọng của 'intellectual perseverance'.",
-          "whyOthersWrong": [
-            "B, C, D đều mang nghĩa trái ngược hoặc xuyên tạc nội dung đoạn văn."
-          ]
-        }
+          "translation": "Tóm tắt Đoạn 2: Câu trả lời kỹ thuật số ăn sẵn có nguy cơ tước đi sự nỗ lực tư duy cần thiết để phát triển não bộ.",
+          "correct": "Đoạn 2 tập trung vào nguy cơ xói mòn tư duy sâu và tầm quan trọng của 'intellectual perseverance'.",
+          "traps": "B, C, D đều mang nghĩa trái ngược hoặc xuyên tạc nội dung đoạn văn.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 32: Which of the following best summarizes Paragraph 2?"
       },
       {
         "id": 33,
@@ -1917,14 +1880,12 @@
         "correctAnswer": "B. Engaging critically with flawed AI outputs can actually strengthen students' evaluative skills.",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Suy luận: Việc chủ động soi xét các câu trả lời chưa hoàn thiện của AI sẽ giúp củng cố kỹ năng đánh giá phản biện của sinh viên.",
-          "whyCorrect": "Đoạn 3 chỉ ra: 'students are tasked with scrutinizing AI-generated texts, identifying factual errors, and exposing subtle algorithmic biases... foster metacognitive awareness.'",
-          "whyOthersWrong": [
-            "A trái ngược tinh thần bài viết",
-            "C sai sự thật",
-            "D trái ngược hoàn toàn."
-          ]
-        }
+          "translation": "Suy luận: Việc chủ động soi xét các câu trả lời chưa hoàn thiện của AI sẽ giúp củng cố kỹ năng đánh giá phản biện của sinh viên.",
+          "correct": "Đoạn 3 chỉ ra: 'students are tasked with scrutinizing AI-generated texts, identifying factual errors, and exposing subtle algorithmic biases... foster metacognitive awareness.'",
+          "traps": "A trái ngược tinh thần bài viết; C sai sự thật; D trái ngược hoàn toàn.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 33: What can be inferred from Paragraph 3 regarding the use of AI in universities?"
       },
       {
         "id": 34,
@@ -1943,12 +1904,12 @@
         "correctAnswer": "A. While AI presents challenges to traditional schooling, it ultimately underscores the enduring value of uniquely human qualities and adaptable thinking.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tóm tắt toàn bài: Dù AI đặt ra nhiều thách thức cho học đường truyền thống, nó càng làm nổi bật giá trị trường tồn của những phẩm chất người và tư duy linh hoạt thích ứng.",
-          "whyCorrect": "Bao quát toàn diện cả thách thức lẫn cơ hội, hướng đến thông điệp nhân văn ở đoạn kết.",
-          "whyOthersWrong": [
-            "B, C, D đều mang tính cực đoan và không phản ánh giọng điệu học thuật của tác giả."
-          ]
-        }
+          "translation": "Tóm tắt toàn bài: Dù AI đặt ra nhiều thách thức cho học đường truyền thống, nó càng làm nổi bật giá trị trường tồn của những phẩm chất người và tư duy linh hoạt thích ứng.",
+          "correct": "Bao quát toàn diện cả thách thức lẫn cơ hội, hướng đến thông điệp nhân văn ở đoạn kết.",
+          "traps": "B, C, D đều mang tính cực đoan và không phản ánh giọng điệu học thuật của tác giả.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 34: Which of the following best summarizes the entire passage?"
       },
       {
         "id": 35,
@@ -1967,14 +1928,12 @@
         "correctAnswer": "A. essential",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ 'indispensable' (không thể thiếu, tối quan trọng) ĐỒNG NGHĨA với 'essential'.",
-          "whyCorrect": "Indispensable = absolutely necessary = essential.",
-          "whyOthersWrong": [
-            "B. superfluous: thừa thãi",
-            "C. optional: tùy ý",
-            "D. negligible: không đáng kể"
-          ]
-        }
+          "translation": "Từ 'indispensable' (không thể thiếu, tối quan trọng) ĐỒNG NGHĨA với 'essential'.",
+          "correct": "Indispensable = absolutely necessary = essential.",
+          "traps": "B. superfluous: thừa thãi; C. optional: tùy ý; D. negligible: không đáng kể",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 35: The word 'indispensable' in paragraph 2 is CLOSEST in meaning to ______."
       },
       {
         "id": 36,
@@ -1993,12 +1952,12 @@
         "correctAnswer": "A. proactive",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ 'passive' (thụ động) TRÁI NGHĨA với 'proactive' (chủ động, tiên phong).",
-          "whyCorrect": "Passive = receiving action without active response <-> Proactive = taking the initiative.",
-          "whyOthersWrong": [
-            "B, C, D đều mang nét nghĩa tiêu cực hoặc thụ động tương đương."
-          ]
-        }
+          "translation": "Từ 'passive' (thụ động) TRÁI NGHĨA với 'proactive' (chủ động, tiên phong).",
+          "correct": "Passive = receiving action without active response <-> Proactive = taking the initiative.",
+          "traps": "B, C, D đều mang nét nghĩa tiêu cực hoặc thụ động tương đương.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 36: The word 'passive' in paragraph 2 is OPPOSITE in meaning to ______."
       },
       {
         "id": 37,
@@ -2017,12 +1976,12 @@
         "correctAnswer": "A. Collaborative learning environments",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ quy chiếu: 'In these collaborative learning environments...' -> 'These' quy chiếu trực tiếp về các môi trường học tập tương tác cộng tác.",
-          "whyCorrect": "Xuất hiện trực tiếp trong cụm danh từ 'these collaborative learning environments'.",
-          "whyOthersWrong": [
-            "B, C, D không khớp với ngữ cảnh diễn đạt trong đoạn 3."
-          ]
-        }
+          "translation": "Từ quy chiếu: 'In these collaborative learning environments...' -> 'These' quy chiếu trực tiếp về các môi trường học tập tương tác cộng tác.",
+          "correct": "Xuất hiện trực tiếp trong cụm danh từ 'these collaborative learning environments'.",
+          "traps": "B, C, D không khớp với ngữ cảnh diễn đạt trong đoạn 3.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 37: The word 'These' in paragraph 3 refers to ______."
       },
       {
         "id": 38,
@@ -2041,12 +2000,12 @@
         "correctAnswer": "B. The ability to learn, unlearn, and relearn with agility",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Thông tin đúng: Đoạn 4 nêu rõ điều giữ giá trị vĩnh viễn là khả năng học hỏi, loại bỏ cái cũ và học lại một cách linh hoạt.",
-          "whyCorrect": "Khớp câu: 'What remains permanently valuable is the capacity to learn, unlearn, and relearn with speed and flexibility.'",
-          "whyOthersWrong": [
-            "A, C, D trái ngược hoàn toàn với lời khuyên thích ứng của đoạn văn."
-          ]
-        }
+          "translation": "Thông tin đúng: Đoạn 4 nêu rõ điều giữ giá trị vĩnh viễn là khả năng học hỏi, loại bỏ cái cũ và học lại một cách linh hoạt.",
+          "correct": "Khớp câu: 'What remains permanently valuable is the capacity to learn, unlearn, and relearn with speed and flexibility.'",
+          "traps": "A, C, D trái ngược hoàn toàn với lời khuyên thích ứng của đoạn văn.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 38: According to paragraph 4, what quality remains permanently valuable in the modern job market?"
       },
       {
         "id": 39,
@@ -2065,12 +2024,12 @@
         "correctAnswer": "A. To advocate for cultivating critical agility and unique human empathy alongside AI.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mục đích của tác giả: Kêu gọi rèn luyện sự linh hoạt phản biện và lòng thấu cảm độc bản của con người bên cạnh sự phát triển của AI.",
-          "whyCorrect": "Xuyên suốt bài đọc, tác giả hướng tới việc biến AI thành công cụ thúc đẩy tiềm năng sáng tạo của con người.",
-          "whyOthersWrong": [
-            "B, C, D là các quan điểm sai lệch và cực đoan không có trong bài."
-          ]
-        }
+          "translation": "Mục đích của tác giả: Kêu gọi rèn luyện sự linh hoạt phản biện và lòng thấu cảm độc bản của con người bên cạnh sự phát triển của AI.",
+          "correct": "Xuyên suốt bài đọc, tác giả hướng tới việc biến AI thành công cụ thúc đẩy tiềm năng sáng tạo của con người.",
+          "traps": "B, C, D là các quan điểm sai lệch và cực đoan không có trong bài.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 39: What is the primary purpose of the author in this passage?"
       },
       {
         "id": 40,
@@ -2089,13 +2048,80 @@
         "correctAnswer": "A. Biophilic Cities: Restoring Urban Biodiversity for a Resilient Tomorrow",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tiêu đề phù hợp nhất: Kỷ Nguyên Của Thuật Toán: Tái Định Hình Giáo Dục Và Tiềm Năng Con Người.",
-          "whyCorrect": "Tiêu đề này bao hàm đầy đủ khía cạnh học thuật, giáo dục và tiềm năng nhân bản được phân tích trong bài.",
-          "whyOthersWrong": [
-            "B, C mang tính giật gân sai lệch",
-            "D quá hạn hẹp về mặt lịch sử"
-          ]
-        }
+          "translation": "Tiêu đề phù hợp nhất: Kỷ Nguyên Của Thuật Toán: Tái Định Hình Giáo Dục Và Tiềm Năng Con Người.",
+          "correct": "Tiêu đề này bao hàm đầy đủ khía cạnh học thuật, giáo dục và tiềm năng nhân bản được phân tích trong bài.",
+          "traps": "B, C mang tính giật gân sai lệch; D quá hạn hẹp về mặt lịch sử",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 40: Which of the following is the best title for the passage?"
+      }
+    ],
+    "sections": [
+      {
+        "sectionId": 1,
+        "title": "Phần 1: Quảng Cáo Điền Khuyết (Advertisement Cloze)",
+        "instruction": "Read the following advertisement and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 1 to 6.",
+        "questionRange": [
+          1,
+          6
+        ],
+        "passageTitle": "ECOSMART LIVING EXPO 2026",
+        "passage": "ECOSMART LIVING EXPO 2026\nDiscover practical ways to transition towards a sustainable lifestyle at the city's largest green exhibition!\n• Learn how cutting-edge renewable technologies are (1) ______ carbon emissions in residential districts.\n• Attend interactive workshops led by (2) ______ from international conservation organizations.\n• Explore energy-efficient devices, (3) ______ by local green start-ups.\n• Connect with community activists who work tirelessly (4) ______ the defense of environmental health.\n• The organizing committee hopes to help citizens (5) ______ an active contribution to global reforestation.\n• Register today (6) ______ insightful materials and free saplings for your home garden!\n(Adapted from BBC Future)"
+      },
+      {
+        "sectionId": 2,
+        "title": "Phần 2: Tờ Rơi / Thông Báo Điền Khuyết (Leaflet Cloze)",
+        "instruction": "Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 7 to 12.",
+        "questionRange": [
+          7,
+          12
+        ],
+        "passageTitle": "PRACTICAL ZERO-WASTE LIVING",
+        "passage": "PRACTICAL ZERO-WASTE LIVING: AN ACTIONABLE GUIDE\nEvery household can take simple, impactful steps to reduce daily ecological footprints:\n• Minimize Single-Use Plastics: When shopping, choose reusable cloth bags and avoid (7) ______ plastic wrappings.\n• Compost Kitchen Scraps: Instead of throwing away vegetable peelings, try to (8) ______ home composting in your backyard.\n• Energy Conservation: High household energy (9) ______ can be curtailed by switching to smart LED bulbs.\n• Smart Commuting: (10) ______ the convenience of private motorbikes, cycling significantly cleans local air.\n• Repair Rather than Replace: Fix minor appliance defects to (11) ______ with the principles of the circular economy.\n• Community Engagement: Share surplus food items with neighbours to avoid needless food (12) ______.\n(Adapted from ReadTheory Grade 11-12)"
+      },
+      {
+        "sectionId": 3,
+        "title": "Phần 3: Sắp Xếp Trật Tự Câu / Đoạn Văn / Hội Thoại (Sentence Rearrangement)",
+        "instruction": "Mark the letter A, B, C or D on your answer sheet to indicate the correct arrangement of sentences to make a meaningful conversation or paragraph.",
+        "questionRange": [
+          13,
+          17
+        ],
+        "passageTitle": null,
+        "passage": ""
+      },
+      {
+        "sectionId": 4,
+        "title": "Phần 4: Điền Mệnh Đề / Cụm Từ Vào Đoạn Văn (Passage Clause Cloze)",
+        "instruction": "Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.",
+        "questionRange": [
+          18,
+          22
+        ],
+        "passageTitle": "BIOPHILIC URBAN PLANNING AND SUSTAINABILITY",
+        "passage": "BIOPHILIC URBAN PLANNING AND SUSTAINABILITY\nModern metropolises are undergoing a monumental architectural transformation known as biophilic urbanism. Rather than isolating urban inhabitants from natural environments, contemporary planners are integrating living vertical forests into high-rise facades, (18) ______. \nRecent environmental assessments demonstrate that buildings enveloped in vegetative foliage reduce indoor temperatures by up to four degrees Celsius. (19) ______, municipal authorities can dramatically curtail overall air conditioning energy expenditures. \nFurthermore, living green walls actively trap microscopic airborne pollutants, (20) ______. \nTherefore, progressive urban designers are advocating for mandatory biological density minimums in new commercial permits. (21) ______, metropolitan centers will become resilient sanctuaries capable of mitigating severe heatwaves. Ultimately, the survival of future urban civilizations depends not on conquering nature, (22) ______.\n(Adapted from National Geographic)"
+      },
+      {
+        "sectionId": 5,
+        "title": "Phần 5: Bài Đọc Hiểu 1 (Reading Comprehension 1 - 8 câu)",
+        "instruction": "Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the correct answer to each of the questions from 23 to 30.",
+        "questionRange": [
+          23,
+          30
+        ],
+        "passageTitle": "THE GLOBAL RENEWABLE ENERGY TRANSITION",
+        "passage": "Paragraph 1:\nThe global transition toward renewable energy has gained unprecedented momentum over the past decade. Propelled by steep cost reductions in photovoltaic solar panels and offshore wind turbines, clean power is rapidly outcompeting fossil fuels across major industrial economies. Energy analysts project that by 2040, renewable sources will satisfy the majority of planetary electrical consumption.\n\nParagraph 2:\nHowever, modernizing electric grids to accommodate weather-dependent energy generation remains a formidable engineering challenge. Critics frequently highlight the intermittency problem: solar panels cease production at dusk, while wind velocities fluctuate unpredictably. They warn that without massive capital investments into advanced energy storage batteries, unstable grid frequencies could trigger catastrophic industrial blackouts.\n\nParagraph 3:\nFortunately, decentralized smart microgrids are proving to be a revolutionary antidote to grid vulnerability. During localized power failures, autonomous municipal microgrids can instantly decouple from central transmission lines and continue supplying essential electricity to hospitals and emergency shelters. Furthermore, peer-to-peer trading platforms allow homeowners with rooftop solar systems to sell surplus power directly to neighbors. Rather than relying on monopolized utility conglomerates, local communities are reclaiming sovereignty over energy generation.\n\nParagraph 4:\nTo accelerate this clean transition, governments must streamline bureaucratic permitting procedures and eliminate legacy fossil fuel subsidies. Furthermore, citizens should cultivate an energy-conscious ethos, minimizing wasteful consumption during peak grid hours. Achieving a carbon-neutral planet is not merely an engineering achievement; it demands collective political willpower and widespread environmental stewardship.\n(Adapted from BBC Future)"
+      },
+      {
+        "sectionId": 6,
+        "title": "Phần 6: Bài Đọc Hiểu 2 (Reading Comprehension 2 - 10 câu Phân Hóa Cao)",
+        "instruction": "Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the correct answer to each of the questions from 31 to 40.",
+        "questionRange": [
+          31,
+          40
+        ],
+        "passageTitle": "RESTORING URBAN BIODIVERSITY",
+        "passage": "Paragraph 1:\nUrban ecosystems across the globe are confronting severe environmental stressors compounded by accelerating climate instability. Concrete pavements and asphalt thoroughfares absorb solar radiation during daylight hours, creating elevated temperature microclimates known as urban heat islands. [I] This thermal trapping phenomenon elevates air conditioning energy demands and exacerbates respiratory distress among vulnerable demographics.\n\nParagraph 2:\nIn response, landscape ecologists are championing the systematic restoration of urban biodiversity through interconnected green corridors. When municipal authorities replace vacant concrete expanses with native wildflower meadows and multi-layered tree canopies, local ambient temperatures decrease markedly. [II] Field observations confirm that diverse native vegetative assemblages support pollinating insects, absorb storm water runoff, and sequester significant quantities of carbon.\n\nParagraph 3:\nNevertheless, urban greening projects must navigate intricate socioeconomic dimensions to prevent unintended green gentrification. In several prominent cities, the installation of scenic parks has catalyzed rapid escalation in local property values, unintentionally displacing low-income residents who originally inhabited the neighborhoods. [III] Progressive urban planners emphasize that environmental justice must accompany ecological design, ensuring that affordable housing protections accompany municipal tree-planting initiatives.\n\nParagraph 4:\nFurthermore, urban wildlife conservation requires active citizen participation and community stewardship. Citizen science platforms allow residents to document avian migratory patterns, monitor insect diversity, and report invasive plant incursions using mobile devices. [IV] Through direct involvement in neighborhood bio-monitoring, urban dwellers cultivate profound psychological attachments to non-human species.\n\nParagraph 5:\nUltimately, modern cities must be reconceptualized not as sterile concrete deserts divorced from nature, but as vibrant, symbiotic ecosystems where human culture and biological diversity flourish simultaneously. Embracing biodiversity restoration within metropolitan boundaries will safeguard climatic resilience while enriching the spiritual and emotional wellbeing of future urban generations.\n(Adapted from National Geographic)"
       }
     ]
   },
@@ -2131,15 +2157,12 @@
         "correctAnswer": "A. actively reviving",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Chọn dạng đúng của từ: 'that are revolutionizing industries' (đang cách mạng hóa các ngành công nghiệp).",
-          "grammarFormula": "Thì Hiện tại tiếp diễn: S + be + V-ing diễn tả hành động đang biến đổi nhanh chóng.",
-          "whyCorrect": "Sau động từ to be 'are' cần V-ing để tạo thành thì hiện tại tiếp diễn với tân ngữ 'industries'.",
-          "whyOthersWrong": [
-            "A là động từ nguyên mẫu",
-            "C là tính từ",
-            "D là danh từ"
-          ]
-        }
+          "translation": "Chọn dạng đúng của từ: 'that are revolutionizing industries' (đang cách mạng hóa các ngành công nghiệp).",
+          "correct": "Sau động từ to be 'are' cần V-ing để tạo thành thì hiện tại tiếp diễn với tân ngữ 'industries'.",
+          "traps": "A là động từ nguyên mẫu; C là tính từ; D là danh từ",
+          "formula": "Thì Hiện tại tiếp diễn: S + be + V-ing diễn tả hành động đang biến đổi nhanh chóng."
+        },
+        "question": "Question 1: Mark the letter A, B, C or D to indicate the correct word to fill in blank (1)."
       },
       {
         "id": 2,
@@ -2158,13 +2181,12 @@
         "correctAnswer": "A. distinguished cultural delegates",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Chọn trật tự tính từ/danh từ: 'những học giả quốc tế nổi tiếng'.",
-          "grammarFormula": "Trật tự từ: Opinion (renowned) + Origin/Classification (international) + Noun (scholars).",
-          "whyCorrect": "Tính từ chỉ quan điểm/đánh giá 'renowned' đứng trước tính từ phân loại/nguồn gốc 'international'.",
-          "whyOthersWrong": [
-            "B, C, D sai quy tắc sắp xếp cụm danh từ trong tiếng Anh."
-          ]
-        }
+          "translation": "Chọn trật tự tính từ/danh từ: 'những học giả quốc tế nổi tiếng'.",
+          "correct": "Tính từ chỉ quan điểm/đánh giá 'renowned' đứng trước tính từ phân loại/nguồn gốc 'international'.",
+          "traps": "B, C, D sai quy tắc sắp xếp cụm danh từ trong tiếng Anh.",
+          "formula": "Trật tự từ: Opinion (renowned) + Origin/Classification (international) + Noun (scholars)."
+        },
+        "question": "Question 2: Mark the letter A, B, C or D to indicate the correct phrase to fill in blank (2)."
       },
       {
         "id": 3,
@@ -2183,15 +2205,12 @@
         "correctAnswer": "B. crafted",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Rút gọn mệnh đề quan hệ dạng bị động: 'practical skills in machine learning, which are conducted by top engineers'.",
-          "grammarFormula": "Rút gọn mệnh đề quan hệ thể bị động dùng Quá khứ phân từ (V-ed/V3).",
-          "whyCorrect": "Kỹ năng được giảng dạy/hướng dẫn bởi các kỹ sư hàng đầu nên dùng phân từ quá khứ 'conducted'.",
-          "whyOthersWrong": [
-            "A là chủ động (V-ing)",
-            "C chỉ mục đích",
-            "D thừa động từ to be khi chưa có đại từ quan hệ"
-          ]
-        }
+          "translation": "Rút gọn mệnh đề quan hệ dạng bị động: 'practical skills in machine learning, which are conducted by top engineers'.",
+          "correct": "Kỹ năng được giảng dạy/hướng dẫn bởi các kỹ sư hàng đầu nên dùng phân từ quá khứ 'conducted'.",
+          "traps": "A là chủ động (V-ing); C chỉ mục đích; D thừa động từ to be khi chưa có đại từ quan hệ",
+          "formula": "Rút gọn mệnh đề quan hệ thể bị động dùng Quá khứ phân từ (V-ed/V3)."
+        },
+        "question": "Question 3: Mark the letter A, B, C or D to indicate the correct option for blank (3)."
       },
       {
         "id": 4,
@@ -2210,13 +2229,12 @@
         "correctAnswer": "A. in",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cụm cố định: 'take pride in sth' (tự hào về việc gì).",
-          "grammarFormula": "Idiom/Prepositional phrase: at the forefront of sth = dẫn đầu trong lĩnh vực nào.",
-          "whyCorrect": "Đi với cụm 'the forefront of' bắt buộc dùng giới từ 'at'.",
-          "whyOthersWrong": [
-            "B, C, D không kết hợp với 'the forefront of'."
-          ]
-        }
+          "translation": "Cụm cố định: 'take pride in sth' (tự hào về việc gì).",
+          "correct": "Đi với cụm 'the forefront of' bắt buộc dùng giới từ 'at'.",
+          "traps": "B, C, D không kết hợp với 'the forefront of'.",
+          "formula": "Idiom/Prepositional phrase: at the forefront of sth = dẫn đầu trong lĩnh vực nào."
+        },
+        "question": "Question 4: Mark the letter A, B, C or D to indicate the correct preposition for blank (4)."
       },
       {
         "id": 5,
@@ -2235,13 +2253,12 @@
         "correctAnswer": "A. gain",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Collocation: 'gain an insight into sth' (thu nhận được hiểu biết sâu sắc về cái gì).",
-          "grammarFormula": "Collocation: make a decision (đưa ra quyết định).",
-          "whyCorrect": "'decision' luôn đi với động từ 'make'.",
-          "whyOthersWrong": [
-            "take/give/do không tạo thành collocation chuẩn với decision trong ngữ cảnh này."
-          ]
-        }
+          "translation": "Collocation: 'gain an insight into sth' (thu nhận được hiểu biết sâu sắc về cái gì).",
+          "correct": "'decision' luôn đi với động từ 'make'.",
+          "traps": "take/give/do không tạo thành collocation chuẩn với decision trong ngữ cảnh này.",
+          "formula": "Collocation: make a decision (đưa ra quyết định)."
+        },
+        "question": "Question 5: Mark the letter A, B, C or D to indicate the correct verb for blank (5)."
       },
       {
         "id": 6,
@@ -2260,13 +2277,12 @@
         "correctAnswer": "B. to experience",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Cấu trúc danh từ chỉ cơ hội: 'opportunity to do sth' (cơ hội để làm gì).",
-          "grammarFormula": "Noun + to-infinitive: opportunity / chance + To-V.",
-          "whyCorrect": "Sau 'opportunity' dùng 'to gain' để chỉ mục đích hoặc nội dung của cơ hội.",
-          "whyOthersWrong": [
-            "A, C, D không đúng cấu trúc ngữ pháp chuẩn sau danh từ opportunity."
-          ]
-        }
+          "translation": "Cấu trúc danh từ chỉ cơ hội: 'opportunity to do sth' (cơ hội để làm gì).",
+          "correct": "Sau 'opportunity' dùng 'to gain' để chỉ mục đích hoặc nội dung của cơ hội.",
+          "traps": "A, C, D không đúng cấu trúc ngữ pháp chuẩn sau danh từ opportunity.",
+          "formula": "Noun + to-infinitive: opportunity / chance + To-V."
+        },
+        "question": "Question 6: Mark the letter A, B, C or D to indicate the correct form for blank (6)."
       },
       {
         "id": 7,
@@ -2285,15 +2301,12 @@
         "correctAnswer": "A. widespread",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Lượng từ đi với danh từ đếm được số nhiều 'areas': 'other areas' (những lĩnh vực khác).",
-          "grammarFormula": "Other + N(plural) = những cái/người khác.",
-          "whyCorrect": "'areas' là danh từ đếm được số nhiều nên chọn 'other'.",
-          "whyOthersWrong": [
-            "B (another) đi với danh từ số ít",
-            "C (every) đi với danh từ số ít",
-            "D (much) đi với danh từ không đếm được"
-          ]
-        }
+          "translation": "Lượng từ đi với danh từ đếm được số nhiều 'areas': 'other areas' (những lĩnh vực khác).",
+          "correct": "'areas' là danh từ đếm được số nhiều nên chọn 'other'.",
+          "traps": "B (another) đi với danh từ số ít; C (every) đi với danh từ số ít; D (much) đi với danh từ không đếm được",
+          "formula": "Other + N(plural) = những cái/người khác."
+        },
+        "question": "Question 7: Mark the letter A, B, C or D to indicate the correct quantifier for blank (7)."
       },
       {
         "id": 8,
@@ -2312,15 +2325,12 @@
         "correctAnswer": "A. put together",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cụm động từ: put together short educational clips = biên tập/lắp ráp các video ngắn.",
-          "grammarFormula": "Take up sth = bắt đầu một hoạt động/học một môn mới.",
-          "whyCorrect": "'take up new online courses' mang nghĩa chủ động theo học các khóa học mới.",
-          "whyOthersWrong": [
-            "B. look up: tra cứu",
-            "C. give up: từ bỏ",
-            "D. put out: dập tắt"
-          ]
-        }
+          "translation": "Cụm động từ: put together short educational clips = biên tập/lắp ráp các video ngắn.",
+          "correct": "'take up new online courses' mang nghĩa chủ động theo học các khóa học mới.",
+          "traps": "B. look up: tra cứu; C. give up: từ bỏ; D. put out: dập tắt",
+          "formula": "Take up sth = bắt đầu một hoạt động/học một môn mới."
+        },
+        "question": "Question 8: Mark the letter A, B, C or D to indicate the correct phrasal verb for blank (8)."
       },
       {
         "id": 9,
@@ -2339,15 +2349,12 @@
         "correctAnswer": "A. sensitivity",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Collocation: 'cultural sensitivity' (sự nhạy bén/tinh tế về văn hóa).",
-          "grammarFormula": "Collocation học thuật: cognitive agility = khả năng thích ứng nhận thức linh hoạt.",
-          "whyCorrect": "Người lao động có tư duy nhạy bén (agility) sẽ dễ dàng chuyển đổi sang các vai trò mới.",
-          "whyOthersWrong": [
-            "A. hesitation: do dự",
-            "C. ignorance: sự thiếu hiểu biết",
-            "D. reluctance: sự miễn cưỡng"
-          ]
-        }
+          "translation": "Collocation: 'cultural sensitivity' (sự nhạy bén/tinh tế về văn hóa).",
+          "correct": "Người lao động có tư duy nhạy bén (agility) sẽ dễ dàng chuyển đổi sang các vai trò mới.",
+          "traps": "A. hesitation: do dự; C. ignorance: sự thiếu hiểu biết; D. reluctance: sự miễn cưỡng",
+          "formula": "Collocation học thuật: cognitive agility = khả năng thích ứng nhận thức linh hoạt."
+        },
+        "question": "Question 9: Mark the letter A, B, C or D to indicate the correct word for blank (9)."
       },
       {
         "id": 10,
@@ -2366,14 +2373,12 @@
         "correctAnswer": "A. In spite of",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mệnh đề chỉ sự nhượng bộ đi với cụm danh từ: 'In spite of the rapid pace...' (Mặc cho tốc độ thay đổi nhanh chóng...).",
-          "grammarFormula": "In spite of + Noun Phrase (thay vì Although + Clause).",
-          "whyCorrect": "Phía sau là cụm danh từ 'the rapid pace of technological disruption' và mang nghĩa nhượng bộ, người học chủ động vẫn tìm thấy cơ hội.",
-          "whyOthersWrong": [
-            "B và C phải đi với một mệnh đề có S + V",
-            "D (Instead of) sai nghĩa (thay vì)"
-          ]
-        }
+          "translation": "Mệnh đề chỉ sự nhượng bộ đi với cụm danh từ: 'In spite of the rapid pace...' (Mặc cho tốc độ thay đổi nhanh chóng...).",
+          "correct": "Phía sau là cụm danh từ 'the rapid pace of technological disruption' và mang nghĩa nhượng bộ, người học chủ động vẫn tìm thấy cơ hội.",
+          "traps": "B và C phải đi với một mệnh đề có S + V; D (Instead of) sai nghĩa (thay vì)",
+          "formula": "In spite of + Noun Phrase (thay vì Although + Clause)."
+        },
+        "question": "Question 10: Mark the letter A, B, C or D to indicate the correct connector for blank (10)."
       },
       {
         "id": 11,
@@ -2392,15 +2397,12 @@
         "correctAnswer": "A. interact",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cụm từ: 'interact with elders' (tương tác với các bậc cao niên).",
-          "grammarFormula": "Connect with sb = thiết lập mối quan hệ liên lạc, kết nối.",
-          "whyCorrect": "Trong xây dựng mạng lưới nghề nghiệp, 'connect with' là cách diễn đạt tự nhiên và chính xác nhất.",
-          "whyOthersWrong": [
-            "A. interact with thường dùng cho tương tác tức thời",
-            "C. collide with: va chạm",
-            "D. conflict with: xung đột"
-          ]
-        }
+          "translation": "Cụm từ: 'interact with elders' (tương tác với các bậc cao niên).",
+          "correct": "Trong xây dựng mạng lưới nghề nghiệp, 'connect with' là cách diễn đạt tự nhiên và chính xác nhất.",
+          "traps": "A. interact with thường dùng cho tương tác tức thời; C. collide with: va chạm; D. conflict with: xung đột",
+          "formula": "Connect with sb = thiết lập mối quan hệ liên lạc, kết nối."
+        },
+        "question": "Question 11: Mark the letter A, B, C or D to indicate the correct phrase for blank (11)."
       },
       {
         "id": 12,
@@ -2419,15 +2421,12 @@
         "correctAnswer": "A. disappearance",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ vựng: 'artisanal disappearance' (sự biến mất không thể đảo ngược của các ngành thủ công mỹ nghệ).",
-          "grammarFormula": "Collocation: digital innovations = các đổi mới sáng tạo công nghệ.",
-          "whyCorrect": "Phù hợp với chủ đề công nghệ và trí tuệ nhân tạo.",
-          "whyOthersWrong": [
-            "B. appliances: đồ gia dụng",
-            "C. ingredients: nguyên liệu nấu ăn",
-            "D. instruments: nhạc cụ/dụng cụ đo"
-          ]
-        }
+          "translation": "Từ vựng: 'artisanal disappearance' (sự biến mất không thể đảo ngược của các ngành thủ công mỹ nghệ).",
+          "correct": "Phù hợp với chủ đề công nghệ và trí tuệ nhân tạo.",
+          "traps": "B. appliances: đồ gia dụng; C. ingredients: nguyên liệu nấu ăn; D. instruments: nhạc cụ/dụng cụ đo",
+          "formula": "Collocation: digital innovations = các đổi mới sáng tạo công nghệ."
+        },
+        "question": "Question 12: Mark the letter A, B, C or D to indicate the correct noun for blank (12)."
       },
       {
         "id": 13,
@@ -2448,13 +2447,12 @@
         "correctAnswer": "A. b - a - c",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Sắp xếp logic: (b) Nêu dự định học khoa học dữ liệu -> (a) Khen ngợi và hỏi đã chọn khóa nào chưa -> (c) Trả lời đã đăng ký khóa Python.",
-          "grammarFormula": "Nguyên lý hội thoại: Statement of intention -> Follow-up question -> Direct answer.",
-          "whyCorrect": "Thứ tự b - a - c tạo mạch hội thoại mạch lạc và chuẩn ngữ dụng học.",
-          "whyOthersWrong": [
-            "B, C, D đều đảo lộn câu trả lời trước câu hỏi hoặc đặt câu hỏi trước khi người nói nêu chủ đề."
-          ]
-        }
+          "translation": "Sắp xếp logic: (b) Nêu dự định học khoa học dữ liệu -> (a) Khen ngợi và hỏi đã chọn khóa nào chưa -> (c) Trả lời đã đăng ký khóa Python.",
+          "correct": "Thứ tự b - a - c tạo mạch hội thoại mạch lạc và chuẩn ngữ dụng học.",
+          "traps": "B, C, D đều đảo lộn câu trả lời trước câu hỏi hoặc đặt câu hỏi trước khi người nói nêu chủ đề.",
+          "formula": "Nguyên lý hội thoại: Statement of intention -> Follow-up question -> Direct answer."
+        },
+        "question": "Question 13: Mark the letter A, B, C or D to indicate the correct arrangement of utterances to make a meaningful exchange:\n\na. That's a great initiative! Have you decided which online course to enroll in?\nb. I'm planning to enhance my data science skills this summer to prepare for future jobs.\nc. Yes, I've just signed up for an advanced Python course recommended by my tutor."
       },
       {
         "id": 14,
@@ -2477,13 +2475,12 @@
         "correctAnswer": "A. b - d - c - a - e",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mạch hội thoại: (b) Đặt câu hỏi AI có thay thế con người không -> (d) Trả lời không hoàn toàn vì thiếu thấu cảm -> (c) Đồng ý vì chiều sâu cảm xúc không thể lập trình -> (a) Khẳng định thêm tác vụ lặp đi lặp lại đã bị thay -> (e) Kết luận cần rèn kỹ năng giao tiếp.",
-          "grammarFormula": "Cấu trúc trao đổi quan điểm phản biện (Discussion & Concurrence).",
-          "whyCorrect": "Thứ tự b - d - c - a - e phát triển ý tăng dần và kết luận thuyết phục.",
-          "whyOthersWrong": [
-            "B, C, D làm đứt gãy tính liên kết nhân quả giữa câu hỏi và phản hồi trực tiếp."
-          ]
-        }
+          "translation": "Mạch hội thoại: (b) Đặt câu hỏi AI có thay thế con người không -> (d) Trả lời không hoàn toàn vì thiếu thấu cảm -> (c) Đồng ý vì chiều sâu cảm xúc không thể lập trình -> (a) Khẳng định thêm tác vụ lặp đi lặp lại đã bị thay -> (e) Kết luận cần rèn kỹ năng giao tiếp.",
+          "correct": "Thứ tự b - d - c - a - e phát triển ý tăng dần và kết luận thuyết phục.",
+          "traps": "B, C, D làm đứt gãy tính liên kết nhân quả giữa câu hỏi và phản hồi trực tiếp.",
+          "formula": "Cấu trúc trao đổi quan điểm phản biện (Discussion & Concurrence)."
+        },
+        "question": "Question 14: Mark the letter A, B, C or D to indicate the correct arrangement of utterances to make a meaningful conversation:\n\na. Definitely. In fact, many repetitive tasks are already handled by software.\nb. Do you think AI will replace all human workers in the creative sector?\nc. I agree. Emotional depth and authentic human experiences cannot be coded.\nd. Not entirely, because machines still lack genuine empathy and cultural nuances.\ne. Exactly, which is why future professionals must hone interpersonal skills."
       },
       {
         "id": 15,
@@ -2506,13 +2503,12 @@
         "correctAnswer": "A. b - d - a - e - c",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Trật tự thư xin việc: (b) Lời chào & mục đích viết thư -> (d) Lý do quan tâm đến dự án -> (a) Nêu năng lực chuyên môn bổ sung -> (e) Bày tỏ mong muốn phỏng vấn -> (c) Lời cảm ơn kết thư.",
-          "grammarFormula": "Chuẩn mực viết thư học thuật (Formal Cover Letter Structure).",
-          "whyCorrect": "b - d - a - e - c tuân thủ đúng chuẩn cấu trúc mở - thân - kết của một email trang trọng.",
-          "whyOthersWrong": [
-            "B, C, D sắp xếp sai vị trí mở đầu hoặc lời kết cảm ơn."
-          ]
-        }
+          "translation": "Trật tự thư xin việc: (b) Lời chào & mục đích viết thư -> (d) Lý do quan tâm đến dự án -> (a) Nêu năng lực chuyên môn bổ sung -> (e) Bày tỏ mong muốn phỏng vấn -> (c) Lời cảm ơn kết thư.",
+          "correct": "b - d - a - e - c tuân thủ đúng chuẩn cấu trúc mở - thân - kết của một email trang trọng.",
+          "traps": "B, C, D sắp xếp sai vị trí mở đầu hoặc lời kết cảm ơn.",
+          "formula": "Chuẩn mực viết thư học thuật (Formal Cover Letter Structure)."
+        },
+        "question": "Question 15: Mark the letter A, B, C or D to indicate the correct order of sentences to form a coherent formal email:\n\na. Furthermore, my academic background in computer science has equipped me with solid analytical skills.\nb. Dear Dr. Harrison, I am writing to express my eager interest in the AI Research Assistant position.\nc. Thank you very much for your time and consideration of my application.\nd. Having followed your lab's publications on ethical algorithms, I am eager to contribute to your ongoing project.\ne. I look forward to the possibility of discussing my qualifications in an interview."
       },
       {
         "id": 16,
@@ -2535,13 +2531,12 @@
         "correctAnswer": "A. b - d - a - c - e",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mạch nghị luận: (b) Nêu hiện tượng tự động hóa -> (d) Hệ quả trực tiếp là kỹ năng cũ lỗi thời -> (a) Người lao động buộc phải học tập liên tục -> (c) Chính phủ cần hỗ trợ đào tạo bổ sung -> (e) Cảnh báo nếu không hành động khoảng cách giàu nghèo sẽ gia tăng.",
-          "grammarFormula": "Problem -> Immediate effect -> Individual response -> Policy solution -> Warning/Conclusion.",
-          "whyCorrect": "b - d - a - c - e tạo thành đoạn văn lập luận chặt chẽ và logic.",
-          "whyOthersWrong": [
-            "B, C, D đặt hệ quả và giải pháp không tương ứng với các từ nối Consequently / In addition."
-          ]
-        }
+          "translation": "Mạch nghị luận: (b) Nêu hiện tượng tự động hóa -> (d) Hệ quả trực tiếp là kỹ năng cũ lỗi thời -> (a) Người lao động buộc phải học tập liên tục -> (c) Chính phủ cần hỗ trợ đào tạo bổ sung -> (e) Cảnh báo nếu không hành động khoảng cách giàu nghèo sẽ gia tăng.",
+          "correct": "b - d - a - c - e tạo thành đoạn văn lập luận chặt chẽ và logic.",
+          "traps": "B, C, D đặt hệ quả và giải pháp không tương ứng với các từ nối Consequently / In addition.",
+          "formula": "Problem -> Immediate effect -> Individual response -> Policy solution -> Warning/Conclusion."
+        },
+        "question": "Question 16: Mark the letter A, B, C or D to indicate the best arrangement of sentences to create a cohesive paragraph:\n\na. Consequently, workers are compelled to embrace continuous education throughout their careers.\nb. Technological automation is transforming modern workplace environments at a staggering rate.\nc. In addition, governments should establish subsidized training programs to assist displaced laborers.\nd. This rapid disruption often results in the immediate obsolescence of traditional job functions.\ne. Without such proactive interventions, the socioeconomic gap between skilled and unskilled workers will widen."
       },
       {
         "id": 17,
@@ -2564,13 +2559,12 @@
         "correctAnswer": "A. c - d - a - b - e",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Trật tự học thuật: (c) Câu chủ đề về đạo đức AI -> (d) Luận điểm 1: Dữ liệu huấn luyện thiên vị -> (a) Luận điểm 2: Thiếu tính minh bạch -> (b) Yêu cầu giải pháp giám sát -> (e) Kết luận thành lập ủy ban liên ngành.",
-          "grammarFormula": "Topic sentence -> Primary argument -> Secondary argument -> General solution -> Concrete recommendation.",
-          "whyCorrect": "c - d - a - b - e đảm bảo tính mạch lạc tuyệt đối với các liên từ Primarily -> Secondly -> Therefore.",
-          "whyOthersWrong": [
-            "B, C, D sai thứ tự liệt kê giữa Primarily (trước hết) và Secondly (thứ hai)."
-          ]
-        }
+          "translation": "Trật tự học thuật: (c) Câu chủ đề về đạo đức AI -> (d) Luận điểm 1: Dữ liệu huấn luyện thiên vị -> (a) Luận điểm 2: Thiếu tính minh bạch -> (b) Yêu cầu giải pháp giám sát -> (e) Kết luận thành lập ủy ban liên ngành.",
+          "correct": "c - d - a - b - e đảm bảo tính mạch lạc tuyệt đối với các liên từ Primarily -> Secondly -> Therefore.",
+          "traps": "B, C, D sai thứ tự liệt kê giữa Primarily (trước hết) và Secondly (thứ hai).",
+          "formula": "Topic sentence -> Primary argument -> Secondary argument -> General solution -> Concrete recommendation."
+        },
+        "question": "Question 17: Mark the letter A, B, C or D to indicate the best arrangement of sentences to build an academic text:\n\na. Secondly, algorithmic decisions often lack transparency, making accountability elusive.\nb. Addressing these intertwined challenges requires robust regulatory oversight and ethical guidelines.\nc. The integration of artificial intelligence into public services raises urgent ethical questions.\nd. Primarily, biased training data can reinforce historical inequalities in judicial decisions.\ne. Therefore, interdisciplinary committees must oversee algorithmic deployments in sensitive sectors."
       },
       {
         "id": 18,
@@ -2589,15 +2583,12 @@
         "correctAnswer": "A. enabling professionals to achieve unprecedented levels of productivity",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Rút gọn mệnh đề kết quả: '..., enabling professionals to achieve...' (cho phép các chuyên gia đạt được năng suất chưa từng thấy).",
-          "grammarFormula": "V-ing chỉ kết quả kéo theo của mệnh đề đứng trước; enable sb to do sth.",
-          "whyCorrect": "Mệnh đề phân từ 'enabling sb to do sth' diễn tả kết quả trực tiếp của việc công cụ AI khuếch đại năng lực con người.",
-          "whyOthersWrong": [
-            "B sai cấu trúc enables sb doing",
-            "C dùng having enabled không hợp ngữ cảnh hiện tại",
-            "D sai cấu trúc enabled... to achieving"
-          ]
-        }
+          "translation": "Rút gọn mệnh đề kết quả: '..., enabling professionals to achieve...' (cho phép các chuyên gia đạt được năng suất chưa từng thấy).",
+          "correct": "Mệnh đề phân từ 'enabling sb to do sth' diễn tả kết quả trực tiếp của việc công cụ AI khuếch đại năng lực con người.",
+          "traps": "B sai cấu trúc enables sb doing; C dùng having enabled không hợp ngữ cảnh hiện tại; D sai cấu trúc enabled... to achieving",
+          "formula": "V-ing chỉ kết quả kéo theo của mệnh đề đứng trước; enable sb to do sth."
+        },
+        "question": "Question 18: Mark the letter A, B, C or D to indicate the option that best fits blank (18)."
       },
       {
         "id": 19,
@@ -2616,14 +2607,12 @@
         "correctAnswer": "A. As an inevitable consequence of this time-saving advantage",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mệnh đề chuyển tiếp chỉ hệ quả logic: 'Như một hệ quả tất yếu của lợi thế tiết kiệm thời gian này, nhân viên giờ đây có thể dành nhiều thời gian hơn...'.",
-          "grammarFormula": "Transition phrase expressing logical result.",
-          "whyCorrect": "Liên kết trực tiếp với câu trước đó nói về việc tiết kiệm một nửa thời gian làm việc.",
-          "whyOthersWrong": [
-            "B, C mang nghĩa tương phản không phù hợp",
-            "D chỉ mục đích không tạo mạch văn tự nhiên"
-          ]
-        }
+          "translation": "Mệnh đề chuyển tiếp chỉ hệ quả logic: 'Như một hệ quả tất yếu của lợi thế tiết kiệm thời gian này, nhân viên giờ đây có thể dành nhiều thời gian hơn...'.",
+          "correct": "Liên kết trực tiếp với câu trước đó nói về việc tiết kiệm một nửa thời gian làm việc.",
+          "traps": "B, C mang nghĩa tương phản không phù hợp; D chỉ mục đích không tạo mạch văn tự nhiên",
+          "formula": "Transition phrase expressing logical result."
+        },
+        "question": "Question 19: Mark the letter A, B, C or D to indicate the option that best fits blank (19)."
       },
       {
         "id": 20,
@@ -2642,15 +2631,12 @@
         "correctAnswer": "A. which can result in catastrophic errors if accepted uncritically",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mệnh đề quan hệ bổ nghĩa cho 'subtle hallucinations': 'những lỗi ảo giác có thể dẫn đến sai sót thảm khốc nếu tiếp nhận thiếu suy xét phản biện'.",
-          "grammarFormula": "Non-defining relative clause: which + V + in...",
-          "whyCorrect": "which thay thế cho cả cụm hallucinations và giữ vai trò chủ ngữ của động từ can result in.",
-          "whyOthersWrong": [
-            "B thiếu động từ chính (chỉ có V-ing)",
-            "C dùng where không chỉ nơi chốn",
-            "D dùng whose sai nghĩa"
-          ]
-        }
+          "translation": "Mệnh đề quan hệ bổ nghĩa cho 'subtle hallucinations': 'những lỗi ảo giác có thể dẫn đến sai sót thảm khốc nếu tiếp nhận thiếu suy xét phản biện'.",
+          "correct": "which thay thế cho cả cụm hallucinations và giữ vai trò chủ ngữ của động từ can result in.",
+          "traps": "B thiếu động từ chính (chỉ có V-ing); C dùng where không chỉ nơi chốn; D dùng whose sai nghĩa",
+          "formula": "Non-defining relative clause: which + V + in..."
+        },
+        "question": "Question 20: Mark the letter A, B, C or D to indicate the option that best fits blank (20)."
       },
       {
         "id": 21,
@@ -2669,15 +2655,12 @@
         "correctAnswer": "A. By mastering both algorithmic capabilities and critical reasoning",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cụm giới từ chỉ phương thức: 'Bằng cách làm chủ cả năng lực thuật toán lẫn tư duy phản biện, những người trẻ tìm việc sẽ được trao quyền...'.",
-          "grammarFormula": "By + V-ing = bằng cách thức nào đó.",
-          "whyCorrect": "Chỉ phương thức hành động để đạt được kết quả ở mệnh đề chính.",
-          "whyOthersWrong": [
-            "B (neither... nor) phủ định sai nghĩa",
-            "C mang nghĩa tương phản",
-            "D sai cấu trúc ngữ pháp"
-          ]
-        }
+          "translation": "Cụm giới từ chỉ phương thức: 'Bằng cách làm chủ cả năng lực thuật toán lẫn tư duy phản biện, những người trẻ tìm việc sẽ được trao quyền...'.",
+          "correct": "Chỉ phương thức hành động để đạt được kết quả ở mệnh đề chính.",
+          "traps": "B (neither... nor) phủ định sai nghĩa; C mang nghĩa tương phản; D sai cấu trúc ngữ pháp",
+          "formula": "By + V-ing = bằng cách thức nào đó."
+        },
+        "question": "Question 21: Mark the letter A, B, C or D to indicate the option that best fits blank (21)."
       },
       {
         "id": 22,
@@ -2696,13 +2679,12 @@
         "correctAnswer": "A. but to humans who skillfully collaborate with intelligent systems",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Cấu trúc song hành tương phản: 'not to... but to...' (tương lai không thuộc về riêng AI, mà thuộc về những con người biết khéo léo cộng tác với hệ thống thông minh).",
-          "grammarFormula": "Parallel structure: not to X, but to Y.",
-          "whyCorrect": "Cặp cấu trúc song hành kinh điển 'not to... but to...' truyền tải thông điệp nhân văn đắt giá của bài viết.",
-          "whyOthersWrong": [
-            "B, C, D bóp méo thông điệp của tác giả và vi phạm cấu trúc song hành."
-          ]
-        }
+          "translation": "Cấu trúc song hành tương phản: 'not to... but to...' (tương lai không thuộc về riêng AI, mà thuộc về những con người biết khéo léo cộng tác với hệ thống thông minh).",
+          "correct": "Cặp cấu trúc song hành kinh điển 'not to... but to...' truyền tải thông điệp nhân văn đắt giá của bài viết.",
+          "traps": "B, C, D bóp méo thông điệp của tác giả và vi phạm cấu trúc song hành.",
+          "formula": "Parallel structure: not to X, but to Y."
+        },
+        "question": "Question 22: Mark the letter A, B, C or D to indicate the option that best fits blank (22)."
       },
       {
         "id": 23,
@@ -2721,12 +2703,12 @@
         "correctAnswer": "D. Autonomous vehicle manufacturing",
         "answer": 3,
         "explanation": {
-          "viTranslation": "Thông tin không được đề cập trong Đoạn 1: Sản xuất xe tự hành (D) không xuất hiện trong danh sách các ứng dụng được liệt kê.",
-          "whyCorrect": "Đoạn 1 chỉ đề cập: automated customer support (A), algorithmic financial forecasting (B), predictive healthcare analytics (C).",
-          "whyOthersWrong": [
-            "A, B, C đều có trong bài đọc."
-          ]
-        }
+          "translation": "Thông tin không được đề cập trong Đoạn 1: Sản xuất xe tự hành (D) không xuất hiện trong danh sách các ứng dụng được liệt kê.",
+          "correct": "Đoạn 1 chỉ đề cập: automated customer support (A), algorithmic financial forecasting (B), predictive healthcare analytics (C).",
+          "traps": "A, B, C đều có trong bài đọc.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 23: Which of the following is NOT mentioned in paragraph 1 as an application of artificial intelligence?"
       },
       {
         "id": 24,
@@ -2745,14 +2727,12 @@
         "correctAnswer": "B. contemporary",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Từ 'obsolete' (lỗi thời, không còn được dùng) TRÁI NGHĨA với 'contemporary' (hiện đại, đương thời).",
-          "whyCorrect": "Obsolete = no longer produced or used, out of date <-> Contemporary = modern, up-to-date.",
-          "whyOthersWrong": [
-            "A. outdated (đồng nghĩa)",
-            "C. redundant (dư thừa)",
-            "D. ineffective (không hiệu quả)"
-          ]
-        }
+          "translation": "Từ 'obsolete' (lỗi thời, không còn được dùng) TRÁI NGHĨA với 'contemporary' (hiện đại, đương thời).",
+          "correct": "Obsolete = no longer produced or used, out of date <-> Contemporary = modern, up-to-date.",
+          "traps": "A. outdated (đồng nghĩa); C. redundant (dư thừa); D. ineffective (không hiệu quả)",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 24: The word 'obsolete' in paragraph 2 is OPPOSITE in meaning to ______."
       },
       {
         "id": 25,
@@ -2771,12 +2751,12 @@
         "correctAnswer": "B. Critics",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Từ quy chiếu: 'Critics argue that generative tools threaten... They believe that...' -> 'They' quy chiếu về 'Critics' (các nhà phê bình/người chỉ trích).",
-          "whyCorrect": "Đại từ nhân xưng 'They' thay thế cho danh từ số nhiều đứng trước là 'Critics'.",
-          "whyOthersWrong": [
-            "A, C, D không phải chủ thể đưa ra nhận định phê bình trong câu."
-          ]
-        }
+          "translation": "Từ quy chiếu: 'Critics argue that generative tools threaten... They believe that...' -> 'They' quy chiếu về 'Critics' (các nhà phê bình/người chỉ trích).",
+          "correct": "Đại từ nhân xưng 'They' thay thế cho danh từ số nhiều đứng trước là 'Critics'.",
+          "traps": "A, C, D không phải chủ thể đưa ra nhận định phê bình trong câu.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 25: The word 'They' in paragraph 2 refers to ______."
       },
       {
         "id": 26,
@@ -2795,14 +2775,12 @@
         "correctAnswer": "A. flourishing",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ 'burgeoning' (đang phát triển bùng nổ, gia tăng mạnh mẽ) ĐỒNG NGHĨA với 'flourishing' (nở rộ, phát triển thịnh vượng).",
-          "whyCorrect": "Burgeoning = growing or developing rapidly = flourishing.",
-          "whyOthersWrong": [
-            "B. diminishing: giảm dần",
-            "C. stagnating: đình trệ",
-            "D. fluctuating: biến động lên xuống"
-          ]
-        }
+          "translation": "Từ 'burgeoning' (đang phát triển bùng nổ, gia tăng mạnh mẽ) ĐỒNG NGHĨA với 'flourishing' (nở rộ, phát triển thịnh vượng).",
+          "correct": "Burgeoning = growing or developing rapidly = flourishing.",
+          "traps": "B. diminishing: giảm dần; C. stagnating: đình trệ; D. fluctuating: biến động lên xuống",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 26: The word 'burgeoning' in paragraph 3 is CLOSEST in meaning to ______."
       },
       {
         "id": 27,
@@ -2821,14 +2799,12 @@
         "correctAnswer": "A. Instead of depriving humans of control, AI is reshaping the core duties of existing careers.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Viết lại câu: Thay vì tước bỏ vai trò của con người, AI đang tái định hình bản chất cốt lõi của công việc.",
-          "whyCorrect": "Câu A diễn đạt chính xác nghĩa của câu gốc: Instead of depriving humans of control (= Rather than eliminating human agency), reshaping the core duties (= transforming the fundamental nature of job responsibilities).",
-          "whyOthersWrong": [
-            "B sai nghĩa (will definitely remove)",
-            "C sai nghĩa (remain unchanged)",
-            "D đảo lộn quan hệ nhân quả"
-          ]
-        }
+          "translation": "Viết lại câu: Thay vì tước bỏ vai trò của con người, AI đang tái định hình bản chất cốt lõi của công việc.",
+          "correct": "Câu A diễn đạt chính xác nghĩa của câu gốc: Instead of depriving humans of control (= Rather than eliminating human agency), reshaping the core duties (= transforming the fundamental nature of job responsibilities).",
+          "traps": "B sai nghĩa (will definitely remove); C sai nghĩa (remain unchanged); D đảo lộn quan hệ nhân quả",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 27: Which of the following best paraphrases the underlined sentence in paragraph 3: 'Rather than eliminating human agency, artificial intelligence is transforming the fundamental nature of job responsibilities.'?"
       },
       {
         "id": 28,
@@ -2847,12 +2823,12 @@
         "correctAnswer": "B. It initially triggered public anxiety but ultimately spawned new economic fields.",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Thông tin đúng: Đoạn 3 nêu rõ cơ giới hóa nông nghiệp ban đầu gây ra lo lắng tương tự nhưng cuối cùng thúc đẩy các ngành kinh tế hoàn toàn mới.",
-          "whyCorrect": "Khớp với câu: 'initially spurred comparable anxieties, yet both transitions ultimately fostered entirely new economic sectors.'",
-          "whyOthersWrong": [
-            "A, C, D mâu thuẫn trực tiếp với dẫn chứng trong bài."
-          ]
-        }
+          "translation": "Thông tin đúng: Đoạn 3 nêu rõ cơ giới hóa nông nghiệp ban đầu gây ra lo lắng tương tự nhưng cuối cùng thúc đẩy các ngành kinh tế hoàn toàn mới.",
+          "correct": "Khớp với câu: 'initially spurred comparable anxieties, yet both transitions ultimately fostered entirely new economic sectors.'",
+          "traps": "A, C, D mâu thuẫn trực tiếp với dẫn chứng trong bài.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 28: According to paragraph 3, what happened during the historical mechanization of agriculture?"
       },
       {
         "id": 29,
@@ -2871,12 +2847,12 @@
         "correctAnswer": "A. Paragraph 1",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tìm đoạn: Đóng góp tài chính của AI (hơn 15 nghìn tỷ USD) được đề cập ở Đoạn 1.",
-          "whyCorrect": "Đoạn 1 viết: 'contribute over fifteen trillion dollars to the global economy.'",
-          "whyOthersWrong": [
-            "Các đoạn 2, 3, 4 không nói về con số đóng góp tài chính tổng thể."
-          ]
-        }
+          "translation": "Tìm đoạn: Đóng góp tài chính của AI (hơn 15 nghìn tỷ USD) được đề cập ở Đoạn 1.",
+          "correct": "Đoạn 1 viết: 'contribute over fifteen trillion dollars to the global economy.'",
+          "traps": "Các đoạn 2, 3, 4 không nói về con số đóng góp tài chính tổng thể.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 29: In which paragraph does the writer discuss the financial contribution of AI to the worldwide economy?"
       },
       {
         "id": 30,
@@ -2895,12 +2871,12 @@
         "correctAnswer": "D. Paragraph 4",
         "answer": 3,
         "explanation": {
-          "viTranslation": "Tìm đoạn: Năng lực khác biệt của con người (đồng cảm, tư duy đạo đức, phân định văn hóa) được đề cập ở Đoạn 4.",
-          "whyCorrect": "Đoạn 4 nêu: 'they lack empathy, ethical reasoning, and nuanced cultural discernment.'",
-          "whyOthersWrong": [
-            "Đoạn 1, 2, 3 không đi sâu vào các phẩm chất độc bản của trí tuệ con người."
-          ]
-        }
+          "translation": "Tìm đoạn: Năng lực khác biệt của con người (đồng cảm, tư duy đạo đức, phân định văn hóa) được đề cập ở Đoạn 4.",
+          "correct": "Đoạn 4 nêu: 'they lack empathy, ethical reasoning, and nuanced cultural discernment.'",
+          "traps": "Đoạn 1, 2, 3 không đi sâu vào các phẩm chất độc bản của trí tuệ con người.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 30: In which paragraph does the writer mention distinct human capabilities that machines cannot easily imitate?"
       },
       {
         "id": 31,
@@ -2919,12 +2895,12 @@
         "correctAnswer": "A. [I]",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Điền câu vào vị trí: Vị trí [I] ở cuối đoạn 1 là hợp lý nhất vì câu trước đang nói về việc đánh giá lại mục tiêu nền tảng của giáo dục.",
-          "whyCorrect": "Câu trước đó: 'prompted educators and policymakers to re-evaluate the foundational objectives of secondary and higher education.' Câu được điền kết nối bằng liên từ 'Consequently' chỉ kết quả trực tiếp.",
-          "whyOthersWrong": [
-            "Các vị trí [II], [III], [IV] thuộc về các khía cạnh tâm lý học hoặc thị trường lao động."
-          ]
-        }
+          "translation": "Điền câu vào vị trí: Vị trí [I] ở cuối đoạn 1 là hợp lý nhất vì câu trước đang nói về việc đánh giá lại mục tiêu nền tảng của giáo dục.",
+          "correct": "Câu trước đó: 'prompted educators and policymakers to re-evaluate the foundational objectives of secondary and higher education.' Câu được điền kết nối bằng liên từ 'Consequently' chỉ kết quả trực tiếp.",
+          "traps": "Các vị trí [II], [III], [IV] thuộc về các khía cạnh tâm lý học hoặc thị trường lao động.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 31: Where in the passage does the following sentence best fit?\n'Consequently, schools must transition from assessing memorized data to cultivating autonomous critical inquiry.'\n[I], [II], [III], or [IV]?"
       },
       {
         "id": 32,
@@ -2943,12 +2919,12 @@
         "correctAnswer": "A. Instant digital answers risk depriving students of the vital intellectual struggle necessary for brain development.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tóm tắt Đoạn 2: Câu trả lời kỹ thuật số ăn sẵn có nguy cơ tước đi sự nỗ lực tư duy cần thiết để phát triển não bộ.",
-          "whyCorrect": "Đoạn 2 tập trung vào nguy cơ xói mòn tư duy sâu và tầm quan trọng của 'intellectual perseverance'.",
-          "whyOthersWrong": [
-            "B, C, D đều mang nghĩa trái ngược hoặc xuyên tạc nội dung đoạn văn."
-          ]
-        }
+          "translation": "Tóm tắt Đoạn 2: Câu trả lời kỹ thuật số ăn sẵn có nguy cơ tước đi sự nỗ lực tư duy cần thiết để phát triển não bộ.",
+          "correct": "Đoạn 2 tập trung vào nguy cơ xói mòn tư duy sâu và tầm quan trọng của 'intellectual perseverance'.",
+          "traps": "B, C, D đều mang nghĩa trái ngược hoặc xuyên tạc nội dung đoạn văn.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 32: Which of the following best summarizes Paragraph 2?"
       },
       {
         "id": 33,
@@ -2967,14 +2943,12 @@
         "correctAnswer": "B. Engaging critically with flawed AI outputs can actually strengthen students' evaluative skills.",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Suy luận: Việc chủ động soi xét các câu trả lời chưa hoàn thiện của AI sẽ giúp củng cố kỹ năng đánh giá phản biện của sinh viên.",
-          "whyCorrect": "Đoạn 3 chỉ ra: 'students are tasked with scrutinizing AI-generated texts, identifying factual errors, and exposing subtle algorithmic biases... foster metacognitive awareness.'",
-          "whyOthersWrong": [
-            "A trái ngược tinh thần bài viết",
-            "C sai sự thật",
-            "D trái ngược hoàn toàn."
-          ]
-        }
+          "translation": "Suy luận: Việc chủ động soi xét các câu trả lời chưa hoàn thiện của AI sẽ giúp củng cố kỹ năng đánh giá phản biện của sinh viên.",
+          "correct": "Đoạn 3 chỉ ra: 'students are tasked with scrutinizing AI-generated texts, identifying factual errors, and exposing subtle algorithmic biases... foster metacognitive awareness.'",
+          "traps": "A trái ngược tinh thần bài viết; C sai sự thật; D trái ngược hoàn toàn.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 33: What can be inferred from Paragraph 3 regarding the use of AI in universities?"
       },
       {
         "id": 34,
@@ -2993,12 +2967,12 @@
         "correctAnswer": "A. While AI presents challenges to traditional schooling, it ultimately underscores the enduring value of uniquely human qualities and adaptable thinking.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tóm tắt toàn bài: Dù AI đặt ra nhiều thách thức cho học đường truyền thống, nó càng làm nổi bật giá trị trường tồn của những phẩm chất người và tư duy linh hoạt thích ứng.",
-          "whyCorrect": "Bao quát toàn diện cả thách thức lẫn cơ hội, hướng đến thông điệp nhân văn ở đoạn kết.",
-          "whyOthersWrong": [
-            "B, C, D đều mang tính cực đoan và không phản ánh giọng điệu học thuật của tác giả."
-          ]
-        }
+          "translation": "Tóm tắt toàn bài: Dù AI đặt ra nhiều thách thức cho học đường truyền thống, nó càng làm nổi bật giá trị trường tồn của những phẩm chất người và tư duy linh hoạt thích ứng.",
+          "correct": "Bao quát toàn diện cả thách thức lẫn cơ hội, hướng đến thông điệp nhân văn ở đoạn kết.",
+          "traps": "B, C, D đều mang tính cực đoan và không phản ánh giọng điệu học thuật của tác giả.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 34: Which of the following best summarizes the entire passage?"
       },
       {
         "id": 35,
@@ -3017,14 +2991,12 @@
         "correctAnswer": "A. essential",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ 'indispensable' (không thể thiếu, tối quan trọng) ĐỒNG NGHĨA với 'essential'.",
-          "whyCorrect": "Indispensable = absolutely necessary = essential.",
-          "whyOthersWrong": [
-            "B. superfluous: thừa thãi",
-            "C. optional: tùy ý",
-            "D. negligible: không đáng kể"
-          ]
-        }
+          "translation": "Từ 'indispensable' (không thể thiếu, tối quan trọng) ĐỒNG NGHĨA với 'essential'.",
+          "correct": "Indispensable = absolutely necessary = essential.",
+          "traps": "B. superfluous: thừa thãi; C. optional: tùy ý; D. negligible: không đáng kể",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 35: The word 'indispensable' in paragraph 2 is CLOSEST in meaning to ______."
       },
       {
         "id": 36,
@@ -3043,12 +3015,12 @@
         "correctAnswer": "A. proactive",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ 'passive' (thụ động) TRÁI NGHĨA với 'proactive' (chủ động, tiên phong).",
-          "whyCorrect": "Passive = receiving action without active response <-> Proactive = taking the initiative.",
-          "whyOthersWrong": [
-            "B, C, D đều mang nét nghĩa tiêu cực hoặc thụ động tương đương."
-          ]
-        }
+          "translation": "Từ 'passive' (thụ động) TRÁI NGHĨA với 'proactive' (chủ động, tiên phong).",
+          "correct": "Passive = receiving action without active response <-> Proactive = taking the initiative.",
+          "traps": "B, C, D đều mang nét nghĩa tiêu cực hoặc thụ động tương đương.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 36: The word 'passive' in paragraph 2 is OPPOSITE in meaning to ______."
       },
       {
         "id": 37,
@@ -3067,12 +3039,12 @@
         "correctAnswer": "A. Collaborative learning environments",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Từ quy chiếu: 'In these collaborative learning environments...' -> 'These' quy chiếu trực tiếp về các môi trường học tập tương tác cộng tác.",
-          "whyCorrect": "Xuất hiện trực tiếp trong cụm danh từ 'these collaborative learning environments'.",
-          "whyOthersWrong": [
-            "B, C, D không khớp với ngữ cảnh diễn đạt trong đoạn 3."
-          ]
-        }
+          "translation": "Từ quy chiếu: 'In these collaborative learning environments...' -> 'These' quy chiếu trực tiếp về các môi trường học tập tương tác cộng tác.",
+          "correct": "Xuất hiện trực tiếp trong cụm danh từ 'these collaborative learning environments'.",
+          "traps": "B, C, D không khớp với ngữ cảnh diễn đạt trong đoạn 3.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 37: The word 'These' in paragraph 3 refers to ______."
       },
       {
         "id": 38,
@@ -3091,12 +3063,12 @@
         "correctAnswer": "B. The ability to learn, unlearn, and relearn with agility",
         "answer": 1,
         "explanation": {
-          "viTranslation": "Thông tin đúng: Đoạn 4 nêu rõ điều giữ giá trị vĩnh viễn là khả năng học hỏi, loại bỏ cái cũ và học lại một cách linh hoạt.",
-          "whyCorrect": "Khớp câu: 'What remains permanently valuable is the capacity to learn, unlearn, and relearn with speed and flexibility.'",
-          "whyOthersWrong": [
-            "A, C, D trái ngược hoàn toàn với lời khuyên thích ứng của đoạn văn."
-          ]
-        }
+          "translation": "Thông tin đúng: Đoạn 4 nêu rõ điều giữ giá trị vĩnh viễn là khả năng học hỏi, loại bỏ cái cũ và học lại một cách linh hoạt.",
+          "correct": "Khớp câu: 'What remains permanently valuable is the capacity to learn, unlearn, and relearn with speed and flexibility.'",
+          "traps": "A, C, D trái ngược hoàn toàn với lời khuyên thích ứng của đoạn văn.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 38: According to paragraph 4, what quality remains permanently valuable in the modern job market?"
       },
       {
         "id": 39,
@@ -3115,12 +3087,12 @@
         "correctAnswer": "A. To advocate for cultivating critical agility and unique human empathy alongside AI.",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Mục đích của tác giả: Kêu gọi rèn luyện sự linh hoạt phản biện và lòng thấu cảm độc bản của con người bên cạnh sự phát triển của AI.",
-          "whyCorrect": "Xuyên suốt bài đọc, tác giả hướng tới việc biến AI thành công cụ thúc đẩy tiềm năng sáng tạo của con người.",
-          "whyOthersWrong": [
-            "B, C, D là các quan điểm sai lệch và cực đoan không có trong bài."
-          ]
-        }
+          "translation": "Mục đích của tác giả: Kêu gọi rèn luyện sự linh hoạt phản biện và lòng thấu cảm độc bản của con người bên cạnh sự phát triển của AI.",
+          "correct": "Xuyên suốt bài đọc, tác giả hướng tới việc biến AI thành công cụ thúc đẩy tiềm năng sáng tạo của con người.",
+          "traps": "B, C, D là các quan điểm sai lệch và cực đoan không có trong bài.",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 39: What is the primary purpose of the author in this passage?"
       },
       {
         "id": 40,
@@ -3139,13 +3111,80 @@
         "correctAnswer": "A. The Age of Algorithms: Rethinking Education and Human Potential",
         "answer": 0,
         "explanation": {
-          "viTranslation": "Tiêu đề phù hợp nhất: Kỷ Nguyên Của Thuật Toán: Tái Định Hình Giáo Dục Và Tiềm Năng Con Người.",
-          "whyCorrect": "Tiêu đề này bao hàm đầy đủ khía cạnh học thuật, giáo dục và tiềm năng nhân bản được phân tích trong bài.",
-          "whyOthersWrong": [
-            "B, C mang tính giật gân sai lệch",
-            "D quá hạn hẹp về mặt lịch sử"
-          ]
-        }
+          "translation": "Tiêu đề phù hợp nhất: Kỷ Nguyên Của Thuật Toán: Tái Định Hình Giáo Dục Và Tiềm Năng Con Người.",
+          "correct": "Tiêu đề này bao hàm đầy đủ khía cạnh học thuật, giáo dục và tiềm năng nhân bản được phân tích trong bài.",
+          "traps": "B, C mang tính giật gân sai lệch; D quá hạn hẹp về mặt lịch sử",
+          "formula": "Quy tắc ngữ pháp / Cấu trúc trọng tâm"
+        },
+        "question": "Question 40: Which of the following is the most suitable title for the passage?"
+      }
+    ],
+    "sections": [
+      {
+        "sectionId": 1,
+        "title": "Phần 1: Quảng Cáo Điền Khuyết (Advertisement Cloze)",
+        "instruction": "Read the following advertisement and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 1 to 6.",
+        "questionRange": [
+          1,
+          6
+        ],
+        "passageTitle": "INTERNATIONAL CULTURAL HERITAGE FESTIVAL 2026",
+        "passage": "INTERNATIONAL CULTURAL HERITAGE FESTIVAL 2026\nImmerse yourself in a vibrant kaleidoscope of world traditions, traditional folk arts, and culinary masterpieces!\n• Discover how youth ambassadors are (1) ______ indigenous customs across Southeast Asia.\n• Witness mesmerizing performances presented by (2) ______ from forty different nations.\n• Admire ancient handicrafts, (3) ______ by master artisans using sustainable materials.\n• Take pride (4) ______ contributing to the UNESCO world intangible heritage fund.\n• This multicultural gathering empowers students to (5) ______ an invaluable insight into diverse global perspectives.\n• Book your festival pass today (6) ______ interactive craft workshops with living folklore masters!\n(Adapted from British Council)"
+      },
+      {
+        "sectionId": 2,
+        "title": "Phần 2: Tờ Rơi / Thông Báo Điền Khuyết (Leaflet Cloze)",
+        "instruction": "Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 7 to 12.",
+        "questionRange": [
+          7,
+          12
+        ],
+        "passageTitle": "PRESERVING INTANGIBLE CULTURAL HERITAGE",
+        "passage": "PRESERVING INTANGIBLE CULTURAL HERITAGE: YOUTH ACTION GUIDE\nGlobal connectivity offers unprecedented opportunities for youths to safeguard their cultural roots:\n• Celebrate Local Folklore: Record village elders recounting ancient legends and avoid (7) ______ cultural neglect.\n• Digital Storytelling: Use social media to (8) ______ short educational clips about traditional culinary rituals.\n• Cultural Awareness: High cultural (9) ______ enables students to communicate respectfully in international settings.\n• Overcoming Prejudices: (10) ______ generational differences, young people can bridge historical divides through dialogue.\n• Community Participation: Volunteer at traditional festivals to (11) ______ with elders and inherit artisan knowledge.\n• Sustaining Traditions: Support local craft villages to prevent irreversible artisanal (12) ______.\n(Adapted from ReadWorks Grade 11-12)"
+      },
+      {
+        "sectionId": 3,
+        "title": "Phần 3: Sắp Xếp Trật Tự Câu / Đoạn Văn / Hội Thoại (Sentence Rearrangement)",
+        "instruction": "Mark the letter A, B, C or D on your answer sheet to indicate the correct arrangement of sentences to make a meaningful conversation or paragraph.",
+        "questionRange": [
+          13,
+          17
+        ],
+        "passageTitle": null,
+        "passage": ""
+      },
+      {
+        "sectionId": 4,
+        "title": "Phần 4: Điền Mệnh Đề / Cụm Từ Vào Đoạn Văn (Passage Clause Cloze)",
+        "instruction": "Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.",
+        "questionRange": [
+          18,
+          22
+        ],
+        "passageTitle": "DIGITAL PRESERVATION OF INDIGENOUS ARTS",
+        "passage": "DIGITAL PRESERVATION OF INDIGENOUS ARTS\nIn the face of relentless globalization, indigenous communities and cultural anthropologists are adopting cutting-edge technologies to preserve their ancestral traditions. Rather than permitting fragile folklore and endangered languages to fade into oblivion, digital archivists are deploying high-definition volumetric scanning, (18) ______. \nRecent cultural preservation initiatives demonstrate that interactive digital museums can attract millions of youth visitors worldwide. (19) ______, younger generations who previously felt disconnected from traditional rituals are rediscovering deep pride in their ancestral heritage. \nFurthermore, artificial intelligence algorithms can now translate ancient oral chants into multiple languages, (20) ______. \nTherefore, international cultural bodies are funding decentralized digital archives in indigenous villages. (21) ______, local youth will become empowered custodians of their community's folklore. Ultimately, authentic cultural diversity is not a barrier to human solidarity, (22) ______.\n(Adapted from National Geographic)"
+      },
+      {
+        "sectionId": 5,
+        "title": "Phần 5: Bài Đọc Hiểu 1 (Reading Comprehension 1 - 8 câu)",
+        "instruction": "Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the correct answer to each of the questions from 23 to 30.",
+        "questionRange": [
+          23,
+          30
+        ],
+        "passageTitle": "MULTICULTURALISM IN THE GLOBAL ERA",
+        "passage": "Paragraph 1:\nIn an increasingly interconnected world characterized by seamless telecommunications and global migration, multiculturalism has become the defining demographic reality of modern societies. Metropolises such as London, New York, Singapore, and Toronto boast residents from hundreds of distinct ethnolinguistic backgrounds, fostering exceptionally dynamic urban cultures. Sociologists observe that cultural diversity acts as a fertile catalyst for creative innovation, economic vitality, and culinary richness.\n\nParagraph 2:\nNevertheless, navigating multicultural coexistence presents intricate psychological and institutional challenges. Critics often express concern that excessive cultural fragmentation can undermine social cohesion and erode common civic values. They worry that when distinct cultural enclaves operate in isolation without meaningful inter-group interaction, prejudice and mutual mistrust can proliferate.\n\nParagraph 3:\nConversely, intercultural education advocates emphasize that harmony does not require cultural homogenization. Rather than demanding that immigrants completely abandon their heritage through aggressive assimilation, successful multicultural policies promote mutual integration. In such inclusive societies, citizens celebrate diverse traditions while sharing a commitment to democratic values, the rule of law, and universal human rights. Cross-cultural exchanges in schools and community centers systematically debunk negative stereotypes and cultivate empathy.\n\nParagraph 4:\nTo build resilient multicultural communities, governments must combat systemic discrimination in employment and housing while supporting cultural festivals. Citizens, too, must develop cultural humility—the willingness to listen respectfully to perspectives rooted in different historical experiences. Celebrating our multifaceted identities while recognizing our shared humanity is the ultimate pathway toward sustainable global peace.\n(Adapted from British Council)"
+      },
+      {
+        "sectionId": 6,
+        "title": "Phần 6: Bài Đọc Hiểu 2 (Reading Comprehension 2 - 10 câu Phân Hóa Cao)",
+        "instruction": "Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the correct answer to each of the questions from 31 to 40.",
+        "questionRange": [
+          31,
+          40
+        ],
+        "passageTitle": "PRESERVING INTANGIBLE HERITAGE",
+        "passage": "Paragraph 1:\nThe preservation of intangible cultural heritage has emerged as one of the most critical cultural challenges of the twenty-first century. Unlike tangible monuments such as pyramids or medieval cathedrals that can be physically restored with stone and mortar, intangible heritage resides exclusively in human memory, oral traditions, performing arts, and traditional craft practices. [I] When a master artisan passes away without apprentice successors, centuries of collective wisdom can vanish overnight.\n\nParagraph 2:\nA primary driver of cultural erosion is the pervasive spread of standardized global consumer culture. Young people in indigenous communities are frequently drawn to globalized mass media, often perceiving ancestral customs as antiquated and economically unviable. [II] Sociolinguists document with alarm that over forty percent of the world's seven thousand spoken languages are in imminent danger of extinction within the coming decades.\n\nParagraph 3:\nHowever, modern digital technology is unexpectedly emerging as a powerful savior of endangered cultural traditions. Grassroots organizations and young indigenous creators are leveraging mobile video platforms to teach traditional textile weaving, broadcast ceremonial dances, and compile digital dictionaries. [III] By framing heritage not as a museum curiosity but as a living, evolving source of artistic identity, youth creators are breathing new life into ancient arts.\n\nParagraph 4:\nFurthermore, sustainable cultural tourism provides tangible economic incentives for communities to safeguard their traditional practices. When domestic and international travelers pay to experience authentic folklore festivals and purchase traditional handicrafts directly from local makers, cultural heritage becomes an engine of community empowerment. [IV] \n\nParagraph 5:\nUltimately, preserving the cultural tapestry of humanity is vital for our collective intellectual and spiritual survival. Traditional knowledge systems contain profound ecological insights, philosophical perspectives, and creative expressions honed over millennia. Protecting cultural diversity is just as essential for human flourishing as conserving biological biodiversity is for ecological health.\n(Adapted from ReadWorks Grade 11-12)"
       }
     ]
   }
