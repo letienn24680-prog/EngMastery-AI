@@ -1,12 +1,13 @@
 {
-  "version": "1.7.1",
-  "versionCode": 10611,
+  "version": "1.7.2",
+  "versionCode": 10612,
   "releaseDate": "2026-10-26",
-  "title": "Bản Cập Nhật v1.7.1: Ô Nhập Từ Vựng Thủ Công (Đơn / Đa Từ) & Tự Động Phân Tích Lưu AI",
+  "title": "Bản Cập Nhật v1.7.2: Hệ Thống Đồng Bộ Đám Mây Đa Thiết Bị & Khắc Phục Lỗi Hiển Thị 1.060+ Từ Vựng",
   "highlights": [
-    "Bổ sung ô nhập từ vựng thủ công trực tiếp trong Kho Từ Vựng: hỗ trợ nhập 1 từ hoặc dán danh sách nhiều từ cùng lúc (ngăn cách bởi dấu phẩy hoặc xuống dòng)",
-    "AI tự động dịch nghĩa tiếng Việt, phân cấp CEFR, tìm từ đồng nghĩa, trái nghĩa, collocations & họ từ vựng cho từng từ được gửi đi",
-    "Tự động tạo thẻ học mới và lưu toàn bộ vào hệ thống ôn tập (Flashcards & Kho Từ Vựng)",
-    "Thanh tiến trình trực quan thời gian thực (0% ➔ 100%) khi xử lý nhiều từ vựng và tự động mở chi tiết nếu nhập 1 từ"
+    "Hệ thống Đồng Bộ Đám Mây 1-Chạm (Cloud Sync Vault) với Mã Đồng Bộ 6 ký tự cá nhân: Đồng bộ tức thì toàn bộ 1.060+ từ vựng, từ tự thêm và tiến độ học tập giữa Điện Thoại và Máy Tính",
+    "Khắc phục triệt để lỗi thiết bị chỉ hiển thị ~200 từ: Tự động đối chiếu bù đắp từ gốc khi khởi động và bổ sung nút 'Nạp Đầy Đủ 1.060+ Từ Gốc Master 1-Chạm'",
+    "Bổ sung nút lọc '🌟 Tất Cả (1.060+ Từ)' mặc định trong chế độ Flashcards giúp người học nắm bắt trọn vẹn kho từ vựng",
+    "Chuyển đổi chiến lược Service Worker sang Network-First cho HTML: Thiết bị di động luôn nhận phiên bản mới nhất ngay khi mở app",
+    "Khắc phục lỗi hiển thị co hẹp thẻ đề thi Lớp 12 đã lưu trên màn hình di động"
   ]
 }
