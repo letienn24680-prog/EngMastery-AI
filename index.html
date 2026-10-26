@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.6.8 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.6.9 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -1075,6 +1075,15 @@
               <span>AI Tra & Lưu Ôn</span>
             </button>
 
+            <!-- Sort Selector (Alphabet A-Z default) -->
+            <select id="hub-sort-select" onchange="app.onHubSortChange(this.value)" class="w-full sm:w-auto px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold focus:outline-none text-slate-700 dark:text-slate-300" title="Sắp xếp danh sách từ vựng">
+              <option value="alpha-asc">🔤 Sắp xếp: Alphabet (A ➔ Z)</option>
+              <option value="alpha-desc">🔤 Sắp xếp: Alphabet (Z ➔ A)</option>
+              <option value="starred">⭐ Từ đã đánh dấu sao</option>
+              <option value="level">🎯 Cấp độ CEFR (A1 ➔ C1)</option>
+              <option value="newest">🕒 Mới tra cứu / Mới thêm</option>
+            </select>
+
             <!-- Level Selector -->
             <select id="hub-level-filter" onchange="app.filterVocabHubLevel(this.value)" class="w-full sm:w-auto px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold focus:outline-none">
               <option value="all">Mọi Cấp Độ (A1 - C1)</option>
@@ -1085,6 +1094,43 @@
               <option value="C1">Cấp độ C1 (Nâng cao / 9+)</option>
             </select>
           </div>
+        </div>
+
+        <!-- Alphabet Quick Jump Strip (A to Z) -->
+        <div class="p-3 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-sm flex items-center space-x-1.5 overflow-x-auto text-xs no-scrollbar">
+          <span class="text-[11px] font-extrabold uppercase text-slate-400 mr-1 shrink-0 flex items-center space-x-1.5">
+            <i class="fa-solid fa-arrow-down-a-z text-primary-light text-xs"></i>
+            <span>Chữ Cái:</span>
+          </span>
+          <button onclick="app.setHubLetter('all')" data-letter="all" class="hub-letter-btn px-3 py-1 rounded-xl font-black transition text-xs bg-primary text-white shrink-0">
+            Tất cả (A-Z)
+          </button>
+            <button onclick="app.setHubLetter('A')" data-letter="A" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">A</button>
+            <button onclick="app.setHubLetter('B')" data-letter="B" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">B</button>
+            <button onclick="app.setHubLetter('C')" data-letter="C" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">C</button>
+            <button onclick="app.setHubLetter('D')" data-letter="D" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">D</button>
+            <button onclick="app.setHubLetter('E')" data-letter="E" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">E</button>
+            <button onclick="app.setHubLetter('F')" data-letter="F" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">F</button>
+            <button onclick="app.setHubLetter('G')" data-letter="G" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">G</button>
+            <button onclick="app.setHubLetter('H')" data-letter="H" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">H</button>
+            <button onclick="app.setHubLetter('I')" data-letter="I" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">I</button>
+            <button onclick="app.setHubLetter('J')" data-letter="J" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">J</button>
+            <button onclick="app.setHubLetter('K')" data-letter="K" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">K</button>
+            <button onclick="app.setHubLetter('L')" data-letter="L" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">L</button>
+            <button onclick="app.setHubLetter('M')" data-letter="M" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">M</button>
+            <button onclick="app.setHubLetter('N')" data-letter="N" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">N</button>
+            <button onclick="app.setHubLetter('O')" data-letter="O" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">O</button>
+            <button onclick="app.setHubLetter('P')" data-letter="P" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">P</button>
+            <button onclick="app.setHubLetter('Q')" data-letter="Q" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">Q</button>
+            <button onclick="app.setHubLetter('R')" data-letter="R" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">R</button>
+            <button onclick="app.setHubLetter('S')" data-letter="S" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">S</button>
+            <button onclick="app.setHubLetter('T')" data-letter="T" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">T</button>
+            <button onclick="app.setHubLetter('U')" data-letter="U" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">U</button>
+            <button onclick="app.setHubLetter('V')" data-letter="V" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">V</button>
+            <button onclick="app.setHubLetter('W')" data-letter="W" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">W</button>
+            <button onclick="app.setHubLetter('X')" data-letter="X" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">X</button>
+            <button onclick="app.setHubLetter('Y')" data-letter="Y" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">Y</button>
+            <button onclick="app.setHubLetter('Z')" data-letter="Z" class="hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0">Z</button>
         </div>
 
         <!-- Topic Categories Selector -->
@@ -3311,7 +3357,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.6.8 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.6.9 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -32637,7 +32683,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.6.8';
+        this.appVersion = '1.6.9';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -35820,6 +35866,12 @@ Yêu cầu output STRICTLY là một JSON object:
           list = list.filter(v => v.level === this.hubCurrentLevel);
         }
 
+        // Lọc theo Chữ cái đầu tiên (A - Z) nếu có chọn
+        if (this.hubLetterFilter && this.hubLetterFilter !== 'all') {
+          const ltr = this.hubLetterFilter.toUpperCase();
+          list = list.filter(v => (v.word || '').trim().toUpperCase().startsWith(ltr));
+        }
+
         if (this.hubSearchQuery) {
           const q = this.hubSearchQuery.toLowerCase();
           list = list.filter(v =>
@@ -35829,6 +35881,21 @@ Yêu cầu output STRICTLY là một JSON object:
             (v.collocations && v.collocations.toLowerCase().includes(q)) ||
             (v.synonyms && v.synonyms.toLowerCase().includes(q))
           );
+        }
+
+        // BẮT BUỘC: Sắp xếp theo bảng chữ cái Alphabet (A -> Z) mặc định để học sinh dễ tìm kiếm
+        const sortMode = this.hubSortMode || 'alpha-asc';
+        if (sortMode === 'alpha-asc') {
+          list.sort((a, b) => (a.word || '').localeCompare(b.word || '', 'en', { sensitivity: 'base' }));
+        } else if (sortMode === 'alpha-desc') {
+          list.sort((a, b) => (b.word || '').localeCompare(a.word || '', 'en', { sensitivity: 'base' }));
+        } else if (sortMode === 'starred') {
+          list.sort((a, b) => (b.isFavorite ? 1 : 0) - (a.isFavorite ? 1 : 0) || (a.word || '').localeCompare(b.word || '', 'en', { sensitivity: 'base' }));
+        } else if (sortMode === 'level') {
+          const lvlOrder = { A1: 1, A2: 2, B1: 3, B2: 4, C1: 5 };
+          list.sort((a, b) => (lvlOrder[a.level] || 99) - (lvlOrder[b.level] || 99) || (a.word || '').localeCompare(b.word || '', 'en', { sensitivity: 'base' }));
+        } else if (sortMode === 'newest') {
+          list.sort((a, b) => (b.lastLookedUpAt || 0) - (a.lastLookedUpAt || 0) || (a.word || '').localeCompare(b.word || '', 'en', { sensitivity: 'base' }));
         }
 
         const countTotal = document.getElementById('hub-count-total');
@@ -35983,15 +36050,45 @@ Yêu cầu output STRICTLY là một JSON object:
         this.renderVocabHub();
       }
 
+      onHubSortChange(val) {
+        this.hubCurrentPage = 1;
+        this.hubSortMode = val;
+        this.renderVocabHub();
+      }
+
+      setHubLetter(letter) {
+        this.hubCurrentPage = 1;
+        this.hubLetterFilter = letter;
+        document.querySelectorAll('.hub-letter-btn').forEach(btn => {
+          if (btn.dataset.letter === letter) {
+            btn.className = 'hub-letter-btn px-3 py-1 rounded-xl font-black transition text-xs bg-primary text-white shrink-0';
+          } else {
+            btn.className = 'hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0';
+          }
+        });
+        this.renderVocabHub();
+      }
+
       resetHubFilters() {
         this.hubCurrentPage = 1;
         this.hubCurrentTopic = 'all';
         this.hubCurrentLevel = 'all';
+        this.hubLetterFilter = 'all';
+        this.hubSortMode = 'alpha-asc';
         this.hubSearchQuery = '';
         const searchInput = document.getElementById('hub-search-input');
         if (searchInput) searchInput.value = '';
         const levelFilter = document.getElementById('hub-level-filter');
         if (levelFilter) levelFilter.value = 'all';
+        const sortSelect = document.getElementById('hub-sort-select');
+        if (sortSelect) sortSelect.value = 'alpha-asc';
+        document.querySelectorAll('.hub-letter-btn').forEach(btn => {
+          if (btn.dataset.letter === 'all') {
+            btn.className = 'hub-letter-btn px-3 py-1 rounded-xl font-black transition text-xs bg-primary text-white shrink-0';
+          } else {
+            btn.className = 'hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0';
+          }
+        });
         this.setHubTopic('all');
       }
 
@@ -38774,7 +38871,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.6.8')) return caches.delete(c);
+                if (!c.includes('v1.6.9')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -42996,7 +43093,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
           if (reg.waiting && window.app) {
             window.app.showUpdateBanner({
-              version: '1.6.8',
+              version: '1.6.9',
               title: 'Bản cập nhật mới đã sẵn sàng!',
               highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
             });
@@ -43010,7 +43107,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   if (window.app) {
                     window.app.showUpdateBanner({
-                      version: '1.6.8',
+                      version: '1.6.9',
                       title: 'Đã có bản cập nhật mới!',
                       highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
                     });
@@ -43562,7 +43659,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.6.8</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.6.9</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
