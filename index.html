@@ -29,6 +29,9 @@
       darkMode: 'class',
       theme: {
         extend: {
+          screens: {
+            'xs': '480px',
+          },
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
@@ -566,17 +569,16 @@
                   Gồm 30 câu thực hành trực tiếp từ tài liệu HOCMAI và các phần Phát âm, Trọng âm, Giao tiếp, Lỗi sai & Đọc hiểu. Có đồng hồ đếm ngược và bảng điểm 10.0 chuẩn.
                 </p>
               </div>
-                      <button onclick="app.navigate('thptqg')" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60" data-view="thptqg">
-          <i class="fa-solid fa-file-signature w-5 text-center text-sm text-cyan-400"></i>
-          <span>Thi Thử THPT Quốc Gia</span>
-          <span class="ml-auto text-[10px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-400">HOT</span>
-        </button>
-
-        <button onclick="app.navigate('grade12-exam')" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60" data-view="grade12-exam">
-          <i class="fa-solid fa-graduation-cap w-5 text-center text-sm text-amber-400"></i>
-          <span>Đề Cương & Thi Lớp 12</span>
-          <span class="ml-auto text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400">GK & CK</span>
-        </button>
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto shrink-0">
+                <button onclick="app.navigate('thptqg')" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs shadow-lg transition flex items-center justify-center space-x-2 active:scale-95">
+                  <i class="fa-solid fa-file-signature"></i>
+                  <span>Vào Thi Thử THPTQG</span>
+                </button>
+                <button onclick="app.navigate('grade12-exam')" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 transition flex items-center justify-center space-x-2 active:scale-95">
+                  <i class="fa-solid fa-graduation-cap text-amber-400"></i>
+                  <span>Đề Lớp 12</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -829,7 +831,7 @@
 
               <!-- Center Word & IPA -->
               <div class="text-center py-6 space-y-3.5">
-                <h2 id="fc-word" class="text-3xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white drop-shadow-sm select-text">
+                <h2 id="fc-word" class="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white drop-shadow-sm select-text break-words hyphens-auto">
                   Pass with flying colours
                 </h2>
                 <div class="flex items-center justify-center">
@@ -962,22 +964,22 @@
         </div>
 
         <!-- FLASHCARD NAVIGATION CONTROLS (NẰM NGAY DƯỚI THẺ ĐỂ CHUYỂN THẺ TỨC THÌ) -->
-        <div class="flex items-center justify-between px-1 text-xs font-semibold text-slate-500 dark:text-slate-400 py-1">
-          <button onclick="app.prevCard()" class="px-4 py-2.5 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs flex items-center space-x-2 transition border border-slate-200 dark:border-slate-800 shadow-sm active:scale-95">
-            <i class="fa-solid fa-arrow-left"></i>
+        <div class="flex items-center justify-between px-0.5 sm:px-1 text-xs font-semibold text-slate-500 dark:text-slate-400 py-1 gap-1.5 sm:gap-2">
+          <button onclick="app.prevCard()" class="px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs flex items-center space-x-1.5 sm:space-x-2 transition border border-slate-200 dark:border-slate-800 shadow-sm active:scale-95 shrink-0" title="Thẻ trước (Mũi tên trái)">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
             <span>Thẻ trước</span>
           </button>
 
-          <div class="flex items-center space-x-2 text-[11px] text-slate-400">
-            <span id="fc-session-repeat-badge" class="px-2.5 py-0.5 rounded-full font-bold bg-amber-500/20 text-amber-500 border border-amber-500/30">
-              🔁 Lặp lại: 1/3 lần
+          <div class="flex items-center justify-center space-x-1.5 text-[10px] sm:text-[11px] text-slate-400 truncate min-w-0">
+            <span id="fc-session-repeat-badge" class="px-2 sm:px-2.5 py-0.5 rounded-full font-bold bg-amber-500/20 text-amber-500 border border-amber-500/30 whitespace-nowrap">
+              🔁 Lặp: 1/3 lần
             </span>
-            <span class="hidden sm:inline">Dùng mũi tên ← → hoặc Space để lật</span>
+            <span class="hidden md:inline">Dùng phím ← → hoặc Space để lật</span>
           </div>
 
-          <button onclick="app.nextCard()" class="px-5 py-2.5 rounded-2xl bg-primary/20 hover:bg-primary/30 text-primary-light font-black text-xs flex items-center space-x-2 transition border border-primary/30 shadow-sm active:scale-95">
-            <span>Thẻ tiếp theo</span>
-            <i class="fa-solid fa-arrow-right"></i>
+          <button onclick="app.nextCard()" class="px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-2xl bg-primary/20 hover:bg-primary/30 text-primary-light font-black text-xs flex items-center space-x-1.5 sm:space-x-2 transition border border-primary/30 shadow-sm active:scale-95 shrink-0" title="Thẻ tiếp theo (Mũi tên phải hoặc Enter)">
+            <span>Thẻ tiếp</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
           </button>
         </div>
 
@@ -985,25 +987,25 @@
         <div class="space-y-3">
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <button onclick="app.rateCard(1)" class="p-3.5 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 hover:border-accent-rose hover:bg-rose-50/50 dark:hover:bg-rose-950/20 transition flex flex-col items-center group shadow-sm">
-              <span class="text-xs font-mono font-extrabold text-slate-500 dark:text-slate-400 group-hover:text-accent-rose">[ Phím 1 ]</span>
+              <span class="text-xs font-mono font-extrabold text-slate-500 dark:text-slate-400 group-hover:text-accent-rose hidden sm:block">[ Phím 1 ]</span>
               <span class="font-extrabold text-sm text-slate-900 dark:text-white group-hover:text-accent-rose mt-1">Quên / Học lại</span>
               <span class="text-[10px] font-bold text-rose-500 mt-0.5">Ôn lại ngay</span>
             </button>
 
             <button onclick="app.rateCard(2)" class="p-3.5 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 hover:border-accent-amber hover:bg-amber-50/50 dark:hover:bg-amber-950/20 transition flex flex-col items-center group shadow-sm">
-              <span class="text-xs font-mono font-extrabold text-slate-500 dark:text-slate-400 group-hover:text-accent-amber">[ Phím 2 ]</span>
+              <span class="text-xs font-mono font-extrabold text-slate-500 dark:text-slate-400 group-hover:text-accent-amber hidden sm:block">[ Phím 2 ]</span>
               <span class="font-extrabold text-sm text-slate-900 dark:text-white group-hover:text-accent-amber mt-1">Khó</span>
               <span class="text-[10px] font-bold text-amber-500 mt-0.5">Sau 1 ngày</span>
             </button>
 
             <button onclick="app.rateCard(3)" class="p-3.5 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 hover:border-primary-light hover:bg-indigo-50/50 dark:hover:bg-indigo-950/20 transition flex flex-col items-center group shadow-sm">
-              <span class="text-xs font-mono font-extrabold text-slate-500 dark:text-slate-400 group-hover:text-primary-light">[ Phím 3 ]</span>
+              <span class="text-xs font-mono font-extrabold text-slate-500 dark:text-slate-400 group-hover:text-primary-light hidden sm:block">[ Phím 3 ]</span>
               <span class="font-extrabold text-sm text-slate-900 dark:text-white group-hover:text-primary-light mt-1">Tốt</span>
               <span class="text-[10px] font-bold text-primary-light mt-0.5">Sau 3 ngày</span>
             </button>
 
             <button onclick="app.rateCard(4)" class="p-3.5 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 hover:border-accent-emerald hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 transition flex flex-col items-center group shadow-sm">
-              <span class="text-xs font-mono font-extrabold text-slate-500 dark:text-slate-400 group-hover:text-accent-emerald">[ Phím 4 ]</span>
+              <span class="text-xs font-mono font-extrabold text-slate-500 dark:text-slate-400 group-hover:text-accent-emerald hidden sm:block">[ Phím 4 ]</span>
               <span class="font-extrabold text-sm text-slate-900 dark:text-white group-hover:text-accent-emerald mt-1">Dễ / Đã nhớ</span>
               <span class="text-[10px] font-bold text-emerald-500 mt-0.5">Sau 6 ngày</span>
             </button>
@@ -1378,17 +1380,14 @@
               <button onclick="app.navigate('quiz')" class="px-6 py-2.5 rounded-xl bg-primary text-white font-bold text-xs hover:bg-primary-hover shadow-glow-primary transition">
                 Luyện Tập Đề Mới
               </button>
-                      <button onclick="app.navigate('thptqg')" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60" data-view="thptqg">
-          <i class="fa-solid fa-file-signature w-5 text-center text-sm text-cyan-400"></i>
-          <span>Thi Thử THPT Quốc Gia</span>
-          <span class="ml-auto text-[10px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-400">HOT</span>
-        </button>
-
-        <button onclick="app.navigate('grade12-exam')" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60" data-view="grade12-exam">
-          <i class="fa-solid fa-graduation-cap w-5 text-center text-sm text-amber-400"></i>
-          <span>Đề Cương & Thi Lớp 12</span>
-          <span class="ml-auto text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400">GK & CK</span>
-        </button>
+              <button onclick="app.navigate('dashboard')" class="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center space-x-1.5">
+                <i class="fa-solid fa-house"></i>
+                <span>Về Bảng Điều Khiển</span>
+              </button>
+              <button onclick="app.navigate('thptqg')" class="px-5 py-2.5 rounded-xl bg-cyan-500/15 text-cyan-500 border border-cyan-500/30 font-bold text-xs hover:bg-cyan-500/25 transition flex items-center space-x-1.5">
+                <i class="fa-solid fa-file-signature"></i>
+                <span>Thi Thử THPTQG</span>
+              </button>
             </div>
           </div>
         </div>
