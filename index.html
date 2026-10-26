@@ -278,7 +278,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.6.2 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.6.3 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -684,34 +684,42 @@
 
       <!-- VIEW 2: SMART FLASHCARDS -->
       <section id="view-flashcards" class="view-content hidden space-y-6 max-w-4xl mx-auto">
-        <!-- ACTIVE TOPIC BANNER & CHUYỂN BỘ THẺ THEO CHỦ ĐỀ -->
-        <div class="bg-gradient-to-r from-indigo-500/10 via-primary/10 to-purple-500/10 p-4 md:p-5 rounded-3xl border border-indigo-200/80 dark:border-indigo-800/80 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <div class="flex items-center space-x-3.5 min-w-0">
-            <div id="fc-current-topic-icon" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-primary to-indigo-500 text-white flex items-center justify-center text-xl shadow-glow-primary shrink-0">
+        <!-- ACTIVE TOPIC BANNER & CHUYỂN BỘ THẺ THEO CHỦ ĐỀ (Tối ưu hóa gọn gàng trên Mobile) -->
+        <div class="bg-gradient-to-r from-indigo-500/10 via-primary/10 to-purple-500/10 p-3 sm:p-4 md:p-5 rounded-2xl sm:rounded-3xl border border-indigo-200/80 dark:border-indigo-800/80 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3">
+          <div class="flex items-center space-x-2.5 sm:space-x-3.5 min-w-0 w-full sm:w-auto">
+            <div id="fc-current-topic-icon" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-primary to-indigo-500 text-white flex items-center justify-center text-lg sm:text-xl shadow-glow-primary shrink-0">
               <i class="fa-solid fa-book-bookmark"></i>
             </div>
-            <div class="min-w-0">
-              <div class="flex items-center gap-2">
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-primary-light">Đang Học Chủ Đề:</span>
-                <span id="fc-current-topic-badge" class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-500 border border-amber-500/30">179 từ</span>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-1.5 sm:gap-2">
+                <span class="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-primary-light">Đang Học:</span>
+                <span id="fc-current-topic-badge" class="px-2 py-0.2 sm:px-2.5 sm:py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold bg-amber-500/20 text-amber-500 border border-amber-500/30">179 từ</span>
               </div>
-              <h3 id="fc-current-topic-title" class="font-black text-base md:text-lg text-slate-900 dark:text-white truncate mt-0.5">
+              <h3 id="fc-current-topic-title" class="font-black text-sm sm:text-base md:text-lg text-slate-900 dark:text-white truncate mt-0.5">
                 📓 Sổ Tay Từ Vựng
               </h3>
             </div>
           </div>
 
           <div class="flex items-center space-x-2 w-full sm:w-auto justify-end">
-            <button onclick="app.openTopicPickerModal()" class="px-4 py-2.5 rounded-2xl bg-primary text-white text-xs font-bold hover:bg-primary-hover shadow-glow-primary transition flex items-center space-x-2 active:scale-95 shrink-0" title="Bấm vào để chọn chủ đề từ vựng khác">
-              <i class="fa-solid fa-layer-group"></i>
+            <!-- Nút Thu gọn / Mở rộng cài đặt trên Mobile -->
+            <button onclick="app.toggleMobileFlashcardControls()" class="sm:hidden px-3 py-2 rounded-xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center space-x-1.5 shadow-sm" title="Hiện/ẩn bộ lọc & giới hạn từ">
+              <i class="fa-solid fa-sliders text-primary-light text-xs"></i>
+              <span id="text-toggle-fc-controls">Cài Đặt</span>
+            </button>
+            <button onclick="app.openTopicPickerModal()" class="flex-1 sm:flex-initial px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl bg-primary text-white text-xs font-bold hover:bg-primary-hover shadow-glow-primary transition flex items-center justify-center space-x-1.5 sm:space-x-2 active:scale-95 shrink-0" title="Bấm vào để chọn chủ đề từ vựng khác">
+              <i class="fa-solid fa-layer-group text-xs"></i>
               <span>Chọn Chủ Đề Học ▾</span>
             </button>
-            <button onclick="app.openCustomWordPicker()" class="px-3.5 py-2.5 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:text-primary-light text-xs font-bold transition flex items-center space-x-1.5 shadow-sm" title="Tự chọn danh sách từ bất kỳ để ôn">
-              <i class="fa-solid fa-list-check text-primary-light"></i>
+            <button onclick="app.openCustomWordPicker()" class="p-2 sm:px-3.5 sm:py-2.5 rounded-xl sm:rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:text-primary-light text-xs font-bold transition flex items-center justify-center shadow-sm" title="Tự chọn danh sách từ bất kỳ để ôn">
+              <i class="fa-solid fa-list-check text-primary-light text-xs"></i>
               <span class="hidden md:inline">Chọn Từng Từ</span>
             </button>
           </div>
         </div>
+
+        <!-- KHỐI BỘ LỌC & GIỚI HẠN PHIÊN (Bọc trong container thu gọn trên Mobile để đưa Flashcard lên đầu) -->
+        <div id="fc-collapsible-controls" class="space-y-3 sm:space-y-4">
 
         <!-- Search Bar & Controls Bar -->
         <div class="bg-white dark:bg-darkCard p-4 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
@@ -790,15 +798,17 @@
           </div>
         </div>
 
-        <!-- Progress Header for Study Session -->
-        <div class="flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400 px-2">
-          <div class="flex items-center space-x-2">
-            <span>Tiến độ chủ đề:</span>
-            <strong id="card-index-indicator" class="text-sm font-black text-primary-light">1 / 179</strong>
+        </div><!-- /#fc-collapsible-controls -->
+
+        <!-- Progress Header for Study Session (Chống tràn chữ, không bao giờ vỡ hàng trên Mobile) -->
+        <div class="flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400 px-1 sm:px-2 gap-2">
+          <div class="flex items-center space-x-1.5 min-w-0 flex-1">
+            <span class="text-[11px] sm:text-xs text-slate-400 shrink-0 hidden xs:inline">Tiến độ:</span>
+            <strong id="card-index-indicator" class="text-xs sm:text-sm font-black text-primary-light truncate">1 / 179</strong>
           </div>
-          <div class="flex items-center space-x-2">
-            <span id="card-topic-badge" class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-amber-500/20 text-amber-500 border border-amber-500/30">📓 Sổ Tay</span>
-            <span id="card-status-badge" class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-emerald-500/20 text-emerald-500 border border-emerald-500/30">Đang học</span>
+          <div class="flex items-center space-x-1.5 shrink-0">
+            <span id="card-topic-badge" class="px-2 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-amber-500/20 text-amber-500 border border-amber-500/30 whitespace-nowrap max-w-[110px] sm:max-w-[150px] truncate shrink-0">📓 Sổ Tay</span>
+            <span id="card-status-badge" class="px-2 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-emerald-500/20 text-emerald-500 border border-emerald-500/30 whitespace-nowrap shrink-0">Đang học</span>
           </div>
         </div>
 
@@ -812,30 +822,30 @@
           <div id="flashcard-inner" class="card-inner transform-style-3d relative w-full min-h-[340px] sm:min-h-[400px] md:min-h-[460px]">
             
             <!-- FRONT OF CARD -->
-            <div class="card-front backface-hidden absolute inset-0 rounded-3xl p-6 md:p-10 bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col justify-between">
-              <!-- Top Front Bar -->
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                  <span id="fc-type" class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/60 text-primary-light border border-indigo-200 dark:border-indigo-800">
+            <div class="card-front backface-hidden absolute inset-0 rounded-3xl p-4 sm:p-6 md:p-10 bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col justify-between">
+              <!-- Top Front Bar (Gọn gàng trên Mobile, chống đè nút hành động) -->
+              <div class="flex items-center justify-between gap-1.5 sm:gap-2">
+                <div class="flex items-center space-x-1.5 min-w-0 flex-1 overflow-hidden">
+                  <span id="fc-type" class="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/60 text-primary-light border border-indigo-200 dark:border-indigo-800 shrink-0">
                     Idiom
                   </span>
-                  <span id="fc-level" class="px-2.5 py-1 rounded-full text-xs font-black bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                  <span id="fc-level" class="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 shrink-0">
                     B2
                   </span>
-                  <span id="fc-topic-tag" class="px-2.5 py-1 rounded-full text-xs font-black bg-amber-500/15 text-amber-600 dark:text-amber-400">
+                  <span id="fc-topic-tag" class="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black bg-amber-500/15 text-amber-600 dark:text-amber-400 whitespace-nowrap max-w-[90px] sm:max-w-[140px] truncate shrink-0 hidden xs:inline-block">
                     Sổ Tay
                   </span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <button id="fc-star-btn-front" onclick="event.stopPropagation(); app.toggleStarCurrentCard();" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-amber-500/20 text-slate-400 hover:text-amber-500 flex items-center justify-center transition" title="Đánh dấu sao thẻ quan trọng">
-                    <i id="fc-star-icon-front" class="fa-regular fa-star text-base"></i>
+                <div class="flex items-center space-x-1 sm:space-x-1.5 shrink-0">
+                  <button id="fc-star-btn-front" onclick="event.stopPropagation(); app.toggleStarCurrentCard();" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-amber-500/20 text-slate-400 hover:text-amber-500 flex items-center justify-center transition" title="Đánh dấu sao thẻ quan trọng">
+                    <i id="fc-star-icon-front" class="fa-regular fa-star text-xs sm:text-base"></i>
                   </button>
-                  <button onclick="event.stopPropagation(); app.speakCurrentWord();" class="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 text-primary-light flex items-center justify-center transition" title="Nghe phát âm chuẩn (Phím S)">
-                    <i class="fa-solid fa-volume-high text-base"></i>
+                  <button onclick="event.stopPropagation(); app.speakCurrentWord();" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 hover:bg-primary/20 text-primary-light flex items-center justify-center transition" title="Nghe phát âm chuẩn (Phím S)">
+                    <i class="fa-solid fa-volume-high text-xs sm:text-base"></i>
                   </button>
                   <!-- MICROPHONE CHẤM ĐIỂM PHÁT ÂM (TÍNH NĂNG 3) -->
-                  <button onclick="event.stopPropagation(); app.startPronunciationPractice();" class="w-10 h-10 rounded-full bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white flex items-center justify-center transition shadow-sm" title="Luyện phát âm qua Micro & Chấm Điểm">
-                    <i class="fa-solid fa-microphone text-base"></i>
+                  <button onclick="event.stopPropagation(); app.startPronunciationPractice();" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white flex items-center justify-center transition shadow-sm" title="Luyện phát âm qua Micro & Chấm Điểm">
+                    <i class="fa-solid fa-microphone text-xs sm:text-base"></i>
                   </button>
                 </div>
               </div>
@@ -875,7 +885,7 @@
             </div>
 
             <!-- BACK OF CARD -->
-            <div class="card-back backface-hidden rotate-y-180 absolute inset-0 rounded-3xl p-6 md:p-8 bg-white dark:bg-darkCard border-2 border-primary/40 shadow-2xl flex flex-col justify-between overflow-y-auto">
+            <div class="card-back backface-hidden rotate-y-180 absolute inset-0 rounded-3xl p-4 sm:p-6 md:p-8 bg-white dark:bg-darkCard border-2 border-primary/40 shadow-2xl flex flex-col justify-between overflow-y-auto">
               <!-- Top Back Bar -->
               <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
                 <div class="flex items-center space-x-2">
@@ -3266,7 +3276,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.6.2 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.6.3 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -3330,7 +3340,7 @@
     "ipa": "/pæs wɪð ˈflaɪ.ɪŋ ˈkʌl.əz/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tốt nghiệp hoặc thi đỗ với kết quả xuất sắc, điểm số rực rỡ",
     "meaningEn": "To pass an examination or test with very high marks or great success.",
     "cloze": "She studied diligently for months and passed the university entrance examination with [ _____ ].",
@@ -3350,7 +3360,7 @@
     "ipa": "/ɒf ˈkʌl.ər/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Không khỏe, mệt mỏi, uể oải, sắc mặt nhợt nhạt",
     "meaningEn": "Slightly unwell or in low spirits; looking slightly pale or ill.",
     "cloze": "I am feeling a bit [ _____ ] this morning, so I might take a sick leave.",
@@ -3370,7 +3380,7 @@
     "ipa": "/lʌɡˈʒʊə.ri.əs/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Sang trọng, xa hoa, lộng lẫy, tiện nghi đẳng cấp",
     "meaningEn": "Extremely comfortable, elegant, or enjoyable, especially involving great expense.",
     "cloze": "They spent their holiday in a [ _____ ] beachfront villa with a private infinity pool.",
@@ -3390,7 +3400,7 @@
     "ipa": "/weər aʊt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Làm kiệt sức, hao mòn; làm cho mòn/hỏng vì dùng nhiều",
     "meaningEn": "To exhaust someone completely, or to make something useless through prolonged use.",
     "cloze": "Working twelve hours a day without a break completely [ _____ ] him.",
@@ -3410,7 +3420,7 @@
     "ipa": "/dɪˈsaɪ.sɪv/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Quyết đoán, kiên quyết; mang tính chất định đoạt bước ngoặt",
     "meaningEn": "Settling an issue; producing a definite result; having or showing the ability to make decisions quickly.",
     "cloze": "Her [ _____ ] action prevented the company from falling into bankruptcy during the crisis.",
@@ -3430,7 +3440,7 @@
     "ipa": "/ˈkɒn.sən.treɪt ɒn/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tập trung cao độ sự chú ý hoặc năng lượng vào điều gì",
     "meaningEn": "To direct your mental power, attention, or efforts towards a particular activity or problem.",
     "cloze": "It is hard to [ _____ ] one's study when there is loud music playing next door.",
@@ -3450,7 +3460,7 @@
     "ipa": "/breɪk ði aɪs/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Phá vỡ bầu không khí ngại ngùng, ngượng ngập ban đầu",
     "meaningEn": "To do or say something that makes people who do not know each other feel more relaxed and comfortable.",
     "cloze": "The speaker told a lighthearted joke to [ _____ ] before starting his formal presentation.",
@@ -3470,7 +3480,7 @@
     "ipa": "/teɪk ˈɪn.tuː kənˌsɪd.əˈreɪ.ʃən/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cân nhắc, tính đến, xem xét một yếu tố khi đưa ra quyết định",
     "meaningEn": "To consider or remember something when assessing a situation or making a decision.",
     "cloze": "The judge will [ _____ ] his clean criminal record before issuing the final sentence.",
@@ -3490,7 +3500,7 @@
     "ipa": "/nəʊˈtɔː.ri.əs/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Khét tiếng, tai tiếng vì điều tiêu cực hoặc hành vi xấu",
     "meaningEn": "Famous or well known, typically for some bad quality or deed.",
     "cloze": "The crossroad is [ _____ ] for frequent traffic accidents due to poor street lighting.",
@@ -3510,7 +3520,7 @@
     "ipa": "/lend ˈkʌl.ər tuː/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Thêm bằng chứng thuyết phục, làm cho câu chuyện thêm phần xác thực",
     "meaningEn": "To make something seem more true, believable, or likely.",
     "cloze": "The newly discovered security camera footage [ _____ ] his statement that he was innocent.",
@@ -3530,7 +3540,7 @@
     "ipa": "/kætʃ ɒn/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Trở nên phổ biến, thành trào lưu; hoặc hiểu ra điều gì",
     "meaningEn": "To become fashionable or popular; to understand what is meant or what is going on.",
     "cloze": "The trend of wearing sustainable clothing quickly [ _____ ] among young generations.",
@@ -3550,7 +3560,7 @@
     "ipa": "/kætʃ ʌp wɪð/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Đuổi kịp, bắt kịp tiến độ; hoặc hậu quả ập đến",
     "meaningEn": "To reach the same standard or level as others; to succeed in reaching a person ahead of you.",
     "cloze": "After missing two weeks of class due to flu, he worked overtime to [ _____ ] his peers.",
@@ -3570,7 +3580,7 @@
     "ipa": "/aʊt əv ˈɔː.dər/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Bị hỏng, ngừng hoạt động (máy móc, thang máy)",
     "meaningEn": "Not operating properly; damaged or not working mechanically.",
     "cloze": "We had to take the stairs up to the eighth floor because the elevator was [ _____ ].",
@@ -3590,7 +3600,7 @@
     "ipa": "/ˈnɒv.əl/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Mới lạ, độc đáo, chưa từng có tiền lệ",
     "meaningEn": "Interestingly new or unusual; not like anything seen or known before.",
     "cloze": "The tech startup proposed a [ _____ ] approach to reducing plastic waste in urban rivers.",
@@ -3610,7 +3620,7 @@
     "ipa": "/æt ðə drɒp əv ə hæt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Ngay tức khắc, sẵn sàng làm gì ngay mà không cần do dự",
     "meaningEn": "Without any hesitation; instantly and willingly.",
     "cloze": "He is so fond of travelling that he is ready to pack his backpack [ _____ ].",
@@ -3630,7 +3640,7 @@
     "ipa": "/ruːt kɔːz/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Nguyên nhân gốc rễ, căn nguyên sâu xa của vấn đề",
     "meaningEn": "The fundamental reason or primary source for the occurrence of a problem.",
     "cloze": "Instead of blaming the symptoms, we must address the [ _____ ] of rising youth unemployment.",
@@ -3650,7 +3660,7 @@
     "ipa": "/prɪˈven.tɪv ˈmeʒ.əz/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Các biện pháp phòng ngừa, ngăn ngừa từ sớm",
     "meaningEn": "Steps taken in advance to prevent something dangerous or unpleasant from happening.",
     "cloze": "The city government implemented strict [ _____ ] to avert another outbreak of seasonal fever.",
@@ -3670,7 +3680,7 @@
     "ipa": "/rest əˈʃɔːd/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Hãy yên tâm, tin chắc rằng điều gì đó sẽ được đảm bảo",
     "meaningEn": "Used to tell someone not to worry because something is certain to happen or is safe.",
     "cloze": "You can [ _____ ] that all your personal information is stored with bank-grade encryption.",
@@ -3690,7 +3700,7 @@
     "ipa": "/sens əv əˈkʌm.plɪʃ.mənt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cảm giác thỏa mãn, thành tựu sau khi hoàn thành mục tiêu",
     "meaningEn": "A proud and satisfied feeling of having achieved something good and meaningful.",
     "cloze": "Crossing the marathon finish line gave her an overwhelming [ _____ ].",
@@ -3710,7 +3720,7 @@
     "ipa": "/wɪð ə vjuː tuː/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Với mục đích, nhằm để làm gì trong tương lai",
     "meaningEn": "With the aim, intention, or hope of doing something.",
     "cloze": "He enrolled in a night coding academy with a view to [ _____ ] his career path towards AI.",
@@ -4770,7 +4780,7 @@
     "ipa": "/ˌwel ˈraʊn.dɪd/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Toàn diện, phát triển đầy đủ các mặt (kiến thức, kỹ năng, tính cách)",
     "meaningEn": "Having or providing a good variety of different skills and abilities; comprehensive.",
     "cloze": "The university aims to foster [ _____ ] individuals who excel both academically and socially.",
@@ -4790,7 +4800,7 @@
     "ipa": "/wɔːk ɒn ˈeɡ.ʃelz/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cực kỳ cẩn trọng trong lời ăn tiếng nói, nơm nớp lo sợ làm phật ý người khác",
     "meaningEn": "To be extremely cautious about what one says or does, so as not to offend anyone.",
     "cloze": "Whenever the boss is in a bad mood, everyone in the office feels like they are [ _____ ].",
@@ -4810,7 +4820,7 @@
     "ipa": "/ɪnˈlɑːdʒ/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Mở rộng kích thước, phóng to, nới rộng phạm vi",
     "meaningEn": "To make or become bigger or more extensive.",
     "cloze": "Reading books every day will help to [ _____ ] your vocabulary and worldview.",
@@ -4830,7 +4840,7 @@
     "ipa": "/ɪkˈses.ɪv/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Quá mức, thái quá, vượt quá giới hạn cho phép hoặc thông thường",
     "meaningEn": "Greater than what is normal, acceptable, or reasonable.",
     "cloze": "[ _____ ] screen time at night can severely disrupt your sleep quality.",
@@ -4850,7 +4860,7 @@
     "ipa": "/ˈber.i ðə ˈhætʃ.ɪt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Giảng hòa, làm hòa, dẹp bỏ mâu thuẫn hận thù trong quá khứ",
     "meaningEn": "To end a quarrel or conflict and become friendly again.",
     "cloze": "After years of bitter rivalry, the two brothers decided to [ _____ ] and cooperate.",
@@ -4870,7 +4880,7 @@
     "ipa": "/kənˈsek.jə.tɪv/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Liên tiếp, liền nhau, theo thứ tự nối tiếp không gián đoạn",
     "meaningEn": "Following continuously; in unbroken or logical sequence.",
     "cloze": "She has maintained a study streak for 30 [ _____ ] days on EngMastery AI.",
@@ -4890,7 +4900,7 @@
     "ipa": "/iːt wʌnz wɜːdz/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Thừa nhận mình đã nói sai, phải nuốt lại lời nói ngạo mạn trước đó",
     "meaningEn": "To admit that what one said previously was wrong.",
     "cloze": "He claimed our team would lose, but had to [ _____ ] when we took the trophy.",
@@ -4910,7 +4920,7 @@
     "ipa": "/kɒst ən ɑːm ænd ə leɡ/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cực kỳ đắt đỏ, tốn kém tiền của như phải đổi cả cánh tay và cái chân",
     "meaningEn": "To be extremely expensive.",
     "cloze": "Renting a modern apartment in the city centre can [ _____ ].",
@@ -4930,7 +4940,7 @@
     "ipa": "/ˈθɔːt.prəˌvəʊ.kɪŋ/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Gợi nhiều suy nghĩ, kích thích tư duy sâu sắc, đáng để suy ngẫm",
     "meaningEn": "Stimulating careful consideration or interesting thoughts.",
     "cloze": "The documentary raised [ _____ ] questions about the future of artificial intelligence.",
@@ -4950,7 +4960,7 @@
     "ipa": "/prəˈlɪf.ɪk/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Sáng tác nhiều, năng suất cao, mắn đẻ (nhà văn, nghệ sĩ, nhà khoa học)",
     "meaningEn": "Producing a great number or amount of something, especially creative work.",
     "cloze": "She is one of the most [ _____ ] novelists of the 21st century, publishing a book every year.",
@@ -4970,7 +4980,7 @@
     "ipa": "/let ˈsliː.pɪŋ dɒɡz laɪ/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Chuyện cũ đã qua hãy để nó yên, đừng bới móc lại rắc rối trong quá khứ",
     "meaningEn": "To avoid interfering in a situation that is currently not causing problems, to prevent restarting trouble.",
     "cloze": "Don't bring up that argument again; it is better to [ _____ ].",
@@ -4990,7 +5000,7 @@
     "ipa": "/ˈtaɪ.tən wʌnz belt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Thắt lưng buộc bụng, cắt giảm chi tiêu tối đa trong thời kỳ khó khăn",
     "meaningEn": "To spend less money than usual because you have less money or need to save.",
     "cloze": "Due to rising inflation, many families have had to [ _____ ] this year.",
@@ -5010,7 +5020,7 @@
     "ipa": "/kʌm ˈɪn.tuː/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Thừa kế, được hưởng quyền thừa kế tài sản lớn",
     "meaningEn": "To inherit money, property, or a title from someone who died.",
     "cloze": "He [ _____ ] a considerable fortune after the passing of his grandfather.",
@@ -5030,7 +5040,7 @@
     "ipa": "/kʌm ɪn fɔːr/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Hứng chịu chỉ trích, nhận lấy lời phê phán hay chê trách từ dư luận",
     "meaningEn": "To receive or be subjected to blame, criticism, or condemnation.",
     "cloze": "The government's new taxation policy has [ _____ ] severe criticism from small businesses.",
@@ -5050,7 +5060,7 @@
     "ipa": "/smæʃ hɪt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tác phẩm thành công vang dội, bài hát/bộ phim gây sốt lớn",
     "meaningEn": "A very successful song, film, show, or play.",
     "cloze": "Their latest single turned into an overnight [ _____ ] across global streaming charts.",
@@ -5070,7 +5080,7 @@
     "ipa": "/kleɪm laɪf/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cướp đi sinh mạng, làm ai thiệt mạng (thiên tai, dịch bệnh, tai nạn)",
     "meaningEn": "To cause the death of someone (referring to accidents, natural disasters, or diseases).",
     "cloze": "The catastrophic earthquake [ _____ ] over three thousand lives in the mountainous region.",
@@ -5090,7 +5100,7 @@
     "ipa": "/bʊk ɪn ədˈvɑːns/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Đặt chỗ/vé trước thời hạn để giữ chỗ",
     "meaningEn": "To reserve a place, ticket, or hotel accommodation beforehand.",
     "cloze": "During peak tourist season, travelers are strongly advised to [ _____ ].",
@@ -5110,7 +5120,7 @@
     "ipa": "/ˌdet.rɪˈmen.təl/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Gây hại, có tác động tiêu cực, tổn hại đến sự phát triển",
     "meaningEn": "Causing harm, damage, or disadvantage.",
     "cloze": "Chronic stress has a severely [ _____ ] impact on cardiovascular health.",
@@ -5130,7 +5140,7 @@
     "ipa": "/ˈdev.ə.steɪ.tɪŋ/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tàn phá khủng khiếp, mang tính hủy diệt nặng nề",
     "meaningEn": "Causing severe shock, distress, or immense destruction.",
     "cloze": "The flood caused [ _____ ] damage to the agricultural infrastructure of the province.",
@@ -5150,7 +5160,7 @@
     "ipa": "/ˈsaɪd ɪˌfekt/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tác dụng phụ ngoài ý muốn (của thuốc hoặc một chính sách)",
     "meaningEn": "An unwanted or unexpected secondary effect of a drug, treatment, or action.",
     "cloze": "Drowsiness is a common [ _____ ] of this antihistamine medication.",
@@ -5170,7 +5180,7 @@
     "ipa": "/prəˈlɒŋd/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Kéo dài, dai dẳng hơn mức bình thường",
     "meaningEn": "Continuing for a long time, often longer than expected.",
     "cloze": "The region suffered a [ _____ ] period of drought that ruined entire harvests.",
@@ -5190,7 +5200,7 @@
     "ipa": "/ˈbʌm.pər krɒp/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Vụ mùa bội thu, sản lượng nông nghiệp đạt mức kỷ lục",
     "meaningEn": "An unusually large and abundant harvest of agricultural produce.",
     "cloze": "Thanks to favorable weather, farmers celebrated a [ _____ ] of golden rice this autumn.",
@@ -5210,7 +5220,7 @@
     "ipa": "/rɪˈdʌn.dənt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Dư thừa, không cần thiết; (nhân sự) bị sa thải do dôi dư vị trí",
     "meaningEn": "No longer needed or useful; laid off from work because one's job is eliminated.",
     "cloze": "Automation has made many manual factory roles completely [ _____ ].",
@@ -5230,7 +5240,7 @@
     "ipa": "/ˈsteɪ.pəl/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Lương thực chính, mặt hàng chủ lực, thành phần căn bản",
     "meaningEn": "A main or important element of something, especially a primary food eaten regularly.",
     "cloze": "Rice is the primary [ _____ ] diet for more than half of the world's population.",
@@ -5250,7 +5260,7 @@
     "ipa": "/wet bɪˈhaɪnd ðiː ɪəz/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Còn non nớt, chưa có kinh nghiệm, miệng còn hôi sữa",
     "meaningEn": "Young and lacking experience; naive.",
     "cloze": "Don't entrust high-stakes negotiations to an intern who is still [ _____ ].",
@@ -5270,7 +5280,7 @@
     "ipa": "/kɪk ðə ˈbʌk.ɪt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Qua đời, chết, ngỏm củ tỏi (thành ngữ suồng sã)",
     "meaningEn": "An informal idiom meaning to die.",
     "cloze": "The old television set finally [ _____ ] after twenty years of service.",
@@ -5290,7 +5300,7 @@
     "ipa": "/ɒn ˈdjuː.ti/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Đang làm nhiệm vụ, đang trong ca trực",
     "meaningEn": "Engaged in one's scheduled work or assigned duty.",
     "cloze": "Police officers [ _____ ] must remain alert and responsive at all times.",
@@ -5310,7 +5320,7 @@
     "ipa": "/pɪk ʌp ə ˈlæŋ.ɡwɪdʒ/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Học lỏm, tiếp thu một ngôn ngữ tự nhiên qua tiếp xúc đời thường mà không cần qua trường lớp",
     "meaningEn": "To learn a language casually through immersion rather than formal lessons.",
     "cloze": "Children usually [ _____ ] much faster than adults when living in a bilingual environment.",
@@ -5330,7 +5340,7 @@
     "ipa": "/ˈmɪt.ɪ.ɡeɪt/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Làm dịu bớt, giảm nhẹ mức độ nghiêm trọng hoặc tác hại của điều gì",
     "meaningEn": "To make something less severe, harmful, or painful.",
     "cloze": "Planting urban trees is an effective measure to [ _____ ] the effects of heat waves.",
@@ -5350,7 +5360,7 @@
     "ipa": "/ɒpt fɔːr/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Lựa chọn, quyết định chọn một phương án cụ thể",
     "meaningEn": "To make a choice or decision in favor of an option.",
     "cloze": "More consumers now [ _____ ] eco-friendly products made from organic materials.",
@@ -5370,7 +5380,7 @@
     "ipa": "/ˈkær.i ðə kæn/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Đứng mũi chịu sào, gánh chịu trách nhiệm/hậu quả cho lỗi lầm của người khác",
     "meaningEn": "To take the blame or responsibility for something that went wrong, often on behalf of others.",
     "cloze": "When the project collapsed, the project manager was left to [ _____ ].",
@@ -5390,7 +5400,7 @@
     "ipa": "/meɪk laɪt ɒv/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Coi nhẹ, xem thường, xem việc gì là không quan trọng",
     "meaningEn": "To treat something as unimportant or not serious.",
     "cloze": "You shouldn't [ _____ ] your recurring headache; you need to see a physician.",
@@ -5410,7 +5420,7 @@
     "ipa": "/ˈstʌm.bəl əˈpɒn/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tình cờ phát hiện, bất ngờ bắt gặp điều gì quý giá mà không hề chủ định tìm kiếm",
     "meaningEn": "To find or discover something entirely by chance.",
     "cloze": "While researching in the archives, the historian [ _____ ] a lost manuscript.",
@@ -5430,7 +5440,7 @@
     "ipa": "/ɒn ðə haʊs/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Được quán chiêu đãi miễn phí, không phải trả tiền",
     "meaningEn": "Provided free of charge by the establishment (restaurant, hotel, or bar).",
     "cloze": "Because it was our anniversary, the restaurant manager said dessert was [ _____ ].",
@@ -5450,7 +5460,7 @@
     "ipa": "/əˈkjuːt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cấp tính, dữ dội, nghiêm trọng (bệnh tật, cơn đau hoặc tình trạng khủng hoảng)",
     "meaningEn": "Very serious, severe, or sharply experienced; in medicine, short-term and severe.",
     "cloze": "The patient was rushed into the emergency room with [ _____ ] chest pain.",
@@ -5470,7 +5480,7 @@
     "ipa": "/ɪn ˌrek.əɡˈnɪʃ.ən ɒv/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Để ghi nhận, vinh danh những cống hiến hoặc thành tựu xuất sắc",
     "meaningEn": "As an acknowledgment or reward for someone's service or achievement.",
     "cloze": "He received a gold medal [ _____ ] his lifelong dedication to public health.",
@@ -5490,7 +5500,7 @@
     "ipa": "/lɪv frəm hænd tuː maʊθ/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Sống chật vật qua ngày, kiếm đồng nào xào đồng nấy không có tích lũy",
     "meaningEn": "To have only just enough money to buy food and stay alive, with no savings.",
     "cloze": "Before launching her own business, she had to [ _____ ] on odd jobs.",
@@ -5510,7 +5520,7 @@
     "ipa": "/æt ɔːl kɒsts/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Bằng mọi giá, quyết tâm thực hiện dù có phải trả giá bao nhiêu",
     "meaningEn": "Regardless of the effort, price, or sacrifice required.",
     "cloze": "We must protect this endangered biosphere reserve [ _____ ].",
@@ -5530,7 +5540,7 @@
     "ipa": "/presˈtɪdʒ.əs/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Có uy tín lớn, danh giá, được kính trọng và ngưỡng mộ rộng rãi",
     "meaningEn": "Inspiring respect and admiration; having high status or prestige.",
     "cloze": "Winning a scholarship to such a [ _____ ] university was her lifelong dream.",
@@ -5550,7 +5560,7 @@
     "ipa": "/ˈmaɪnd.set/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tư duy, nếp nghĩ, định kiến định hình cách nhìn nhận thế giới",
     "meaningEn": "A set of attitudes, beliefs, or habits that dictates how a person interprets situations.",
     "cloze": "Cultivating a growth [ _____ ] is essential for overcoming academic setbacks.",
@@ -5570,7 +5580,7 @@
     "ipa": "/prəʊˈkræs.tɪ.neɪt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Trì hoãn, chần chừ, việc hôm nay cứ lùi sang ngày mai",
     "meaningEn": "To delay or postpone action; put off doing something habitually.",
     "cloze": "If you continue to [ _____ ], you will struggle to meet the graduation deadline.",
@@ -5590,7 +5600,7 @@
     "ipa": "/ˈhæz.ə.dəs/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Độc hại, nguy hiểm hiểm nghèo cho sức khỏe hoặc an toàn",
     "meaningEn": "Risky, perilous, or dangerous, especially to health or life.",
     "cloze": "Proper safety protocols are mandatory when disposing of [ _____ ] chemical waste.",
@@ -5610,7 +5620,7 @@
     "ipa": "/ˈvʌl.nər.ə.bəl/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Dễ bị tổn thương, dễ gặp nguy hiểm trước các tác động xấu bên ngoài",
     "meaningEn": "Susceptible to physical or emotional attack or harm.",
     "cloze": "Coastal communities are particularly [ _____ ] to rising sea levels and storm surges.",
@@ -5630,7 +5640,7 @@
     "ipa": "/ˈæd.vent/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Sự xuất hiện, sự ra đời của một kỷ nguyên/phát minh mang tính bước ngoặt",
     "meaningEn": "The arrival or inception of a notable person, thing, or event.",
     "cloze": "The [ _____ ] of the smartphone has fundamentally transformed human communication.",
@@ -5650,7 +5660,7 @@
     "ipa": "/biː æt ˈlɒɡ.ə.hedz/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Bất đồng gay gắt, xung đột không khoan nhượng với ai về điều gì",
     "meaningEn": "In stubborn, vehement disagreement or conflict with someone.",
     "cloze": "The management and union representatives are [ _____ ] over wage increments.",
@@ -5670,7 +5680,7 @@
     "ipa": "/ˈfɒs.tər/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Thúc đẩy, khuyến khích phát triển; nuôi dưỡng tình cảm/ý tưởng",
     "meaningEn": "To encourage or promote the development or growth of something.",
     "cloze": "Interactive classrooms help to [ _____ ] critical thinking and teamwork among learners.",
@@ -5690,7 +5700,7 @@
     "ipa": "/ˈpær.ə.maʊnt/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tối quan trọng, có tầm quan trọng tối thượng hơn tất cả những điều khác",
     "meaningEn": "More important than anything else; supreme.",
     "cloze": "Passenger safety is of [ _____ ] importance in civil aviation engineering.",
@@ -5710,7 +5720,7 @@
     "ipa": "/pɑːt ænd ˈpɑː.səl/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Phần thiết yếu không thể tách rời, đặc điểm gắn liền với điều gì",
     "meaningEn": "An essential or unavoidable component of an experience or process.",
     "cloze": "Overcoming hardship is [ _____ ] of becoming a resilient adult.",
@@ -5730,7 +5740,7 @@
     "ipa": "/hɪər tuː steɪ/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Trở thành một phần quen thuộc lâu dài, trường tồn không bị đào thải",
     "meaningEn": "Likely to last or continue for a long time; established permanently.",
     "cloze": "Remote learning and digital education platforms are certainly [ _____ ].",
@@ -5750,7 +5760,7 @@
     "ipa": "/ˈstaɪ.fəld/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Bị ngột ngạt, bức bối, bị kìm hãm không thể tự do sáng tạo phát triển",
     "meaningEn": "Feeling suffocated or suppressed; unable to breathe or express oneself freely.",
     "cloze": "Talented employees often feel [ _____ ] when working in a rigid bureaucracy.",
@@ -5770,7 +5780,7 @@
     "ipa": "/weər ðeər ɪz ə wɪl ðeər ɪz ə weɪ/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Có chí thì nên, nơi nào có ý chí kiên định nơi đó có con đường dẫn đến thành công",
     "meaningEn": "If someone has the determination to do something, they will always find a method to achieve it.",
     "cloze": "Never give up on your college ambition; remember that [ _____ ].",
@@ -5790,7 +5800,7 @@
     "ipa": "/ɪnˈdɪf.ər.ənt tuː/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Thờ ơ, vô cảm, lãnh đạm không hề bận tâm tới cái gì",
     "meaningEn": "Having no particular interest or sympathy; unconcerned.",
     "cloze": "Society must not remain [ _____ ] the plight of the homeless and impoverished.",
@@ -5810,7 +5820,7 @@
     "ipa": "/ˈhez.ɪ.tənt tuː/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Ngập ngừng, do dự, lưỡng lự chưa dám quyết làm điều gì",
     "meaningEn": "Tentative, unsure, or slow in acting or speaking.",
     "cloze": "Many students are [ _____ ] ask questions when they don't understand the lecture.",
@@ -5830,7 +5840,7 @@
     "ipa": "/ˈbɜːn.aʊt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Hội chứng kiệt quệ sức lực và tinh thần do làm việc căng thẳng kéo dài",
     "meaningEn": "A state of physical or mental exhaustion caused by prolonged stress.",
     "cloze": "Without adequate rest and work-life balance, high achievers risk suffering from [ _____ ].",
@@ -5850,7 +5860,7 @@
     "ipa": "/ˈkɒn.təm.pleɪt/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Suy ngẫm sâu sắc, trầm ngâm cân nhắc kỹ lưỡng về một quyết định",
     "meaningEn": "To think deeply or carefully about something for a long period.",
     "cloze": "She sat quietly by the river to [ _____ ] her future career path.",
@@ -5870,7 +5880,7 @@
     "ipa": "/ˌrem.ɪˈnɪs/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Hồi tưởng, bồi hồi nhớ lại những kỷ niệm đẹp trong quá khứ",
     "meaningEn": "To indulge in enjoyable recollection of past events.",
     "cloze": "Old schoolmates gathered over coffee to [ _____ ] their joyful high school years.",
@@ -5890,7 +5900,7 @@
     "ipa": "/rɪˈzɪl.jəns/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Khả năng phục hồi, sự kiên cường bật dậy mạnh mẽ sau nghịch cảnh",
     "meaningEn": "The capacity to recover quickly from difficulties; toughness.",
     "cloze": "The community demonstrated tremendous [ _____ ] in rebuilding their town after the hurricane.",
@@ -5910,7 +5920,7 @@
     "ipa": "/ˌhændzˈɒn/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Thực tế, thực hành trực tiếp bằng tay chứ không chỉ trên lý thuyết",
     "meaningEn": "Involving or offering active participation rather than theory.",
     "cloze": "Vocational colleges emphasize [ _____ ] experience in state-of-the-art laboratories.",
@@ -5930,7 +5940,7 @@
     "ipa": "/ɔːˈtɒn.ə.məs/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tự chủ, tự trị, có khả năng tự vận hành độc lập không cần can thiệp",
     "meaningEn": "Acting independently or having the freedom to do so; self-governing.",
     "cloze": "Technologists anticipate that fully [ _____ ] electric vehicles will reduce highway accidents.",
@@ -5950,7 +5960,7 @@
     "ipa": "/təʊ ðə laɪn/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tuân thủ nghiêm ngặt các quy tắc, chấp hành mệnh lệnh kỷ luật không cãi lại",
     "meaningEn": "To conform to a rule or standard, especially under pressure from authority.",
     "cloze": "Subordinates who refuse to [ _____ ] may face disciplinary sanctions from executives.",
@@ -5970,7 +5980,7 @@
     "ipa": "/tʃɪp ɪn/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Góp tiền chung, góp sức chung để làm một việc tập thể",
     "meaningEn": "To contribute money, time, or assistance to a common cause.",
     "cloze": "All students in the class agreed to [ _____ ] five dollars to buy a farewell gift for their teacher.",
@@ -5990,7 +6000,7 @@
     "ipa": "/ɪnˈdʌs.tri.əs/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Chăm chỉ, cần cù, siêng năng làm việc (dễ nhầm với industrial)",
     "meaningEn": "Diligent, hard-working, and conscientious.",
     "cloze": "She is an [ _____ ] student who spends evenings reviewing her notes diligently.",
@@ -6010,7 +6020,7 @@
     "ipa": "/ˌdɪdʒ.ɪ.təl ˈdiː.tɒks/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cai thiết bị kỹ thuật số, thời gian tạm ngắt kết nối với màn hình điện tử",
     "meaningEn": "A period of time during which a person refrains from using tech devices like smartphones.",
     "cloze": "Taking a weekend [ _____ ] in nature is a wonderful remedy for mental fatigue.",
@@ -6030,7 +6040,7 @@
     "ipa": "/breɪk θruː/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Đột phá, chọc thủng rào cản, tạo ra bước tiến vượt bậc",
     "meaningEn": "To make a major advance or overcome a barrier or obstacle.",
     "cloze": "Researchers finally [ _____ ] the bottleneck and synthesized the vaccine.",
@@ -6050,7 +6060,7 @@
     "ipa": "/drɒp aʊt ɒv/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Bỏ học giữa chừng, rút lui khỏi một cuộc thi hoặc tổ chức",
     "meaningEn": "To leave school, college, or an activity before finishing it.",
     "cloze": "Economic difficulties forced him to [ _____ ] university and start working.",
@@ -6070,7 +6080,7 @@
     "ipa": "/æt wʌnz dɪˈspəʊ.zəl/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tùy ý sử dụng, sẵn sàng phục vụ khi cần thiết",
     "meaningEn": "Available for someone to use whenever they wish or require.",
     "cloze": "A dedicated mentor was placed [ _____ ] to guide his research.",
@@ -6090,7 +6100,7 @@
     "ipa": "/kəmˈpʌl.sər.i/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Bắt buộc theo luật định hoặc quy chế",
     "meaningEn": "Required by law or a rule; mandatory.",
     "cloze": "Primary education is [ _____ ] for all children under national law.",
@@ -6110,7 +6120,7 @@
     "ipa": "/əˈkleɪmd/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Được ca ngợi, hoan nghênh và đánh giá rất cao bởi giới chuyên môn",
     "meaningEn": "Publicly praised and celebrated with enthusiasm.",
     "cloze": "She is a critically [ _____ ] violinist who has performed with top philharmonics.",
@@ -6130,7 +6140,7 @@
     "ipa": "/rɪˈspek.tə.bəl/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Đáng kính trọng, đứng đắn, có phẩm hạnh tốt trong xã hội",
     "meaningEn": "Regarded by society to be good, proper, or correct; deserving respect.",
     "cloze": "He earned a [ _____ ] income and was widely regarded as an upright citizen.",
@@ -6150,7 +6160,7 @@
     "ipa": "/vaʊ tuː/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Thề, nguyện quyết tâm làm gì",
     "meaningEn": "To make a solemn and determined promise to do something.",
     "cloze": "After the failure, the athlete [ _____ ] train twice as hard for the next Olympics.",
@@ -6170,7 +6180,7 @@
     "ipa": "/spɑːk/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Châm ngòi, khơi dậy, làm bùng phát một phong trào hay cuộc tranh luận",
     "meaningEn": "To trigger, evoke, or provide the initial stimulus for something.",
     "cloze": "The investigative report [ _____ ] widespread debate on social media.",
@@ -6190,7 +6200,7 @@
     "ipa": "/kiːp ˈʌn.dər sɜːˈveɪ.ləns/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Giám sát chặt chẽ, theo dõi an ninh nghiêm ngặt",
     "meaningEn": "To closely observe or monitor someone or something, especially suspected criminals.",
     "cloze": "The perimeter is [ _____ ] by high-definition cameras around the clock.",
@@ -6210,7 +6220,7 @@
     "ipa": "/ɪn ˈɒn.ər ɒv/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Để vinh danh, để tưởng nhớ và bày tỏ lòng kính trọng",
     "meaningEn": "In order to show celebration, respect, and admiration for someone.",
     "cloze": "A commemorative banquet was held [ _____ ] the visiting foreign delegation.",
@@ -6230,7 +6240,7 @@
     "ipa": "/ˌsæn.ɪˈteɪ.ʃən/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Vệ sinh dịch tễ, hệ thống xử lý chất thải giữ gìn vệ sinh công cộng",
     "meaningEn": "Conditions relating to public health, especially the provision of clean drinking water and sewage disposal.",
     "cloze": "Access to clean water and basic [ _____ ] remains a critical challenge in rural areas.",
@@ -6250,7 +6260,7 @@
     "ipa": "/ɪɡˈzɔː.stɪv/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Toàn diện, thấu đáo, xem xét cặn kẽ mọi khía cạnh không bỏ sót",
     "meaningEn": "Including or considering all elements or aspects; fully comprehensive.",
     "cloze": "The police conducted an [ _____ ] investigation into the financial fraud.",
@@ -6270,7 +6280,7 @@
     "ipa": "/ˈpʌb.lɪk əˈmiː.nə.ti/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tiện ích công cộng (công viên, thư viện, hồ bơi, xe buýt)",
     "meaningEn": "A desirable or useful feature or facility of a town or building open to all residents.",
     "cloze": "The new master plan allocates substantial funds for parks and [ _____ ].",
@@ -6290,7 +6300,7 @@
     "ipa": "/ˈræd.ɪ.kəl tʃeɪndʒ/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Sự thay đổi triệt để, biến đổi sâu rộng từ gốc rễ",
     "meaningEn": "A complete and fundamental transformation affecting basic nature.",
     "cloze": "The healthcare system requires [ _____ ] to meet the demands of an aging society.",
@@ -6310,7 +6320,7 @@
     "ipa": "/əˌmæl.ɡəˈmeɪ.ʃən/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Sự sáp nhập, sự hòa trộn kết hợp hài hòa nhiều yếu tố",
     "meaningEn": "The action, process, or result of combining or uniting multiple things into one.",
     "cloze": "The architecture of the cathedral is an intriguing [ _____ ] of Gothic and Romanesque styles.",
@@ -6330,7 +6340,7 @@
     "ipa": "/ˈkʌl.tɪ.veɪt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Trau dồi, vun đắp, nuôi dưỡng phẩm chất, kỹ năng hay mối quan hệ",
     "meaningEn": "To develop or improve by care, training, or study; to promote the growth of.",
     "cloze": "Regular reading will help you [ _____ ] a rich vocabulary and articulate speaking style.",
@@ -6350,7 +6360,7 @@
     "ipa": "/ˈvaɪ.brənt/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Sống động, tràn đầy sức sống và năng lượng, rực rỡ màu sắc",
     "meaningEn": "Full of energy, enthusiasm, and life; bright and striking.",
     "cloze": "Hanoi is renowned for its [ _____ ] street life and rich culinary traditions.",
@@ -6370,7 +6380,7 @@
     "ipa": "/əˈsɜːt ˌɪn.dɪˈpen.dəns/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Khẳng định nền độc lập, tuyên bố quyền tự quyết",
     "meaningEn": "To state firmly and declare one's freedom from outside control.",
     "cloze": "Teenagers naturally strive to [ _____ ] as they transition into adulthood.",
@@ -6390,7 +6400,7 @@
     "ipa": "/əˈlaɪn wɪð/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Phù hợp với, ăn khớp và đồng hành cùng định hướng/mục tiêu",
     "meaningEn": "To give support to a person, organization, or cause; to adjust so as to fit or agree.",
     "cloze": "Ensure your daily study habits [ _____ ] your long-term university entrance goal.",
@@ -6410,7 +6420,7 @@
     "ipa": "/əbˈdʒekt tuː/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Phản đối, không đồng tình với một hành động (sau TO luôn là danh từ hoặc V-ing)",
     "meaningEn": "To express disapproval of or opposition to something.",
     "cloze": "Local residents strongly [ _____ ] building a chemical plant near their reservoir.",
@@ -6430,7 +6440,7 @@
     "ipa": "/əbˈzɔːb/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Hấp thụ, tiếp thu kiến thức một cách sâu sắc và thấu đáo",
     "meaningEn": "To take in or soak up information, energy, or liquid; to understand fully.",
     "cloze": "Spaced repetition helps learners [ _____ ] complex vocabulary effortlessly into long-term memory.",
@@ -6450,7 +6460,7 @@
     "ipa": "/ˈmæɡ.nɪ.tʃuːd/",
     "level": "C1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tầm vóc to lớn, độ lớn, mức độ nghiêm trọng hay quy mô khổng lồ",
     "meaningEn": "The great size, scale, or importance of something.",
     "cloze": "Few leaders anticipated the sheer [ _____ ] of the global economic crisis.",
@@ -6470,7 +6480,7 @@
     "ipa": "/ˌsɒl.ɪˈdær.ə.ti/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Tinh thần đoàn kết, sự thống nhất ý chí và tương trợ lẫn nhau",
     "meaningEn": "Unity or agreement of feeling or action, especially among individuals with a common interest.",
     "cloze": "Nations expressed heartfelt [ _____ ] with the earthquake victims by dispatching rescue teams.",
@@ -6490,7 +6500,7 @@
     "ipa": "/ˈtæb.lɔɪd/",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Báo lá cải, tờ báo chuyên giật gân, chuyện phiếm và tin đồn đời tư",
     "meaningEn": "A newspaper having pages half the size of those of the average broadsheet, typically popular in style and dominated by sensational stories.",
     "cloze": "Discerning readers prefer reputable periodicals over sensational [ _____ ] headlines.",
@@ -6510,7 +6520,7 @@
     "ipa": "/ˈtrʌstˌwɜː.ði/",
     "level": "B1",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Đáng tin cậy, trung thực, có thể trao trọn niềm tin",
     "meaningEn": "Able to be relied on as honest or truthful; dependable.",
     "cloze": "It is crucial to verify facts from [ _____ ] academic sources before writing a thesis.",
@@ -7510,7 +7520,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "toàn diện",
     "meaningEn": "Refers to 'toàn diện', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7530,7 +7540,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "cẩn thận",
     "meaningEn": "Refers to 'cẩn thận', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7550,7 +7560,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "màu sắc",
     "meaningEn": "Refers to 'màu sắc', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7570,7 +7580,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "tốt nghiệp xuất sắc / vượt qua vẻ vang",
     "meaningEn": "Refers to 'tốt nghiệp xuất sắc / vượt qua vẻ vang', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7590,7 +7600,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "mặc, đeo",
     "meaningEn": "Refers to 'mặc, đeo', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7610,7 +7620,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "quyết định",
     "meaningEn": "Refers to 'quyết định', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7630,7 +7640,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "lạm dụng, ngược đãi",
     "meaningEn": "Refers to 'lạm dụng, ngược đãi', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7650,7 +7660,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "giúp đỡ",
     "meaningEn": "Refers to 'giúp đỡ', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7670,7 +7680,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "đơn giản",
     "meaningEn": "Refers to 'đơn giản', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7690,7 +7700,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "sâu, sâu sắc",
     "meaningEn": "Refers to 'sâu, sâu sắc', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7710,7 +7720,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "vượt quá",
     "meaningEn": "Refers to 'vượt quá', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7730,7 +7740,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "hoà bình, thanh bình, yên bình",
     "meaningEn": "Refers to 'hoà bình, thanh bình, yên bình', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7750,7 +7760,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "làm hoà với ai",
     "meaningEn": "Refers to 'làm hoà với ai', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7770,7 +7780,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "dễ dàng",
     "meaningEn": "Refers to 'dễ dàng', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7790,7 +7800,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "đạt được",
     "meaningEn": "Refers to 'đạt được', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7810,7 +7820,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "thành công; kế tiếp / kế vị",
     "meaningEn": "Refers to 'thành công; kế tiếp / kế vị', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7830,7 +7840,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "liên tiếp, kế tiếp",
     "meaningEn": "Refers to 'liên tiếp, kế tiếp', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7850,7 +7860,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "thành công, có kết quả mỹ mãn",
     "meaningEn": "Refers to 'thành công, có kết quả mỹ mãn', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7870,7 +7880,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "ăn, tiêu thụ",
     "meaningEn": "Refers to 'ăn, tiêu thụ', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7890,7 +7900,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "kiến thức, sự hiểu biết",
     "meaningEn": "Refers to 'kiến thức, sự hiểu biết', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7910,7 +7920,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "đỉnh, đứng đầu, cao nhất",
     "meaningEn": "Refers to 'đỉnh, đứng đầu, cao nhất', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7930,7 +7940,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "phổ biến, được ưa chuộng",
     "meaningEn": "Refers to 'phổ biến, được ưa chuộng', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7950,7 +7960,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Các hậu tố nhận biết danh từ và vị trí trong câu",
     "meaningEn": "Refers to 'Các hậu tố nhận biết danh từ và vị trí trong câu', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7970,7 +7980,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Các hậu tố nhận biết tính từ và vị trí trong câu",
     "meaningEn": "Refers to 'Các hậu tố nhận biết tính từ và vị trí trong câu', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -7990,7 +8000,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Hậu tố và vị trí của trạng từ trong câu",
     "meaningEn": "Refers to 'Hậu tố và vị trí của trạng từ trong câu', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8010,7 +8020,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Các hậu tố nhận biết động từ và vị trí/cấu trúc vị ngữ trong câu",
     "meaningEn": "Refers to 'Các hậu tố nhận biết động từ và vị trí/cấu trúc vị ngữ trong câu', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8030,7 +8040,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Để làm gì (chỉ mục đích cho cùng chủ ngữ)",
     "meaningEn": "Refers to 'Để làm gì (chỉ mục đích cho cùng chủ ngữ)', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8050,7 +8060,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cảm thấy cái gì như thế nào khi làm gì",
     "meaningEn": "Refers to 'Cảm thấy cái gì như thế nào khi làm gì', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8070,7 +8080,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cả hai đều có / cả hai",
     "meaningEn": "Refers to 'Cả hai đều có / cả hai', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8090,7 +8100,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Hoặc A hoặc B (một trong hai)",
     "meaningEn": "Refers to 'Hoặc A hoặc B (một trong hai)', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8110,7 +8120,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Không A cũng không B (cả hai đều không)",
     "meaningEn": "Refers to 'Không A cũng không B (cả hai đều không)', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8130,7 +8140,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Không có ai / không có cái gì",
     "meaningEn": "Refers to 'Không có ai / không có cái gì', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8150,7 +8160,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Sau giới từ là danh từ hoặc danh động từ",
     "meaningEn": "Refers to 'Sau giới từ là danh từ hoặc danh động từ', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8170,7 +8180,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Nhằm mục đích làm gì",
     "meaningEn": "Refers to 'Nhằm mục đích làm gì', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8190,7 +8200,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cách dùng của danh động từ V-ing",
     "meaningEn": "Refers to 'Cách dùng của danh động từ V-ing', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8210,7 +8220,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Dừng lại",
     "meaningEn": "Refers to 'Dừng lại', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8230,7 +8240,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cố gắng / thử làm gì",
     "meaningEn": "Refers to 'Cố gắng / thử làm gì', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8250,7 +8260,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "thay đổi, điều chỉnh",
     "meaningEn": "Refers to 'thay đổi, điều chỉnh', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8270,7 +8280,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "chăm chỉ, cần cù làm việc",
     "meaningEn": "Refers to 'chăm chỉ, cần cù làm việc', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8290,7 +8300,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "đủ khả năng chi trả (tiền bạc, thời gian)",
     "meaningEn": "Refers to 'đủ khả năng chi trả (tiền bạc, thời gian)', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8310,7 +8320,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "hạ giá, mặc cả để giảm giá (beat someone down)",
     "meaningEn": "Refers to 'hạ giá, mặc cả để giảm giá (beat someone down)', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8330,7 +8340,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "ý tưởng, sáng kiến",
     "meaningEn": "Refers to 'ý tưởng, sáng kiến', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8350,7 +8360,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "theo đuổi (ước mơ, sự nghiệp, mục tiêu)",
     "meaningEn": "Refers to 'theo đuổi (ước mơ, sự nghiệp, mục tiêu)', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8370,7 +8380,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "bận rộn",
     "meaningEn": "Refers to 'bận rộn', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8390,7 +8400,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "công việc; tác phẩm",
     "meaningEn": "Refers to 'công việc; tác phẩm', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8410,7 +8420,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "thất nghiệp",
     "meaningEn": "Refers to 'thất nghiệp', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8430,7 +8440,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "đặc sản, chuyên môn, thế mạnh",
     "meaningEn": "Refers to 'đặc sản, chuyên môn, thế mạnh', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8450,7 +8460,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "huỷ bỏ",
     "meaningEn": "Refers to 'huỷ bỏ', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8470,7 +8480,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "tiết kiệm, tích luỹ",
     "meaningEn": "Refers to 'tiết kiệm, tích luỹ', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8490,7 +8500,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "giao tiếp, liên lạc",
     "meaningEn": "Refers to 'giao tiếp, liên lạc', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8510,7 +8520,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "người tư vấn định hướng nghề nghiệp",
     "meaningEn": "Refers to 'người tư vấn định hướng nghề nghiệp', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8530,7 +8540,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "hồi phục sau đau ốm, khó khăn",
     "meaningEn": "Refers to 'hồi phục sau đau ốm, khó khăn', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8550,7 +8560,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "cân nhắc, xem xét",
     "meaningEn": "Refers to 'cân nhắc, xem xét', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8570,7 +8580,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "nổi tiếng vì cái gì",
     "meaningEn": "Refers to 'nổi tiếng vì cái gì', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8590,7 +8600,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "sự lựa chọn",
     "meaningEn": "Refers to 'sự lựa chọn', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8610,7 +8620,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "tạo ra sự khác biệt, có tác động tích cực đối với",
     "meaningEn": "Refers to 'tạo ra sự khác biệt, có tác động tích cực đối với', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8630,7 +8640,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "sử dụng, tận dụng",
     "meaningEn": "Refers to 'sử dụng, tận dụng', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8650,7 +8660,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cần",
     "meaningEn": "Refers to 'Cần', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8670,7 +8680,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Đại từ dùng thay thế danh từ đã nhắc tới phía trước để tránh lặp từ",
     "meaningEn": "Refers to 'Đại từ dùng thay thế danh từ đã nhắc tới phía trước để tránh lặp từ', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8690,7 +8700,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Nghĩ ra, nảy ra (ý tưởng, giải pháp, câu trả lời)",
     "meaningEn": "Refers to 'Nghĩ ra, nảy ra (ý tưởng, giải pháp, câu trả lời)', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8710,7 +8720,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Lộ ra, hé lộ; xuất bản, phát hành",
     "meaningEn": "Refers to 'Lộ ra, hé lộ; xuất bản, phát hành', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8730,7 +8740,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Nảy sinh, xuất hiện bất ngờ, xảy ra",
     "meaningEn": "Refers to 'Nảy sinh, xuất hiện bất ngờ, xảy ra', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8750,7 +8760,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cấu trúc giả định sau động từ hoặc tính từ thể hiện sự đề nghị, cấp bách, cần thiết",
     "meaningEn": "Refers to 'Cấu trúc giả định sau động từ hoặc tính từ thể hiện sự đề nghị, cấp bách, cần thiết', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8770,7 +8780,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Các cấu trúc diễn đạt sự cho phép đối lập với ngăn cản",
     "meaningEn": "Refers to 'Các cấu trúc diễn đạt sự cho phép đối lập với ngăn cản', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8790,7 +8800,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Cho phép, tạo điều kiện thuận lợi cho ai làm việc gì",
     "meaningEn": "Refers to 'Cho phép, tạo điều kiện thuận lợi cho ai làm việc gì', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8810,7 +8820,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Thuyết phục ai làm việc gì",
     "meaningEn": "Refers to 'Thuyết phục ai làm việc gì', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8830,7 +8840,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Có ý định / lên kế hoạch / sắp sửa làm gì",
     "meaningEn": "Refers to 'Có ý định / lên kế hoạch / sắp sửa làm gì', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8850,7 +8860,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Thành công trong việc làm gì / xoay sở hoàn thành được việc gì khó khăn",
     "meaningEn": "Refers to 'Thành công trong việc làm gì / xoay sở hoàn thành được việc gì khó khăn', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8870,7 +8880,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Trông mong, ngóng đợi điều gì với cảm xúc háo hức",
     "meaningEn": "Refers to 'Trông mong, ngóng đợi điều gì với cảm xúc háo hức', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8890,7 +8900,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Nhằm mục đích làm gì",
     "meaningEn": "Refers to 'Nhằm mục đích làm gì', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -8910,7 +8920,7 @@
     "ipa": "/.../",
     "level": "B2",
     "topic": "topic_notebook",
-    "topicLabel": "📓 Sổ Tay (100+)",
+    "topicLabel": "📓 Sổ Tay",
     "meaningVi": "Khuyến khích, động viên, khích lệ",
     "meaningEn": "Refers to 'Khuyến khích, động viên, khích lệ', a key English term from notebook notes.",
     "cloze": "Understanding the concept of [ _____ ] is essential for English mastery.",
@@ -32592,7 +32602,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.6.2';
+        this.appVersion = '1.6.3';
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
         this.thptTimerSeconds = 0;
@@ -34442,10 +34452,10 @@ Yêu cầu output STRICTLY là một JSON object:
               } else {
                 this.vocabList = parsed;
               }
-              // Tự động chuẩn hóa xóa chữ Drive cho các từ đã lưu trong localStorage
+              // Tự động chuẩn hóa xóa chữ Drive và (100+) cho các từ đã lưu trong localStorage
               this.vocabList.forEach(v => {
-                if (v && v.topicLabel && v.topicLabel.includes('Drive')) {
-                  v.topicLabel = v.topicLabel.replace(/\s*Drive/gi, '').trim();
+                if (v && v.topicLabel) {
+                  v.topicLabel = v.topicLabel.replace(/\s*Drive/gi, '').replace(/\s*\(100\+\)/gi, '').trim();
                 }
               });
             } else {
@@ -34969,7 +34979,7 @@ Yêu cầu output STRICTLY là một JSON object:
         if (isSessionMode) {
           const stepCurrent = Math.min(this.sessionTotalSteps, this.sessionCompletedSteps + 1);
           if (idxIndicator) {
-            idxIndicator.innerHTML = `🎯 Phiên <strong>${this.sessionBaseCards.length} từ</strong> • Lượt: <strong>${stepCurrent}/${this.sessionTotalSteps}</strong>`;
+            idxIndicator.innerHTML = `🎯 Phiên <strong>${this.sessionBaseCards.length}t</strong> • Lượt <strong>${stepCurrent}/${this.sessionTotalSteps}</strong>`;
           }
           if (pbar) {
             const pct = Math.min(100, Math.round((stepCurrent / this.sessionTotalSteps) * 100));
@@ -34999,14 +35009,16 @@ Yêu cầu output STRICTLY là một JSON object:
           }
         }
 
+        const rawTopicLabel = (card.topicLabel || card.deck || 'Chủ Đề').replace(/\s*\(100\+\)/gi, '').trim();
         const topicBadge = document.getElementById('card-topic-badge');
-        if (topicBadge) topicBadge.innerText = card.topicLabel || card.deck || 'Chủ Đề';
+        if (topicBadge) topicBadge.innerText = rawTopicLabel;
 
         // Front Data
         document.getElementById('fc-word').innerText = card.word;
         document.getElementById('fc-type').innerText = card.type;
         document.getElementById('fc-level').innerText = card.level || 'B2';
-        document.getElementById('fc-topic-tag').innerText = card.topicLabel || 'Chủ đề';
+        const fcTopicEl = document.getElementById('fc-topic-tag');
+        if (fcTopicEl) fcTopicEl.innerText = rawTopicLabel;
         document.getElementById('fc-ipa').innerText = card.ipa || '';
         document.getElementById('fc-cloze').innerHTML = card.cloze ? card.cloze.replace('[ _____ ]', '<span class="text-primary-light font-bold underline underline-offset-4 decoration-2">[ _____ ]</span>') : card.example;
 
@@ -37793,7 +37805,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.6.2')) return caches.delete(c);
+                if (!c.includes('v1.6.3')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -37838,6 +37850,16 @@ Trả về DUY NHẤT một JSON hợp lệ:
       closePWAInstallModal() {
         const modal = document.getElementById('modal-pwa-install');
         if (modal) modal.classList.add('hidden');
+      }
+
+      toggleMobileFlashcardControls() {
+        const el = document.getElementById('fc-collapsible-controls');
+        const textEl = document.getElementById('text-toggle-fc-controls');
+        if (!el) return;
+        const isHidden = el.classList.toggle('hidden');
+        if (textEl) {
+          textEl.textContent = isHidden ? 'Mở Rộng' : 'Thu Gọn';
+        }
       }
 
       switchPWAInstallTab(tabId) {
@@ -41989,7 +42011,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
           if (reg.waiting && window.app) {
             window.app.showUpdateBanner({
-              version: '1.6.2',
+              version: '1.6.3',
               title: 'Bản cập nhật mới đã sẵn sàng!',
               highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
             });
@@ -42003,7 +42025,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   if (window.app) {
                     window.app.showUpdateBanner({
-                      version: '1.6.2',
+                      version: '1.6.3',
                       title: 'Đã có bản cập nhật mới!',
                       highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
                     });
@@ -42555,7 +42577,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.6.2</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.6.3</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

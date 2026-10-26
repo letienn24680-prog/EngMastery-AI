@@ -1,12 +1,12 @@
 {
-  "version": "1.6.2",
-  "versionCode": 10602,
+  "version": "1.6.3",
+  "versionCode": 10603,
   "releaseDate": "2026-10-26",
-  "title": "Bản Cập Nhật v1.6.2: Tự Động Cập Nhật & Đóng Gói App",
+  "title": "Bản Cập Nhật v1.6.3: Tối Ưu Giao Diện Flashcard Mobile",
   "highlights": [
-    "Tự động phát hiện phiên bản mới và thông báo nổi bật trên màn hình",
-    "Giao diện cài đặt App PWA toàn diện (Android, iOS Safari, PC/Mac)",
-    "Gia cố bảo vệ bộ nhớ và bóc tách dữ liệu AI chống crash",
-    "Tối ưu hóa vòng đời timer và tiết kiệm pin thiết bị di động"
+    "Sửa triệt để lỗi vỡ chữ và tràn khung huy hiệu chủ đề trên di động",
+    "Thêm nút Thu gọn / Mở rộng bộ lọc Flashcard giúp thẻ học hiển thị ngay tầm mắt",
+    "Tối ưu kích thước nút bấm âm thanh và mic chống che khuất thẻ từ vựng",
+    "Tự động làm sạch dữ liệu nhãn từ vựng (100+) cũ"
   ]
 }
