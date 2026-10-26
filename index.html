@@ -32849,8 +32849,10 @@
 
             const newOpts = indices.map((origIdx, pos) => `${letters[pos]}. ${oldOptsText[origIdx]}`);
             let newAnsIdx = 0;
+            const normTarget = reOpt(oldAnsText).toLowerCase().trim();
             for (let pos = 0; pos < 4; pos++) {
-              if (oldOptsText[indices[pos]] === oldAnsText) {
+              const optVal = reOpt(oldOptsText[indices[pos]]).toLowerCase().trim();
+              if (optVal === normTarget || (normTarget && optVal.includes(normTarget))) {
                 newAnsIdx = pos;
                 break;
               }
@@ -33444,7 +33446,7 @@ Yêu cầu output STRICTLY là một JSON object:
           }
         });
 
-        const score = (correctCount / total) * 10;
+        const score = total > 0 ? (correctCount / total) * 10 : 0;
         const scoreFormatted = (Math.round(score * 10) / 10).toFixed(1);
 
         // Update active rooms
@@ -34280,57 +34282,83 @@ Yêu cầu output STRICTLY là một JSON object:
       }
 
       loadState() {
-        // Load Vocab with merge
+        // Load Vocab with merge and corruption protection
         const storedVocab = localStorage.getItem('engMastery_vocab_v6');
         if (storedVocab) {
-          const parsed = JSON.parse(storedVocab);
-          if (parsed.length < DEFAULT_VOCABULARY.length) {
-            const existingIds = new Set(parsed.map(x => x.id));
-            const newItems = DEFAULT_VOCABULARY.filter(x => !existingIds.has(x.id));
-            this.vocabList = [...parsed, ...newItems];
-            localStorage.setItem('engMastery_vocab_v6', JSON.stringify(this.vocabList));
-          } else {
-            this.vocabList = parsed;
-          }
-          // Tự động chuẩn hóa xóa chữ Drive cho các từ đã lưu trong localStorage
-          this.vocabList.forEach(v => {
-            if (v.topicLabel && v.topicLabel.includes('Drive')) {
-              v.topicLabel = v.topicLabel.replace(/\s*Drive/gi, '').trim();
+          try {
+            const parsed = JSON.parse(storedVocab);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              if (parsed.length < DEFAULT_VOCABULARY.length) {
+                const existingIds = new Set(parsed.map(x => x.id));
+                const newItems = DEFAULT_VOCABULARY.filter(x => !existingIds.has(x.id));
+                this.vocabList = [...parsed, ...newItems];
+                try { localStorage.setItem('engMastery_vocab_v6', JSON.stringify(this.vocabList)); } catch (e) {}
+              } else {
+                this.vocabList = parsed;
+              }
+              // Tự động chuẩn hóa xóa chữ Drive cho các từ đã lưu trong localStorage
+              this.vocabList.forEach(v => {
+                if (v && v.topicLabel && v.topicLabel.includes('Drive')) {
+                  v.topicLabel = v.topicLabel.replace(/\s*Drive/gi, '').trim();
+                }
+              });
+            } else {
+              this.vocabList = [...DEFAULT_VOCABULARY];
             }
-          });
+          } catch (e) {
+            console.warn('Lỗi đọc dữ liệu từ vựng cũ, tự động phục hồi về mặc định:', e);
+            this.vocabList = [...DEFAULT_VOCABULARY];
+          }
         } else {
           this.vocabList = [...DEFAULT_VOCABULARY];
         }
 
-        // Load Grammar
+        // Load Grammar with corruption protection
         const storedGrammar = localStorage.getItem('engMastery_grammar_v4');
         if (storedGrammar) {
-          const parsedG = JSON.parse(storedGrammar);
-          if (parsedG.length < DEFAULT_GRAMMAR.length) {
+          try {
+            const parsedG = JSON.parse(storedGrammar);
+            if (Array.isArray(parsedG) && parsedG.length > 0) {
+              if (parsedG.length < DEFAULT_GRAMMAR.length) {
+                this.grammarList = [...DEFAULT_GRAMMAR];
+                try { localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList)); } catch (e) {}
+              } else {
+                this.grammarList = parsedG;
+              }
+            } else {
+              this.grammarList = [...DEFAULT_GRAMMAR];
+            }
+          } catch (e) {
+            console.warn('Lỗi đọc dữ liệu ngữ pháp cũ, phục hồi mặc định:', e);
             this.grammarList = [...DEFAULT_GRAMMAR];
-            localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList));
-          } else {
-            this.grammarList = parsedG;
           }
         } else {
           this.grammarList = [...DEFAULT_GRAMMAR];
         }
 
-        this.thptBank = [...THPTQG_EXAM_BANK];
+        this.thptBank = (typeof THPTQG_EXAM_BANK !== 'undefined' && Array.isArray(THPTQG_EXAM_BANK)) ? [...THPTQG_EXAM_BANK] : [];
 
-        const storedSettings = localStorage.getItem('engMastery_settings');
-        if (storedSettings) this.settings = Object.assign(this.settings, JSON.parse(storedSettings));
+        try {
+          const storedSettings = localStorage.getItem('engMastery_settings');
+          if (storedSettings) this.settings = Object.assign(this.settings, JSON.parse(storedSettings));
+        } catch (e) {
+          console.warn('Lỗi đọc cài đặt, dùng mặc định:', e);
+        }
 
         // Auto-migrate to user's new xKiro API Key
         if (!this.settings.aiApiKey || this.settings.geminiApiKey === '' || !this.settings.aiApiKey.startsWith('sk-xt-')) {
           this.settings.aiApiKey = DEFAULT_AI_KEY;
           this.settings.geminiApiKey = DEFAULT_AI_KEY;
           this.settings.apiProvider = 'xkiro';
-          localStorage.setItem('engMastery_settings', JSON.stringify(this.settings));
+          try { localStorage.setItem('engMastery_settings', JSON.stringify(this.settings)); } catch (e) {}
         }
 
-        const storedStats = localStorage.getItem('engMastery_stats');
-        if (storedStats) this.stats = Object.assign(this.stats, JSON.parse(storedStats));
+        try {
+          const storedStats = localStorage.getItem('engMastery_stats');
+          if (storedStats) this.stats = Object.assign(this.stats, JSON.parse(storedStats));
+        } catch (e) {
+          console.warn('Lỗi đọc thống kê học tập:', e);
+        }
 
         this.setVocabTopicFilter(this.currentVocabTopicFilter || 'topic_notebook');
       }
@@ -34393,6 +34421,28 @@ Yêu cầu output STRICTLY là một JSON object:
       navigate(viewId) {
         // Tự động đóng thanh menu sidebar trên mobile khi chọn mục
         this.closeSidebar();
+
+        // Dừng âm thanh đang đọc dở nếu người dùng chuyển trang
+        if (window.speechSynthesis && window.speechSynthesis.speaking) {
+          window.speechSynthesis.cancel();
+        }
+
+        // Dừng tự động lật thẻ nếu đang chạy mà chuyển trang khác
+        if (this.isAutoPlaying && viewId !== 'flashcards') {
+          this.toggleAutoPlay();
+        }
+
+        // Quản lý tiết kiệm pin: chỉ chạy timer đổi từ vựng trọng điểm khi đang ở Dashboard
+        if (viewId === 'dashboard') {
+          if (!this.spotlightInterval) {
+            this.initSpotlightRotator();
+          }
+        } else {
+          if (this.spotlightInterval) {
+            clearInterval(this.spotlightInterval);
+            this.spotlightInterval = null;
+          }
+        }
 
         this.currentView = viewId;
         document.querySelectorAll('.view-content').forEach(el => el.classList.add('hidden'));
@@ -39652,8 +39702,7 @@ YÊU CẦU BẮT BUỘC:
 }`;
 
           const raw = await this.callAI(prompt, { temperature: 0.25 });
-          const cleanJson = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
-          const data = JSON.parse(cleanJson);
+          const data = this.robustJSONParse(raw);
 
           if (data.synonyms) this.activeModalWord.synonyms = this.normalizeCefrField(data.synonyms);
           if (data.antonyms) this.activeModalWord.antonyms = this.normalizeCefrField(data.antonyms);
@@ -39811,8 +39860,7 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ:
 }`;
 
           const rawText = await this.callAI(prompt, { temperature: 0.25 });
-          const cleanJson = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
-          const cardData = JSON.parse(cleanJson);
+          const cardData = this.robustJSONParse(rawText);
 
           cardData.word = cardData.word || word;
           cardData.topic = 'topic_notebook';
@@ -40310,8 +40358,7 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ (không kèm markdown ngoài
 }`;
 
           const rawText = await this.callAI(prompt, { temperature: 0.2 });
-          const cleanJson = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
-          const data = JSON.parse(cleanJson);
+          const data = this.robustJSONParse(rawText);
 
           this.currentReadingAnalysis = data;
           this.renderReadingAnalysisResults(data);
@@ -40539,8 +40586,7 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ theo cấu trúc:
 }`;
 
           const rawText = await this.callAI(prompt, { temperature: 0.25 });
-          const cleanJson = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
-          const clueData = JSON.parse(cleanJson);
+          const clueData = this.robustJSONParse(rawText);
 
           this.renderReadingClueCard(clueData);
         } catch (err) {
