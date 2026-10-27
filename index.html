@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.1 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.2 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3849,7 +3849,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.1 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.2 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -33254,7 +33254,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.9.1';
+        this.appVersion = '1.9.2';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -36879,9 +36879,36 @@ Yêu cầu output STRICTLY là một JSON object:
           list.sort((a, b) => (lvlOrder[a.level] || 99) - (lvlOrder[b.level] || 99) || (a.word || '').localeCompare(b.word || '', 'en', { sensitivity: 'base' }));
         } else if (sortMode === 'newest') {
           const getTime = (x) => {
-            if (x._justAddedAt) return x._justAddedAt;
-            const t = x.lastLookedUpAt || x.lastSearchedAt || x.createdAt || 0;
-            return typeof t === 'number' ? t : (new Date(t).getTime() || 0);
+            if (!x) return 0;
+            if (x._justAddedAt) return Number(x._justAddedAt);
+            if (x.lastLookedUpAt) return Number(x.lastLookedUpAt);
+            if (x.lastSearchedAt) return Number(x.lastSearchedAt);
+
+            if (x.createdAt) {
+              const t = typeof x.createdAt === 'number' ? x.createdAt : new Date(x.createdAt).getTime();
+              if (!isNaN(t) && t > 0) return t;
+            }
+
+            // Trích xuất timestamp từ id: custom_179310..., cefr_syn_179310..., colloc_179310...
+            if (x.id && typeof x.id === 'string') {
+              const m = x.id.match(/_(\d{10,13})(?:_|$)/);
+              if (m && m[1]) {
+                const parsed = parseInt(m[1], 10);
+                if (!isNaN(parsed) && parsed > 1500000000000) return parsed;
+              }
+            }
+
+            // Các thẻ thuộc nhóm tự tra cứu / dịch / sổ tay nhưng chưa có timestamp chính xác
+            if (x.topic === 'topic_translated' || x.deck === 'translated') return 3000000000;
+            if (x.topic === 'topic_notebook' || x.deck === 'notebook') return 2000000000;
+            if (x.id && String(x.id).startsWith('custom_')) return 1500000000;
+            if (x.isCustom || (x.topicLabel && (x.topicLabel.includes('Tra Cứu') || x.topicLabel.includes('Thủ Công') || x.topicLabel.includes('Dịch')))) {
+              return 1000000000;
+            }
+            if (x.isFavorite) return 500000000;
+            if (x.repetitions && x.repetitions > 0) return 200000000 + x.repetitions;
+
+            return 0;
           };
           list.sort((a, b) => (getTime(b) - getTime(a)) || (a.word || '').localeCompare(b.word || '', 'en', { sensitivity: 'base' }));
         }
@@ -36928,8 +36955,9 @@ Yêu cầu output STRICTLY là một JSON object:
 
         let cardsHtml = displayedList.map(item => {
           const isJustAdded = (item._justAddedAt && (Date.now() - item._justAddedAt < 300000)) || item._isJustAdded;
+          const isRecentlyLookedUp = !isJustAdded && ((item.lastLookedUpAt && (Date.now() - item.lastLookedUpAt < 86400000)) || (item.lastSearchedAt && (Date.now() - item.lastSearchedAt < 86400000)));
           return `
-          <div class="cv-auto p-5 rounded-3xl bg-white dark:bg-darkCard ${isJustAdded ? 'border-2 border-emerald-500/80 shadow-lg ring-2 ring-emerald-500/20' : 'border border-slate-200 dark:border-slate-800 shadow-bento'} hover:border-primary-light/50 transition flex flex-col justify-between space-y-4">
+          <div class="cv-auto p-5 rounded-3xl bg-white dark:bg-darkCard ${isJustAdded ? 'border-2 border-emerald-500/80 shadow-lg ring-2 ring-emerald-500/20' : isRecentlyLookedUp ? 'border-2 border-indigo-500/60 shadow-md ring-2 ring-indigo-500/10' : 'border border-slate-200 dark:border-slate-800 shadow-bento'} hover:border-primary-light/50 transition flex flex-col justify-between space-y-4">
             <div>
               <div class="flex items-start justify-between">
                 <div class="flex items-center flex-wrap gap-1">
@@ -36937,6 +36965,11 @@ Yêu cầu output STRICTLY là một JSON object:
                     <span class="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-emerald-500 text-white shadow-sm flex items-center gap-1 animate-pulse">
                       <i class="fa-solid fa-sparkles text-[9px]"></i>
                       <span>Mới Thêm</span>
+                    </span>
+                  ` : isRecentlyLookedUp ? `
+                    <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30 shadow-xs flex items-center gap-1">
+                      <i class="fa-solid fa-clock-rotate-left text-[9px]"></i>
+                      <span>Vừa Tra Cứu</span>
                     </span>
                   ` : ''}
                   <span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase bg-slate-100 dark:bg-slate-800 text-slate-500">
@@ -37045,6 +37078,26 @@ Yêu cầu output STRICTLY là một JSON object:
         if (this._searchVocabTimeout) clearTimeout(this._searchVocabTimeout);
         this._searchVocabTimeout = setTimeout(() => {
           this.hubCurrentPage = 1;
+
+          // Ghi nhận mốc thời gian tra cứu cho các từ khớp chính xác khi người dùng tìm kiếm
+          const cleanQ = (val || '').trim().toLowerCase();
+          if (cleanQ.length >= 2) {
+            const normQ = this.normalizeWordKey(cleanQ);
+            const matches = this.vocabList.filter(v => {
+              if (!v || !v.word) return false;
+              const nw = this.normalizeWordKey(v.word);
+              return nw === normQ || v.word.toLowerCase() === cleanQ;
+            });
+            if (matches.length > 0) {
+              const now = Date.now();
+              matches.forEach(m => {
+                m.lastLookedUpAt = now;
+                m.lastSearchedAt = now;
+              });
+              this.saveState();
+            }
+          }
+
           this.renderVocabHub();
         }, 160);
       }
@@ -37059,6 +37112,34 @@ Yêu cầu output STRICTLY là một JSON object:
         this.hubCurrentPage = 1;
         this.hubSortMode = val;
         try { localStorage.setItem('engMastery_hub_sort', val); } catch (_) {}
+
+        if (val === 'newest') {
+          // 1. Tự động reset bộ lọc chữ cái (A-Z) để không bị ẩn các từ bắt đầu bằng chữ cái khác
+          this.hubLetterFilter = 'all';
+          try { localStorage.setItem('engMastery_hub_letter', 'all'); } catch (_) {}
+          document.querySelectorAll('.hub-letter-btn').forEach(btn => {
+            if (btn.dataset.letter === 'all') {
+              btn.className = 'hub-letter-btn px-3 py-1 rounded-xl font-black transition text-xs bg-primary text-white shrink-0';
+            } else {
+              btn.className = 'hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0';
+            }
+          });
+
+          // 2. Xóa ô tìm kiếm nếu đang có truy vấn để người dùng thấy đầy đủ các từ mới tra cứu
+          if (this.hubSearchQuery) {
+            this.hubSearchQuery = '';
+            const searchInput = document.getElementById('hub-search-input');
+            if (searchInput) searchInput.value = '';
+          }
+
+          // 3. Reset bộ lọc cấp độ CEFR về 'all' nếu đang chọn cấp độ cụ thể
+          if (this.hubCurrentLevel !== 'all') {
+            this.hubCurrentLevel = 'all';
+            const levelFilter = document.getElementById('hub-level-filter');
+            if (levelFilter) levelFilter.value = 'all';
+          }
+        }
+
         this.renderVocabHub();
       }
 
@@ -39439,6 +39520,7 @@ YÊU CẦU ĐỊNH DẠNG: Output STRICTLY là một JSON Object hợp lệ (kh�
         else if (wordCount <= 4) wordType = 'Phrasal Verb / Phrase';
         else wordType = 'Sentence / Mẫu câu';
 
+        const nowTrans = Date.now();
         const cardData = {
           word: enText,
           type: wordType,
@@ -39453,7 +39535,12 @@ YÊU CẦU ĐỊNH DẠNG: Output STRICTLY là một JSON Object hợp lệ (kh�
           deck: 'translated',
           status: 'due',
           due: true,
-          nextReviewDate: new Date().toISOString()
+          nextReviewDate: new Date().toISOString(),
+          createdAt: nowTrans,
+          lastLookedUpAt: nowTrans,
+          lastSearchedAt: nowTrans,
+          _justAddedAt: nowTrans,
+          _isJustAdded: true
         };
 
         // Gộp nếu trùng lặp hoặc thêm mới vào đầu danh sách
@@ -41533,7 +41620,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.9.1')) return caches.delete(c);
+                if (!c.includes('v1.9.2')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -42579,10 +42666,13 @@ Trả về DUY NHẤT một JSON hợp lệ:
         const existing = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
         if (existing) {
           // KÍCH HOẠT VÀO DANH SÁCH CẦN ÔN TẬP
+          const nowEnroll = Date.now();
           existing.status = 'due';
           existing.due = true;
           existing.nextReviewDate = new Date().toISOString();
-          existing.lastSearchedAt = Date.now();
+          existing.lastSearchedAt = nowEnroll;
+          existing.lastLookedUpAt = nowEnroll;
+          existing._justAddedAt = nowEnroll;
 
           // Đưa lên đầu danh sách
           const idx = this.vocabList.indexOf(existing);
@@ -46269,6 +46359,10 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ:
 
           // If word exists in list, update its synonyms & antonyms & collocations
           if (existing) {
+            const nowCefr = Date.now();
+            existing.lastLookedUpAt = nowCefr;
+            existing.lastSearchedAt = nowCefr;
+            existing._justAddedAt = nowCefr;
             existing.synonyms = this.normalizeCefrField(cardData.synonyms);
             existing.antonyms = this.normalizeCefrField(cardData.antonyms);
             if (cardData.collocations) existing.collocations = cardData.collocations;
@@ -48534,7 +48628,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.1</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.2</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

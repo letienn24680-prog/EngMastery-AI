@@ -1,13 +1,12 @@
 {
-  "version": "1.9.1",
-  "versionCode": 11100,
+  "version": "1.9.2",
+  "versionCode": 11200,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.9.1: Khắc Phục Hiển Thị Tức Thì Từ Vựng Mới Nạp Trong Kho Từ Vựng & Bộ Lọc Thông Minh",
+  "title": "Bản Cập Nhật v1.9.2: Tối Ưu Toàn Diện Chế Độ Xem \"Mới Tra Cứu / Mới Thêm\" & Khôi Phục Lịch Sử Tra Từ",
   "highlights": [
-    "Tự động chuyển chế độ hiển thị từ mới nhất (Newest Sort): Khi nạp từ vựng thủ công (đơn từ hoặc đa từ), hệ thống tự động đưa từ vừa nạp lên vị trí đầu tiên của Kho Từ Vựng kèm huy hiệu nổi bật ✨ Mới Thêm.",
-    "Khắc phục phân trang & bộ lọc chữ cái: Tự động reset bộ lọc chữ cái (A-Z) và đặt trang về Trang 1 để các từ vừa nhập (kể cả bắt đầu bằng F, G, P, R, S...) xuất hiện ngay dưới khung nhập liệu.",
-    "Cuộn mượt tức thì tới thẻ vừa tạo: Ngay khi nhấn Gửi Đi & AI Phân Tích Lưu Ngay, màn hình tự động cuộn nhẹ xuống kho từ vựng để bạn theo dõi kết quả.",
-    "Cập nhật trực quan theo thời gian thực (Live Stream Updates): Giao diện thẻ được cập nhật nghĩa, IPA, và Collocations ngay khi AI hoàn thành từng từ mà không cần chờ cả danh sách.",
-    "Bóc tách đa từ loại & làm sạch tiêu đề chuẩn xác: Bộ làm sạch AI tự động loại bỏ các chú thích như (v, n), (adj), adv., v.t. khỏi tiêu đề từ vựng, đồng thời tự động gộp trùng lặp."
+    "Khắc phục triệt để chế độ xem \"Mới tra cứu / Mới thêm\": Tự động mở rộng và reset bộ lọc chữ cái (A-Z), ô tìm kiếm và bộ lọc cấp độ khi người dùng chọn chế độ xem mới nhất, đảm bảo hiển thị 100% các từ vừa tra cứu.",
+    "Khôi phục timestamp từ ID lịch sử: Tự động trích xuất mốc thời gian từ ID của tất cả từ vựng thủ công, từ đồng nghĩa/trái nghĩa CEFR và collocations tạo trước đó, giúp danh sách sắp xếp chính xác từ mới nhất đến cũ nhất.",
+    "Tự động ghi nhận mốc tra cứu tức thì: Khi người dùng tìm kiếm từ trong Kho Từ Vựng, bấm \"AI Tra & Lưu Ôn\", tra từ CEFR A1-C1 hay dịch nhanh, hệ thống lập tức đánh dấu mốc thời gian tra cứu và huy hiệu \"Vừa Tra Cứu\".",
+    "Phân định trực quan giữa \"✨ Mới Thêm\" và \"🕒 Vừa Tra Cứu\": Các từ vừa nạp trong phiên hiển thị huy hiệu xanh lá nổi bật, các từ vừa được tra cứu hiển thị huy hiệu tím than trực quan."
   ]
 }
