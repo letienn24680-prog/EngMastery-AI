@@ -65,6 +65,14 @@
   </script>
 
   <style>
+    /* Modal active state: Lock background scroll & gestures completely */
+    html.modal-open, body.modal-open {
+      overflow: hidden !important;
+      touch-action: none !important;
+      -webkit-overflow-scrolling: auto !important;
+      overscroll-behavior: none !important;
+    }
+
     /* Mobile Touch Optimization & High-Performance Rendering */
     * {
       -webkit-tap-highlight-color: transparent;
@@ -290,7 +298,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.1 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.2 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3074,12 +3082,12 @@
   <!-- ============================================== -->
   <!-- MODAL: CEFR SYNONYM & ANTONYM EXPLORER (A1-C1) -->
   <!-- ============================================== -->
-  <div id="modal-cefr-explorer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto p-5 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+  <div id="modal-cefr-explorer" onclick="if(event.target === this) app.closeCefrExplorerModal()" class="fixed inset-0 z-[90] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-2xl w-full max-h-[85vh] sm:max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scale-up">
+      <!-- Fixed Header: ALWAYS PINNED -->
+      <div class="shrink-0 p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-darkCard">
         <div class="flex items-center space-x-2.5">
-          <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-purple-500 to-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow-md">
+          <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-purple-500 to-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow-md shrink-0">
             <i class="fa-solid fa-arrows-split-up-and-left"></i>
           </div>
           <div>
@@ -3087,8 +3095,8 @@
             <p class="text-[11px] text-slate-400 font-medium">Bóc tách toàn bộ cây từ vựng chuẩn CEFR phục vụ thi THPT Quốc Gia & IELTS</p>
           </div>
         </div>
-        <button onclick="app.closeCefrExplorerModal()" class="w-8 h-8 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 flex items-center justify-center transition">
-          <i class="fa-solid fa-xmark text-base"></i>
+        <button onclick="app.closeCefrExplorerModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
+          <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
 
@@ -3115,24 +3123,31 @@
         </div>
       </div>
 
-      <!-- Results Area -->
-      <div id="cefr-explorer-results" class="space-y-4">
-        <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-dashed border-slate-200 dark:border-slate-700 text-center space-y-2">
-          <i class="fa-solid fa-network-wired text-3xl text-purple-400/60"></i>
-          <h4 class="font-extrabold text-sm text-slate-700 dark:text-slate-300">Khám Phá Cây Từ Đồng Nghĩa & Trái Nghĩa A1 - C1</h4>
-          <p class="text-xs text-slate-400 max-w-md mx-auto">Nhập một từ vựng bất kỳ hoặc bấm vào các từ gợi ý ở trên để xem phân cấp chi tiết theo từng bậc chuẩn CEFR và lưu vào Flashcards.</p>
+      <!-- Results Area (Scrollable Body) -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 overscroll-contain">
+        <div id="cefr-explorer-results" class="space-y-4">
+          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-dashed border-slate-200 dark:border-slate-700 text-center space-y-2">
+            <i class="fa-solid fa-network-wired text-3xl text-purple-400/60"></i>
+            <h4 class="font-extrabold text-sm text-slate-700 dark:text-slate-300">Khám Phá Cây Từ Đồng Nghĩa & Trái Nghĩa A1 - C1</h4>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">Nhập một từ vựng bất kỳ hoặc bấm vào các từ gợi ý ở trên để xem phân cấp chi tiết theo từng bậc chuẩn CEFR và lưu vào Flashcards.</p>
+          </div>
         </div>
+      </div>
+
+      <!-- Fixed Footer: ALWAYS PINNED AT BOTTOM -->
+      <div class="shrink-0 p-3 sm:p-4 border-t border-slate-100 dark:border-slate-800 flex justify-end bg-slate-50 dark:bg-slate-900/60">
+        <button onclick="app.closeCefrExplorerModal()" class="px-5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-300 dark:hover:bg-slate-700 transition">Đóng</button>
       </div>
     </div>
   </div>
 
-  <div id="modal-word-detail" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5">
-      <!-- Modal Header -->
-      <div class="flex items-start justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+  <div id="modal-word-detail" onclick="if(event.target === this) app.closeWordDetailModal()" class="fixed inset-0 z-[90] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-xl w-full max-h-[85vh] sm:max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scale-up">
+      <!-- Fixed Header: ALWAYS PINNED -->
+      <div class="shrink-0 p-4 sm:p-6 border-b border-slate-100 dark:border-slate-800 flex items-start justify-between bg-white dark:bg-darkCard">
         <div>
           <div class="flex items-center space-x-2">
-            <h3 id="modal-detail-word" class="text-2xl font-extrabold text-slate-900 dark:text-white">Word</h3>
+            <h3 id="modal-detail-word" class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">Word</h3>
             <button onclick="app.speakModalWord()" class="w-8 h-8 rounded-full bg-primary/10 text-primary-light flex items-center justify-center hover:bg-primary/20 transition" title="Nghe phát âm">
               <i class="fa-solid fa-volume-high text-xs"></i>
             </button>
@@ -3142,10 +3157,13 @@
           </div>
           <p id="modal-detail-ipa" class="text-xs font-mono text-slate-400 mt-1">/ipa/</p>
         </div>
-        <button onclick="app.closeWordDetailModal()" class="text-slate-400 hover:text-slate-600 text-lg">
-          <i class="fa-solid fa-xmark"></i>
+        <button onclick="app.closeWordDetailModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
+          <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
+
+      <!-- Scrollable Body -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 overscroll-contain">
 
       <!-- Badges -->
       <div class="flex items-center space-x-2 text-xs flex-wrap gap-y-1">
@@ -3247,15 +3265,17 @@
         </div>
       </div>
 
-      <!-- Modal Footer -->
-      <div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 flex-wrap gap-2">
+      </div>
+
+      <!-- Fixed Footer: ALWAYS PINNED AT BOTTOM -->
+      <div class="shrink-0 p-3.5 sm:p-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900/60">
         <button type="button" onclick="app.deleteActiveModalWord()" class="px-3.5 py-2 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white font-bold text-xs transition flex items-center space-x-1.5 cursor-pointer shadow-xs" title="Xóa thẻ từ này khỏi kho từ vựng">
           <i class="fa-solid fa-trash-can"></i>
           <span>Xóa Thẻ Này</span>
         </button>
         <div class="flex items-center space-x-2">
-          <button onclick="app.closeWordDetailModal()" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold cursor-pointer">Đóng</button>
-          <button id="modal-detail-practice-btn" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-hover shadow-glow-primary transition cursor-pointer">Học Trong Flashcard</button>
+          <button onclick="app.closeWordDetailModal()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-300 dark:hover:bg-slate-700 transition">Đóng</button>
+          <button id="modal-detail-practice-btn" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-hover shadow-glow-primary transition cursor-pointer active:scale-95">Học Trong Flashcard</button>
         </div>
       </div>
     </div>
@@ -3264,18 +3284,21 @@
   <!-- ========================================================== -->
   <!-- MODAL: LUYỆN PHÁT ÂM QUA MICRO & CHẤM ĐIỂM (ITEM 3)         -->
   <!-- ========================================================== -->
-  <div id="modal-pronunciation" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-md w-full p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5 animate-scale-up text-center">
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+  <div id="modal-pronunciation" onclick="if(event.target === this) app.closePronunciationModal()" class="fixed inset-0 z-[90] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-md w-full max-h-[85vh] sm:max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scale-up text-center">
+      <!-- Fixed Header: ALWAYS PINNED -->
+      <div class="shrink-0 p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-darkCard">
         <span class="text-xs font-bold uppercase tracking-wider text-rose-500 flex items-center gap-1.5">
           <i class="fa-solid fa-microphone-lines"></i>
           <span>Luyện Nói & Chấm Điểm AI</span>
         </span>
-        <button onclick="app.closePronunciationModal()" class="text-slate-400 hover:text-slate-600 text-base">
-          <i class="fa-solid fa-xmark"></i>
+        <button onclick="app.closePronunciationModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
+          <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
+
+      <!-- Scrollable Body -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 overscroll-contain">
 
       <!-- Target Word & IPA -->
       <div class="space-y-1">
@@ -3308,9 +3331,11 @@
         <p id="pronounce-feedback-text" class="text-slate-500 dark:text-slate-400 leading-relaxed italic"></p>
       </div>
 
-      <!-- Modal Footer -->
-      <div class="pt-2 flex items-center justify-center gap-3">
-        <button onclick="app.closePronunciationModal()" class="px-5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold text-xs text-slate-700 dark:text-slate-300 hover:text-white transition">
+      </div>
+
+      <!-- Fixed Footer: ALWAYS PINNED AT BOTTOM -->
+      <div class="shrink-0 p-3.5 border-t border-slate-100 dark:border-slate-800 flex justify-center bg-slate-50 dark:bg-slate-900/60">
+        <button onclick="app.closePronunciationModal()" class="px-6 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 font-bold text-xs text-slate-700 dark:text-slate-300 hover:text-white transition active:scale-95">
           Xong
         </button>
       </div>
@@ -3320,12 +3345,18 @@
   <!-- ============================================== -->
   <!-- MODAL: ADD CUSTOM VOCABULARY                   -->
   <!-- ============================================== -->
-  <div id="modal-add-vocab" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between border-b pb-3">
-        <h3 class="text-lg font-bold">Thêm Từ Vựng Mới Vào Bộ Thẻ</h3>
-        <button onclick="app.closeAddVocabModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+  <div id="modal-add-vocab" onclick="if(event.target === this) app.closeAddVocabModal()" class="fixed inset-0 z-[90] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-lg w-full max-h-[85vh] sm:max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scale-up">
+      <!-- Fixed Header: ALWAYS PINNED -->
+      <div class="shrink-0 p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-darkCard">
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">Thêm Từ Vựng Mới Vào Bộ Thẻ</h3>
+        <button onclick="app.closeAddVocabModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
       </div>
+
+      <!-- Scrollable Body -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3.5 text-xs overscroll-contain">
 
       <div class="space-y-3 text-xs">
         <div>
@@ -3397,9 +3428,12 @@
         </div>
       </div>
 
-      <div class="pt-2 flex justify-end space-x-2">
-        <button onclick="app.closeAddVocabModal()" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold">Hủy</button>
-        <button onclick="app.saveNewVocab()" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-hover shadow-glow-primary">Lưu Từ Vựng</button>
+      </div>
+
+      <!-- Fixed Footer: ALWAYS PINNED AT BOTTOM -->
+      <div class="shrink-0 p-3.5 sm:p-4 border-t border-slate-100 dark:border-slate-800 flex justify-end space-x-2.5 bg-slate-50 dark:bg-slate-900/60">
+        <button onclick="app.closeAddVocabModal()" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition">Hủy</button>
+        <button onclick="app.saveNewVocab()" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-hover shadow-glow-primary transition active:scale-95">Lưu Từ Vựng</button>
       </div>
     </div>
   </div>
@@ -3410,11 +3444,12 @@
   <!-- ============================================== -->
   <!-- MODAL: PWA APP INSTALL & OFFLINE PACKAGING     -->
   <!-- ============================================== -->
-  <div id="modal-pwa-install" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 animate-fade-in">
-    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-lg w-full p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+  <div id="modal-pwa-install" onclick="if(event.target === this) app.closePWAInstallModal()" class="fixed inset-0 z-[90] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4 animate-fade-in">
+    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-lg w-full max-h-[85vh] sm:max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scale-up">
+      <!-- Fixed Header: ALWAYS PINNED -->
+      <div class="shrink-0 p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-darkCard">
         <div class="flex items-center space-x-2.5">
-          <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 text-white flex items-center justify-center shadow-md">
+          <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 text-white flex items-center justify-center shadow-md shrink-0">
             <i class="fa-solid fa-mobile-screen-button text-base"></i>
           </div>
           <div>
@@ -3422,10 +3457,13 @@
             <p class="text-[11px] text-slate-400">Ứng dụng học offline, toàn màn hình và tốc độ cao</p>
           </div>
         </div>
-        <button onclick="app.closePWAInstallModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-lg">
-          <i class="fa-solid fa-xmark text-base"></i>
+        <button onclick="app.closePWAInstallModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
+          <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
+
+      <!-- Scrollable Body -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 overscroll-contain">
 
       <!-- Quick 1-Click Install Button (When prompt is available) -->
       <div id="btn-pwa-oneclick-install" class="hidden">
@@ -3529,8 +3567,11 @@
         </p>
       </div>
 
-      <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-end">
-        <button onclick="app.closePWAInstallModal()" class="px-5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition">
+      </div>
+
+      <!-- Fixed Footer: ALWAYS PINNED AT BOTTOM -->
+      <div class="shrink-0 p-3.5 sm:p-4 border-t border-slate-100 dark:border-slate-800 flex justify-end bg-slate-50 dark:bg-slate-900/60">
+        <button onclick="app.closePWAInstallModal()" class="px-5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition active:scale-95">
           Đóng
         </button>
       </div>
@@ -3538,13 +3579,13 @@
   </div>
 
     <!-- MODAL: ĐỒNG BỘ ĐÁM MÂY ĐA THIẾT BỊ (CLOUD SYNC VAULT) -->
-  <div id="modal-cloud-sync" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 animate-fade-in">
-    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-lg w-full p-5 sm:p-6 md:p-7 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
+  <div id="modal-cloud-sync" onclick="if(event.target === this) app.closeCloudSyncModal()" class="fixed inset-0 z-[90] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4 animate-fade-in">
+    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-lg w-full max-h-[85vh] sm:max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scale-up">
       
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+      <!-- Fixed Header: ALWAYS PINNED -->
+      <div class="shrink-0 p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-darkCard">
         <div class="flex items-center space-x-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary to-indigo-600 text-white flex items-center justify-center text-lg shadow-glow-primary">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary to-indigo-600 text-white flex items-center justify-center text-lg shadow-glow-primary shrink-0">
             <i class="fa-solid fa-cloud-arrow-up"></i>
           </div>
           <div>
@@ -3552,13 +3593,16 @@
               <span>Đồng Bộ Đa Thiết Bị</span>
               <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 uppercase">Cloud Sync</span>
             </h3>
-            <p class="text-[11px] text-slate-400">Đồng bộ 1.060+ từ vựng, từ bạn tự thêm & tiến độ học giữa Điện Thoại và Máy Tính</p>
+            <p class="text-[11px] text-slate-400">Đồng bộ 1.060+ từ vựng & tiến độ học giữa Điện Thoại và Máy Tính</p>
           </div>
         </div>
-        <button type="button" onclick="app.closeCloudSyncModal()" class="w-8 h-8 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center transition">
+        <button type="button" onclick="app.closeCloudSyncModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
+
+      <!-- Scrollable Body -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 overscroll-contain">
 
       <!-- Current Sync State Overview Card -->
       <div class="p-3.5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200/60 dark:border-indigo-800/60 flex items-center justify-between gap-3">
@@ -3658,17 +3702,31 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="modal-settings" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-md w-full p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between border-b pb-3">
-        <h3 class="text-base font-bold flex items-center gap-2">
+    <!-- Fixed Footer: ALWAYS PINNED AT BOTTOM -->
+    <div class="shrink-0 p-3.5 sm:p-4 border-t border-slate-200 dark:border-slate-800 flex justify-end bg-slate-50 dark:bg-slate-900/60">
+      <button onclick="app.closeCloudSyncModal()" class="px-5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition active:scale-95">
+        Đóng
+      </button>
+    </div>
+  </div>
+</div>
+
+  <div id="modal-settings" onclick="if(event.target === this) app.closeSettingsModal()" class="fixed inset-0 z-[90] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-md w-full max-h-[85vh] sm:max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scale-up">
+      <!-- Fixed Header: ALWAYS PINNED -->
+      <div class="shrink-0 p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-darkCard">
+        <h3 class="text-base font-bold flex items-center gap-2 text-slate-900 dark:text-white">
           <i class="fa-solid fa-gear text-primary-light"></i>
           <span>Cài Đặt Hệ Thống & xKiro / Gemini AI</span>
         </h3>
-        <button onclick="app.closeSettingsModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="app.closeSettingsModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
       </div>
+
+      <!-- Scrollable Body: All settings inputs, buttons, toggles -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 text-xs overscroll-contain">
 
       <div class="space-y-4 text-xs">
         <div>
@@ -3690,7 +3748,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.1 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.2 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -3755,8 +3813,11 @@
         </div>
       </div>
 
-      <div class="pt-2 flex justify-end">
-        <button onclick="app.saveSettings()" class="px-5 py-2 rounded-xl bg-primary text-white font-bold text-xs hover:bg-primary-hover shadow-glow-primary">Lưu Cài Đặt</button>
+      </div>
+
+      <!-- Fixed Footer: ALWAYS PINNED AT BOTTOM -->
+      <div class="shrink-0 p-3.5 sm:p-4 border-t border-slate-100 dark:border-slate-800 flex justify-end bg-slate-50 dark:bg-slate-900/60">
+        <button onclick="app.saveSettings()" class="px-5 py-2.5 rounded-xl bg-primary text-white font-bold text-xs hover:bg-primary-hover shadow-glow-primary transition active:scale-95">Lưu Cài Đặt</button>
       </div>
     </div>
   </div>
@@ -35400,6 +35461,11 @@ Yêu cầu output STRICTLY là một JSON object:
           if (!scrollTicking) {
             requestAnimationFrame(() => {
               const btn = document.getElementById('scroll-to-top');
+              if (document.body.classList.contains('modal-open')) {
+                if (btn) btn.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+                scrollTicking = false;
+                return;
+              }
               if (btn) {
                 const shouldBeVisible = currentY > 280;
                 if (shouldBeVisible !== lastScrollVisible) {
@@ -35594,6 +35660,29 @@ Yêu cầu output STRICTLY là một JSON object:
         if (viewId === 'dashboard') {
           if (!this.spotlightInterval) {
             this.initSpotlightRotator();
+        // ⌨️ Global Escape key handler to close topmost open modal
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            if (this.activeModals && this.activeModals.size > 0) {
+              const lastModal = Array.from(this.activeModals).pop();
+              switch (lastModal) {
+                case 'modal-settings': this.closeSettingsModal(); break;
+                case 'modal-word-detail': this.closeWordDetailModal(); break;
+                case 'modal-add-vocab': this.closeAddVocabModal(); break;
+                case 'modal-cefr-explorer': this.closeCefrExplorerModal(); break;
+                case 'modal-pronunciation': this.closePronunciationModal(); break;
+                case 'modal-pwa-install': this.closePWAInstallModal(); break;
+                case 'modal-cloud-sync': this.closeCloudSyncModal(); break;
+                case 'modal-profile-manager': this.closeProfileModal(); break;
+                case 'modal-topic-picker': this.closeTopicPickerModal(); break;
+                case 'custom-word-picker-modal': this.closeCustomWordPicker(); break;
+                case 'flashcard-summary-modal': this.closeSummaryModal(); break;
+                case 'modal-update-overlay': this.dismissUpdateBanner(); break;
+              }
+            }
+          }
+        });
+
           }
         } else {
           if (this.spotlightInterval) {
@@ -35845,11 +35934,13 @@ Yêu cầu output STRICTLY là một JSON object:
       /* FLASHCARDS CONTROLLER (SM-2 & SEARCH & TOPICS)      */
       /* =================================================== */
       openTopicPickerModal() {
+        this.registerModalOpen('modal-topic-picker');
         const modal = document.getElementById('modal-topic-picker');
         if (modal) modal.classList.remove('hidden');
       }
 
       closeTopicPickerModal() {
+        this.registerModalClose('modal-topic-picker');
         const modal = document.getElementById('modal-topic-picker');
         if (modal) modal.classList.add('hidden');
       }
@@ -37018,6 +37109,7 @@ Yêu cầu output STRICTLY là một JSON object:
       }
 
       openWordDetailModal(wordId) {
+        this.registerModalOpen('modal-word-detail');
         const item = this.vocabList.find(v => v.id === wordId);
         if (!item) return;
 
@@ -37102,6 +37194,7 @@ Yêu cầu output STRICTLY là một JSON object:
       }
 
       closeWordDetailModal() {
+        this.registerModalClose('modal-word-detail');
         document.getElementById('modal-word-detail').classList.add('hidden');
       }
 
@@ -39132,10 +39225,12 @@ Trả về DUY NHẤT một JSON hợp lệ:
       /* MODALS & GENERAL APP METHODS                        */
       /* =================================================== */
       openAddVocabModal() {
+        this.registerModalOpen('modal-add-vocab');
         document.getElementById('modal-add-vocab').classList.remove('hidden');
       }
 
       closeAddVocabModal() {
+        this.registerModalClose('modal-add-vocab');
         document.getElementById('modal-add-vocab').classList.add('hidden');
       }
 
@@ -40336,6 +40431,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       openCloudSyncModal() {
+        this.registerModalOpen('modal-cloud-sync');
         const modal = document.getElementById('modal-cloud-sync');
         if (!modal) return;
         modal.classList.remove('hidden');
@@ -40365,6 +40461,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       closeCloudSyncModal() {
+        this.registerModalClose('modal-cloud-sync');
         const modal = document.getElementById('modal-cloud-sync');
         if (modal) modal.classList.add('hidden');
       }
@@ -40688,8 +40785,8 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       showUpdateBanner(data) {
-        const banner = document.getElementById('pwa-update-banner');
-        if (!banner) return;
+        const overlay = document.getElementById('modal-update-overlay') || document.getElementById('pwa-update-banner');
+        if (!overlay) return;
 
         const versionTag = document.getElementById('pwa-update-version-tag');
         const titleEl = document.getElementById('pwa-update-title');
@@ -40703,23 +40800,19 @@ Trả về DUY NHẤT một JSON hợp lệ:
         }
         if (descEl && data.highlights && Array.isArray(data.highlights) && data.highlights.length > 0) {
           descEl.innerHTML = data.highlights.map(h => 
-            `<div class="flex items-center space-x-1.5 text-[11px] text-indigo-200 mt-0.5"><i class="fa-solid fa-circle-check text-emerald-400 text-[10px]"></i><span>${h}</span></div>`
+            `<div class="flex items-start space-x-2.5 text-xs text-slate-200 mt-1.5 leading-relaxed bg-white/5 p-2.5 rounded-xl border border-white/5"><i class="fa-solid fa-circle-check text-emerald-400 text-xs mt-0.5 shrink-0"></i><span class="flex-1">${h}</span></div>`
           ).join('');
         }
 
-        banner.classList.remove('hidden');
-        requestAnimationFrame(() => {
-          banner.classList.remove('-translate-y-6', 'opacity-0');
-          banner.classList.add('translate-y-0', 'opacity-100');
-        });
+        this.registerModalOpen('modal-update-overlay');
+        overlay.classList.remove('hidden');
       }
 
       dismissUpdateBanner() {
-        const banner = document.getElementById('pwa-update-banner');
-        if (!banner) return;
-        banner.classList.remove('translate-y-0', 'opacity-100');
-        banner.classList.add('-translate-y-6', 'opacity-0');
-        setTimeout(() => banner.classList.add('hidden'), 500);
+        const overlay = document.getElementById('modal-update-overlay') || document.getElementById('pwa-update-banner');
+        if (!overlay) return;
+        this.registerModalClose('modal-update-overlay');
+        overlay.classList.add('hidden');
       }
 
       async applyPWAUpdate() {
@@ -40739,7 +40832,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.8.1')) return caches.delete(c);
+                if (!c.includes('v1.8.2')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -40751,6 +40844,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       openPWAInstallModal() {
+        this.registerModalOpen('modal-pwa-install');
         this.closeSidebar();
         const modal = document.getElementById('modal-pwa-install');
         if (!modal) return;
@@ -40782,6 +40876,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       closePWAInstallModal() {
+        this.registerModalClose('modal-pwa-install');
         const modal = document.getElementById('modal-pwa-install');
         if (modal) modal.classList.add('hidden');
       }
@@ -40842,6 +40937,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       openSettingsModal() {
+        this.registerModalOpen('modal-settings');
         this.closeSidebar();
         document.getElementById('settings-gemini-key').value = this.settings.aiApiKey || this.settings.geminiApiKey || '';
         document.getElementById('api-test-result').innerText = '';
@@ -40849,6 +40945,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       closeSettingsModal() {
+        this.registerModalClose('modal-settings');
         document.getElementById('modal-settings').classList.add('hidden');
       }
 
@@ -40953,6 +41050,33 @@ Trả về DUY NHẤT một JSON hợp lệ:
         }
       }
 
+      // ==============================================================
+      // 🔒 GLOBAL MODAL ISOLATION & SCROLL LOCK CONTROLLER
+      // ==============================================================
+      activeModals = new Set();
+
+      registerModalOpen(modalId) {
+        if (!this.activeModals) this.activeModals = new Set();
+        if (modalId) this.activeModals.add(modalId);
+        document.body.classList.add('modal-open');
+        document.documentElement.classList.add('modal-open');
+
+        // Ẩn nút cuộn lên đầu trang khi có modal đang mở
+        const scrollBtn = document.getElementById('scroll-to-top');
+        if (scrollBtn) {
+          scrollBtn.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+        }
+      }
+
+      registerModalClose(modalId) {
+        if (!this.activeModals) this.activeModals = new Set();
+        if (modalId) this.activeModals.delete(modalId);
+        if (this.activeModals.size === 0) {
+          document.body.classList.remove('modal-open');
+          document.documentElement.classList.remove('modal-open');
+        }
+      }
+
       /* =================================================== */
       /* UNIVERSAL IN-APP DIALOG SYSTEM (CONFIRM & PROMPT)   */
       /* =================================================== */
@@ -41015,6 +41139,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
 
           const cleanup = () => {
             modal.classList.add('hidden');
+            this.registerModalClose('modal-app-dialog');
             document.removeEventListener('keydown', handleKeyDown);
             if (btnConfirm) btnConfirm.onclick = null;
             if (btnCancel) btnCancel.onclick = null;
@@ -41042,6 +41167,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
           };
 
           document.addEventListener('keydown', handleKeyDown);
+          this.registerModalOpen('modal-app-dialog');
           modal.classList.remove('hidden');
         });
       }
@@ -41120,6 +41246,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
 
           const cleanup = () => {
             modal.classList.add('hidden');
+            this.registerModalClose('modal-app-dialog');
             document.removeEventListener('keydown', handleKeyDown);
             if (btnConfirm) btnConfirm.onclick = null;
             if (btnCancel) btnCancel.onclick = null;
@@ -41152,6 +41279,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
           };
 
           document.addEventListener('keydown', handleKeyDown);
+          this.registerModalOpen('modal-app-dialog');
           modal.classList.remove('hidden');
         });
       }
@@ -41436,6 +41564,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       /* =================================================== */
 
       openCustomWordPicker() {
+        this.registerModalOpen('custom-word-picker-modal');
         const modal = document.getElementById('custom-word-picker-modal');
         if (!modal) return;
         modal.classList.remove('hidden');
@@ -41447,6 +41576,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       closeCustomWordPicker() {
+        this.registerModalClose('custom-word-picker-modal');
         const modal = document.getElementById('custom-word-picker-modal');
         if (modal) modal.classList.add('hidden');
       }
@@ -41687,6 +41817,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       closeSummaryModal() {
+        this.registerModalClose('flashcard-summary-modal');
         const modal = document.getElementById('flashcard-summary-modal');
         if (modal) modal.classList.add('hidden');
         this.navigate('dashboard');
@@ -42342,6 +42473,7 @@ LƯU Ý: Phân cấp rõ ràng các từ đồng nghĩa và trái nghĩa theo c�
       }
 
       closePronunciationModal() {
+        this.registerModalClose('modal-pronunciation');
         if (this.pronounceRecognition) {
           try { this.pronounceRecognition.abort(); } catch (e) {}
           this.pronounceRecognition = null;
@@ -44898,6 +45030,7 @@ YÊU CẦU BẮT BUỘC:
       }
 
       openCefrExplorerModal(initialWord = '') {
+        this.registerModalOpen('modal-cefr-explorer');
         const modal = document.getElementById('modal-cefr-explorer');
         if (!modal) return;
         modal.classList.remove('hidden');
@@ -44917,6 +45050,7 @@ YÊU CẦU BẮT BUỘC:
       }
 
       closeCefrExplorerModal() {
+        this.registerModalClose('modal-cefr-explorer');
         const modal = document.getElementById('modal-cefr-explorer');
         if (modal) modal.classList.add('hidden');
       }
@@ -45941,6 +46075,7 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ theo cấu trúc:
       }
 
       openProfileModal() {
+        this.registerModalOpen('modal-profile-manager');
         const modal = document.getElementById('modal-profile-manager');
         if (!modal) return;
         const devIdEl = document.getElementById('profile-modal-dev-id');
@@ -45954,6 +46089,7 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ theo cấu trúc:
       }
 
       closeProfileModal() {
+        this.registerModalClose('modal-profile-manager');
         const modal = document.getElementById('modal-profile-manager');
         if (modal) modal.classList.add('hidden');
       }
@@ -46885,130 +47021,13 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
   </script>
 
   <!-- Floating Scroll To Top Button (Đặt nổi an toàn bên trên Mobile Bottom Nav) -->
-  <button id="scroll-to-top" onclick="document.querySelector('main')?.scrollTo({ top: 0, behavior: 'smooth' }); window.scrollTo({ top: 0, behavior: 'smooth' })" title="Cuộn lên đầu trang" class="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-50 w-11 h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-primary to-indigo-600 text-white shadow-2xl hover:shadow-glow-primary hover:-translate-y-1 active:scale-95 flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none scale-75 hidden">
+  <button id="scroll-to-top" onclick="document.querySelector('main')?.scrollTo({ top: 0, behavior: 'smooth' }); window.scrollTo({ top: 0, behavior: 'smooth' })" title="Cuộn lên đầu trang" class="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-primary to-indigo-600 text-white shadow-2xl hover:shadow-glow-primary hover:-translate-y-1 active:scale-95 flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none scale-75 hidden">
     <i class="fa-solid fa-arrow-up text-base md:text-lg"></i>
   </button>
 
 
   <!-- CUSTOM WORD PICKER MODAL (Quizlet style study set builder) -->
-  <!-- PWA INSTALL GUIDE MODAL -->
-  <div id="pwa-install-modal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-darkCard w-full max-w-2xl max-h-[92vh] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col overflow-hidden animate-scale-up">
-      <!-- Header -->
-      <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-950 text-white">
-        <div class="flex items-center space-x-3">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 text-slate-950 flex items-center justify-center text-xl shadow-lg font-bold">
-            <i class="fa-solid fa-graduation-cap"></i>
-          </div>
-          <div>
-            <h3 class="text-lg md:text-xl font-extrabold flex items-center space-x-2">
-              <span>Cài Đặt EngMastery AI Thành App</span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">PWA 2026</span>
-            </h3>
-            <p class="text-xs text-slate-300 mt-0.5">Sử dụng mượt mà trong cửa sổ riêng biệt, không có thanh địa chỉ trình duyệt!</p>
-          </div>
-        </div>
-        <button onclick="app.closePWAInstallModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <!-- One-Click Instant Install Trigger (if browser supports) -->
-      <div id="pwa-native-prompt-banner" class="p-4 bg-amber-500/10 border-b border-amber-500/20 flex items-center justify-between gap-3">
-        <div class="flex items-center space-x-2.5">
-          <div class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center text-sm font-black shrink-0">
-            <i class="fa-solid fa-bolt"></i>
-          </div>
-          <p class="text-xs text-slate-700 dark:text-slate-300">
-            Trình duyệt của bạn hỗ trợ cài đặt 1-chạm! Bấm nút bên cạnh để thêm vào thiết bị ngay.
-          </p>
-        </div>
-        <button onclick="app.triggerNativePWAInstall()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-black text-xs shadow-md transition whitespace-nowrap shrink-0 flex items-center space-x-1.5">
-          <i class="fa-solid fa-download"></i>
-          <span>Cài Đặt Ngay</span>
-        </button>
-      </div>
-
-      <!-- Device Tabs -->
-      <div class="flex items-center border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 p-2 gap-2 text-xs">
-        <button onclick="app.switchPWAInstallTab('windows')" id="pwa-tab-btn-windows" class="pwa-tab-btn flex-1 py-2.5 rounded-xl font-bold bg-white dark:bg-darkCard text-primary-light shadow-sm transition flex items-center justify-center space-x-1.5">
-          <i class="fa-brands fa-windows text-sm text-blue-500"></i>
-          <span>Máy Tính (Windows)</span>
-        </button>
-        <button onclick="app.switchPWAInstallTab('android')" id="pwa-tab-btn-android" class="pwa-tab-btn flex-1 py-2.5 rounded-xl font-bold text-slate-500 hover:text-slate-800 dark:hover:text-white transition flex items-center justify-center space-x-1.5">
-          <i class="fa-brands fa-android text-sm text-emerald-500"></i>
-          <span>Điện Thoại Android</span>
-        </button>
-        <button onclick="app.switchPWAInstallTab('ios')" id="pwa-tab-btn-ios" class="pwa-tab-btn flex-1 py-2.5 rounded-xl font-bold text-slate-500 hover:text-slate-800 dark:hover:text-white transition flex items-center justify-center space-x-1.5">
-          <i class="fa-brands fa-apple text-sm text-slate-400"></i>
-          <span>iPhone / iPad (iOS)</span>
-        </button>
-      </div>
-
-      <!-- Body Content per Tab -->
-      <div class="p-6 overflow-y-auto space-y-4 text-xs md:text-sm">
-        <!-- TAB 1: WINDOWS -->
-        <div id="pwa-tab-content-windows" class="space-y-4">
-          <div class="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 space-y-2">
-            <div class="font-extrabold text-blue-500 flex items-center space-x-2">
-              <i class="fa-solid fa-circle-check text-base"></i>
-              <span>Cách 1: Biểu Tượng App Đã Có Sẵn Trên Màn Hình Desktop!</span>
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Hệ thống đã tạo sẵn lối tắt ứng dụng <strong>EngMastery AI</strong> ngay trên màn hình Desktop của bạn!
-              <br/>👉 Ra ngoài màn hình chính (Desktop) và bấm đúp chuột vào biểu tượng <strong>EngMastery AI</strong> để mở ứng dụng toàn màn hình trong cửa sổ riêng, không có thanh trình duyệt rườm rà.
-            </p>
-          </div>
-
-          <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
-            <div class="font-extrabold text-slate-800 dark:text-white flex items-center space-x-2">
-              <i class="fa-solid fa-window-restore text-primary-light"></i>
-              <span>Cách 2: Cài Đặt Ứng Dụng Bằng Trình Duyệt Chrome / Edge</span>
-            </div>
-            <ol class="list-decimal ml-5 space-y-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              <li>Mở trình duyệt qua địa chỉ: <strong class="text-primary-light font-mono">http://localhost:5200/index.html</strong>.</li>
-              <li>Nhìn lên góc bên phải của thanh địa chỉ (Address Bar), tìm biểu tượng <strong>Cài đặt ứng dụng</strong> (hình màn hình máy tính có mũi tên tải xuống).</li>
-              <li>Bấm vào và chọn <strong>"Cài đặt" (Install)</strong>.</li>
-              <li>Ứng dụng sẽ được ghim vĩnh viễn vào Start Menu, Taskbar của Windows.</li>
-            </ol>
-          </div>
-        </div>
-
-        <!-- TAB 2: ANDROID -->
-        <div id="pwa-tab-content-android" class="hidden space-y-4">
-          <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 space-y-3">
-            <div class="font-extrabold text-emerald-500 flex items-center space-x-2">
-              <i class="fa-brands fa-android text-base"></i>
-              <span>Cài Đặt Lên Điện Thoại Android (Samsung, Xiaomi, Oppo, Vivo...)</span>
-            </div>
-            <ol class="list-decimal ml-5 space-y-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              <li>Mở trình duyệt <strong>Google Chrome</strong> trên điện thoại.</li>
-              <li>Nhập địa chỉ máy chủ (khi cùng bắt chung mạng Wi-Fi): <br/><span class="inline-block mt-1 px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 font-mono font-bold text-xs" id="pwa-network-ip-display">http://localhost:5200/index.html</span></li>
-              <li>Bấm vào biểu tượng <strong>dấu 3 chấm đứng (⋮)</strong> ở góc trên bên phải màn hình.</li>
-              <li>Chọn <strong>"Cài đặt ứng dụng" (Install app)</strong> hoặc <strong>"Thêm vào Màn hình chính" (Add to Home screen)</strong>.</li>
-              <li>Bấm <strong>Cài đặt</strong> xác nhận. Biểu tượng EngMastery AI sẽ hiển thị ngay trên màn hình ứng dụng điện thoại của bạn!</li>
-            </ol>
-          </div>
-        </div>
-
-        <!-- TAB 3: IOS -->
-        <div id="pwa-tab-content-ios" class="hidden space-y-4">
-          <div class="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 space-y-3">
-            <div class="font-extrabold text-indigo-400 flex items-center space-x-2">
-              <i class="fa-brands fa-apple text-base"></i>
-              <span>Cài Đặt Lên iPhone / iPad (Safari)</span>
-            </div>
-            <ol class="list-decimal ml-5 space-y-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              <li>Mở trình duyệt <strong>Safari</strong> trên thiết bị iPhone hoặc iPad.</li>
-              <li>Truy cập vào trang web EngMastery AI.</li>
-              <li>Bấm vào biểu tượng <strong>Chia sẻ (Share)</strong> ở thanh công cụ dưới cùng màn hình (hình vuông có mũi tên hướng lên).</li>
-              <li>Cuộn xuống danh sách và nhấn vào dòng <strong>"Thêm vào MH chính" (Add to Home Screen)</strong>.</li>
-              <li>Nhấn <strong>Thêm (Add)</strong> ở góc trên bên phải.</li>
-              <li>Biểu tượng EngMastery AI sẽ xuất hiện trên màn hình iPhone, bấm vào mở ra sẽ toàn màn hình như một ứng dụng App Store thực thụ!</li>
-            </ol>
-          </div>
-        </div>
-      </div>
+  <!-- PWA INSTALL GUIDE MODAL (Harmonized with modal-pwa-install) -->
 
       <!-- Footer -->
       <div class="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 flex items-center justify-between">
@@ -47024,12 +47043,12 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
   <!-- ============================================== -->
   <!-- MODAL: DEVICE PROFILE & DATA ISOLATION MANAGER -->
   <!-- ============================================== -->
-  <div id="modal-profile-manager" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-lg w-full max-h-[92vh] overflow-y-auto p-5 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 sm:space-y-5">
-      <!-- Header -->
-      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+  <div id="modal-profile-manager" onclick="if(event.target === this) app.closeProfileModal()" class="fixed inset-0 z-[90] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-lg w-full max-h-[85vh] sm:max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scale-up">
+      <!-- Fixed Header: ALWAYS PINNED -->
+      <div class="shrink-0 p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-darkCard">
         <div class="flex items-center space-x-2.5">
-          <div class="w-9 h-9 rounded-2xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center font-bold text-base shadow-xs">
+          <div class="w-9 h-9 rounded-2xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center font-bold text-base shadow-xs shrink-0">
             <i class="fa-solid fa-id-card-clip"></i>
           </div>
           <div>
@@ -47037,10 +47056,13 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
             <p class="text-[11px] text-slate-400">Cách ly sổ tay câu sai, điểm số và tiến độ học cho từng người dùng / thiết bị</p>
           </div>
         </div>
-        <button onclick="app.closeProfileModal()" class="w-8 h-8 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 flex items-center justify-center transition">
-          <i class="fa-solid fa-xmark text-base"></i>
+        <button onclick="app.closeProfileModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
+          <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
+
+      <!-- Scrollable Body -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-5 overscroll-contain">
 
       <!-- Current Device Info Card -->
       <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
@@ -47102,15 +47124,18 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </button>
       </div>
 
-      <div class="pt-2 flex justify-end">
-        <button onclick="app.closeProfileModal()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition">
-          Xong
+      </div>
+
+      <!-- Fixed Footer: ALWAYS PINNED AT BOTTOM -->
+      <div class="shrink-0 p-3.5 sm:p-4 border-t border-slate-100 dark:border-slate-800 flex justify-end bg-slate-50 dark:bg-slate-900/60">
+        <button onclick="app.closeProfileModal()" class="px-5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition active:scale-95">
+          Đóng
         </button>
       </div>
     </div>
   </div>
 
-  <div id="custom-word-picker-modal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+  <div id="custom-word-picker-modal" onclick="if(event.target === this) app.closeCustomWordPicker()" class="fixed inset-0 z-[90] bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white dark:bg-darkCard w-full max-w-3xl max-h-[90vh] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col overflow-hidden animate-scale-up">
       <!-- Header -->
       <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
@@ -47173,7 +47198,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
   </div>
 
   <!-- FLASHCARD ROUND SUMMARY MODAL -->
-  <div id="flashcard-summary-modal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+  <div id="flashcard-summary-modal" onclick="if(event.target === this) app.closeSummaryModal()" class="fixed inset-0 z-[90] bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white dark:bg-darkCard w-full max-w-md rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-2xl text-center space-y-5 animate-scale-up">
       <div class="w-16 h-16 rounded-3xl bg-accent-emerald/10 text-accent-emerald flex items-center justify-center text-3xl mx-auto shadow-glow-emerald">
         <i class="fa-solid fa-trophy"></i>
@@ -47216,7 +47241,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
   </div>
 
   <!-- TOPIC PICKER MODAL (Chọn Chủ Đề Học Flashcard) -->
-  <div id="modal-topic-picker" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+  <div id="modal-topic-picker" onclick="if(event.target === this) app.closeTopicPickerModal()" class="fixed inset-0 z-[90] bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white dark:bg-darkCard w-full max-w-2xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col max-h-[88vh] overflow-hidden animate-scale-up">
       <!-- Modal Header -->
       <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
@@ -47383,36 +47408,47 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
     </div>
   </div>
 
-  <!-- FLOATING PWA UPDATE NOTIFICATION BANNER (Nổi bật trên màn hình, không bị che bởi Bottom Nav) -->
-  <div id="pwa-update-banner" class="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-[100] w-[94%] max-w-lg bg-gradient-to-r from-slate-900/98 via-indigo-950/98 to-slate-900/98 border-2 border-indigo-500/60 text-white p-4 sm:p-5 rounded-3xl shadow-[0_20px_60px_rgba(79,70,229,0.45)] backdrop-blur-2xl transition-all duration-500 hidden transform -translate-y-6 opacity-0">
-    <div class="flex items-start justify-between gap-3">
-      <div class="flex items-start space-x-3 sm:space-x-3.5">
-        <div class="w-10 h-10 rounded-2xl bg-indigo-500/20 border border-indigo-400/40 text-indigo-400 flex items-center justify-center shrink-0 shadow-glow-primary">
-          <i class="fa-solid fa-cloud-arrow-down text-lg animate-bounce"></i>
+  <!-- ============================================== -->
+  <!-- MODAL: PWA UPDATE NOTIFICATION DIALOG          -->
+  <!-- ============================================== -->
+  <div id="modal-update-overlay" onclick="if(event.target === this) app.dismissUpdateBanner()" class="fixed inset-0 z-[100] bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4 transition-all duration-300">
+    <div id="pwa-update-banner" class="bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900 border-2 border-indigo-500/60 text-white rounded-3xl shadow-[0_20px_60px_rgba(79,70,229,0.45)] w-full max-w-lg max-h-[85vh] sm:max-h-[88vh] flex flex-col overflow-hidden animate-scale-up">
+      <!-- Fixed Header: ALWAYS VISIBLE -->
+      <div class="shrink-0 p-4 sm:p-5 border-b border-indigo-500/30 flex items-center justify-between bg-slate-900/95 backdrop-blur-sm">
+        <div class="flex items-center space-x-2.5 sm:space-x-3 min-w-0">
+          <div class="w-10 h-10 rounded-2xl bg-indigo-500/20 border border-indigo-400/40 text-indigo-400 flex items-center justify-center shrink-0 shadow-glow-primary">
+            <i class="fa-solid fa-cloud-arrow-down text-lg animate-bounce"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.2</span>
+              <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
+            </div>
+            <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
+          </div>
         </div>
-        <div class="min-w-0">
-          <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.1</span>
-            <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
-          </div>
-          <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
-          <div class="text-xs text-slate-300 mt-1 leading-relaxed" id="pwa-update-desc">
-            Cập nhật ngay để nhận các tính năng tối ưu, đề thi THPTQG mới và bộ từ vựng mới nhất.
-          </div>
+        <button onclick="app.dismissUpdateBanner()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Scrollable Body: Content and Highlights -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3 overscroll-contain">
+        <div class="text-xs text-slate-300 leading-relaxed space-y-2" id="pwa-update-desc">
+          Cập nhật ngay để nhận các tính năng tối ưu, đề thi THPTQG mới và bộ từ vựng mới nhất.
         </div>
       </div>
-      <button onclick="app.dismissUpdateBanner()" class="text-slate-400 hover:text-white p-1 rounded-lg transition" title="Để sau">
-        <i class="fa-solid fa-xmark text-base"></i>
-      </button>
-    </div>
-    <div class="mt-3.5 pt-3 border-t border-slate-800/80 flex items-center justify-end space-x-2.5">
-      <button onclick="app.dismissUpdateBanner()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
-        Để Sau
-      </button>
-      <button id="btn-apply-update" onclick="app.applyPWAUpdate()" class="px-4 sm:px-5 py-2 rounded-xl bg-gradient-to-r from-primary to-indigo-600 hover:from-primary-hover hover:to-indigo-500 text-white font-extrabold text-xs shadow-glow-primary transition flex items-center space-x-1.5 active:scale-95">
-        <i class="fa-solid fa-bolt text-amber-300"></i>
-        <span>Cập Nhật Ngay</span>
-      </button>
+
+      <!-- Fixed Footer: ALWAYS VISIBLE AT BOTTOM -->
+      <div class="shrink-0 p-3.5 sm:p-4 border-t border-indigo-500/30 flex items-center justify-end space-x-2.5 bg-slate-900/95 backdrop-blur-sm">
+        <button onclick="app.dismissUpdateBanner()" class="px-3.5 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+          Để Sau
+        </button>
+        <button id="btn-apply-update" onclick="app.applyPWAUpdate()" class="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-indigo-600 hover:from-primary-hover hover:to-indigo-500 text-white font-extrabold text-xs shadow-glow-primary transition flex items-center space-x-1.5 active:scale-95">
+          <i class="fa-solid fa-bolt text-amber-300"></i>
+          <span>Cập Nhật Ngay</span>
+        </button>
+      </div>
     </div>
   </div>
 
