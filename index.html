@@ -163,7 +163,7 @@
   <div id="sidebar-backdrop" onclick="app.closeSidebar()" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-40 transition-opacity duration-300 hidden md:hidden"></div>
 
   <!-- Sidebar Navigation Drawer -->
-  <aside id="app-sidebar" class="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] md:static md:w-64 md:h-screen bg-white dark:bg-darkCard border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between shrink-0 transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0 shadow-2xl md:shadow-none overflow-y-auto">
+  <aside id="app-sidebar" class="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] md:static md:w-72 md:h-screen bg-white dark:bg-darkCard border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between shrink-0 transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0 shadow-2xl md:shadow-none overflow-y-auto">
     <div>
       <!-- Brand Logo -->
       <div class="p-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80">
@@ -316,73 +316,60 @@
   <!-- MAIN CONTENT AREA                              -->
   <!-- ============================================== -->
   <main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto pb-36 md:pb-8">
-    <!-- Top Global Header -->
-    <header class="h-16 px-2.5 sm:px-6 bg-white/90 dark:bg-darkCard/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-20 flex items-center justify-between shrink-0 pt-[env(safe-area-inset-top,0px)] gap-1.5 sm:gap-3 overflow-hidden">
-      <!-- Left: Mobile Menu & Current View Title (Tránh tràn hàng trên điện thoại) -->
-      <div class="flex items-center space-x-1.5 sm:space-x-2 min-w-0 flex-1 overflow-hidden">
+    <!-- Top Global Header (Responsive & Zero Truncation) -->
+    <header class="h-16 px-3 sm:px-6 bg-white/95 dark:bg-darkCard/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-20 flex items-center justify-between shrink-0 pt-[env(safe-area-inset-top,0px)] gap-2 sm:gap-4">
+      <!-- Left: Mobile Menu & Current View Title -->
+      <div class="flex items-center space-x-2 sm:space-x-2.5 min-w-0 flex-1">
         <button onclick="app.toggleSidebar()" class="md:hidden p-2 -ml-1 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm shrink-0" aria-label="Mở menu">
           <i class="fa-solid fa-bars"></i>
         </button>
-        <div class="flex items-center space-x-1.5 min-w-0 overflow-hidden">
-          <span id="header-breadcrumb-root" class="hidden md:inline shrink-0 text-xs font-semibold text-slate-400">EngMastery AI</span>
-          <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 hidden md:inline shrink-0"></i>
-          <h1 id="header-breadcrumb-current" class="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-100 truncate whitespace-nowrap block max-w-[130px] xs:max-w-[180px] sm:max-w-xs md:max-w-none">Bảng Điều Khiển</h1>
+        <div class="flex items-center space-x-2 min-w-0">
+          <span id="header-breadcrumb-root" class="hidden sm:inline shrink-0 text-xs font-semibold text-slate-400">EngMastery AI</span>
+          <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 hidden sm:inline shrink-0"></i>
+          <h1 id="header-breadcrumb-current" class="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-100 whitespace-nowrap truncate">Bảng Điều Khiển</h1>
         </div>
       </div>
 
-      <!-- Right: Action Buttons (Gọn gàng trên Mobile, không vỡ layout) -->
-      <div class="flex items-center space-x-1 sm:space-x-2 shrink-0">
-        <!-- Quick Audio Speaker Test (Desktop only) -->
-        <button onclick="app.testAudio()" class="hidden lg:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-semibold hover:text-primary-light transition" title="Nghe thử âm thanh">
+      <!-- Right: Action Buttons (Adaptive layout with clean badges) -->
+      <div class="flex items-center space-x-1 sm:space-x-1.5 shrink-0">
+        <!-- Quick Audio Speaker Test -->
+        <button onclick="app.testAudio()" class="hidden xl:flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-semibold hover:text-primary-light transition" title="Nghe thử âm thanh">
           <i class="fa-solid fa-volume-high text-primary-light"></i>
           <span>Voice</span>
         </button>
 
         <!-- Tra Từ A1 - C1 Quick Button -->
-        <button onclick="app.openCefrExplorerModal()" class="px-2 sm:px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-purple-500/15 to-indigo-500/15 hover:from-purple-500/25 hover:to-indigo-500/25 text-purple-600 dark:text-purple-300 border border-purple-500/30 text-xs font-bold transition flex items-center space-x-1 shadow-xs" title="Tra cứu từ đồng nghĩa & trái nghĩa A1 - C1">
+        <button onclick="app.openCefrExplorerModal()" class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-purple-500/15 to-indigo-500/15 hover:from-purple-500/25 hover:to-indigo-500/25 text-purple-600 dark:text-purple-300 border border-purple-500/30 text-xs font-bold transition flex items-center space-x-1 shadow-xs" title="Tra cứu từ đồng nghĩa & trái nghĩa A1 - C1">
           <i class="fa-solid fa-arrows-split-up-and-left text-xs text-purple-500"></i>
-          <span class="hidden md:inline">Tra A1-C1</span>
+          <span class="hidden lg:inline">Tra A1-C1</span>
         </button>
 
         <!-- Fast Translate Button -->
-        <button onclick="app.navigate('translator')" class="px-2 sm:px-2.5 py-1.5 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary-light text-xs font-bold transition flex items-center space-x-1" title="Dịch Thuật">
+        <button onclick="app.navigate('translator')" class="px-2.5 py-1.5 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary-light text-xs font-bold transition flex items-center space-x-1" title="Dịch Thuật Song Ngữ">
           <i class="fa-solid fa-language text-sm"></i>
-          <span class="hidden md:inline">Dịch Nhanh</span>
+          <span class="hidden lg:inline">Dịch Nhanh</span>
         </button>
-
-        <!-- Live AI Status Badge -->
-        <div id="header-api-badge" class="hidden xl:flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-accent-emerald border border-emerald-500/20" title="Trạng thái trí tuệ nhân tạo AI">
-          <i class="fa-solid fa-bolt text-[10px]"></i>
-          <span id="header-api-text">Built-in Engine</span>
-        </div>
 
         <!-- Install App Button (PWA) -->
-        <button id="btn-header-install-app" onclick="app.openPWAInstallModal()" class="flex items-center space-x-1 px-2 sm:px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs font-bold shadow-md hover:shadow-lg transition active:scale-95" title="Cài đặt EngMastery AI thành Ứng Dụng (App)">
+        <button id="btn-header-install-app" onclick="app.openPWAInstallModal()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs font-bold shadow-md hover:shadow-lg transition active:scale-95 shrink-0" title="Cài đặt EngMastery AI thành Ứng Dụng (App)">
           <i class="fa-solid fa-mobile-screen-button text-xs"></i>
-          <span class="hidden xs:inline">Cài App</span>
+          <span class="hidden sm:inline">Cài App</span>
         </button>
 
-        <!-- Device Profile Badge (Multi-User & Data Isolation) -->
-        <button id="header-profile-badge" onclick="app.openProfileModal()" class="flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20 transition cursor-pointer shadow-xs" title="Hồ sơ người học & Cách ly dữ liệu cá nhân trên thiết bị">
+        <!-- Device Profile Badge -->
+        <button id="header-profile-badge" onclick="app.openProfileModal()" class="flex items-center space-x-1 sm:space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20 transition cursor-pointer shadow-xs shrink-0" title="Hồ sơ người học & Cách ly dữ liệu cá nhân">
           <i class="fa-solid fa-user-graduate text-xs"></i>
-          <span id="header-profile-name" class="hidden lg:inline max-w-[110px] truncate">Hồ Sơ Của Tôi</span>
+          <span id="header-profile-name" class="hidden xl:inline max-w-[95px] truncate">Học Sinh 12</span>
         </button>
 
-        <!-- Live Shared Community Vocab Pool Badge & Sync -->
-        <button id="header-global-sync-badge" onclick="app.syncGlobalCommunityWords(true)" class="flex items-center space-x-1 sm:space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 transition cursor-pointer shadow-xs active:scale-95" title="Kho Từ Vựng Chung Toàn Cộng Đồng (Real-time Live Sync) - Nhấn để làm mới ngay">
-          <span id="global-sync-live-dot" class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
-          <i class="fa-solid fa-globe text-xs"></i>
-          <span class="hidden sm:inline">Kho Chung Live</span>
+        <!-- Cloud Sync Multi-Device Button -->
+        <button id="header-cloud-sync-btn" onclick="app.openCloudSyncModal()" class="flex items-center space-x-1 sm:space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-primary/10 text-primary-light hover:bg-primary hover:text-white border border-primary/20 transition cursor-pointer shadow-xs active:scale-95 shrink-0" title="Đồng bộ kho từ vựng và tiến độ học giữa các thiết bị (Cloud Sync)">
+          <i class="fa-solid fa-cloud-arrow-up text-xs"></i>
+          <span class="hidden xl:inline">Đồng Bộ</span>
         </button>
 
         <!-- Network & Offline Status Indicator -->
-        <!-- Cloud Sync Multi-Device Button -->
-        <button id="header-cloud-sync-btn" onclick="app.openCloudSyncModal()" class="flex items-center space-x-1 sm:space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-primary/10 text-primary-light hover:bg-primary hover:text-white border border-primary/20 transition cursor-pointer shadow-xs active:scale-95" title="Đồng bộ kho từ vựng và tiến độ học giữa các thiết bị (Cloud Sync)">
-          <i class="fa-solid fa-cloud-arrow-up text-xs"></i>
-          <span class="hidden sm:inline">Đồng Bộ</span>
-        </button>
-
-        <button id="header-network-badge" onclick="app.syncOfflineQueue()" class="flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 transition cursor-pointer hover:bg-emerald-500/20 shadow-xs" title="Trạng thái mạng và hàng đợi ngoại tuyến (Nhấn để đồng bộ)">
+        <button id="header-network-badge" onclick="app.syncOfflineQueue()" class="flex items-center space-x-1 sm:space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 transition cursor-pointer hover:bg-emerald-500/20 shadow-xs shrink-0" title="Trạng thái mạng và hàng đợi ngoại tuyến">
           <span id="header-network-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span id="header-network-text" class="hidden sm:inline">Online</span>
           <span id="header-queue-pill" class="hidden px-1.5 py-0.2 rounded-full text-[9px] font-black bg-amber-500 text-white">0</span>
@@ -1087,53 +1074,61 @@
       </section>
 
       <section id="view-vocab-hub" class="view-content hidden space-y-6">
-        <!-- Header Hub Banner -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-darkCard p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <div>
-            <div class="flex items-center space-x-2">
-              <span class="w-8 h-8 rounded-xl bg-accent-emerald/10 text-accent-emerald flex items-center justify-center text-sm">
+        <!-- Header Hub Banner (2-Tier Responsive Design: Spanning Full Width & No Text Wrapping) -->
+        <div class="bg-white dark:bg-darkCard p-5 sm:p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <!-- Tier 1: Title, Icon, Subtitle & Status Badge -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center space-x-3 min-w-0">
+              <span class="w-10 h-10 rounded-2xl bg-accent-emerald/10 text-accent-emerald flex items-center justify-center text-base shadow-xs shrink-0">
                 <i class="fa-solid fa-book-bookmark"></i>
               </span>
-              <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white">Kho Từ Vựng Chuyên Sâu Theo Topic</h2>
+              <div class="min-w-0">
+                <h2 class="text-lg sm:text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">Kho Từ Vựng Chuyên Sâu Theo Topic</h2>
+                <p class="text-xs text-slate-400 mt-0.5">Tra cứu từ vựng, phrasal verbs, collocations và từ nâng cao tới C1 có đầy đủ đồng nghĩa, trái nghĩa và ví dụ.</p>
+              </div>
             </div>
-            <p class="text-xs text-slate-400 mt-1">Tra cứu từ vựng, phrasal verbs, collocations và từ nâng cao tới C1 có đầy đủ đồng nghĩa, trái nghĩa và ví dụ.</p>
+            <div class="flex items-center space-x-2 shrink-0">
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
+                <i class="fa-solid fa-shield-check text-emerald-500"></i>
+                <span>1,060+ Từ Chuẩn Bộ GD&ĐT</span>
+              </span>
+            </div>
           </div>
 
-          <!-- Search & Filter Controls -->
-          <div class="flex flex-col sm:flex-row items-center gap-2.5 w-full md:w-auto">
-            <!-- Search Bar -->
-            <div class="relative w-full sm:w-72">
+          <!-- Tier 2: Responsive Wrapped Toolbar & Search Controls -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <!-- Search Bar: Flexible width, taking available space -->
+            <div class="relative flex-1 min-w-[200px] sm:min-w-[260px] max-w-full sm:max-w-md">
               <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-              <input type="text" id="hub-search-input" oninput="app.searchVocabHub(this.value)" onkeydown="if(event.key==='Enter') app.searchAndAutoEnrollWord(this.value)" placeholder="Tìm từ, nghĩa, collocation (Enter để AI lưu)..." class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs focus:outline-none focus:border-primary-light">
+              <input type="text" id="hub-search-input" oninput="app.searchVocabHub(this.value)" onkeydown="if(event.key==='Enter') app.searchAndAutoEnrollWord(this.value)" placeholder="Tìm từ, nghĩa, collocation (Enter để AI tra & lưu)..." class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs focus:outline-none focus:border-primary-light">
             </div>
 
             <!-- AI Proactive Search & Enroll Button -->
-                        <!-- Manual Multi-Word / Batch Input Toggle Button -->
-            <button type="button" onclick="app.toggleManualBatchVocabInput()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs hover:shadow-glow transition flex items-center justify-center space-x-1.5 shrink-0 shadow-sm active:scale-95" title="Nhập 1 hoặc nhiều từ vựng thủ công để AI dịch, tìm đồng/trái nghĩa, collocations & lưu vào hệ thống">
-              <i class="fa-solid fa-file-circle-plus"></i>
-              <span>+ Nhập Từ Thủ Công (Đơn / Đa Từ)</span>
-            </button>
-
-            <!-- AI Proactive Search & Enroll Button -->
-            <button onclick="app.searchAndAutoEnrollWord(document.getElementById('hub-search-input').value)" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold text-xs hover:shadow-glow-primary transition flex items-center justify-center space-x-1.5 shrink-0" title="AI chủ động tra từ, lưu vào app và đưa vào danh sách Cần Ôn Tập">
+            <button onclick="app.searchAndAutoEnrollWord(document.getElementById('hub-search-input').value)" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-primary to-indigo-600 hover:from-primary-hover hover:to-indigo-700 text-white font-bold text-xs hover:shadow-glow-primary transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="AI chủ động tra từ, lưu vào app và đưa vào danh sách Cần Ôn Tập">
               <i class="fa-solid fa-wand-magic-sparkles"></i>
               <span>AI Tra & Lưu Ôn</span>
             </button>
 
+            <!-- Manual Multi-Word / Batch Input Toggle Button -->
+            <button type="button" onclick="app.toggleManualBatchVocabInput()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs hover:shadow-glow transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Nhập 1 hoặc nhiều từ vựng thủ công để AI dịch, tìm đồng/trái nghĩa, collocations & lưu vào hệ thống">
+              <i class="fa-solid fa-file-circle-plus"></i>
+              <span>+ Nhập Từ Thủ Công (Đơn / Đa Từ)</span>
+            </button>
+
             <!-- Clean Junk / Invalid Words Button -->
-            <button type="button" onclick="app.cleanInvalidVocabEntries(true)" class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white border border-rose-500/20 font-bold text-xs transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Quét toàn bộ hệ thống, tự động giữ lại từ vựng hợp lệ và xóa sạch các từ rác (như số thứ tự 81, 88, mã 2a, B2...)">
+            <button type="button" onclick="app.cleanInvalidVocabEntries(true)" class="px-3.5 py-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white border border-rose-500/20 font-bold text-xs transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Quét toàn bộ hệ thống, tự động giữ lại từ vựng hợp lệ và xóa sạch các từ rác (như số thứ tự 81, 88, mã 2a, B2...)">
               <i class="fa-solid fa-broom"></i>
               <span>Quét & Dọn Từ Rác</span>
             </button>
 
             <!-- Merge Duplicate Words Button -->
-            <button type="button" onclick="app.mergeDuplicateVocabCards(true)" class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500 hover:text-white border border-indigo-500/20 font-bold text-xs transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Quét toàn bộ kho từ vựng và tự động gộp tất cả các từ bị trùng lặp làm 1 thẻ duy nhất, giữ nguyên nghĩa, đồng/trái nghĩa và tiến độ học">
+            <button type="button" onclick="app.mergeDuplicateVocabCards(true)" class="px-3.5 py-2.5 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500 hover:text-white border border-indigo-500/20 font-bold text-xs transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Quét toàn bộ kho từ vựng và tự động gộp tất cả các từ bị trùng lặp làm 1 thẻ duy nhất">
               <i class="fa-solid fa-layer-group"></i>
               <span>Gộp Từ Trùng</span>
             </button>
 
-            <!-- Sort Selector (Alphabet A-Z default) -->
-            <select id="hub-sort-select" onchange="app.onHubSortChange(this.value)" class="w-full sm:w-auto px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold focus:outline-none text-slate-700 dark:text-slate-300" title="Sắp xếp danh sách từ vựng">
+            <!-- Sort Selector -->
+            <select id="hub-sort-select" onchange="app.onHubSortChange(this.value)" class="px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold focus:outline-none text-slate-700 dark:text-slate-300 shrink-0 cursor-pointer" title="Sắp xếp danh sách từ vựng">
               <option value="alpha-asc">🔤 Sắp xếp: Alphabet (A ➔ Z)</option>
               <option value="alpha-desc">🔤 Sắp xếp: Alphabet (Z ➔ A)</option>
               <option value="starred">⭐ Từ đã đánh dấu sao</option>
@@ -1142,7 +1137,7 @@
             </select>
 
             <!-- Level Selector -->
-            <select id="hub-level-filter" onchange="app.filterVocabHubLevel(this.value)" class="w-full sm:w-auto px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold focus:outline-none">
+            <select id="hub-level-filter" onchange="app.filterVocabHubLevel(this.value)" class="px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold focus:outline-none text-slate-700 dark:text-slate-300 shrink-0 cursor-pointer">
               <option value="all">Mọi Cấp Độ (A1 - C1)</option>
               <option value="A1">Cấp độ A1 (Cơ bản)</option>
               <option value="A2">Cấp độ A2 (Sơ cấp)</option>
@@ -1265,7 +1260,7 @@
         </div>
 
         <!-- Topic Categories Selector -->
-        <div class="flex items-center space-x-2 overflow-x-auto pb-2 text-xs">
+        <div class="flex items-center space-x-2 overflow-x-auto pb-2 text-xs no-scrollbar">
           <button onclick="app.setHubTopic('all')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-primary text-white" data-topic="all">
             Tất cả (<span id="hub-count-total">1,060+</span>)
           </button>

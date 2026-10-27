@@ -1,14 +1,13 @@
 {
-  "version": "1.7.9",
-  "versionCode": 10619,
+  "version": "1.8.0",
+  "versionCode": 10620,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.7.9: Bộ Lọc Quét Dọn & Chữa Lành Từ Vựng Mạng Thông Minh (AI Lexical Sanitizer & Web Artifact Stripper)",
+  "title": "Bản Cập Nhật v1.8.0: Đại Tu Giao Diện Responsive Toàn Diện Cho Mobile & PC (Zero Squishing, Zero Truncation, Perfect Layout)",
   "highlights": [
-    "Quét sạch triệt để các thẻ số và ký hiệu rác (2a, 32, 81, 88, 98, a1, B2...): Tự động nhận diện và xóa bỏ vĩnh viễn các thẻ rác sinh ra do copy dính số thứ tự danh sách, câu hỏi đề thi hoặc cấp độ CEFR.",
-    "Thanh lọc toàn bộ thẻ dính lỗi 'aboutprep' và từ họ hàng rác: Loại bỏ triệt để các thẻ placeholder bị lỗi nguồn gốc như 'Danh từ/khái niệm của aboutprep', trả lại sự trong sạch 100% cho kho từ vựng.",
-    "Chặn đứng vòng lặp tự sinh thẻ không mong muốn: Loại bỏ cơ chế tự động nhân bản thẻ khi mở xem chi tiết hoặc lật Flashcard, chỉ thêm từ mới khi người dùng chủ động tra cứu hoặc nạp danh sách thủ công.",
-    "Bộ lọc chữa lành từ vựng dính ký tự lạ từ mạng: Chữa lành các cụm từ dính gạch nối và giới từ như 'deal -with' ➔ 'deal with', 'interfere (-with)' ➔ 'interfere with', đồng thời loại bỏ triệt để các mảnh '-with', 'with-', '-to'.",
-    "Gọt sạch chú thích ngữ pháp, phiên âm và rác web: Loại bỏ gọn gàng các nhãn (sb/sth), (someone), (v), (n), [T], trailing POS như 'AIDS n.' ➔ 'AIDS', số thứ tự '1.', '•', URL và các câu boilerplate copy từ web từ điển.",
-    "Bóc tách thông minh từ và nghĩa tiếng Việt: Nhận diện tức thì định dạng 'Word : Meaning' hoặc 'Word - Meaning' để nạp nghĩa tiếng Việt nguyên bản mà không cần chờ dịch lại."
+    "Khắc phục triệt để lỗi tiêu đề Kho Từ Vựng bị ép thành 5 dòng dọc: Tái cấu trúc Banner Kho Từ Vựng theo chuẩn 2 tầng (Tier 1: Tiêu đề & phụ đề trải rộng 100%; Tier 2: Thanh công cụ bọc flex-wrap thông minh), không bao giờ bị chèn ép chữ hay vỡ khung.",
+    "Khắc phục lỗi nút bấm bị tràn và cắt cụt góc màn hình: Toàn bộ các nút Nhập Từ Thủ Công, AI Tra & Lưu Ôn, Quét & Dọn Từ Rác, Gộp Từ Trùng và các bộ lọc tự động dàn hàng và xuống dòng mượt mà trên mọi kích cỡ màn hình PC, laptop và điện thoại.",
+    "Sửa lỗi thanh điều hướng trên cùng (Breadcrumb) bị rút ngắn thành 'K..': Tối ưu hóa thanh điều hướng Navbar, tinh chỉnh hiển thị huy hiệu thích ứng để tiêu đề trang luôn hiển thị đầy đủ và rõ ràng trên cả màn hình chia đôi.",
+    "Mở rộng thanh Menu Sidebar (md:w-72) chống cụt chữ: Khắc phục lỗi hiển thị dấu hai chấm ('..') ở các mục '53 Cấu Trúc Ngữ Pháp', 'Thi Thử THPT Quốc Gia', 'Đề Cương & Thi Lớp 12', đảm bảo toàn bộ menu hiển thị trọn vẹn 100%.",
+    "Thanh cuộn mượt không hiện thanh xám xấu trên Windows: Thêm chuẩn no-scrollbar cho dải chữ cái A-Z và dải danh mục chủ đề để trải nghiệm lướt mượt mà như app gốc."
   ]
 }
