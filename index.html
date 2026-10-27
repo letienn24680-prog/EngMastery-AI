@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.0 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.1 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3849,7 +3849,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.0 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.1 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -33254,7 +33254,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.9.0';
+        this.appVersion = '1.9.1';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -36878,7 +36878,12 @@ Yêu cầu output STRICTLY là một JSON object:
           const lvlOrder = { A1: 1, A2: 2, B1: 3, B2: 4, C1: 5 };
           list.sort((a, b) => (lvlOrder[a.level] || 99) - (lvlOrder[b.level] || 99) || (a.word || '').localeCompare(b.word || '', 'en', { sensitivity: 'base' }));
         } else if (sortMode === 'newest') {
-          list.sort((a, b) => (b.lastLookedUpAt || 0) - (a.lastLookedUpAt || 0) || (a.word || '').localeCompare(b.word || '', 'en', { sensitivity: 'base' }));
+          const getTime = (x) => {
+            if (x._justAddedAt) return x._justAddedAt;
+            const t = x.lastLookedUpAt || x.lastSearchedAt || x.createdAt || 0;
+            return typeof t === 'number' ? t : (new Date(t).getTime() || 0);
+          };
+          list.sort((a, b) => (getTime(b) - getTime(a)) || (a.word || '').localeCompare(b.word || '', 'en', { sensitivity: 'base' }));
         }
 
         const countTotal = document.getElementById('hub-count-total');
@@ -36921,18 +36926,26 @@ Yêu cầu output STRICTLY là một JSON object:
         const totalMatching = list.length;
         const displayedList = list.slice(0, this.hubCurrentPage * PAGE_SIZE);
 
-        let cardsHtml = displayedList.map(item => `
-          <div class="cv-auto p-5 rounded-3xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-bento hover:border-primary-light/50 transition flex flex-col justify-between space-y-4">
+        let cardsHtml = displayedList.map(item => {
+          const isJustAdded = (item._justAddedAt && (Date.now() - item._justAddedAt < 300000)) || item._isJustAdded;
+          return `
+          <div class="cv-auto p-5 rounded-3xl bg-white dark:bg-darkCard ${isJustAdded ? 'border-2 border-emerald-500/80 shadow-lg ring-2 ring-emerald-500/20' : 'border border-slate-200 dark:border-slate-800 shadow-bento'} hover:border-primary-light/50 transition flex flex-col justify-between space-y-4">
             <div>
               <div class="flex items-start justify-between">
-                <div>
-                  <span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase bg-slate-100 dark:bg-slate-800 text-slate-500 mr-1.5">
+                <div class="flex items-center flex-wrap gap-1">
+                  ${isJustAdded ? `
+                    <span class="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-emerald-500 text-white shadow-sm flex items-center gap-1 animate-pulse">
+                      <i class="fa-solid fa-sparkles text-[9px]"></i>
+                      <span>Mới Thêm</span>
+                    </span>
+                  ` : ''}
+                  <span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase bg-slate-100 dark:bg-slate-800 text-slate-500">
                     ${item.level || 'B2'}
                   </span>
                   <span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase bg-primary/10 text-primary-light">
                     ${item.type}
                   </span>
-                  <span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${item.deck === 'notebook' ? 'bg-amber-500/10 text-amber-500' : 'bg-emerald-500/10 text-emerald-500'} ml-1">
+                  <span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${item.deck === 'notebook' ? 'bg-amber-500/10 text-amber-500' : 'bg-emerald-500/10 text-emerald-500'}">
                     ${item.topicLabel || 'Chủ đề'}
                   </span>
                 </div>
@@ -36983,7 +36996,8 @@ Yêu cầu output STRICTLY là một JSON object:
               </button>
             </div>
           </div>
-        `).join('');
+          `;
+        }).join('');
 
         if (totalMatching > displayedList.length) {
           cardsHtml += `
@@ -39879,8 +39893,9 @@ Trả về DUY NHẤT một JSON hợp lệ:
 
         if (existingIdx === -1) {
           // 1. TỪ MỚI HOÀN TOÀN -> THÊM MỚI VÀO BỘ THẺ
+          const now = Date.now();
           const newCard = Object.assign({
-            id: `custom_${Date.now()}_${Math.floor(Math.random() * 10000)}`,
+            id: `custom_${now}_${Math.floor(Math.random() * 10000)}`,
             word: cardData.word.trim(),
             type: cardData.type || 'Noun',
             ipa: cardData.ipa || '',
@@ -39902,7 +39917,12 @@ Trả về DUY NHẤT một JSON hợp lệ:
             easeFactor: 2.5,
             nextReviewDate: new Date().toISOString(),
             status: 'due',
-            due: true
+            due: true,
+            createdAt: now,
+            lastLookedUpAt: now,
+            lastSearchedAt: now,
+            _justAddedAt: now,
+            _isJustAdded: true
           }, cardData);
 
           this.vocabList.unshift(newCard);
@@ -39915,6 +39935,11 @@ Trả về DUY NHẤT một JSON hợp lệ:
         } else {
           // 2. TỪ ĐÃ CÓ TRONG KHO (TRÙNG LẶP) -> TỰ ĐỘNG GỘP LÀM 1 ĐỂ TRÁNH LỘN XỘN
           const existing = this.vocabList[existingIdx];
+          const nowExisting = Date.now();
+          existing.lastLookedUpAt = nowExisting;
+          existing.lastSearchedAt = nowExisting;
+          existing._justAddedAt = nowExisting;
+          existing._isJustAdded = true;
 
           // Gộp Nghĩa tiếng Việt thông minh (loại bỏ placeholder và từ trùng lặp)
           existing.meaningVi = this.mergeMeaningVi(existing.meaningVi, cardData.meaningVi);
@@ -40269,13 +40294,15 @@ Trả về DUY NHẤT một JSON hợp lệ:
           const w = card.word.trim();
           const corrected = this.getCorrectedWord(w);
           const hasTypo = (corrected && corrected.toLowerCase() !== w.toLowerCase());
+          const cleanedHeadword = this.sanitizeWebVocabHeadword(w);
+          const hasDirtyHeadword = (cleanedHeadword && cleanedHeadword !== w && this.isValidEnglishVocab(cleanedHeadword));
           const isMissingVi = this.isPlaceholderMeaning(card.meaningVi, w);
           const isMissingPos = (!card.type || card.type === 'Word' || card.type === 'Từ vựng');
           const isMissingIpa = (!card.ipa || !card.ipa.trim());
           const isMissingExample = (!card.example || !card.exampleVi || card.example.includes('Pay special attention'));
 
-          if (hasTypo || isMissingVi || isMissingPos || isMissingIpa || isMissingExample) {
-            flawedCards.push({ card, hasTypo, corrected, isMissingVi, isMissingPos, isMissingIpa, isMissingExample });
+          if (hasTypo || hasDirtyHeadword || isMissingVi || isMissingPos || isMissingIpa || isMissingExample) {
+            flawedCards.push({ card, hasTypo, corrected, hasDirtyHeadword, cleanedHeadword, isMissingVi, isMissingPos, isMissingIpa, isMissingExample });
           }
         }
 
@@ -40298,10 +40325,14 @@ Trả về DUY NHẤT một JSON hợp lệ:
           const card = item.card;
           let changed = false;
 
-          // A. Sửa lỗi chính tả
+          // A. Sửa lỗi chính tả & Chữa lành từ vựng dính ký tự lạ/từ loại rác
           if (item.hasTypo && item.corrected) {
             card.originalTypo = card.word;
             card.word = item.corrected;
+            changed = true;
+          }
+          if (item.hasDirtyHeadword && item.cleanedHeadword) {
+            card.word = item.cleanedHeadword;
             changed = true;
           }
 
@@ -40374,6 +40405,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
         }
 
         if (fixedCount > 0) {
+          this.mergeDuplicateVocabCards(false);
           this.flushSaveState();
           this.updateFilterCounts();
           if (this.currentView === 'vocab-hub') {
@@ -40527,11 +40559,11 @@ Trả về DUY NHẤT một JSON hợp lệ:
         // 7. Xóa ghi chú đối tượng trong ngoặc: (sb/sth), (someone), (something), (oneself), (doing sth), (V-ing)
         t = t.replace(/\(\s*(?:sb\/sth|sth\/sb|sb|sth|someone|something|oneself|doing sth|v\-ing|ving)\s*\)/gi, '');
 
-        // 8. Xóa ghi chú từ loại trong ngoặc: (v), (n), (adj), (adv), (prep), (v.t.), (v.i.), (C), (U), (T), (I)
-        t = t.replace(/\(\s*(?:noun|verb|adj|adv|prep|pron|conj|interj|v\.t\.|v\.i\.|v|n|adj\.|adv\.|c|u|t|i|formal|informal|slang|uk|us)\s*\)/gi, '');
+        // 8. Xóa ghi chú từ loại đa năng trong ngoặc: (v, n), (v., n.), (adj, adv), (n), (v), (collocation), (idiom)
+        t = t.replace(/\(\s*(?:(?:noun|verb|adj|adv|prep|pron|conj|interj|v\.t\.|v\.i\.|v|n|adj\.|adv\.|prep\.|collocation|idiom|c|u|t|i|formal|informal|slang|uk|us|sb|sth|someone|something|oneself|doing sth|v\-ing|ving)[\s,;\/\.]*)+\)/gi, ' ');
 
-        // 9. Xóa chú thích từ loại đứng cuối dòng không ngoặc: "AIDS n." -> "AIDS", "interfere v." -> "interfere"
-        t = t.replace(/\s+(?:noun|verb|adj|adv|prep|pron|conj|interj|v\.t\.|v\.i\.|v|n|adj\.|adv\.|prep\.)\.?$/gi, '').trim();
+        // 9. Xóa chú thích từ loại đứng cuối dòng không ngoặc: "gain v., n.", "fundamental adj.", "gang n."
+        t = t.replace(/\s+(?:(?:noun|verb|adj|adv|prep|pron|conj|interj|v\.t\.|v\.i\.|v|n|adj\.|adv\.|prep\.)[\s,;\/\.]*)+$/gi, ' ');
 
         // 10. Xóa các ký tự thừa ở đầu và cuối từ (dấu nháy, ngoặc, gạch nối, dấu hai chấm...)
         t = t.replace(/^[\s\-\~:;.,\(\)\[\]"\'“”‘’]+|[\s\-\~:;.,\(\)\[\]"\'“”‘’]+$/g, '').trim();
@@ -40936,6 +40968,9 @@ Trả về DUY NHẤT một JSON hợp lệ:
           }
           return true;
         });
+
+        // Tự động gộp tất cả các từ vừa được chữa lành hoặc trùng lặp làm 1 thẻ duy nhất
+        this.mergeDuplicateVocabCards(false);
 
         // Đảm bảo luôn bảo lưu 1.060+ từ gốc chuẩn Bộ GD&ĐT
         if (typeof DEFAULT_VOCABULARY !== 'undefined' && Array.isArray(DEFAULT_VOCABULARY)) {
@@ -41498,7 +41533,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.9.0')) return caches.delete(c);
+                if (!c.includes('v1.9.1')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -43801,6 +43836,29 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         }
       }
 
+      /* PHÂN TÁCH CHUỖI KHÔNG TÁCH NHẦM DẤU PHẨY BÊN TRONG NGOẶC ĐƠN (VD: 'guarantee (v, n), guidance (n)') */
+      splitOutsideParens(str) {
+        if (!str || typeof str !== 'string') return [];
+        const tokens = [];
+        let current = '';
+        let parenDepth = 0;
+
+        for (let i = 0; i < str.length; i++) {
+          const ch = str[i];
+          if (ch === '(') parenDepth++;
+          else if (ch === ')') { if (parenDepth > 0) parenDepth--; }
+
+          if ((ch === ',' || ch === ';') && parenDepth === 0) {
+            if (current.trim()) tokens.push(current.trim());
+            current = '';
+          } else {
+            current += ch;
+          }
+        }
+        if (current.trim()) tokens.push(current.trim());
+        return tokens;
+      }
+
       parseManualWordsInput(rawText) {
         if (!rawText || typeof rawText !== 'string') return [];
         const lines = rawText.split(/[\n\r]+/);
@@ -43809,6 +43867,9 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         for (let line of lines) {
           line = line.trim();
           if (!line) continue;
+
+          // Chuẩn hóa dấu phẩy trong cụm từ loại ngoài ngoặc: "gain v., n." -> "gain v. / n."
+          line = line.replace(/\b(v|n|adj|adv|prep|pron|conj|interj|v\.t|v\.i)\.?\s*,\s*(n|v|adj|adv|prep|pron|conj|interj|v\.t|v\.i)\b/gi, '$1 / $2');
 
           // Xử lý các dòng có định dạng: "word : meaning", "word = meaning", "word — meaning", "word 	 meaning"
           const sepMatch = line.match(/^(.+?)\s*(?::|=|—|–|\t)\s*(.+)$/);
@@ -43820,8 +43881,8 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
           } else if (dashMatch && /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(dashMatch[2])) {
             candidateItems.push({ rawEn: dashMatch[1], rawVi: dashMatch[2] });
           } else {
-            // Dòng chứa nhiều từ ngăn cách bởi dấu phẩy hoặc chấm phẩy
-            const subTokens = line.split(/[,;]+/);
+            // Dòng chứa nhiều từ ngăn cách bởi dấu phẩy/chấm phẩy (bảo vệ không tách nhầm bên trong ngoặc)
+            const subTokens = this.splitOutsideParens(line);
             for (const st of subTokens) {
               if (st.trim()) candidateItems.push({ rawEn: st.trim(), rawVi: '' });
             }
@@ -43917,6 +43978,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
           let newlyCreatedCount = 0;
           let activatedDueCount = 0;
 
+          const now = Date.now();
           words.forEach(item => {
             const w = (typeof item === 'object' && item !== null && item.word) ? item.word : item;
             const customVi = (typeof item === 'object' && item !== null && item.meaningVi) ? item.meaningVi : '';
@@ -43928,14 +43990,17 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
               existing.status = 'due';
               existing.due = true;
               existing.nextReviewDate = new Date().toISOString();
-              existing.lastSearchedAt = Date.now();
+              existing.lastSearchedAt = now;
+              existing.lastLookedUpAt = now;
+              existing._justAddedAt = now;
+              existing._isJustAdded = true;
               if (customVi && (!existing.meaningVi || existing.meaningVi.includes('Đang chờ AI') || existing.meaningVi.includes('Đang cập nhật'))) {
                 existing.meaningVi = customVi;
               }
               activatedDueCount++;
             } else {
               const newCard = {
-                id: `custom_${Date.now()}_${Math.floor(Math.random() * 10000000)}`,
+                id: `custom_${now}_${Math.floor(Math.random() * 10000000)}`,
                 word: w.trim(),
                 type: 'Word',
                 ipa: '',
@@ -43959,6 +44024,11 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                 status: 'due',
                 due: true,
                 isFavorite: true,
+                createdAt: now,
+                lastSearchedAt: now,
+                lastLookedUpAt: now,
+                _justAddedAt: now,
+                _isJustAdded: true,
                 _needsEnrichment: true
               };
               this.vocabList.unshift(newCard);
@@ -43966,14 +44036,54 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
             }
           });
 
+          // TỰ ĐỘNG CHUYỂN SẮP XẾP SANG "MỚI THÊM" VÀ RESET BỘ LỌC ĐỂ NGƯỜI DÙNG THẤY NGAY TỪ VỰNG VỪA NẠP Ở ĐẦU TRANG
+          this.hubSortMode = 'newest';
+          try { localStorage.setItem('engMastery_hub_sort', 'newest'); } catch (_) {}
+          const sortSelect = document.getElementById('hub-sort-select');
+          if (sortSelect) sortSelect.value = 'newest';
+
+          this.hubLetterFilter = 'all';
+          try { localStorage.setItem('engMastery_hub_letter', 'all'); } catch (_) {}
+          document.querySelectorAll('.hub-letter-btn').forEach(btn => {
+            if (btn.dataset.letter === 'all') {
+              btn.className = 'hub-letter-btn px-3 py-1 rounded-xl font-black transition text-xs bg-primary text-white shrink-0';
+            } else {
+              btn.className = 'hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0';
+            }
+          });
+
+          if (this.hubCurrentTopic !== 'all' && this.hubCurrentTopic !== 'topic_notebook') {
+            this.hubCurrentTopic = 'all';
+            try { localStorage.setItem('engMastery_hub_topic', 'all'); } catch (_) {}
+            document.querySelectorAll('.hub-topic-btn').forEach(btn => {
+              if (btn.dataset.topic === 'all') {
+                btn.classList.add('bg-primary', 'text-white');
+                btn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+              } else {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+              }
+            });
+          }
+
+          this.hubSearchQuery = '';
+          const searchInput = document.getElementById('hub-search-input');
+          if (searchInput) searchInput.value = '';
+
+          this.hubCurrentPage = 1;
+
           // LƯU NGAY LẬP TỨC VÀO PERSISTENT STORAGE (INDEXEDDB + LOCALSTORAGE)
           this.flushSaveState();
           this.updateFilterCounts();
           this.updateFilterBadges();
           this.renderDashboard();
-          if (this.currentView === 'vocab-hub') {
-            this.renderVocabHub();
-          }
+          this.renderVocabHub();
+
+          // CUỘN MƯỢT XUỐNG KHO TỪ VỰNG ĐỂ NGƯỜI DÙNG THẤY NGAY CÁC THẺ MỚI NẠP
+          setTimeout(() => {
+            const grid = document.getElementById('vocab-hub-grid');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 80);
 
           // Xóa trắng ô nhập và draft vì tất cả từ đã nằm an toàn 100% trong hệ thống
           textarea.value = '';
@@ -44063,6 +44173,11 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
               lastCreatedCardId = targetCard.id;
               processedWords.push(targetCard.word);
               successCount++;
+
+              // Cập nhật giao diện live ngay khi xong từ này để người dùng thấy nghĩa xuất hiện tức thì
+              if (words.length <= 15 || i % 2 === 0 || i === words.length - 1) {
+                this.renderVocabHub();
+              }
 
               // Chỉ tự động phân tách thêm thẻ con (synonyms, word family) nếu nhập ít từ (<= 20 từ)
               // để tránh bùng nổ hàng chục nghìn thẻ làm chậm máy khi nhập hàng nghìn từ
@@ -48419,7 +48534,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.0</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.1</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

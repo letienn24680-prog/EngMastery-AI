@@ -1,12 +1,13 @@
 {
-  "version": "1.9.0",
-  "versionCode": 11000,
+  "version": "1.9.1",
+  "versionCode": 11100,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.9.0: Tự Động Kèm Nghĩa Tiếng Việt Trực Quan Cho Toàn Bộ Từ Đồng Nghĩa, Trái Nghĩa (A1–C1) & Collocations",
+  "title": "Bản Cập Nhật v1.9.1: Khắc Phục Hiển Thị Tức Thì Từ Vựng Mới Nạp Trong Kho Từ Vựng & Bộ Lọc Thông Minh",
   "highlights": [
-    "Dịch nghĩa tiếng Việt trực quan cho toàn bộ Từ Đồng Nghĩa & Trái Nghĩa: Học sinh chỉ cần lướt xuống là thấy ngay nghĩa tiếng Việt của từng từ đồng nghĩa/trái nghĩa chuẩn CEFR (A1 ➔ C1), không cần phải đoán hay bấm vào từng từ.",
-    "Collocations hiển thị kèm dịch nghĩa tiếng Việt & nút phát âm 🔊: Các cụm từ thông dụng đi kèm được định dạng trực quan dạng thẻ badge kèm nghĩa tiếng Việt và hỗ trợ nghe phát âm chuẩn xác.",
-    "Tự động phân tách và nạp nghĩa tiếng Việt tức thì khi AI phân tích: Mỗi từ con khi sinh ra đều sở hữu ngay nghĩa tiếng Việt chính xác, không còn tình trạng thẻ phụ thuộc vào từ gốc hay bị thiếu nghĩa.",
-    "Bộ bóc tách thông minh (splitWordAndMeaning): Nhận diện mượt mà mọi định dạng từ và nghĩa đi kèm, hỗ trợ tra cứu chi tiết 1-chạm mà không bị dính chữ nghĩa tiếng Việt."
+    "Tự động chuyển chế độ hiển thị từ mới nhất (Newest Sort): Khi nạp từ vựng thủ công (đơn từ hoặc đa từ), hệ thống tự động đưa từ vừa nạp lên vị trí đầu tiên của Kho Từ Vựng kèm huy hiệu nổi bật ✨ Mới Thêm.",
+    "Khắc phục phân trang & bộ lọc chữ cái: Tự động reset bộ lọc chữ cái (A-Z) và đặt trang về Trang 1 để các từ vừa nhập (kể cả bắt đầu bằng F, G, P, R, S...) xuất hiện ngay dưới khung nhập liệu.",
+    "Cuộn mượt tức thì tới thẻ vừa tạo: Ngay khi nhấn Gửi Đi & AI Phân Tích Lưu Ngay, màn hình tự động cuộn nhẹ xuống kho từ vựng để bạn theo dõi kết quả.",
+    "Cập nhật trực quan theo thời gian thực (Live Stream Updates): Giao diện thẻ được cập nhật nghĩa, IPA, và Collocations ngay khi AI hoàn thành từng từ mà không cần chờ cả danh sách.",
+    "Bóc tách đa từ loại & làm sạch tiêu đề chuẩn xác: Bộ làm sạch AI tự động loại bỏ các chú thích như (v, n), (adj), adv., v.t. khỏi tiêu đề từ vựng, đồng thời tự động gộp trùng lặp."
   ]
 }
