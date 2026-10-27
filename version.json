@@ -1,11 +1,12 @@
 {
-  "version": "1.8.7",
-  "versionCode": 10700,
+  "version": "1.8.8",
+  "versionCode": 10800,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.8.7: Cơ Chế Lưu Trữ Vĩnh Viễn 2 Lớp (IndexedDB + LocalStorage) & Nạp Từ Thủ Công Tức Thì 0.05s Chống Mất Từ Khi F5",
+  "title": "Bản Cập Nhật v1.8.8: Sửa Triệt Để Lỗi Thiếu Dữ Liệu Đồng / Trái Nghĩa A1–C1 & Khắc Phục Treo Spinner Họ Từ Vựng",
   "highlights": [
-    "Cơ chế nạp từ thủ công tức thì (Instant Ingestion 0.05s): Toàn bộ từ vựng nhập thủ công (đơn từ hoặc danh sách hàng nghìn từ) được ghi nhận và lưu ngay lập tức 100% vào hệ thống & Sổ Tay Cần Ôn Tập trước khi tiến trình phân tích bắt đầu; người dùng F5 hoặc tắt app bất kỳ lúc nào cũng không bao giờ bị mất từ.",
-    "Hệ thống lưu trữ vĩnh viễn 2 lớp không giới hạn dung lượng: Tích hợp IndexedDB lưu trữ hàng chục nghìn thẻ từ mà không bị giới hạn bởi trần 5MB của LocalStorage (loại bỏ hoàn toàn lỗi QuotaExceededError âm thầm làm rớt dữ liệu).",
-    "Tự động khôi phục và bảo vệ thẻ từ vựng khi F5 / Thoát app: Thêm sự kiện beforeunload và pagehide tự động đẩy toàn bộ dữ liệu bộ nhớ vào ổ đĩa; bảo vệ tuyệt đối các thẻ từ do học sinh tự nhập trong bộ lọc làm sạch rác."
+    "Tự động phát hiện & chuẩn hóa lỗi chính tả từ vựng (Typo Healing): Tự động nhận diện các lỗi gõ sai phổ biến (như 'neccesary' ➔ 'necessary') để kết nối chính xác 100% kho dữ liệu đồng nghĩa, trái nghĩa và họ từ vựng học thuật.",
+    "Bổ sung phương thức phân tích JSON thông minh (robustJSONParse): Khắc phục triệt để lỗi khiến nút 'AI Cập Nhật Đầy Đủ A1 ➔ C1' không đổ dữ liệu vào thẻ chi tiết từ.",
+    "Bộ lọc từ trái nghĩa theo ngữ cảnh chuẩn CEFR: Loại bỏ hoàn toàn các từ rác mô tả khái niệm chung ('face', 'across', 'anti-', 'adverse', 'antithesis',...) và tự động ưu tiên các từ trái nghĩa thực sự như 'unnecessary', 'inessential', 'nonessential'.",
+    "Nâng cấp Họ Từ Vựng (Word Family) thông minh & Khắc phục treo Spinner: Tích hợp AI phân tích đầy đủ 4 dạng thức V - N - Adj - Adv chuẩn cấu trúc đề thi THPT Quốc Gia; xử lý triệt để hiện tượng xoay vòng vô tận trên modal."
   ]
 }

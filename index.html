@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.7 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.8 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3843,7 +3843,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.7 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.8 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -33244,7 +33244,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.8.7';
+        this.appVersion = '1.8.8';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -33437,6 +33437,67 @@
             throw e1;
           }
         }
+      }
+
+      robustJSONParse(rawText) {
+        if (!rawText) return null;
+        if (typeof rawText === 'object') return rawText;
+        return this.extractJsonFromAI(rawText);
+      }
+
+      /* BỘ TỰ ĐỘNG CHUẨN HÓA LỖI CHÍNH TẢ THÔNG MINH (SPELL CORRECTION & TYPO HEALER) */
+      getCorrectedWord(word) {
+        if (!word || typeof word !== 'string') return word;
+        const clean = word.trim().toLowerCase();
+
+        const COMMON_TYPOS = {
+          'neccesary': 'necessary',
+          'necesary': 'necessary',
+          'neccessary': 'necessary',
+          'unneccesary': 'unnecessary',
+          'enviroment': 'environment',
+          'enviromental': 'environmental',
+          'accomodate': 'accommodate',
+          'accomodation': 'accommodation',
+          'embarass': 'embarrass',
+          'embarassing': 'embarrassing',
+          'definately': 'definitely',
+          'seperate': 'separate',
+          'occured': 'occurred',
+          'occurence': 'occurrence',
+          'untill': 'until',
+          'recieve': 'receive',
+          'beleive': 'believe',
+          'acheive': 'achieve',
+          'oppurtunity': 'opportunity',
+          'goverment': 'government',
+          'independant': 'independent',
+          'developement': 'development',
+          'succesful': 'successful',
+          'responsability': 'responsibility',
+          'confortable': 'comfortable',
+          'differant': 'different',
+          'immediatly': 'immediately',
+          'dissapear': 'disappear',
+          'dissappoint': 'disappoint',
+          'pronounciation': 'pronunciation',
+          'millenium': 'millennium',
+          'priviledge': 'privilege',
+          'rhythm': 'rhythm',
+          'tommorow': 'tomorrow',
+          'truely': 'truly',
+          'whitch': 'which',
+          'wierd': 'weird',
+          'concious': 'conscious',
+          'collegue': 'colleague',
+          'calender': 'calendar'
+        };
+
+        if (COMMON_TYPOS[clean]) {
+          return COMMON_TYPOS[clean];
+        }
+
+        return word;
       }
 
       normalizeAnswerIndex(ans, options) {
@@ -37019,8 +37080,15 @@ Yêu cầu output STRICTLY là một JSON object:
       /* ========================================================================== */
 
       async fetchRichLexicalData(word, knownVi = '') {
-        const cleanWord = (word || '').trim();
+        let cleanWord = (word || '').trim();
         if (!cleanWord) return null;
+
+        // Tự động phát hiện và sửa lỗi chính tả nếu từ bị gõ sai
+        const typoFixed = this.getCorrectedWord(cleanWord);
+        if (typoFixed && typoFixed.toLowerCase() !== cleanWord.toLowerCase()) {
+          cleanWord = typoFixed;
+        }
+
         const lower = cleanWord.toLowerCase();
 
         // 1. Dịch nghĩa tiếng Việt qua Google Translate (nếu chưa có hoặc là text mặc định)
@@ -37215,13 +37283,51 @@ Yêu cầu output STRICTLY là một JSON object:
       }
 
       async fetchContextualAntonyms(word, pos) {
+        const clean = (word || '').trim().toLowerCase();
+        // 1. Trước tiên thử truy vấn quan hệ trái nghĩa trực tiếp rel_ant
         try {
-          const res = await fetch(`https://api.datamuse.com/words?ml=opposite+of+${encodeURIComponent(word)}&max=15`);
+          const res = await fetch(`https://api.datamuse.com/words?rel_ant=${encodeURIComponent(clean)}&max=20`);
           if (res.ok) {
             const data = await res.json();
-            return data.map(w => w.word).filter(w => w && w.toLowerCase() !== word.toLowerCase() && w.split(' ').length <= 2);
+            const direct = data.map(w => w.word).filter(w => w && w.toLowerCase() !== clean);
+            if (direct.length > 0) return direct;
           }
-        } catch (e) {}
+        } catch (_) {}
+
+        // 2. Thử truy vấn tiền tố phủ định un-, in-, im-, dis-, non-
+        const negPrefixes = ['un', 'in', 'im', 'dis', 'non'];
+        for (const pref of negPrefixes) {
+          if (!clean.startsWith(pref)) {
+            try {
+              const res = await fetch(`https://api.datamuse.com/words?sp=${pref}${encodeURIComponent(clean)}&max=1`);
+              if (res.ok) {
+                const data = await res.json();
+                if (data.length > 0 && data[0].score > 1000) {
+                  return [data[0].word];
+                }
+              }
+            } catch (_) {}
+          }
+        }
+
+        // 3. Fallback có chọn lọc: loại bỏ các từ chung chung chỉ khái niệm "đối lập"
+        const bannedMetaOpposites = new Set([
+          'opposite', 'opposites', 'antonym', 'antonyms', 'antithesis', 'contrary', 'contrast',
+          'contravention', 'converse', 'counter', 'face', 'across', 'inverse', 'opposition',
+          'polar', 'reversal', 'adverse', 'anti-', 'anti', 'reverse', 'other'
+        ]);
+
+        try {
+          const res = await fetch(`https://api.datamuse.com/words?ml=opposite+of+${encodeURIComponent(clean)}&max=20`);
+          if (res.ok) {
+            const data = await res.json();
+            return data.map(w => w.word).filter(w => {
+              const l = (w || '').toLowerCase().trim();
+              return l && l !== clean && !bannedMetaOpposites.has(l) && l.split(' ').length <= 2;
+            });
+          }
+        } catch (_) {}
+
         return [];
       }
 
@@ -37354,6 +37460,16 @@ Yêu cầu output STRICTLY là một JSON object:
         item.lastLookedUpAt = Date.now();
         this.saveState();
         this.updateFilterCounts();
+
+        // Tự động kiểm tra chính tả và chuẩn hóa từ nếu dính lỗi chính tả (vd: neccesary -> necessary)
+        const typoCorrected = this.getCorrectedWord(item.word);
+        if (typoCorrected && typoCorrected.toLowerCase() !== item.word.toLowerCase()) {
+          const oldW = item.word;
+          item.word = typoCorrected;
+          item.originalTypo = oldW;
+          this.flushSaveState();
+          this.showToast(`💡 Đã tự động chuẩn hóa chính tả: "${oldW}" ➔ "${typoCorrected}"`, 'info');
+        }
 
         this.activeModalWord = item;
         document.getElementById('modal-detail-word').innerText = item.word;
@@ -41182,7 +41298,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.8.7')) return caches.delete(c);
+                if (!c.includes('v1.8.8')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -43840,6 +43956,17 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         if (this._builtinWordFamilies) return this._builtinWordFamilies;
         this._builtinWordFamilies = [
   {
+    "root": "necessary",
+    "verb": "necessitate",
+    "verbVi": "đòi hỏi, bắt buộc phải có",
+    "noun": "necessity",
+    "nounVi": "sự cần thiết, nhu yếu phẩm",
+    "adj": "necessary",
+    "adjVi": "cần thiết, thiết yếu",
+    "adv": "necessarily",
+    "advVi": "tất yếu, nhất thiết"
+  },
+  {
     "root": "create",
     "verb": "create",
     "verbVi": "tạo ra, sáng tạo",
@@ -44815,6 +44942,22 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         if (!word) return null;
         const clean = word.trim().toLowerCase().replace(/[^a-z]/g, '');
         if (!clean) return null;
+
+        // Xử lý biến thể & typo của necessary / necessity / necessitate
+        if (clean === 'necessitate' || clean === 'necessity' || clean === 'necessary' || clean === 'necessarily' || clean === 'neccesary' || clean === 'necesary' || clean === 'neccessary') {
+          return {
+            root: "necessary",
+            verb: "necessitate",
+            verbVi: "đòi hỏi, bắt buộc phải có",
+            noun: "necessity",
+            nounVi: "sự cần thiết, nhu yếu phẩm",
+            adj: "necessary",
+            adjVi: "cần thiết, thiết yếu",
+            adv: "necessarily",
+            advVi: "tất yếu, nhất thiết"
+          };
+        }
+
         const idx = this.getWordFamilyIndex();
         if (idx[clean]) return idx[clean];
 
@@ -44881,9 +45024,48 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
 
       async resolveWordFamily(word, meaningVi = '', detectedPos = 'Word') {
         if (!word) return null;
-        const fast = this.getFastWordFamily(word);
+        const clean = (word || '').trim();
+        // 1. Thử từ điển họ từ nhanh
+        const fast = this.getFastWordFamily(clean);
         if (fast) return fast;
-        return await this.deriveWordFamily(word, meaningVi, detectedPos);
+
+        // 2. Thử chuẩn hóa chính tả nếu dính lỗi
+        const corrected = this.getCorrectedWord(clean);
+        if (corrected && corrected.toLowerCase() !== clean.toLowerCase()) {
+          const fastCorrected = this.getFastWordFamily(corrected);
+          if (fastCorrected) return fastCorrected;
+        }
+
+        // 3. Thử hình thái học
+        const derived = await this.deriveWordFamily(corrected || clean, meaningVi, detectedPos);
+        if (derived) return derived;
+
+        // 4. GỌI AI THỰC SỰ ĐỂ PHÂN TÍCH HỌ TỪ VỰNG CHUẨN THPTQG
+        try {
+          const prompt = `Phân tích đầy đủ Họ Từ Vựng (Word Family) cho từ tiếng Anh "${corrected || clean}" theo chuẩn đề thi THPT Quốc Gia (V - N - Adj - Adv).
+Nếu từ có lỗi chính tả (vd: "neccesary"), hãy tự động sửa thành từ đúng ("necessary").
+Trả về DUY NHẤT một JSON hợp lệ không markdown:
+{
+  "root": "${corrected || clean}",
+  "verb": "động từ nguyên mẫu (hoặc none nếu không có)",
+  "verbVi": "nghĩa tiếng Việt động từ",
+  "noun": "danh từ (các biến thể danh từ cách nhau bằng dấu phẩy)",
+  "nounVi": "nghĩa tiếng Việt danh từ",
+  "adj": "tính từ (các biến thể tính từ cách nhau bằng dấu phẩy)",
+  "adjVi": "nghĩa tiếng Việt tính từ",
+  "adv": "trạng từ (hoặc none nếu không có)",
+  "advVi": "nghĩa tiếng Việt trạng từ"
+}`;
+          const raw = await this.callAI(prompt, { temperature: 0.2 });
+          const parsed = this.extractJsonFromAI(raw);
+          if (parsed && (parsed.verb || parsed.noun || parsed.adj || parsed.adv)) {
+            return parsed;
+          }
+        } catch (e) {
+          console.warn('AI resolveWordFamily error:', e);
+        }
+
+        return null;
       }
 
       formatWordFamilyHtml(family, activeWord = '', compact = false) {
@@ -44960,15 +45142,19 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
           return;
         }
 
-        // 2. Tra cứu động nếu từ mới
+        // 2. Tra cứu động
         container.innerHTML = '<span class="text-xs text-indigo-400 animate-pulse font-semibold flex items-center gap-1.5"><i class="fa-solid fa-spinner fa-spin"></i><span>AI đang phân tích Họ Từ Vựng (V - N - Adj - Adv)...</span></span>';
 
         try {
           const family = await this.resolveWordFamily(item.word, item.meaningVi, item.type);
-          if (family && this.activeModalWord && this.activeModalWord.id === item.id) {
-            container.innerHTML = this.formatWordFamilyHtml(family, item.word);
-            item.wordFamily = family;
-            this.enrollWordFamilyMembers(item.word, family);
+          if (container && this.activeModalWord && (this.activeModalWord.id === item.id || this.activeModalWord.word.toLowerCase() === item.word.toLowerCase())) {
+            if (family) {
+              container.innerHTML = this.formatWordFamilyHtml(family, item.word);
+              item.wordFamily = family;
+              this.enrollWordFamilyMembers(item.word, family);
+            } else {
+              container.innerHTML = '<span class="text-xs text-slate-400 italic">Chưa có dữ liệu họ từ vựng cho từ này</span>';
+            }
           }
         } catch (e) {
           console.warn('Lỗi render word family:', e);
@@ -45414,7 +45600,13 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
           return;
         }
 
-        const word = this.activeModalWord.word;
+        // Chuẩn hóa lỗi chính tả nếu có
+        const word = this.getCorrectedWord(this.activeModalWord.word);
+        if (word.toLowerCase() !== this.activeModalWord.word.toLowerCase()) {
+          this.activeModalWord.word = word;
+          const wordTitleEl = document.getElementById('modal-detail-word');
+          if (wordTitleEl) wordTitleEl.innerText = word;
+        }
         const meaningVi = this.activeModalWord.meaningVi || '';
         const type = this.activeModalWord.type || 'Word';
 
@@ -45456,30 +45648,33 @@ YÊU CẦU BẮT BUỘC:
           // 2. Nếu AI không khả dụng hoặc lỗi, sử dụng bộ xử lý Lexical Engine
           if (!data || !data.synonyms || !data.antonyms) {
             const rich = await this.fetchRichLexicalData(word, meaningVi);
-            data = {
-              synonyms: rich.synonyms,
-              antonyms: rich.antonyms,
-              collocations: rich.collocations
-            };
+            if (rich) {
+              data = {
+                synonyms: rich.synonyms,
+                antonyms: rich.antonyms,
+                collocations: rich.collocations
+              };
+            }
           }
 
-          if (data.synonyms) this.activeModalWord.synonyms = this.normalizeCefrField(data.synonyms);
-          if (data.antonyms) this.activeModalWord.antonyms = this.normalizeCefrField(data.antonyms);
-          if (data.collocations) {
+          if (data && data.synonyms) this.activeModalWord.synonyms = this.normalizeCefrField(data.synonyms);
+          if (data && data.antonyms) this.activeModalWord.antonyms = this.normalizeCefrField(data.antonyms);
+          if (data && data.collocations) {
             this.activeModalWord.collocations = data.collocations;
             const collocEl = document.getElementById('modal-detail-collocations');
             if (collocEl) collocEl.innerText = data.collocations;
           }
 
-          // Cập nhật vào danh sách vocabList và lưu vào localStorage
+          // Cập nhật vào danh sách vocabList và lưu bộ nhớ vĩnh viễn
           const targetNorm = this.normalizeWordKey(word);
           const idx = this.vocabList.findIndex(v => v.id === this.activeModalWord.id || this.normalizeWordKey(v.word) === targetNorm);
           if (idx !== -1) {
-            this.vocabList[idx].synonyms = this.activeModalWord.synonyms;
-            this.vocabList[idx].antonyms = this.activeModalWord.antonyms;
-            if (data.collocations) this.vocabList[idx].collocations = data.collocations;
+            this.vocabList[idx].word = word;
+            if (data && data.synonyms) this.vocabList[idx].synonyms = this.activeModalWord.synonyms;
+            if (data && data.antonyms) this.vocabList[idx].antonyms = this.activeModalWord.antonyms;
+            if (data && data.collocations) this.vocabList[idx].collocations = data.collocations;
           }
-          this.saveState();
+          this.flushSaveState();
 
           // Cập nhật lại giao diện Modal ngay lập tức
           const synEl = document.getElementById('modal-detail-synonyms');
@@ -45487,16 +45682,21 @@ YÊU CẦU BẮT BUỘC:
           if (synEl) synEl.innerHTML = this.formatCefrSynAntHtml(this.activeModalWord.synonyms, 'syn');
           if (antEl) antEl.innerHTML = this.formatCefrSynAntHtml(this.activeModalWord.antonyms, 'ant');
 
+          // Cập nhật lại Họ Từ Vựng luôn
+          this.renderModalWordFamily(this.activeModalWord);
+
           // Cập nhật cả Flashcard nếu đang xem từ này
           const fcSyn = document.getElementById('fc-synonyms');
           const fcAnt = document.getElementById('fc-antonyms');
           if (fcSyn) fcSyn.innerHTML = this.formatCefrSynAntHtml(this.activeModalWord.synonyms, 'syn');
           if (fcAnt) fcAnt.innerHTML = this.formatCefrSynAntHtml(this.activeModalWord.antonyms, 'ant');
 
-          // === THÊM CÁC TỪ ĐỒNG NGHĨA/TRÁI NGHĨA/COLLOCATIONS VÀO APP ĐỂ MỞ RỘNG VỐN TỪ ===
-          this.enrollExtractedCefrWords(word, meaningVi, type, data.synonyms, data.antonyms, data.collocations);
+          // Thêm các từ mở rộng vào app
+          if (data && data.synonyms) {
+            this.enrollExtractedCefrWords(word, meaningVi, type, data.synonyms, data.antonyms, data.collocations);
+          }
 
-          this.showToast(`✨ Đã phân cấp từ đồng nghĩa & trái nghĩa (≥3 từ/cấp độ) và tự động thêm vào vốn từ vựng!`, 'success');
+          this.showToast(`✨ Đã phân cấp từ đồng nghĩa, trái nghĩa (A1–C1) & họ từ vựng thành công cho "${word}"!`, 'success');
         } catch (err) {
           console.error('Lỗi phân cấp CEFR:', err);
           this.showToast('Không thể phân cấp từ vựng lúc này. Vui lòng thử lại sau!', 'error');
@@ -47889,7 +48089,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.7</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.8</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
