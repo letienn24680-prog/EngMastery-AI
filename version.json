@@ -1,12 +1,12 @@
 {
-  "version": "1.8.3",
-  "versionCode": 10623,
+  "version": "1.8.4",
+  "versionCode": 10624,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.8.3: Bổ Sung Chế Độ Phóng To Toàn Màn Hình Khung Nhập Từ Vựng Thủ Công (Fullscreen Expand/Maximize)",
+  "title": "Bản Cập Nhật v1.8.4: Đại Tu Thanh Thông Báo Nổi (Top-Center Dynamic Island Style, Triệt Tiêu 100% Lỗi Chồng Lấn Nút Cuộn)",
   "highlights": [
-    "Icon Phóng to / Thu nhỏ ô nhập thủ công (Fullscreen Expand / Maximize Mode): Bổ sung biểu tượng phóng to tại góc ô nhập và thanh tiêu đề, cho phép mở rộng khung nhập thành một cửa sổ lớn toàn màn hình để dễ dàng quan sát, chỉnh sửa và rà soát danh sách hàng ngàn từ vựng cùng lúc.",
-    "Lớp phủ làm mờ cách ly & Khóa cuộn trang (Modal Backdrop Isolation): Khi phóng to, toàn bộ nền phía sau được phủ mờ và khóa cuộn, tập trung tối đa không gian cho việc viết và duyệt từ vựng.",
-    "Bảo lưu 100% dữ liệu đang nhập: Chuyển đổi qua lại giữa chế độ phóng to và thu nhỏ giữ nguyên vẹn toàn bộ văn bản, vị trí con trỏ và số lượng từ đã được AI nhận diện thời gian thực.",
-    "Thao tác linh hoạt đa chiều: Dễ dàng thu nhỏ bằng nút 'Thu nhỏ' ở góc ô nhập, thanh tiêu đề, thanh công cụ đáy, phím tắt Escape (ESC) hoặc chạm vào vùng nền mờ bên ngoài."
+    "Chuyển thanh thông báo (Toast) lên Đỉnh Màn Hình (Top-Center): Chuyển toàn bộ thông báo hệ thống lên vị trí trung tâm phía trên màn hình, mô phỏng phong cách Dynamic Island hiện đại, giải quyết triệt để lỗi thông báo bị nút tím [↑] cuộn lên đầu trang đè chồng lên.",
+    "Tách biệt không gian điều khiển: Nút tròn tím [↑] giữ nguyên ở góc dưới bên phải, thanh thông báo trôi thanh thoát ở đỉnh, không bao giờ chạm hay che khuất nhau trên cả PC và Mobile.",
+    "Nâng cấp giao diện kính mờ & Hiệu ứng trượt mượt mà: Bổ sung hiệu ứng trượt nhẹ từ trên xuống (Slide-down), viền kính bán trong suốt (backdrop-blur-md), hỗ trợ nút đóng [X] nhanh hoặc chạm vào để tắt tức thì.",
+    "Quản lý hàng đợi thông báo thông minh: Tự động hủy timer cũ khi có thông báo mới liên tiếp, không bị biến mất đột ngột giữa chừng."
   ]
 }

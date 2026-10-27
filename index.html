@@ -137,6 +137,21 @@
       }
     }
 
+    /* Toast Notification Top-Center Dropdown Animation (Chống đè chồng giao diện) */
+    @keyframes toastSlideDown {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -24px) scale(0.94);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+      }
+    }
+    .animate-toast {
+      animation: toastSlideDown 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
     /* Mobile Touch Optimization & High-Performance Rendering */
     * {
       -webkit-tap-highlight-color: transparent;
@@ -362,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.3 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.4 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3833,7 +3848,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.3 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.4 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -3949,10 +3964,13 @@
     </div>
   </div>
 
-  <!-- TOAST NOTIFICATION CONTAINER -->
-  <div id="app-toast" class="fixed bottom-5 right-5 z-50 hidden px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold text-white flex items-center space-x-2 transition-all duration-300">
-    <i id="toast-icon" class="fa-solid fa-check"></i>
-    <span id="toast-msg">Thông báo thành công!</span>
+  <!-- TOAST NOTIFICATION CONTAINER (TOP-CENTER DYNAMIC ISLAND STYLE - CHỐNG ĐÈ CHỒNG GIAO DIỆN) -->
+  <div id="app-toast" onclick="this.classList.add('hidden')" class="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-[110] hidden max-w-[92vw] sm:max-w-lg px-4 py-3 rounded-2xl shadow-2xl text-xs sm:text-sm font-bold text-white flex items-center space-x-2.5 backdrop-blur-md transition-all duration-300 border border-white/20 cursor-pointer select-none">
+    <i id="toast-icon" class="fa-solid fa-check text-sm shrink-0"></i>
+    <span id="toast-msg" class="flex-1 leading-snug break-words">Thông báo thành công!</span>
+    <button type="button" onclick="event.stopPropagation(); document.getElementById('app-toast')?.classList.add('hidden')" class="ml-1 text-white/70 hover:text-white shrink-0 p-1 rounded-lg hover:bg-white/10 transition" title="Đóng thông báo">
+      <i class="fa-solid fa-xmark text-xs"></i>
+    </button>
   </div>
 
 
@@ -33231,7 +33249,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.8.3';
+        this.appVersion = '1.8.4';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -40921,7 +40939,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.8.3')) return caches.delete(c);
+                if (!c.includes('v1.8.4')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -41428,26 +41446,42 @@ Trả về DUY NHẤT một JSON hợp lệ:
         }
       }
 
+      toastTimeout = null;
+
       showToast(msg, type = 'success') {
         const toast = document.getElementById('app-toast');
         const msgEl = document.getElementById('toast-msg');
         const icon = document.getElementById('toast-icon');
         if (!toast || !msgEl) return;
 
-        msgEl.innerText = msg;
-        if (type === 'error') {
-          toast.className = 'fixed bottom-5 right-5 z-50 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold text-white flex items-center space-x-2 bg-rose-600 transition-all duration-300';
-          icon.className = 'fa-solid fa-circle-exclamation';
-        } else if (type === 'info') {
-          toast.className = 'fixed bottom-5 right-5 z-50 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold text-white flex items-center space-x-2 bg-indigo-600 transition-all duration-300';
-          icon.className = 'fa-solid fa-bell';
-        } else {
-          toast.className = 'fixed bottom-5 right-5 z-50 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold text-white flex items-center space-x-2 bg-emerald-600 transition-all duration-300';
-          icon.className = 'fa-solid fa-circle-check';
+        if (this.toastTimeout) {
+          clearTimeout(this.toastTimeout);
+          this.toastTimeout = null;
         }
 
+        msgEl.innerText = msg;
+
+        let colorClasses = 'bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 shadow-emerald-900/40';
+        let iconClass = 'fa-solid fa-circle-check text-sm shrink-0';
+
+        if (type === 'error') {
+          colorClasses = 'bg-gradient-to-r from-rose-600 via-rose-700 to-red-700 shadow-rose-900/40';
+          iconClass = 'fa-solid fa-circle-exclamation text-sm shrink-0';
+        } else if (type === 'info') {
+          colorClasses = 'bg-gradient-to-r from-indigo-600 via-primary to-indigo-700 shadow-indigo-900/40';
+          iconClass = 'fa-solid fa-bell text-sm shrink-0';
+        } else if (type === 'warning') {
+          colorClasses = 'bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 shadow-amber-900/40';
+          iconClass = 'fa-solid fa-triangle-exclamation text-sm shrink-0';
+        }
+
+        toast.className = `fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-[110] max-w-[92vw] sm:max-w-lg px-4 py-3 rounded-2xl shadow-2xl text-xs sm:text-sm font-bold text-white flex items-center space-x-2.5 backdrop-blur-md transition-all duration-300 border border-white/20 cursor-pointer select-none animate-toast ${colorClasses}`;
+        if (icon) icon.className = iconClass;
+
         toast.classList.remove('hidden');
-        setTimeout(() => toast.classList.add('hidden'), 3500);
+        this.toastTimeout = setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 4000);
       }
 
       
@@ -47555,7 +47589,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.3</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.4</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
