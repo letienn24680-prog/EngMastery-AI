@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.4 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.5 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -449,10 +449,11 @@
           <span id="header-profile-name" class="hidden xl:inline max-w-[95px] truncate">Học Sinh 12</span>
         </button>
 
-        <!-- Cloud Sync Multi-Device Button -->
-        <button id="header-cloud-sync-btn" onclick="app.openCloudSyncModal()" class="flex items-center space-x-1 sm:space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-primary/10 text-primary-light hover:bg-primary hover:text-white border border-primary/20 transition cursor-pointer shadow-xs active:scale-95 shrink-0" title="Đồng bộ kho từ vựng và tiến độ học giữa các thiết bị (Cloud Sync)">
-          <i class="fa-solid fa-cloud-arrow-up text-xs"></i>
-          <span class="hidden xl:inline">Đồng Bộ</span>
+        <!-- Live Global Community Shared Vocab Button (Tự Động Đồng Bộ 100%) -->
+        <button id="header-cloud-sync-btn" onclick="app.openCloudSyncModal()" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition cursor-pointer shadow-xs active:scale-95 shrink-0" title="Kho từ vựng dùng chung toàn cầu - Tự động đồng bộ Real-time 100%">
+          <span id="global-sync-live-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <i class="fa-solid fa-earth-americas text-xs"></i>
+          <span class="hidden sm:inline font-extrabold">Kho Chung Live</span>
         </button>
 
         <!-- Network & Offline Status Indicator -->
@@ -3678,25 +3679,28 @@
     </div>
   </div>
 
-    <!-- MODAL: ĐỒNG BỘ ĐÁM MÂY ĐA THIẾT BỊ (CLOUD SYNC VAULT) -->
+    <!-- MODAL: KHO TỪ VỰNG DÙNG CHUNG TOÀN HỆ THỐNG & ĐỒNG BỘ REAL-TIME -->
   <div id="modal-cloud-sync" onclick="if(event.target === this) app.closeCloudSyncModal()" class="fixed inset-0 z-[90] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4 animate-fade-in">
     <div class="bg-white dark:bg-darkCard rounded-3xl max-w-lg w-full max-h-[85vh] sm:max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scale-up">
       
       <!-- Fixed Header: ALWAYS PINNED -->
       <div class="shrink-0 p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-darkCard">
         <div class="flex items-center space-x-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary to-indigo-600 text-white flex items-center justify-center text-lg shadow-glow-primary shrink-0">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center text-lg shadow-glow-emerald shrink-0">
+            <i class="fa-solid fa-earth-americas"></i>
           </div>
           <div>
             <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-1.5">
-              <span>Đồng Bộ Đa Thiết Bị</span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 uppercase">Cloud Sync</span>
+              <span>Kho Từ Vựng Dùng Chung</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 uppercase flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Auto Sync Live</span>
+              </span>
             </h3>
-            <p class="text-[11px] text-slate-400">Đồng bộ 1.060+ từ vựng & tiến độ học giữa Điện Thoại và Máy Tính</p>
+            <p class="text-[11px] text-slate-400">Tất cả người dùng dùng chung kho — Tự động cập nhật tức thì khi có từ mới</p>
           </div>
         </div>
-        <button type="button" onclick="app.closeCloudSyncModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
+        <button type="button" onclick="app.closeCloudSyncModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2 cursor-pointer" title="Đóng">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
@@ -3704,113 +3708,104 @@
       <!-- Scrollable Body -->
       <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 overscroll-contain">
 
-      <!-- Current Sync State Overview Card -->
-      <div class="p-3.5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200/60 dark:border-indigo-800/60 flex items-center justify-between gap-3">
-        <div class="space-y-0.5 min-w-0">
-          <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400">Số lượng từ trên thiết bị này:</div>
-          <div class="text-base sm:text-lg font-black text-primary-light flex items-center gap-1.5">
-            <span id="sync-current-vocab-count">1.060</span>
-            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 font-normal">từ vựng sẵn sàng</span>
+        <!-- 1. LIVE REAL-TIME STATUS CARD (EXPLAINS AUTO SYNC CLEARLY) -->
+        <div class="p-4 rounded-3xl bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-cyan-500/10 border border-emerald-500/25 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-full text-xs font-black bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Đang Tự Động Đồng Bộ Real-time 100%</span>
+            </span>
+            <span id="sync-live-channel-badge" class="text-[10px] font-mono font-bold text-slate-400">SSE: Live Stream</span>
+          </div>
+
+          <p class="text-xs text-slate-700 dark:text-slate-200 leading-relaxed">
+            ✨ <strong>Bạn không cần phải bấm nút đồng bộ thủ công!</strong> Tất cả người dùng EngMastery AI đều dùng chung kho từ vựng này. Khi bạn hoặc bất kỳ ai tìm thấy từ mới, thêm từ thủ công hay phân tích bằng AI, từ đó sẽ <strong>tự động xuất hiện ngay tức thì (&lt; 0.5s)</strong> trên máy của những người khác!
+          </p>
+
+          <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
+            <div class="p-2.5 rounded-2xl bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800/60">
+              <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Kho từ của bạn:</div>
+              <div class="text-base font-black text-emerald-600 dark:text-emerald-400 flex items-baseline gap-1 mt-0.5">
+                <span id="sync-current-vocab-count">1.089</span>
+                <span class="text-[11px] font-normal text-slate-400">từ</span>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800/60">
+              <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Gộp từ thông minh:</div>
+              <div class="text-xs font-extrabold text-indigo-500 dark:text-indigo-400 flex items-center gap-1 mt-1">
+                <i class="fa-solid fa-code-merge"></i>
+                <span>Tự động gộp trùng</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="text-right shrink-0">
-          <span id="sync-last-time-badge" class="px-2.5 py-1 rounded-xl text-[10px] font-bold bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shadow-xs block">
-            Chưa tải lên gần đây
-          </span>
-        </div>
-      </div>
 
-      <!-- Step 1: Sync Code Section -->
-      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <label class="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-            <i class="fa-solid fa-key text-amber-500"></i>
-            <span>Mã Đồng Bộ Cá Nhân (Sync Code):</span>
-          </label>
-          <button type="button" onclick="app.generateNewSyncCode()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
-            <i class="fa-solid fa-arrows-rotate text-[10px]"></i> Đổi mã ngẫu nhiên
+        <!-- 2. QUICK REFRESH BUTTON (Nút chủ động kéo từ mới nếu vừa mở máy) -->
+        <button type="button" onclick="app.syncGlobalCommunityWords(true)" class="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-600 to-primary hover:from-emerald-600 hover:to-primary-hover text-white font-extrabold text-xs sm:text-sm shadow-md hover:shadow-glow transition flex items-center justify-center space-x-2 active:scale-95 cursor-pointer">
+          <i class="fa-solid fa-arrows-rotate text-sm"></i>
+          <span>Làm Mới & Kéo Ngay Từ Mới Nhất Từ Kho Chung</span>
+        </button>
+
+        <!-- 3. ACCORDION / COLLAPSIBLE: SAO LƯU TIẾN ĐỘ CÁ NHÂN (ADVANCED ONLY) -->
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+          <button type="button" onclick="document.getElementById('cloud-sync-personal-section').classList.toggle('hidden'); document.getElementById('icon-toggle-personal-sync').classList.toggle('rotate-180')" class="w-full p-3.5 bg-slate-50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-900 text-left flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300 transition cursor-pointer">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-sliders text-primary-light"></i>
+              <span>Tùy chọn nâng cao: Sao lưu tiến độ học cá nhân giữa 2 thiết bị</span>
+            </span>
+            <i id="icon-toggle-personal-sync" class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform duration-200"></i>
           </button>
-        </div>
-        <p class="text-[11px] text-slate-400">
-          Sử dụng cùng 1 mã này trên điện thoại và máy tính để 2 máy kết nối với nhau. Bạn có thể tự đặt mã dễ nhớ (vd: số điện thoại hoặc biệt danh).
-        </p>
-        <div class="flex items-center space-x-2">
-          <div class="relative flex-1">
-            <input type="text" id="input-cloud-sync-code" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono font-bold text-sm tracking-wider uppercase focus:outline-hidden focus:ring-2 focus:ring-primary shadow-xs" placeholder="VD: ENG-882910">
+
+          <div id="cloud-sync-personal-section" class="hidden p-4 space-y-3 bg-white dark:bg-darkCard border-t border-slate-200 dark:border-slate-800 text-xs">
+            <p class="text-[11px] text-slate-400">
+              Phần này dùng khi bạn muốn sao chép toàn bộ tiến độ làm flashcard, câu sai và đề thi riêng tư từ điện thoại sang máy tính của chính bạn:
+            </p>
+
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-600 dark:text-slate-400">Mã thiết bị cá nhân:</span>
+                <button type="button" onclick="app.generateNewSyncCode()" class="text-[10px] font-bold text-primary-light hover:underline cursor-pointer">Đổi mã ngẫu nhiên</button>
+              </div>
+              <div class="flex items-center space-x-2">
+                <input type="text" id="input-cloud-sync-code" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-mono font-bold text-xs uppercase" placeholder="VD: ENG-882910">
+                <button type="button" onclick="app.copyCloudSyncCode()" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 text-xs font-bold transition shrink-0 cursor-pointer">Chép Mã</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button type="button" id="btn-cloud-sync-upload" onclick="app.uploadCloudSyncData()" class="py-2.5 px-3 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-xs transition flex items-center justify-center space-x-1.5 shadow-xs cursor-pointer">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Tải Lên Máy Này</span>
+              </button>
+              <button type="button" id="btn-cloud-sync-download" onclick="app.downloadCloudSyncData()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs transition flex items-center justify-center space-x-1.5 cursor-pointer">
+                <i class="fa-solid fa-cloud-arrow-down"></i>
+                <span>Kéo Về Máy Khác</span>
+              </button>
+            </div>
           </div>
-          <button type="button" onclick="app.copyCloudSyncCode()" class="px-3.5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center space-x-1 shrink-0 shadow-xs" title="Sao chép mã">
-            <i class="fa-solid fa-copy"></i>
-            <span class="hidden sm:inline">Chép Mã</span>
+        </div>
+
+        <!-- 4. KHẮC PHỤC THIẾT BỊ BỊ THIẾU TỪ GỐC -->
+        <div class="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-between gap-3 text-xs">
+          <div class="space-y-0.5">
+            <span class="font-bold text-amber-600 dark:text-amber-400">Máy bạn bị thiếu 1.060+ từ gốc?</span>
+            <p class="text-[10px] text-slate-400">Nạp lại đủ 1.060+ từ chuẩn Bộ GD&ĐT mà không mất từ tự thêm.</p>
+          </div>
+          <button type="button" onclick="app.forceSyncMasterVocab()" class="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shrink-0 transition cursor-pointer">
+            ⚡ Nạp Lại
           </button>
         </div>
+
       </div>
 
-      <!-- Step 2: 1-Touch Action Buttons -->
-      <div class="space-y-2">
-        <label class="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-          <i class="fa-solid fa-bolt text-primary-light"></i>
-          <span>Thao Tác Đồng Bộ 1-Chạm:</span>
-        </label>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          <!-- Button: Đẩy lên đám mây -->
-          <button type="button" id="btn-cloud-sync-upload" onclick="app.uploadCloudSyncData()" class="p-3.5 rounded-2xl bg-gradient-to-r from-primary to-indigo-600 hover:from-primary-hover hover:to-indigo-500 text-white font-bold text-xs shadow-glow-primary transition flex flex-col items-center justify-center space-y-1 active:scale-95 text-center cursor-pointer">
-            <div class="flex items-center space-x-1.5 text-sm font-extrabold">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
-              <span>1. ĐẨY LÊN ĐÁM MÂY</span>
-            </div>
-            <span class="text-[10px] font-normal opacity-90">Gửi toàn bộ từ vựng & tiến độ từ máy này lên</span>
-          </button>
-
-          <!-- Button: Kéo về máy này -->
-          <button type="button" id="btn-cloud-sync-download" onclick="app.downloadCloudSyncData()" class="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md transition flex flex-col items-center justify-center space-y-1 active:scale-95 text-center cursor-pointer">
-            <div class="flex items-center space-x-1.5 text-sm font-extrabold">
-              <i class="fa-solid fa-cloud-arrow-down"></i>
-              <span>2. KÉO VỀ & HỢP NHẤT</span>
-            </div>
-            <span class="text-[10px] font-normal opacity-90">Tải về máy khác & gộp tự động không mất dữ liệu</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Section: Khắc phục sự cố thiết bị hiển thị thiếu từ -->
-      <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/25 space-y-2">
-        <div class="flex items-center space-x-2 text-amber-600 dark:text-amber-400">
-          <i class="fa-solid fa-triangle-exclamation text-sm"></i>
-          <span class="text-xs font-black">Khắc Phục Thiết Bị Bị Thiếu Từ (Chỉ Có ~200 Từ):</span>
-        </div>
-        <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
-          Nếu điện thoại của bạn đang chỉ hiển thị ~179 hoặc ~200 từ vựng (do bản lưu cũ hoặc bộ lọc Sổ Tay), hãy bấm nút dưới đây để nạp lại đầy đủ <strong>1.060+ từ vựng chuẩn Bộ GD&ĐT</strong> ngay lập tức mà vẫn giữ nguyên các từ bạn đã tự thêm!
-        </p>
-        <button type="button" onclick="app.forceSyncMasterVocab()" class="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-md transition flex items-center justify-center space-x-2 active:scale-95 cursor-pointer">
-          <i class="fa-solid fa-rotate text-xs"></i>
-          <span>⚡ NẠP ĐẦY ĐỦ 1.060+ TỪ GỐC MASTER NGAY</span>
+      <!-- Fixed Footer: ALWAYS PINNED AT BOTTOM -->
+      <div class="shrink-0 p-3.5 sm:p-4 border-t border-slate-100 dark:border-slate-800 flex justify-end bg-slate-50 dark:bg-slate-900/60">
+        <button onclick="app.closeCloudSyncModal()" class="px-5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition active:scale-95 cursor-pointer">
+          Đóng
         </button>
       </div>
-
-      <!-- Section: Sao lưu file JSON (Dự phòng truyền thống) -->
-      <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-400">
-        <span>Sao lưu truyền thống bằng File:</span>
-        <div class="flex items-center space-x-2">
-          <button type="button" onclick="app.exportVocabJSON()" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:text-white font-bold transition flex items-center gap-1 text-[11px]">
-            <i class="fa-solid fa-download text-[10px]"></i> Xuất JSON
-          </button>
-          <label class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:text-white font-bold transition flex items-center gap-1 text-[11px] cursor-pointer">
-            <i class="fa-solid fa-upload text-[10px]"></i> Nhập JSON
-            <input type="file" accept=".json" onchange="app.importVocabJSON(this.files[0])" class="hidden">
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fixed Footer: ALWAYS PINNED AT BOTTOM -->
-    <div class="shrink-0 p-3.5 sm:p-4 border-t border-slate-200 dark:border-slate-800 flex justify-end bg-slate-50 dark:bg-slate-900/60">
-      <button onclick="app.closeCloudSyncModal()" class="px-5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition active:scale-95">
-        Đóng
-      </button>
     </div>
   </div>
-</div>
 
   <div id="modal-settings" onclick="if(event.target === this) app.closeSettingsModal()" class="fixed inset-0 z-[90] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white dark:bg-darkCard rounded-3xl max-w-md w-full max-h-[85vh] sm:max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scale-up">
@@ -3848,7 +3843,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.4 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.5 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -33249,7 +33244,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.8.4';
+        this.appVersion = '1.8.5';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -40136,10 +40131,10 @@ Trả về DUY NHẤT một JSON hợp lệ:
                 try { this._communityEventSource.close(); } catch (_) {}
                 this._communityEventSource = null;
               }
-              // Tự động kết nối lại sau 20s
+              // Tự động kết nối lại sau 15s
               setTimeout(() => {
                 if (navigator.onLine) this.initGlobalCommunitySync();
-              }, 20000);
+              }, 15000);
             };
           }
         } catch (e) {
@@ -40149,7 +40144,83 @@ Trả về DUY NHẤT một JSON hợp lệ:
         // 2. Tự động đồng bộ các từ mới nhất từ kho chung khi khởi động ứng dụng
         setTimeout(() => {
           this.syncGlobalCommunityWords(false);
-        }, 1600);
+        }, 1200);
+
+        // 3. Tự động kiểm tra và kéo từ mới ngầm mỗi 60 giây
+        if (!this._communitySyncInterval) {
+          this._communitySyncInterval = setInterval(() => {
+            if (navigator.onLine) {
+              this.syncGlobalCommunityWords(false);
+            }
+          }, 60000);
+        }
+
+        // 4. Tự động kéo từ mới khi người dùng quay lại tab hoặc có mạng lại
+        if (!this._visibilityListenerBound) {
+          this._visibilityListenerBound = true;
+          document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible' && navigator.onLine) {
+              this.syncGlobalCommunityWords(false);
+            }
+          });
+          window.addEventListener('online', () => {
+            this.syncGlobalCommunityWords(false);
+          });
+        }
+      }
+
+      async broadcastBatchToCommunity(cards) {
+        if (!cards || !Array.isArray(cards) || cards.length === 0) return;
+        const validCards = cards
+          .filter(c => c && c.word && !c._isFromGlobalSync && this.isValidEnglishVocab(c.word))
+          .map(c => ({
+            word: c.word.trim(),
+            type: c.type || 'Word',
+            ipa: c.ipa || '',
+            level: c.level || 'B2',
+            meaningVi: c.meaningVi || '',
+            meaningEn: c.meaningEn || '',
+            synonyms: c.synonyms || '',
+            antonyms: c.antonyms || '',
+            collocations: c.collocations || '',
+            example: c.example || '',
+            exampleVi: c.exampleVi || '',
+            topic: 'topic_community',
+            topicLabel: '🌐 Từ Cộng Đồng',
+            mnemonic: c.mnemonic || '',
+            isCommunity: true
+          }));
+
+        if (validCards.length === 0) return;
+
+        const batchSize = 25;
+        for (let i = 0; i < validCards.length; i += batchSize) {
+          const chunk = validCards.slice(i, i + batchSize);
+          try {
+            const profile = this.userProfile || { name: 'Bạn Học THPT' };
+            const payload = {
+              action: 'BROADCAST_BATCH',
+              senderDeviceId: this.myDeviceId,
+              senderName: profile.name || 'Bạn Học THPT',
+              timestamp: Date.now(),
+              cards: chunk
+            };
+
+            await fetch('https://ntfy.sh/engmastery_community_vocab_pool_v1', {
+              method: 'POST',
+              body: JSON.stringify(payload),
+              headers: {
+                'Title': `Community Batch: +${chunk.length} words`,
+                'Tags': 'globe,books'
+              }
+            });
+          } catch (e) {
+            console.warn('Broadcast batch warning:', e);
+          }
+          if (i + batchSize < validCards.length) {
+            await new Promise(r => setTimeout(r, 400));
+          }
+        }
       }
 
       async broadcastWordToCommunity(card) {
@@ -40203,24 +40274,49 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       handleIncomingGlobalWord(body) {
-        if (!body || body.action !== 'BROADCAST_WORD' || !body.card) return;
+        if (!body || !body.action) return;
         if (body.senderDeviceId && body.senderDeviceId === this.myDeviceId) return; // Bỏ qua từ do chính máy này gửi
 
-        const c = body.card;
-        if (!c.word || !this.isValidEnglishVocab(c.word)) return;
+        let incomingCards = [];
+        if (body.action === 'BROADCAST_WORD' && body.card) {
+          incomingCards = [body.card];
+        } else if (body.action === 'BROADCAST_BATCH' && Array.isArray(body.cards)) {
+          incomingCards = body.cards;
+        }
 
-        c._isFromGlobalSync = true;
-        c.isCommunity = true;
-        c.topic = 'topic_community';
-        c.topicLabel = '🌐 Từ Cộng Đồng';
-        c.deck = 'notebook';
-        c.status = 'due';
-        c.due = true;
+        if (incomingCards.length === 0) return;
 
-        const res = this.upsertVocabCard(c);
-        if (res.isNew) {
+        let newCount = 0;
+        let lastWord = '';
+
+        incomingCards.forEach(c => {
+          if (!c || !c.word || !this.isValidEnglishVocab(c.word)) return;
+          c._isFromGlobalSync = true;
+          c.isCommunity = true;
+          c.topic = 'topic_community';
+          c.topicLabel = '🌐 Từ Cộng Đồng';
+          c.deck = 'notebook';
+          c.status = 'due';
+          c.due = true;
+
+          const res = this.upsertVocabCard(c);
+          if (res.isNew) {
+            newCount++;
+            lastWord = c.word;
+          }
+        });
+
+        if (newCount > 0) {
+          this.mergeDuplicateVocabCards(false);
+          this.saveState();
+          this.updateFilterCounts();
           const sender = body.senderName || 'Bạn học';
-          this.showToast(`🌐 ${sender} vừa đóng góp từ mới: "${c.word}" (${c.meaningVi})!`, 'info');
+          if (newCount === 1) {
+            this.showToast(`🌐 ${sender} vừa đóng góp từ mới: "${lastWord}" vào Kho Chung!`, 'info');
+          } else {
+            this.showToast(`🌐 ${sender} vừa đóng góp +${newCount} từ vựng mới vào Kho Chung!`, 'info');
+          }
+
           if (this.currentView === 'flashcards' && this.currentVocabTopicFilter === 'topic_community') {
             this.applyVocabTopicFilter('topic_community');
             this.renderFlashcard();
@@ -40252,17 +40348,22 @@ Trả về DUY NHẤT một JSON hợp lệ:
               const msg = JSON.parse(line);
               if (msg.event === 'message' && msg.message) {
                 const body = JSON.parse(msg.message);
-                if (body && body.action === 'BROADCAST_WORD' && body.card) {
-                  const c = body.card;
-                  if (c.word && this.isValidEnglishVocab(c.word)) {
-                    c._isFromGlobalSync = true;
-                    c.isCommunity = true;
-                    c.topic = 'topic_community';
-                    c.topicLabel = '🌐 Từ Cộng Đồng';
-                    c.deck = 'notebook';
-                    const upRes = this.upsertVocabCard(c);
-                    if (upRes.isNew) newCount++;
-                  }
+                if (body && body.action) {
+                  let cards = [];
+                  if (body.action === 'BROADCAST_WORD' && body.card) cards = [body.card];
+                  else if (body.action === 'BROADCAST_BATCH' && Array.isArray(body.cards)) cards = body.cards;
+
+                  cards.forEach(c => {
+                    if (c && c.word && this.isValidEnglishVocab(c.word)) {
+                      c._isFromGlobalSync = true;
+                      c.isCommunity = true;
+                      c.topic = 'topic_community';
+                      c.topicLabel = '🌐 Từ Cộng Đồng';
+                      c.deck = 'notebook';
+                      const upRes = this.upsertVocabCard(c);
+                      if (upRes.isNew) newCount++;
+                    }
+                  });
                 }
               }
             } catch (_) {}
@@ -40939,7 +41040,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.8.4')) return caches.delete(c);
+                if (!c.includes('v1.8.5')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -43490,6 +43591,14 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         this.renderDashboard();
         this.hubCurrentPage = 1;
         this.renderVocabHub();
+
+        // TỰ ĐỘNG PHÁT SÓNG TOÀN BỘ TỪ MỚI LÊN KHO CHUNG CHO TẤT CẢ NGƯỜI DÙNG
+        if (processedWords.length > 0) {
+          const cardsToBroadcast = this.vocabList.filter(v => processedWords.includes(v.word));
+          if (cardsToBroadcast.length > 0) {
+            this.broadcastBatchToCommunity(cardsToBroadcast);
+          }
+        }
 
         // Xóa trắng ô nhập và bản nháp sau khi đã nạp thành công
         const textareaEl = document.getElementById('hub-manual-input-textarea');
@@ -47589,7 +47698,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.4</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.5</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

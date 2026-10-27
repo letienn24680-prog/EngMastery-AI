@@ -1,12 +1,13 @@
 {
-  "version": "1.8.4",
-  "versionCode": 10624,
+  "version": "1.8.5",
+  "versionCode": 10625,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.8.4: Đại Tu Thanh Thông Báo Nổi (Top-Center Dynamic Island Style, Triệt Tiêu 100% Lỗi Chồng Lấn Nút Cuộn)",
+  "title": "Bản Cập Nhật v1.8.5: Tự Động Hóa 100% Kho Từ Vựng Dùng Chung Toàn Cầu (Real-time Live Auto Sync & Broadcast Batch)",
   "highlights": [
-    "Chuyển thanh thông báo (Toast) lên Đỉnh Màn Hình (Top-Center): Chuyển toàn bộ thông báo hệ thống lên vị trí trung tâm phía trên màn hình, mô phỏng phong cách Dynamic Island hiện đại, giải quyết triệt để lỗi thông báo bị nút tím [↑] cuộn lên đầu trang đè chồng lên.",
-    "Tách biệt không gian điều khiển: Nút tròn tím [↑] giữ nguyên ở góc dưới bên phải, thanh thông báo trôi thanh thoát ở đỉnh, không bao giờ chạm hay che khuất nhau trên cả PC và Mobile.",
-    "Nâng cấp giao diện kính mờ & Hiệu ứng trượt mượt mà: Bổ sung hiệu ứng trượt nhẹ từ trên xuống (Slide-down), viền kính bán trong suốt (backdrop-blur-md), hỗ trợ nút đóng [X] nhanh hoặc chạm vào để tắt tức thì.",
-    "Quản lý hàng đợi thông báo thông minh: Tự động hủy timer cũ khi có thông báo mới liên tiếp, không bị biến mất đột ngột giữa chừng."
+    "Dùng chung Kho Từ Vựng Tự Động 100% (Real-time Live Sync): Tất cả người dùng đều dùng chung một kho từ vựng duy nhất. Khi bất kỳ ai tìm thấy, thêm từ mới hoặc phân tích AI, hệ thống tự động phát sóng tức thì (< 0.5s) sang máy của tất cả mọi người mà không cần bấm bất kỳ nút nào.",
+    "Huy hiệu trạng thái 'Kho Chung Live' trên thanh tiêu đề: Hiển thị chấm xanh nhấp nháy phát sóng trực tiếp, giúp người dùng an tâm hệ thống luôn tự động đồng bộ theo thời gian thực.",
+    "Hỗ trợ Phát Sóng Đa Từ (Broadcast Batch): Nhập hàng loạt từ vựng (hàng chục hay hàng trăm từ) được tự động đóng gói và truyền tải siêu tốc, thông báo nhận từ mới gọn gàng, tự động gộp từ trùng lặp làm 1.",
+    "Cơ chế tự động kéo từ nền (Background Auto-Pull): Tự động kiểm tra và kéo từ mới từ kho chung mỗi 60 giây, khi vừa F5 tải lại trang, hoặc khi người dùng quay lại tab trình duyệt.",
+    "Tách biệt tùy chọn sao lưu cá nhân: Phần mã đồng bộ cá nhân (Sync Code) được thu gọn xuống mục nâng cao dành cho người muốn chuyển dữ liệu riêng tư, không gây hiểu nhầm về kho dùng chung."
   ]
 }
