@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.6 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.7 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -349,6 +349,12 @@
           <i class="fa-solid fa-language text-sm"></i>
           <span class="hidden md:inline">Dịch Nhanh</span>
         </button>
+
+        <!-- Live AI Status Badge -->
+        <div id="header-api-badge" class="hidden xl:flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-accent-emerald border border-emerald-500/20" title="Trạng thái trí tuệ nhân tạo AI">
+          <i class="fa-solid fa-bolt text-[10px]"></i>
+          <span id="header-api-text">Built-in Engine</span>
+        </div>
 
         <!-- Install App Button (PWA) -->
         <button id="btn-header-install-app" onclick="app.openPWAInstallModal()" class="flex items-center space-x-1 px-2 sm:px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs font-bold shadow-md hover:shadow-lg transition active:scale-95" title="Cài đặt EngMastery AI thành Ứng Dụng (App)">
@@ -1261,7 +1267,7 @@
         <!-- Topic Categories Selector -->
         <div class="flex items-center space-x-2 overflow-x-auto pb-2 text-xs">
           <button onclick="app.setHubTopic('all')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-primary text-white" data-topic="all">
-            Tất cả (1,060+)
+            Tất cả (<span id="hub-count-total">1,060+</span>)
           </button>
           <button onclick="app.setHubTopic('topic_notebook')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-amber-500" data-topic="topic_notebook">
             📓 Sổ Tay (<span id="hub-count-notebook">179</span>)
@@ -1618,6 +1624,28 @@
             </p>
           </div>
 
+          <!-- Today's Special Daily Exam Hero Card -->
+          <div id="thpt-daily-today-card" class="rounded-3xl p-6 md:p-8 bg-gradient-to-br from-indigo-950 via-slate-900 to-cyan-950 border border-cyan-500/40 text-white shadow-2xl space-y-4">
+            <!-- Dynamically populated by renderThptTodayHero() -->
+          </div>
+
+          <!-- Custom AI Exam Request Bar -->
+          <div class="p-5 rounded-3xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-bento flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-primary text-white flex items-center justify-center text-xl shadow-glow-primary shrink-0">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Soạn Đề Thi THPTQG Riêng Theo Yêu Cầu</h4>
+                <p class="text-xs text-slate-400">AI Gemini sẽ tự động biên soạn đề thi 40-50 câu chuẩn cấu trúc mới không trùng lặp</p>
+              </div>
+            </div>
+            <button id="thpt-btn-create-custom-ai" onclick="app.generateDailyThptExamAI(true)" class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-gradient-to-r from-primary to-indigo-600 hover:opacity-95 text-white font-extrabold text-xs shadow-glow-primary transition flex items-center justify-center space-x-2 shrink-0">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>Yêu Cầu AI Soạn Đề Mới</span>
+            </button>
+          </div>
+
           <!-- Exam Modes Cards -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <!-- Full Mock Exam 50 Questions -->
@@ -1664,6 +1692,27 @@
               </button>
             </div>
           </div>
+
+          <!-- Daily Exam Archive & History -->
+          <div class="space-y-4 pt-4">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <h3 class="text-lg font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
+                  <i class="fa-solid fa-clock-rotate-left text-cyan-400"></i>
+                  <span>Kho Đề Thi Hằng Ngày & Đề Tự Sinh AI</span>
+                </h3>
+                <p class="text-xs text-slate-400">Lưu trữ toàn bộ các đề thi đã làm và đề chuẩn ôn luyện theo ngày</p>
+              </div>
+              <div class="flex items-center space-x-2 text-xs">
+                <button onclick="app.filterThptHistory('all')" class="px-3 py-1.5 rounded-xl font-bold bg-primary text-white transition">Tất Cả</button>
+                <button onclick="app.filterThptHistory('completed')" class="px-3 py-1.5 rounded-xl font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition">Đã Làm</button>
+                <button onclick="app.filterThptHistory('pending')" class="px-3 py-1.5 rounded-xl font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition">Chưa Làm</button>
+              </div>
+            </div>
+            <div id="thpt-daily-history-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Populated by renderThptDailyHistory() -->
+            </div>
+          </div>
         </div>
 
         <!-- SUB-VIEW 6B: ACTIVE EXAM ROOM -->
@@ -1705,6 +1754,18 @@
                     <i class="fa-solid fa-flag"></i>
                     <span>Đặt cờ phân vân</span>
                   </button>
+                </div>
+
+                <!-- Passage Box for Reading Comprehension Questions -->
+                <div id="thpt-current-passage-box" class="hidden p-5 rounded-2xl bg-cyan-50/50 dark:bg-slate-800/80 border border-cyan-200 dark:border-cyan-800/40 space-y-2.5">
+                  <div class="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-cyan-200/60 dark:border-cyan-800/40">
+                    <div class="flex items-center space-x-2">
+                      <span id="thpt-passage-badge" class="px-2.5 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-600 dark:text-cyan-400">Văn Bản Bài Đọc</span>
+                      <span id="thpt-passage-source" class="text-[11px] text-slate-400 font-medium"></span>
+                    </div>
+                  </div>
+                  <h4 id="thpt-passage-title" class="font-extrabold text-sm text-slate-900 dark:text-white"></h4>
+                  <div id="thpt-passage-text" class="text-xs md:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-serif max-h-72 overflow-y-auto pr-2"></div>
                 </div>
 
                 <!-- Prompt -->
@@ -3634,7 +3695,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.6 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.7 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -36568,7 +36629,7 @@ Yêu cầu output STRICTLY là một JSON object:
         let finalCollocations = '';
         if (rawColls.length > 0) {
           const filteredColls = rawColls.filter(c => !c.includes('undefined') && c.length > 4);
-          if (detectedPos === 'Noun') {
+          if (cleanWord.toLowerCase() === 'passion') {
             filteredColls.unshift(`have a passion for`, `pursue one's passion`);
           }
           finalCollocations = [...new Set(filteredColls)].slice(0, 6).join(', ');
@@ -36650,32 +36711,7 @@ Yêu cầu output STRICTLY là một JSON object:
           }
         });
 
-        // Bổ sung các từ đối xứng chuẩn hóa để đảm bảo đủ các tầng cấp độ A1 - C1
-        const defaultPools = {
-          syn: {
-            A1: ['like', 'love', 'good', 'want', 'make'],
-            A2: ['care', 'drive', 'habit', 'normal', 'easy'],
-            B1: ['desire', 'eager', 'dream', 'warmth', 'active'],
-            B2: ['enthusiasm', 'devotion', 'zeal', 'distinctive', 'vital'],
-            C1: ['ardor', 'fervor', 'intensity', 'prominent', 'profound']
-          },
-          ant: {
-            A1: ['hate', 'dislike', 'bad', 'cold', 'stop'],
-            A2: ['boredom', 'calm', 'rest', 'quiet', 'plain'],
-            B1: ['apathy', 'neglect', 'disregard', 'dull', 'modest'],
-            B2: ['indifference', 'detachment', 'coldness', 'reluctant', 'neutral'],
-            C1: ['unconcern', 'lethargy', 'listlessness', 'insouciance', 'dormancy']
-          }
-        };
-
-        const pool = defaultPools[type] || defaultPools.syn;
-
-        ['A1', 'A2', 'B1', 'B2', 'C1'].forEach(lvl => {
-          if (!levels[lvl] || levels[lvl].length === 0) {
-            const fallbackWords = pool[lvl].filter(fw => !seen.has(fw) && fw !== baseLower).slice(0, 3);
-            levels[lvl] = fallbackWords;
-          }
-        });
+        // Chỉ giữ lại các cấp độ thực sự tìm thấy từ vựng có liên quan ngữ nghĩa (không gán ép từ xa lạ)
 
         const parts = [];
         ['A1', 'A2', 'B1', 'B2', 'C1'].forEach(lvl => {
@@ -38075,7 +38111,11 @@ Note: "answer" must be an integer 0, 1, 2, or 3 corresponding to options A, B, C
         const listContainer = document.getElementById('thpt-daily-history-list');
         if (!listContainer) return;
 
-        if (!this.thptDailyExams || this.thptDailyExams.length === 0) {
+        let exams = [...(this.thptDailyExams || [])];
+        if (filter === 'completed') exams = exams.filter(e => e.status === 'completed' && e.userResult);
+        if (filter === 'pending') exams = exams.filter(e => !(e.status === 'completed' && e.userResult));
+
+        if (exams.length === 0) {
           listContainer.innerHTML = `
             <div class="col-span-full p-8 text-center rounded-3xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 text-slate-400">
               <i class="fa-regular fa-folder-open text-3xl mb-2"></i>
@@ -38085,7 +38125,7 @@ Note: "answer" must be an integer 0, 1, 2, or 3 corresponding to options A, B, C
           return;
         }
 
-        listContainer.innerHTML = this.thptDailyExams.map((exam, idx) => {
+        listContainer.innerHTML = exams.map((exam, idx) => {
           const isDone = exam.status === 'completed' && exam.userResult;
           const score = isDone ? exam.userResult.score10 : null;
 
@@ -39453,6 +39493,32 @@ Trả về DUY NHẤT một JSON hợp lệ:
           }
         } catch (e) {}
 
+        // 5. Fallback MyMemory Free Translation Engine
+        try {
+          const mmUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(clean)}&langpair=en|vi`;
+          const mmRes = await fetch(mmUrl);
+          if (mmRes.ok) {
+            const mmData = await mmRes.json();
+            if (mmData && mmData.responseData && mmData.responseData.translatedText) {
+              const trans = mmData.responseData.translatedText.trim();
+              if (trans && trans.toLowerCase() !== clean.toLowerCase() && !trans.includes('MYMEMORY WARNING')) {
+                return trans;
+              }
+            }
+          }
+        } catch (e) {}
+
+        // 6. Fallback Gemini AI Engine (nếu đã kích hoạt API key)
+        if (this.settings.geminiApiKey && typeof this.callGeminiApi === 'function') {
+          try {
+            const prompt = `Dịch từ/cụm từ tiếng Anh "${clean}" sang tiếng Việt ngắn gọn, chuẩn từ điển học đường Việt Nam (chỉ trả về 1-3 nghĩa thông dụng nhất, không giải thích thêm).`;
+            const aiTrans = await this.callGeminiApi(prompt);
+            if (aiTrans && aiTrans.trim() && !aiTrans.toLowerCase().includes('error')) {
+              return aiTrans.trim().replace(/^["'`]+|["'`]+$/g, '');
+            }
+          } catch (e) {}
+        }
+
         return '';
       }
 
@@ -39788,6 +39854,26 @@ Trả về DUY NHẤT một JSON hợp lệ:
           // Tự động chữa lành nhãn và placeholder nếu dính 'aboutprep'
           if (card.topicLabel && card.topicLabel.includes('aboutprep')) {
             card.topicLabel = '📓 Từ Sổ Tay';
+          }
+          if (card.wordFamilyRoot && card.wordFamilyRoot.includes('aboutprep')) {
+            delete card.wordFamilyRoot;
+          }
+          if (card.meaningVi && (card.meaningVi.includes('aboutprep') || this.isPlaceholderMeaning(card.meaningVi, card.word))) {
+            if (typeof DEFAULT_VOCABULARY !== 'undefined') {
+              const dm = DEFAULT_VOCABULARY.find(m => m.word && m.word.toLowerCase() === card.word.toLowerCase());
+              if (dm && dm.meaningVi && !this.isPlaceholderMeaning(dm.meaningVi, card.word)) {
+                card.meaningVi = dm.meaningVi;
+              }
+            }
+          }
+          if (card.meaningEn && card.meaningEn.includes('aboutprep')) {
+            card.meaningEn = `Key vocabulary item: ${card.word}`;
+          }
+          if (card.collocations && card.collocations.includes('aboutprep')) {
+            card.collocations = card.word;
+          }
+          if (card.mnemonic && card.mnemonic.includes('aboutprep')) {
+            card.mnemonic = `Ghi nhớ ngữ cảnh và cách dùng của từ "${card.word}" trong đề thi THPTQG.`;
           }
           return true;
         });
@@ -40349,7 +40435,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.7.6')) return caches.delete(c);
+                if (!c.includes('v1.7.7')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -40407,21 +40493,33 @@ Trả về DUY NHẤT một JSON hợp lệ:
       }
 
       switchPWAInstallTab(tabId) {
+        const canonical = (tabId === 'windows' || tabId === 'pc') ? 'pc' : tabId;
         ['android', 'ios', 'pc'].forEach(t => {
           const tabBtn = document.getElementById(`tab-btn-install-${t}`);
           const tabContent = document.getElementById(`tab-content-install-${t}`);
-          if (t === tabId) {
-            if (tabBtn) {
-              tabBtn.className = 'flex-1 py-2 rounded-xl bg-primary text-white font-bold text-xs shadow-sm transition flex items-center justify-center space-x-1.5';
-            }
+          const pwaBtn = document.getElementById(`pwa-tab-btn-${t === 'pc' ? 'windows' : t}`);
+          const pwaContent = document.getElementById(`pwa-tab-content-${t === 'pc' ? 'windows' : t}`);
+
+          if (t === canonical) {
+            if (tabBtn) tabBtn.className = 'flex-1 py-2 rounded-xl bg-primary text-white font-bold text-xs shadow-sm transition flex items-center justify-center space-x-1.5';
             if (tabContent) tabContent.classList.remove('hidden');
+            if (pwaBtn) pwaBtn.className = 'pwa-tab-btn flex-1 py-2.5 rounded-xl font-bold bg-white dark:bg-darkCard text-primary-light shadow-sm transition flex items-center justify-center space-x-1.5';
+            if (pwaContent) pwaContent.classList.remove('hidden');
           } else {
-            if (tabBtn) {
-              tabBtn.className = 'flex-1 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-white font-bold text-xs transition flex items-center justify-center space-x-1.5';
-            }
+            if (tabBtn) tabBtn.className = 'flex-1 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-white font-bold text-xs transition flex items-center justify-center space-x-1.5';
             if (tabContent) tabContent.classList.add('hidden');
+            if (pwaBtn) pwaBtn.className = 'pwa-tab-btn flex-1 py-2.5 rounded-xl font-bold text-slate-500 hover:text-slate-800 dark:hover:text-white transition flex items-center justify-center space-x-1.5';
+            if (pwaContent) pwaContent.classList.add('hidden');
           }
         });
+      }
+
+      triggerNativePWAInstall() {
+        this.promptPWAInstall();
+      }
+
+      filterThptHistory(filter = 'all') {
+        this.renderThptDailyHistory(filter);
       }
 
       promptPWAInstall() {
@@ -46620,7 +46718,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.6</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.7</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

@@ -1,13 +1,14 @@
 {
-  "version": "1.7.6",
-  "versionCode": 10616,
+  "version": "1.7.7",
+  "versionCode": 10617,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.7.6: Thuật Toán Quét & Tự Động Gộp Toàn Diện Từ Vựng Trùng Lặp (Intelligent Vocab Deduplication & Deep Merge)",
+  "title": "Bản Cập Nhật v1.7.7: Đại Tu & Rà Soát Toàn Diện Hệ Thống (Full App Deep Audit & Complete Polish)",
   "highlights": [
-    "Tự động quét và gộp tất cả các từ trùng lặp làm 1 thẻ duy nhất (Deep Deduplication & Merge Engine): Giải quyết triệt để tình trạng lộn xộn nhiều thẻ trùng nhau trong kho từ vựng.",
-    "Thuật toán hợp nhất thông minh (Deep Merge): Tự động gộp các nghĩa tiếng Việt khác nhau, bổ sung phiên âm IPA, gộp từ loại, hợp nhất các tầng cấp độ CEFR A1 -> C1, gom cụm Collocations và ghép các câu ví dụ thực tế.",
-    "Bảo lưu 100% tiến độ học tập: Giữ lại số lần ôn tập (Spaced Repetition SM-2), số ngày ôn, trạng thái ghi nhớ (mastered/learning) và biểu tượng yêu thích ⭐ cao nhất của học sinh.",
-    "Bổ sung nút 'Gộp Từ Trùng' trực tiếp trên thanh công cụ Kho Từ Vựng và Cài Đặt giúp học sinh chủ động dọn dẹp kho từ bất cứ lúc nào chỉ với 1 chạm.",
-    "Tự động kích hoạt gộp từ trên mọi luồng: Khởi động app, sau khi nhập thủ công, nhập file JSON, đồng bộ Cloud và đồng bộ Kho Chung Cộng Đồng."
+    "Khắc phục triệt để hiển thị bài đọc hiểu THPTQG: Bổ sung khung hiển thị văn bản bài đọc (thpt-current-passage-box) trong phòng thi thực chiến, học sinh dễ dàng vừa đọc vừa trả lời các câu hỏi đọc hiểu và đọc điền.",
+    "Khôi phục đầy đủ Sảnh Đề Thi THPTQG (thptqg-lobby): Tích hợp Thẻ đề thi hôm nay (Hero Card), Thanh yêu cầu AI biên soạn đề mới không trùng lặp và Kho đề thi theo ngày có bộ lọc Đã làm / Chưa làm.",
+    "Sửa lỗi bảng điều khiển cài đặt PWA: Đồng bộ toàn diện các tab chuyển đổi (Windows/PC, Android, iOS), hỗ trợ cài đặt 1-chạm (triggerNativePWAInstall).",
+    "Chuẩn hóa dữ liệu ngữ nghĩa học: Loại bỏ các từ gán ép sai lệch trong phân cấp CEFR và collocations (khắc phục lỗi chèn 'passion' vào danh từ khác), đảm bảo đồng nghĩa và trái nghĩa bám sát ngữ cảnh thực tế.",
+    "Nâng cấp bộ máy dịch nghĩa tiếng Việt đa tầng: Tích hợp Google Translate + Dictionary API + Datamuse + MyMemory + Gemini AI, tự động chữa lành các thẻ dính placeholder hoặc lỗi tra cứu.",
+    "Hoàn thiện 100% liên kết DOM và phương thức gọi sự kiện trên toàn bộ 13 phân hệ của ứng dụng."
   ]
 }
