@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.8 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.9 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3695,7 +3695,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.8 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.9 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -36163,7 +36163,7 @@ Yêu cầu output STRICTLY là một JSON object:
               if (fcAntEl) fcAntEl.innerHTML = this.formatCefrSynAntHtml(card.antonyms, 'ant');
               document.getElementById('fc-collocations').innerText = card.collocations;
             }
-            this.enrollExtractedCefrWords(card.word, card.meaningVi, card.type, card.synonyms, card.antonyms, card.collocations);
+            // Bỏ auto-enroll khi lật flashcard để tránh tự nhân bản thẻ rác
           }).catch(() => {}).finally(() => { card._enriching = false; });
         }
 
@@ -36931,10 +36931,7 @@ Yêu cầu output STRICTLY là một JSON object:
             if (typeEl) typeEl.innerText = item.type;
           }
 
-          // Tự động nạp các từ vựng này vào danh sách thẻ học của học sinh
-          this.enrollExtractedCefrWords(item.word, item.meaningVi, item.type, item.synonyms, item.antonyms, item.collocations);
-          await this.enrollWordFamilyMembers(item.word, item.meaningVi, item.type);
-
+          // Tự động cập nhật giao diện modal chi tiết từ vựng
           this.showToast(`✨ Đã tự động cập nhật đầy đủ từ đồng nghĩa, trái nghĩa & collocations cho "${item.word}"!`, 'success');
         } catch (e) {
           console.warn('Lỗi auto-enrich word, kích hoạt fallback CEFR thông minh:', e);
@@ -39331,7 +39328,9 @@ Trả về DUY NHẤT một JSON hợp lệ:
       /* =================================================== */
       upsertVocabCard(cardData) {
         if (!cardData || !cardData.word) return { isNew: false, merged: false };
-        if (!this.isValidEnglishVocab(cardData.word)) return { isNew: false, merged: false };
+        const cleanW = this.sanitizeWebVocabHeadword(cardData.word);
+        if (!cleanW || !this.isValidEnglishVocab(cleanW)) return { isNew: false, merged: false };
+        cardData.word = cleanW;
         const normKey = this.normalizeWordKey(cardData.word);
         if (!normKey) return { isNew: false, merged: false };
 
@@ -39757,8 +39756,8 @@ Trả về DUY NHẤT một JSON hợp lệ:
         // 3. Loại bỏ mã phân cấp CEFR đứng riêng lẻ (VD: 'A1', 'A2', 'B1', 'B2', 'C1', 'C2')
         if (/^[a-cA-C][1-2]$/.test(trimmed)) return false;
 
-        // 4. Loại bỏ từ loại viết tắt đứng riêng lẻ (VD: 'n.', 'v.', 'adj', 'adv', 'prep')
-        if (/^(noun|verb|adj|adv|prep|pron|conj|interj|n|v|adj\.|adv\.|prep\.|phr\s*v)$/i.test(trimmed)) return false;
+        // 4. Loại bỏ từ loại viết tắt đứng riêng lẻ (VD: 'n.', 'v.', 'adj', 'adv', 'prep', 'v.t.', 'v.i.')
+        if (/^(noun|verb|adj|adv|prep|pron|conj|interj|n|v|adj\.|adv\.|prep\.|phr\s*v|v\.t\.|v\.i\.)$/i.test(trimmed)) return false;
 
         // 5. Bắt buộc phải chứa ít nhất 1 chữ cái tiếng Anh [a-zA-Z]
         if (!/[a-zA-Z]/.test(trimmed)) return false;
@@ -39766,7 +39765,54 @@ Trả về DUY NHẤT một JSON hợp lệ:
         // 6. Loại bỏ các nhãn tiêu đề hệ thống (VD: 'synonym', 'antonym', 'collocation', 'definition')
         if (/^(synonym|synonyms|antonym|antonyms|collocation|collocations|definition|meaning|example|vietnamese|english|word|level|symbol)$/i.test(trimmed)) return false;
 
+        // 7. Loại bỏ các mảnh giới từ đứng riêng lẻ bị dính dấu gạch từ mạng (VD: '-with', 'with-', '-to', '-in', '-on', '-at', '-for')
+        if (/^[\-\~]?(?:with|to|for|about|in|on|at|of|from|by|into|over|off|out|up|down|away|onto|upon)[\-\~]?$/i.test(trimmed)) return false;
+
+        // 8. Loại bỏ web URLs, email và boilerplate quảng cáo copy từ web
+        if (/https?:\/\/|www\.|@|\.com|\.org|\.net/i.test(trimmed)) return false;
+        if (/\b(?:click\s+(?:here|to|below)|listen(?:\s+to)?|pronunciation|all\s+rights\s+reserved|cambridge|oxford|quizlet|read\s+more|view\s+full|subscribe|privacy\s+policy|terms\s+of\s+service)\b/i.test(trimmed)) return false;
+
         return true;
+      }
+
+      /* BỘ LÀM SẠCH & CHỮA LÀNH TỪ VỰNG DÍNH KÝ TỰ LẠ / RÁC TỪ MẠNG (AI LEXICAL SANITIZER) */
+      sanitizeWebVocabHeadword(rawWord) {
+        if (!rawWord || typeof rawWord !== 'string') return '';
+        let t = rawWord.trim();
+
+        // 1. Xóa HTML tags & entities
+        t = t.replace(/<[^>]+>/g, ' ');
+        t = t.replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&quot;/gi, '"');
+
+        // 2. Bỏ URL & Web link
+        if (/https?:\/\/|www\.|@/i.test(t)) return '';
+
+        // 3. Bỏ số thứ tự đầu dòng: "1.", "1)", "a.", "•", "*", "-", "~"
+        t = t.replace(/^(?:\d+[\.\)]|[a-zA-Z][\.\)]|[•\*\-\~\+—–#>])+\s*/, '').trim();
+
+        // 4. Chữa lành giới từ trong ngoặc copy từ từ điển: "interfere (-with)" -> "interfere with"
+        t = t.replace(/\(\s*[\-\~]?\s*(with|to|for|about|in|on|at|of|from|by|into|over|off|out|up|down|away|onto|upon)\s*\)/gi, ' $1');
+
+        // 5. Chữa lành từ vựng dính gạch nối giới từ: "deal -with" -> "deal with", "comply -with" -> "comply with"
+        t = t.replace(/\s+[\-\~]\s*(with|to|for|about|in|on|at|of|from|by|into|over|off|out|up|down|away|onto|upon)\b/gi, ' $1');
+
+        // 6. Xóa phiên âm /.../ hoặc [...]
+        t = t.replace(/\/[^\/]+\/|\[[^\]]+\]/g, ' ').trim();
+
+        // 7. Xóa ghi chú đối tượng trong ngoặc: (sb/sth), (someone), (something), (oneself), (doing sth), (V-ing)
+        t = t.replace(/\(\s*(?:sb\/sth|sth\/sb|sb|sth|someone|something|oneself|doing sth|v\-ing|ving)\s*\)/gi, '');
+
+        // 8. Xóa ghi chú từ loại trong ngoặc: (v), (n), (adj), (adv), (prep), (v.t.), (v.i.), (C), (U), (T), (I)
+        t = t.replace(/\(\s*(?:noun|verb|adj|adv|prep|pron|conj|interj|v\.t\.|v\.i\.|v|n|adj\.|adv\.|c|u|t|i|formal|informal|slang|uk|us)\s*\)/gi, '');
+
+        // 9. Xóa chú thích từ loại đứng cuối dòng không ngoặc: "AIDS n." -> "AIDS", "interfere v." -> "interfere"
+        t = t.replace(/\s+(?:noun|verb|adj|adv|prep|pron|conj|interj|v\.t\.|v\.i\.|v|n|adj\.|adv\.|prep\.)\.?$/gi, '').trim();
+
+        // 10. Xóa các ký tự thừa ở đầu và cuối từ (dấu nháy, ngoặc, gạch nối, dấu hai chấm...)
+        t = t.replace(/^[\s\-\~:;.,\(\)\[\]"\'“”‘’]+|[\s\-\~:;.,\(\)\[\]"\'“”‘’]+$/g, '').trim();
+        t = t.replace(/\s+/g, ' ').trim();
+
+        return t;
       }
 
       /* ========================================================================== */
@@ -39978,47 +40024,70 @@ Trả về DUY NHẤT một JSON hợp lệ:
         // Tự động gộp tất cả các từ trùng lặp làm 1 thẻ duy nhất
         const mergedDuplicatesCount = this.mergeDuplicateVocabCards(false);
 
-        // Lọc sạch các thẻ từ rác / không hợp lệ
+        let healedCount = 0;
+        // Lọc sạch các thẻ từ rác / không hợp lệ & tự động chữa lành từ vựng dính ký tự mạng
         this.vocabList = this.vocabList.filter(card => {
           if (!card || !card.word) return false;
           if (card._enriching) delete card._enriching;
-          const isValid = this.isValidEnglishVocab(card.word);
-          if (!isValid) {
+
+          // Tự động làm sạch và chữa lành từ vựng dính ký tự lạ hoặc dính '-with'
+          const origWord = card.word;
+          const cleaned = this.sanitizeWebVocabHeadword(origWord);
+
+          if (!cleaned || !this.isValidEnglishVocab(cleaned)) {
+            if (removedSamples.length < 6) removedSamples.push(origWord);
+            return false; // Xóa bỏ từ rác (như "2a", "32", "81", "88", "98", "a1", "-with", "with-", URL, web boilerplate)
+          }
+
+          if (cleaned !== origWord) {
+            card.word = cleaned;
+            healedCount++;
+          }
+
+          // 1. Loại bỏ triệt để các thẻ sinh ra do dính lỗi 'aboutprep'
+          const hasAboutPrep = (
+            card.word.toLowerCase().includes('aboutprep') ||
+            (card.wordFamilyRoot && card.wordFamilyRoot.toLowerCase().includes('aboutprep')) ||
+            (card.meaningVi && card.meaningVi.toLowerCase().includes('aboutprep')) ||
+            (card.meaningEn && card.meaningEn.toLowerCase().includes('aboutprep')) ||
+            (card.topicLabel && card.topicLabel.toLowerCase().includes('aboutprep')) ||
+            (card.collocations && card.collocations.toLowerCase().includes('aboutprep')) ||
+            (card.example && card.example.toLowerCase().includes('aboutprep')) ||
+            (card.mnemonic && card.mnemonic.toLowerCase().includes('aboutprep'))
+          );
+          if (hasAboutPrep) {
             if (removedSamples.length < 6) removedSamples.push(card.word);
             return false;
           }
-          // Loại bỏ các từ rác có chữ 'aboutprep' trong từ hoặc thẻ lỗi
-          if (card.word.toLowerCase().includes('aboutprep')) {
+
+          // 2. Loại bỏ các thẻ con sinh ra từ các từ gốc không hợp lệ (như B2, A1, AIDS n., số thứ tự)
+          if (card.meaningVi && /(?:Đồng nghĩa|Trái nghĩa)\s*\([^)]*\)\s*với\s*"?(?:[a-cA-C][1-2]|\d+|[a-zA-Z]\d+|\d+[a-zA-Z]|AIDS\s*n\.|aboutprep)/i.test(card.meaningVi)) {
             if (removedSamples.length < 6) removedSamples.push(card.word);
             return false;
           }
-          if (card.meaningVi && (card.meaningVi.includes('với "B2": B2') || card.meaningVi.includes('với "A1": A1'))) {
+
+          // 3. Loại bỏ thẻ nếu word là số hoặc ký hiệu câu hỏi hoặc CEFR level
+          if (/^\d+$|^\d+[a-zA-Z]$|^[a-zA-Z]\d+$|^[a-cA-C][1-2]$/i.test(card.word)) {
             if (removedSamples.length < 6) removedSamples.push(card.word);
             return false;
           }
-          // Tự động chữa lành nhãn và placeholder nếu dính 'aboutprep'
-          if (card.topicLabel && card.topicLabel.includes('aboutprep')) {
-            card.topicLabel = '📓 Từ Sổ Tay';
+
+          // 4. Chữa lành thẻ nếu collocations chứa số hoặc từ rác
+          if (card.collocations) {
+            const collTokens = card.collocations.split(/[,;\n]/)
+              .map(c => this.sanitizeWebVocabHeadword(c))
+              .filter(c => this.isValidEnglishVocab(c) && !/\d/.test(c) && !c.toLowerCase().includes('aboutprep'));
+            card.collocations = [...new Set(collTokens)].join(', ') || card.word;
           }
-          if (card.wordFamilyRoot && card.wordFamilyRoot.includes('aboutprep')) {
-            delete card.wordFamilyRoot;
-          }
-          if (card.meaningVi && (card.meaningVi.includes('aboutprep') || this.isPlaceholderMeaning(card.meaningVi, card.word))) {
+
+          // 5. Chữa lành meaningVi nếu còn dính placeholder cho từ hợp lệ
+          if (this.isPlaceholderMeaning(card.meaningVi, card.word)) {
             if (typeof DEFAULT_VOCABULARY !== 'undefined') {
               const dm = DEFAULT_VOCABULARY.find(m => m.word && m.word.toLowerCase() === card.word.toLowerCase());
               if (dm && dm.meaningVi && !this.isPlaceholderMeaning(dm.meaningVi, card.word)) {
                 card.meaningVi = dm.meaningVi;
               }
             }
-          }
-          if (card.meaningEn && card.meaningEn.includes('aboutprep')) {
-            card.meaningEn = `Key vocabulary item: ${card.word}`;
-          }
-          if (card.collocations && card.collocations.includes('aboutprep')) {
-            card.collocations = card.word;
-          }
-          if (card.mnemonic && card.mnemonic.includes('aboutprep')) {
-            card.mnemonic = `Ghi nhớ ngữ cảnh và cách dùng của từ "${card.word}" trong đề thi THPTQG.`;
           }
           return true;
         });
@@ -40580,7 +40649,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.7.8')) return caches.delete(c);
+                if (!c.includes('v1.7.9')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -42512,24 +42581,48 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
 
       parseManualWordsInput(rawText) {
         if (!rawText || typeof rawText !== 'string') return [];
-        const tokens = rawText.split(/[,;\n\r\t\/]+/);
-        const cleaned = [];
-        for (let t of tokens) {
-          let c = t.trim().replace(/^(?:\d+[\.\)]|\-|\*|["'“”‘’])+\s*/, '');
-          c = c.replace(/["'“”‘’]+$/, '').trim();
-          if (this.isValidEnglishVocab(c)) {
-            cleaned.push(c);
+        const lines = rawText.split(/[\n\r]+/);
+        const candidateItems = [];
+
+        for (let line of lines) {
+          line = line.trim();
+          if (!line) continue;
+
+          // Xử lý các dòng có định dạng: "word : meaning", "word = meaning", "word — meaning", "word 	 meaning"
+          const sepMatch = line.match(/^(.+?)\s*(?::|=|—|–|\t)\s*(.+)$/);
+          // Xử lý dấu gạch ngang phân tách có nghĩa tiếng Việt: "creative - sáng tạo"
+          const dashMatch = line.match(/^(.+?)\s+-\s+(.+)$/);
+
+          if (sepMatch) {
+            candidateItems.push({ rawEn: sepMatch[1], rawVi: sepMatch[2] });
+          } else if (dashMatch && /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(dashMatch[2])) {
+            candidateItems.push({ rawEn: dashMatch[1], rawVi: dashMatch[2] });
+          } else {
+            // Dòng chứa nhiều từ ngăn cách bởi dấu phẩy hoặc chấm phẩy
+            const subTokens = line.split(/[,;]+/);
+            for (const st of subTokens) {
+              if (st.trim()) candidateItems.push({ rawEn: st.trim(), rawVi: '' });
+            }
           }
         }
+
         const seen = new Set();
         const result = [];
-        for (const w of cleaned) {
-          const low = w.toLowerCase();
-          if (!seen.has(low)) {
-            seen.add(low);
-            result.push(w);
-          }
+
+        for (const item of candidateItems) {
+          const cleanW = this.sanitizeWebVocabHeadword(item.rawEn);
+          if (!cleanW || !this.isValidEnglishVocab(cleanW)) continue;
+
+          const norm = this.normalizeWordKey(cleanW);
+          if (seen.has(norm)) continue;
+          seen.add(norm);
+
+          result.push({
+            word: cleanW,
+            meaningVi: (item.rawVi || '').trim()
+          });
         }
+
         return result;
       }
 
@@ -42628,7 +42721,9 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         }
 
         for (let i = 0; i < words.length; i++) {
-          const w = words[i];
+          const item = words[i];
+          const w = (typeof item === 'object' && item !== null && item.word) ? item.word : item;
+          const customVi = (typeof item === 'object' && item !== null && item.meaningVi) ? item.meaningVi : '';
           const currentTotalIdx = alreadyProcessed + i + 1;
           const pct = Math.round((currentTotalIdx / total) * 100);
 
@@ -42659,7 +42754,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
               this.autoEnrichModalWord(existing);
             } else {
               // Từ mới -> Phân tích toàn diện bằng Rich Lexical Engine
-              const rich = await this.fetchRichLexicalData(w);
+              const rich = await this.fetchRichLexicalData(w, customVi);
               if (rich) {
                 const newCard = this.upsertVocabCard({
                   word: rich.word || w,
@@ -43931,17 +44026,24 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
       }
 
       async enrollWordFamilyMembers(rootWord, familyInput, detectedType = '') {
-        if (!rootWord) return 0;
+        if (!rootWord || typeof rootWord !== 'string') return 0;
+        const cleanRoot = this.sanitizeWebVocabHeadword(rootWord);
+        if (!cleanRoot || !this.isValidEnglishVocab(cleanRoot)) return 0;
+        if (cleanRoot.toLowerCase().includes('aboutprep')) return 0;
+
         let family = null;
         if (typeof familyInput === 'object' && familyInput !== null) {
           family = familyInput;
         } else {
-          family = await this.resolveWordFamily(rootWord, familyInput || '', detectedType);
+          family = await this.resolveWordFamily(cleanRoot, familyInput || '', detectedType);
         }
         if (!family) return 0;
 
-        const rootNorm = this.normalizeWordKey(rootWord);
-        const canonicalRoot = family.root || rootWord;
+        const rootNorm = this.normalizeWordKey(cleanRoot);
+        const canonicalRoot = this.sanitizeWebVocabHeadword(family.root || cleanRoot);
+        if (!canonicalRoot || !this.isValidEnglishVocab(canonicalRoot) || canonicalRoot.toLowerCase().includes('aboutprep')) {
+          return 0;
+        }
         let addedCount = 0;
         const addedWords = [];
 
@@ -43959,8 +44061,8 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
           const viVal = family[cfg.viKey] || '';
 
           for (const w of words) {
-            const cleanW = w.trim().replace(/^["']+|["']+$/g, '');
-            if (!cleanW || cleanW.length < 2) continue;
+            const cleanW = this.sanitizeWebVocabHeadword(w);
+            if (!cleanW || !this.isValidEnglishVocab(cleanW) || /\d/.test(cleanW) || cleanW.toLowerCase().includes('aboutprep')) continue;
             const norm = this.normalizeWordKey(cleanW);
 
             if (norm === rootNorm) continue; // Bỏ qua từ đang xem
@@ -44199,8 +44301,11 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
 
       /* TỰ ĐỘNG BÓC TÁCH VÀ THÊM TẤT CẢ CÁC TỪ ĐỒNG NGHĨA/TRÁI NGHĨA/COLLOCATIONS VÀO APP */
       enrollExtractedCefrWords(rootWord, rootMeaningVi, rootType, synonymsStr, antonymsStr, collocationsStr) {
-        if (!rootWord) return 0;
-        const rootNorm = this.normalizeWordKey(rootWord);
+        if (!rootWord || typeof rootWord !== 'string') return 0;
+        const cleanRoot = this.sanitizeWebVocabHeadword(rootWord);
+        if (!cleanRoot || !this.isValidEnglishVocab(cleanRoot)) return 0;
+        if (cleanRoot.toLowerCase().includes('aboutprep')) return 0;
+        const rootNorm = this.normalizeWordKey(cleanRoot);
         let addedCount = 0;
 
         // 1. Phân tách và nạp các từ Đồng Nghĩa theo từng cấp độ A1 -> C1
@@ -44208,8 +44313,8 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         if (synLevels) {
           for (const [level, words] of Object.entries(synLevels)) {
             words.forEach(w => {
-              const cleanW = w.trim().replace(/^["']+|["']+$/g, '');
-              if (!cleanW || !this.isValidEnglishVocab(cleanW)) return;
+              const cleanW = this.sanitizeWebVocabHeadword(w);
+              if (!cleanW || !this.isValidEnglishVocab(cleanW) || /\d/.test(cleanW) || cleanW.toLowerCase().includes("aboutprep")) return;
               const norm = this.normalizeWordKey(cleanW);
               if (norm === rootNorm) return;
 
@@ -44223,15 +44328,15 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                   level: level,
                   topic: 'topic_notebook',
                   topicLabel: `🟢 Đồng Nghĩa (${level})`,
-                  meaningVi: `Đồng nghĩa (${level}) với "${rootWord}": ${rootMeaningVi || cleanW}`,
-                  meaningEn: `Synonym (${level}) of "${rootWord}"`,
-                  cloze: `The ${level} word [ ${cleanW} ] is synonymous with "${rootWord}".`,
-                  example: `You can use "${cleanW}" (${level}) in place of "${rootWord}" in this context.`,
-                  exampleVi: `Từ vựng đồng nghĩa cấp độ ${level} mở rộng từ "${rootWord}".`,
-                  synonyms: rootWord,
+                  meaningVi: `Đồng nghĩa (${level}) với "${cleanRoot}": ${rootMeaningVi || cleanW}`,
+                  meaningEn: `Synonym (${level}) of "${cleanRoot}"`,
+                  cloze: `The ${level} word [ ${cleanW} ] is synonymous with "${cleanRoot}".`,
+                  example: `You can use "${cleanW}" (${level}) in place of "${cleanRoot}" in this context.`,
+                  exampleVi: `Từ vựng đồng nghĩa cấp độ ${level} mở rộng từ "${cleanRoot}".`,
+                  synonyms: cleanRoot,
                   antonyms: '',
-                  collocations: rootWord ? `${cleanW}, ${rootWord}` : '',
-                  mnemonic: `Ghi nhớ từ đồng nghĩa cấp độ ${level} "${cleanW}" đi kèm với từ gốc "${rootWord}".`,
+                  collocations: cleanRoot ? `${cleanW}, ${cleanRoot}` : '',
+                  mnemonic: `Ghi nhớ từ đồng nghĩa cấp độ ${level} "${cleanW}" đi kèm với từ gốc "${cleanRoot}".`,
                   deck: 'notebook',
                   status: 'due',
                   due: true,
@@ -44249,8 +44354,8 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         if (antLevels) {
           for (const [level, words] of Object.entries(antLevels)) {
             words.forEach(w => {
-              const cleanW = w.trim().replace(/^["']+|["']+$/g, '');
-              if (!cleanW || !this.isValidEnglishVocab(cleanW)) return;
+              const cleanW = this.sanitizeWebVocabHeadword(w);
+              if (!cleanW || !this.isValidEnglishVocab(cleanW) || /\d/.test(cleanW) || cleanW.toLowerCase().includes("aboutprep")) return;
               const norm = this.normalizeWordKey(cleanW);
               if (norm === rootNorm) return;
 
@@ -44264,15 +44369,15 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                   level: level,
                   topic: 'topic_notebook',
                   topicLabel: `🔴 Trái Nghĩa (${level})`,
-                  meaningVi: `Trái nghĩa (${level}) với "${rootWord}"`,
-                  meaningEn: `Antonym (${level}) of "${rootWord}"`,
-                  cloze: `The ${level} word [ ${cleanW} ] is opposite in meaning to "${rootWord}".`,
-                  example: `In contrast to "${rootWord}", we can say "${cleanW}".`,
-                  exampleVi: `Từ vựng trái nghĩa cấp độ ${level} mở rộng từ "${rootWord}".`,
+                  meaningVi: `Trái nghĩa (${level}) với "${cleanRoot}"`,
+                  meaningEn: `Antonym (${level}) of "${cleanRoot}"`,
+                  cloze: `The ${level} word [ ${cleanW} ] is opposite in meaning to "${cleanRoot}".`,
+                  example: `In contrast to "${cleanRoot}", we can say "${cleanW}".`,
+                  exampleVi: `Từ vựng trái nghĩa cấp độ ${level} mở rộng từ "${cleanRoot}".`,
                   synonyms: '',
-                  antonyms: rootWord,
+                  antonyms: cleanRoot,
                   collocations: '',
-                  mnemonic: `Ghi nhớ từ trái nghĩa cấp độ ${level} "${cleanW}" đối lập với từ gốc "${rootWord}".`,
+                  mnemonic: `Ghi nhớ từ trái nghĩa cấp độ ${level} "${cleanW}" đối lập với từ gốc "${cleanRoot}".`,
                   deck: 'notebook',
                   status: 'due',
                   due: true,
@@ -44287,9 +44392,10 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
 
         // 3. Phân tách và nạp các Collocations
         if (collocationsStr && typeof collocationsStr === 'string') {
-          const colList = collocationsStr.split(/[,;\n]/).map(c => c.trim().replace(/^["']+|["']+$/g, '')).filter(Boolean);
+          const colList = collocationsStr.split(/[,;\n]/).map(c => this.sanitizeWebVocabHeadword(c)).filter(Boolean);
           colList.forEach(c => {
             if (!c || c.length < 3) return;
+            if (!this.isValidEnglishVocab(c) || /\d/.test(c) || c.toLowerCase().includes('aboutprep')) return;
             const norm = this.normalizeWordKey(c);
             if (norm === rootNorm) return;
 
@@ -44303,15 +44409,15 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                 level: 'B2',
                 topic: 'topic_collocation',
                 topicLabel: '🔗 Collocation Mở Rộng',
-                meaningVi: `Cụm từ thông dụng đi với "${rootWord}"`,
-                meaningEn: `Common collocation with "${rootWord}"`,
+                meaningVi: `Cụm từ thông dụng đi với "${cleanRoot}"`,
+                meaningEn: `Common collocation with "${cleanRoot}"`,
                 cloze: `Complete the collocation: [ ${c} ].`,
                 example: `Remember to use the phrase "${c}" in your exam.`,
-                exampleVi: `Cụm từ hay gặp trong đề thi THPT Quốc Gia với "${rootWord}".`,
+                exampleVi: `Cụm từ hay gặp trong đề thi THPT Quốc Gia với "${cleanRoot}".`,
                 collocations: c,
                 synonyms: '',
                 antonyms: '',
-                mnemonic: `Cụm từ quan trọng ăn điểm trong bài thi THPTQG với "${rootWord}".`,
+                mnemonic: `Cụm từ quan trọng ăn điểm trong bài thi THPTQG với "${cleanRoot}".`,
                 deck: 'collocation',
                 status: 'due',
                 due: true,
@@ -46917,7 +47023,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.8</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.9</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

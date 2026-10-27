@@ -1,13 +1,14 @@
 {
-  "version": "1.7.8",
-  "versionCode": 10618,
+  "version": "1.7.9",
+  "versionCode": 10619,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.7.8: Cơ Chế Bảo Lưu Hiện Trạng & Tiếp Tục Công Việc Xuyên F5 (Full State Persistence & Background Task Recovery)",
+  "title": "Bản Cập Nhật v1.7.9: Bộ Lọc Quét Dọn & Chữa Lành Từ Vựng Mạng Thông Minh (AI Lexical Sanitizer & Web Artifact Stripper)",
   "highlights": [
-    "Bảo lưu hiện trạng màn hình 100% khi nhấn F5 (Persistent View State): Người dùng đang ở Kho Từ Vựng, Smart Flashcards, Phòng Thi THPTQG, Ngữ Pháp hay Dịch Thuật... khi nhấn F5 hoặc tải lại trang thì hệ thống vẫn giữ nguyên màn hình đó thay vì bị văng về Bảng điều khiển.",
-    "Khôi phục bản nháp ô nhập từ vựng thủ công (Manual Input Draft Auto-Save): Bất kỳ từ vựng hay đoạn văn bản nào đang gõ dở trong khung nhập đa từ của Kho Từ Vựng đều được tự động lưu tạm; khi F5 xong nội dung vẫn hiển thị đầy đủ, không sợ mất mát dữ liệu.",
-    "Hàng đợi công việc chạy ngầm xuyên F5 (Persistent Background Batch Queue): Khi gửi danh sách nhiều từ vựng cho AI phân tích, nếu lỡ bấm F5 giữa chừng, hệ thống đã lưu các từ đã xong vào bộ nhớ vĩnh viễn và tự động chạy tiếp các từ còn lại ngay khi vừa tải lại trang.",
-    "Ghi nhớ bộ lọc phân loại chuyên sâu: Tự động lưu và khôi phục chủ đề từ vựng (Sổ tay, Cộng đồng, Phrasal Verbs...), bộ lọc chữ cái (A-Z), chế độ sắp xếp và vị trí thẻ Flashcard đang học dở dang.",
-    "Tự động lưu bản nháp khung Dịch thuật & Trợ lý Đọc hiểu: Đoạn văn bản tiếng Anh trong ô Dịch Nhanh và Đọc Hiểu không bị xóa khi F5."
+    "Quét sạch triệt để các thẻ số và ký hiệu rác (2a, 32, 81, 88, 98, a1, B2...): Tự động nhận diện và xóa bỏ vĩnh viễn các thẻ rác sinh ra do copy dính số thứ tự danh sách, câu hỏi đề thi hoặc cấp độ CEFR.",
+    "Thanh lọc toàn bộ thẻ dính lỗi 'aboutprep' và từ họ hàng rác: Loại bỏ triệt để các thẻ placeholder bị lỗi nguồn gốc như 'Danh từ/khái niệm của aboutprep', trả lại sự trong sạch 100% cho kho từ vựng.",
+    "Chặn đứng vòng lặp tự sinh thẻ không mong muốn: Loại bỏ cơ chế tự động nhân bản thẻ khi mở xem chi tiết hoặc lật Flashcard, chỉ thêm từ mới khi người dùng chủ động tra cứu hoặc nạp danh sách thủ công.",
+    "Bộ lọc chữa lành từ vựng dính ký tự lạ từ mạng: Chữa lành các cụm từ dính gạch nối và giới từ như 'deal -with' ➔ 'deal with', 'interfere (-with)' ➔ 'interfere with', đồng thời loại bỏ triệt để các mảnh '-with', 'with-', '-to'.",
+    "Gọt sạch chú thích ngữ pháp, phiên âm và rác web: Loại bỏ gọn gàng các nhãn (sb/sth), (someone), (v), (n), [T], trailing POS như 'AIDS n.' ➔ 'AIDS', số thứ tự '1.', '•', URL và các câu boilerplate copy từ web từ điển.",
+    "Bóc tách thông minh từ và nghĩa tiếng Việt: Nhận diện tức thì định dạng 'Word : Meaning' hoặc 'Word - Meaning' để nạp nghĩa tiếng Việt nguyên bản mà không cần chờ dịch lại."
   ]
 }
