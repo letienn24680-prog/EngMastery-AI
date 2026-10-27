@@ -1,14 +1,13 @@
 {
-  "version": "1.7.7",
-  "versionCode": 10617,
+  "version": "1.7.8",
+  "versionCode": 10618,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.7.7: Đại Tu & Rà Soát Toàn Diện Hệ Thống (Full App Deep Audit & Complete Polish)",
+  "title": "Bản Cập Nhật v1.7.8: Cơ Chế Bảo Lưu Hiện Trạng & Tiếp Tục Công Việc Xuyên F5 (Full State Persistence & Background Task Recovery)",
   "highlights": [
-    "Khắc phục triệt để hiển thị bài đọc hiểu THPTQG: Bổ sung khung hiển thị văn bản bài đọc (thpt-current-passage-box) trong phòng thi thực chiến, học sinh dễ dàng vừa đọc vừa trả lời các câu hỏi đọc hiểu và đọc điền.",
-    "Khôi phục đầy đủ Sảnh Đề Thi THPTQG (thptqg-lobby): Tích hợp Thẻ đề thi hôm nay (Hero Card), Thanh yêu cầu AI biên soạn đề mới không trùng lặp và Kho đề thi theo ngày có bộ lọc Đã làm / Chưa làm.",
-    "Sửa lỗi bảng điều khiển cài đặt PWA: Đồng bộ toàn diện các tab chuyển đổi (Windows/PC, Android, iOS), hỗ trợ cài đặt 1-chạm (triggerNativePWAInstall).",
-    "Chuẩn hóa dữ liệu ngữ nghĩa học: Loại bỏ các từ gán ép sai lệch trong phân cấp CEFR và collocations (khắc phục lỗi chèn 'passion' vào danh từ khác), đảm bảo đồng nghĩa và trái nghĩa bám sát ngữ cảnh thực tế.",
-    "Nâng cấp bộ máy dịch nghĩa tiếng Việt đa tầng: Tích hợp Google Translate + Dictionary API + Datamuse + MyMemory + Gemini AI, tự động chữa lành các thẻ dính placeholder hoặc lỗi tra cứu.",
-    "Hoàn thiện 100% liên kết DOM và phương thức gọi sự kiện trên toàn bộ 13 phân hệ của ứng dụng."
+    "Bảo lưu hiện trạng màn hình 100% khi nhấn F5 (Persistent View State): Người dùng đang ở Kho Từ Vựng, Smart Flashcards, Phòng Thi THPTQG, Ngữ Pháp hay Dịch Thuật... khi nhấn F5 hoặc tải lại trang thì hệ thống vẫn giữ nguyên màn hình đó thay vì bị văng về Bảng điều khiển.",
+    "Khôi phục bản nháp ô nhập từ vựng thủ công (Manual Input Draft Auto-Save): Bất kỳ từ vựng hay đoạn văn bản nào đang gõ dở trong khung nhập đa từ của Kho Từ Vựng đều được tự động lưu tạm; khi F5 xong nội dung vẫn hiển thị đầy đủ, không sợ mất mát dữ liệu.",
+    "Hàng đợi công việc chạy ngầm xuyên F5 (Persistent Background Batch Queue): Khi gửi danh sách nhiều từ vựng cho AI phân tích, nếu lỡ bấm F5 giữa chừng, hệ thống đã lưu các từ đã xong vào bộ nhớ vĩnh viễn và tự động chạy tiếp các từ còn lại ngay khi vừa tải lại trang.",
+    "Ghi nhớ bộ lọc phân loại chuyên sâu: Tự động lưu và khôi phục chủ đề từ vựng (Sổ tay, Cộng đồng, Phrasal Verbs...), bộ lọc chữ cái (A-Z), chế độ sắp xếp và vị trí thẻ Flashcard đang học dở dang.",
+    "Tự động lưu bản nháp khung Dịch thuật & Trợ lý Đọc hiểu: Đoạn văn bản tiếng Anh trong ô Dịch Nhanh và Đọc Hiểu không bị xóa khi F5."
   ]
 }

@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.7 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.8 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3695,7 +3695,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.7 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.8 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -35342,6 +35342,8 @@ Yêu cầu output STRICTLY là một JSON object:
         this.initSavedG12Exams();
         this.initAutoUpdateSystem();
         this.initGlobalCommunitySync();
+        // KHÔI PHỤC HIỆN TRẠNG TRANG & HÀNG ĐỢI CÔNG VIỆC DỞ DANG KHI F5
+        this.initAppViewRestoration();
 
         // Throttled 60fps Scroll listener với passive mode chống lag
         let scrollTicking = false;
@@ -35526,7 +35528,7 @@ Yêu cầu output STRICTLY là một JSON object:
         if (dashStreak) dashStreak.innerText = `${this.stats.streakDays} Ngày`;
       }
 
-      navigate(viewId) {
+      navigate(viewId, isRestoring = false) {
         // Tự động đóng thanh menu sidebar trên mobile khi chọn mục
         this.closeSidebar();
 
@@ -35553,6 +35555,13 @@ Yêu cầu output STRICTLY là một JSON object:
         }
 
         this.currentView = viewId;
+        // BẢO LƯU HIỆN TRẠNG KHI F5: Lưu view đang đứng và đồng bộ URL hash
+        try {
+          localStorage.setItem('engMastery_active_view', viewId);
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', '#' + viewId);
+          }
+        } catch (_) {}
         document.querySelectorAll('.view-content').forEach(el => el.classList.add('hidden'));
         
         const targetView = document.getElementById(`view-${viewId}`);
@@ -35624,6 +35633,132 @@ Yêu cầu output STRICTLY là một JSON object:
         window.scrollTo(0, 0);
       }
 
+      initAppViewRestoration() {
+        // 1. Lắng nghe hashchange để hỗ trợ nút Back/Forward và URL navigation
+        window.addEventListener('hashchange', () => {
+          const h = (window.location.hash || '').replace(/^#/, '').trim();
+          if (h && h !== this.currentView && document.getElementById(`view-${h}`)) {
+            this.navigate(h, true);
+          }
+        });
+
+        // 2. Khôi phục và tự động lưu bản nháp ô nhập từ vựng thủ công trong Kho Từ Vựng
+        const manualTextarea = document.getElementById('hub-manual-input-textarea');
+        const savedManualDraft = localStorage.getItem('engMastery_manual_words_draft');
+        if (savedManualDraft && savedManualDraft.trim()) {
+          if (manualTextarea && !manualTextarea.value) {
+            manualTextarea.value = savedManualDraft;
+            this.onManualWordsInputChange(savedManualDraft);
+            this.toggleManualBatchVocabInput(true);
+          }
+        }
+
+        // 3. Khôi phục và tự động lưu bản nháp khung Dịch thuật, Đọc hiểu và Gia sư ảnh
+        const transInput = document.getElementById('trans-source-input');
+        if (transInput) {
+          const savedTrans = localStorage.getItem('engMastery_trans_draft');
+          if (savedTrans && !transInput.value) {
+            transInput.value = savedTrans;
+            const countEl = document.getElementById('trans-char-count');
+            if (countEl) countEl.innerText = `${savedTrans.length} ký tự`;
+          }
+          transInput.addEventListener('input', () => {
+            try { localStorage.setItem('engMastery_trans_draft', transInput.value); } catch (_) {}
+          });
+        }
+
+        const readingInput = document.getElementById('reading-passage-input');
+        if (readingInput) {
+          const savedReading = localStorage.getItem('engMastery_reading_draft');
+          if (savedReading && !readingInput.value) {
+            readingInput.value = savedReading;
+          }
+          readingInput.addEventListener('input', () => {
+            try { localStorage.setItem('engMastery_reading_draft', readingInput.value); } catch (_) {}
+          });
+        }
+
+        const photoInput = document.getElementById('photo-tutor-extracted-text');
+        if (photoInput) {
+          const savedPhoto = localStorage.getItem('engMastery_photo_draft');
+          if (savedPhoto && !photoInput.value) {
+            photoInput.value = savedPhoto;
+          }
+          photoInput.addEventListener('input', () => {
+            try { localStorage.setItem('engMastery_photo_draft', photoInput.value); } catch (_) {}
+          });
+        }
+
+        // 4. Khôi phục bộ lọc đang chọn của Kho Từ Vựng & Flashcards
+        const savedHubTopic = localStorage.getItem('engMastery_hub_topic');
+        if (savedHubTopic) {
+          this.hubCurrentTopic = savedHubTopic;
+        }
+        const savedHubLetter = localStorage.getItem('engMastery_hub_letter');
+        if (savedHubLetter) {
+          this.hubLetterFilter = savedHubLetter;
+        }
+        const savedHubSort = localStorage.getItem('engMastery_hub_sort');
+        if (savedHubSort) {
+          this.hubSortMode = savedHubSort;
+        }
+        const savedFcTopic = localStorage.getItem('engMastery_fc_topic');
+        if (savedFcTopic) {
+          this.currentVocabTopicFilter = savedFcTopic;
+        }
+        const savedFcIndex = parseInt(localStorage.getItem('engMastery_fc_index'), 10);
+        if (!isNaN(savedFcIndex) && savedFcIndex >= 0) {
+          this.currentCardIndex = savedFcIndex;
+        }
+
+        // 5. Khôi phục View mà học sinh đang đứng trước khi F5
+        const hashView = (window.location.hash || '').replace(/^#/, '').trim();
+        const savedView = localStorage.getItem('engMastery_active_view');
+        let targetView = 'dashboard';
+
+        if (hashView && document.getElementById(`view-${hashView}`)) {
+          targetView = hashView;
+        } else if (savedView && document.getElementById(`view-${savedView}`)) {
+          targetView = savedView;
+        }
+
+        if (targetView && targetView !== 'dashboard') {
+          console.log(`[StateRestore] F5 khôi phục nguyên vẹn màn hình: "${targetView}"`);
+          this.navigate(targetView, true);
+        }
+
+        // 6. Tự động kiểm tra và tiếp tục xử lý hàng đợi công việc nhập từ dở dang
+        this.checkAndResumeActiveBatchQueue();
+      }
+
+      checkAndResumeActiveBatchQueue() {
+        try {
+          const raw = localStorage.getItem('engMastery_active_batch_queue');
+          if (!raw) return;
+          const queue = JSON.parse(raw);
+          if (queue && Array.isArray(queue.words) && queue.words.length > 0) {
+            const count = queue.words.length;
+            const total = queue.total || count;
+            const processed = queue.processedCount || (total - count);
+            console.log(`[BatchQueue] F5 phục hồi: Tiếp tục phân tích & lưu ${count} từ còn lại (${processed}/${total})...`);
+
+            if (this.currentView === 'vocab-hub') {
+              this.toggleManualBatchVocabInput(true);
+            }
+
+            this.showToast(`⚡ Đang tiếp tục hoàn thành ${count} từ vựng dở dang trước khi F5 (đã xong ${processed}/${total} từ)...`, 'info');
+
+            // Tiếp tục chạy ngầm trong background sau khi DOM hoàn tất nạp
+            setTimeout(() => {
+              this.submitManualBatchWords(queue);
+            }, 700);
+          }
+        } catch (e) {
+          console.warn('Lỗi đọc hàng đợi nhập từ:', e);
+          try { localStorage.removeItem('engMastery_active_batch_queue'); } catch (_) {}
+        }
+      }
+
       openSidebar() {
         const sidebar = document.getElementById('app-sidebar');
         const backdrop = document.getElementById('sidebar-backdrop');
@@ -35678,6 +35813,7 @@ Yêu cầu output STRICTLY là một JSON object:
 
       setVocabTopicFilter(filter) {
         this.currentVocabTopicFilter = filter;
+        try { localStorage.setItem('engMastery_fc_topic', filter); } catch (_) {}
         document.querySelectorAll('.vocab-filter-btn').forEach(btn => {
           if (btn.dataset.filter === filter) {
             btn.classList.add('bg-primary', 'text-white', 'shadow-glow-primary');
@@ -35923,6 +36059,7 @@ Yêu cầu output STRICTLY là một JSON object:
 
         if (this.currentCardIndex >= this.filteredCards.length) this.currentCardIndex = 0;
         if (this.currentCardIndex < 0) this.currentCardIndex = 0;
+        try { localStorage.setItem('engMastery_fc_index', this.currentCardIndex); } catch (_) {}
 
         const card = this.filteredCards[this.currentCardIndex];
         this.isCardFlipped = false;
@@ -36410,6 +36547,7 @@ Yêu cầu output STRICTLY là một JSON object:
       setHubTopic(topicId) {
         this.hubCurrentPage = 1;
         this.hubCurrentTopic = topicId;
+        try { localStorage.setItem('engMastery_hub_topic', topicId); } catch (_) {}
         document.querySelectorAll('.hub-topic-btn').forEach(btn => {
           if (btn.dataset.topic === topicId) {
             btn.classList.add('bg-primary', 'text-white');
@@ -36446,12 +36584,14 @@ Yêu cầu output STRICTLY là một JSON object:
       onHubSortChange(val) {
         this.hubCurrentPage = 1;
         this.hubSortMode = val;
+        try { localStorage.setItem('engMastery_hub_sort', val); } catch (_) {}
         this.renderVocabHub();
       }
 
       setHubLetter(letter) {
         this.hubCurrentPage = 1;
         this.hubLetterFilter = letter;
+        try { localStorage.setItem('engMastery_hub_letter', letter); } catch (_) {}
         document.querySelectorAll('.hub-letter-btn').forEach(btn => {
           if (btn.dataset.letter === letter) {
             btn.className = 'hub-letter-btn px-3 py-1 rounded-xl font-black transition text-xs bg-primary text-white shrink-0';
@@ -36475,6 +36615,11 @@ Yêu cầu output STRICTLY là một JSON object:
         if (levelFilter) levelFilter.value = 'all';
         const sortSelect = document.getElementById('hub-sort-select');
         if (sortSelect) sortSelect.value = 'alpha-asc';
+        try {
+          localStorage.removeItem('engMastery_hub_topic');
+          localStorage.removeItem('engMastery_hub_letter');
+          localStorage.removeItem('engMastery_hub_sort');
+        } catch (_) {}
         document.querySelectorAll('.hub-letter-btn').forEach(btn => {
           if (btn.dataset.letter === 'all') {
             btn.className = 'hub-letter-btn px-3 py-1 rounded-xl font-black transition text-xs bg-primary text-white shrink-0';
@@ -40435,7 +40580,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.7.7')) return caches.delete(c);
+                if (!c.includes('v1.7.8')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -42389,6 +42534,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
       }
 
       onManualWordsInputChange(val) {
+        try { localStorage.setItem('engMastery_manual_words_draft', val || ''); } catch (_) {}
         const words = this.parseManualWordsInput(val);
         const counterEl = document.getElementById('hub-manual-words-count');
         const submitBtn = document.getElementById('btn-submit-manual-words');
@@ -42409,6 +42555,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         const textarea = document.getElementById('hub-manual-input-textarea');
         if (textarea) {
           textarea.value = '';
+          try { localStorage.removeItem('engMastery_manual_words_draft'); } catch (_) {}
           this.onManualWordsInputChange('');
           textarea.focus();
         }
@@ -42423,16 +42570,40 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         }
       }
 
-      async submitManualBatchWords() {
-        const textarea = document.getElementById('hub-manual-input-textarea');
-        if (!textarea) return;
-        const raw = textarea.value.trim();
-        const words = this.parseManualWordsInput(raw);
+      async submitManualBatchWords(resumeQueue = null) {
+        let words = [];
+        let total = 0;
+        let alreadyProcessed = 0;
+        let isResumed = false;
 
-        if (words.length === 0) {
-          this.showToast('Vui lòng nhập ít nhất 1 từ vựng hoặc cụm từ tiếng Anh!', 'warning');
-          textarea.focus();
-          return;
+        if (resumeQueue && Array.isArray(resumeQueue.words) && resumeQueue.words.length > 0) {
+          words = [...resumeQueue.words];
+          total = resumeQueue.total || words.length;
+          alreadyProcessed = resumeQueue.processedCount || (total - words.length);
+          isResumed = true;
+        } else {
+          const textarea = document.getElementById('hub-manual-input-textarea');
+          if (!textarea) return;
+          const raw = textarea.value.trim();
+          words = this.parseManualWordsInput(raw);
+
+          if (words.length === 0) {
+            this.showToast('Vui lòng nhập ít nhất 1 từ vựng hoặc cụm từ tiếng Anh!', 'warning');
+            textarea.focus();
+            return;
+          }
+          total = words.length;
+          alreadyProcessed = 0;
+
+          // BẢO LƯU CÔNG VIỆC XUYÊN F5: Lưu ngay hàng đợi vào persistent storage
+          try {
+            localStorage.setItem('engMastery_active_batch_queue', JSON.stringify({
+              words: words,
+              total: total,
+              processedCount: 0,
+              startedAt: Date.now()
+            }));
+          } catch (_) {}
         }
 
         const submitBtn = document.getElementById('btn-submit-manual-words');
@@ -42448,19 +42619,21 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         }
         if (progressBox) progressBox.classList.remove('hidden');
 
-        const total = words.length;
-        let successCount = 0;
+        let successCount = alreadyProcessed;
         let lastCreatedCardId = null;
         const processedWords = [];
 
-        this.showToast(`⚡ AI đang bắt đầu phân tích ${total} từ vựng (dịch nghĩa, bóc tách đồng/trái nghĩa, collocations)...`, 'info');
+        if (!isResumed) {
+          this.showToast(`⚡ AI đang bắt đầu phân tích ${total} từ vựng (dịch nghĩa, bóc tách đồng/trái nghĩa, collocations)...`, 'info');
+        }
 
-        for (let i = 0; i < total; i++) {
+        for (let i = 0; i < words.length; i++) {
           const w = words[i];
-          const pct = Math.round(((i + 1) / total) * 100);
+          const currentTotalIdx = alreadyProcessed + i + 1;
+          const pct = Math.round((currentTotalIdx / total) * 100);
 
           if (progressText) {
-            progressText.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-emerald-500"></i> <span>Đang xử lý ${i + 1}/${total}: "<strong>${w}</strong>"...</span>`;
+            progressText.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-emerald-500"></i> <span>Đang xử lý ${currentTotalIdx}/${total}: "<strong>${w}</strong>"...</span>`;
           }
           if (progressPct) progressPct.innerText = `${pct}%`;
           if (progressBar) progressBar.style.width = `${pct}%`;
@@ -42528,7 +42701,26 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
             console.warn(`Lỗi phân tích từ "${w}":`, err);
           }
 
-          if (total > 1) {
+          // CẬP NHẬT TIẾN ĐỘ PERSISTENT SAU MỖI TỪ ĐỂ F5 KHÔNG BỊ MẤT
+          const remainingWords = words.slice(i + 1);
+          if (remainingWords.length > 0) {
+            try {
+              localStorage.setItem('engMastery_active_batch_queue', JSON.stringify({
+                words: remainingWords,
+                total: total,
+                processedCount: currentTotalIdx,
+                startedAt: Date.now()
+              }));
+            } catch (_) {}
+          } else {
+            // Đã hoàn tất sạch hàng đợi
+            try {
+              localStorage.removeItem('engMastery_active_batch_queue');
+              localStorage.removeItem('engMastery_manual_words_draft');
+            } catch (_) {}
+          }
+
+          if (words.length > 1) {
             await new Promise(r => setTimeout(r, 60));
           }
         }
@@ -42546,9 +42738,16 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         this.hubCurrentPage = 1;
         this.renderVocabHub();
 
-        // Xóa trắng ô nhập sau khi đã nạp thành công
-        textarea.value = '';
-        this.onManualWordsInputChange('');
+        // Xóa trắng ô nhập và bản nháp sau khi đã nạp thành công
+        const textareaEl = document.getElementById('hub-manual-input-textarea');
+        if (textareaEl) {
+          textareaEl.value = '';
+          this.onManualWordsInputChange('');
+        }
+        try {
+          localStorage.removeItem('engMastery_manual_words_draft');
+          localStorage.removeItem('engMastery_active_batch_queue');
+        } catch (_) {}
 
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -46718,7 +46917,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.7</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.8</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
