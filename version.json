@@ -1,12 +1,11 @@
 {
-  "version": "1.9.4",
-  "versionCode": 11400,
-  "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.9.4: Mở Rộng 12 Chủ Đề Chuyên Sâu THPTQG & Bổ Sung Bộ Từ Vựng Thực Chiến",
-  "highlights": [
-    "Mở rộng toàn diện hệ thống 12 Chủ đề từ vựng chuyên sâu bám sát đề thi THPT Quốc Gia và chuẩn CEFR: Môi trường, Công nghệ AI, Học thuật, Kinh tế, Y tế, Xã hội, Tâm lý, Văn hóa, Du lịch, Giao tiếp, Vũ trụ và Pháp luật.",
-    "Bổ sung thanh duyệt chủ đề đa năng trên cả Kho Từ Vựng Chuyên Sâu và Thẻ Flashcard Thông Minh với huy hiệu đếm số lượng từ thời gian thực.",
-    "Nâng cấp Hộp thoại Chọn Chủ Đề Học (Topic Picker Modal) với giao diện thẻ trực quan, biểu tượng sinh động và giải thích chi tiết mục tiêu học tập.",
-    "Bổ sung 20 từ vựng cốt lõi điểm 9+ thuộc các chủ đề Du lịch, Văn hóa, Pháp luật & Vũ trụ, nâng tổng kho từ vựng lên 1.080+ từ."
+  "version": "1.9.5",
+  "buildDate": "2026-10-27",
+  "critical": true,
+  "changelog": [
+    "Khắc phục triệt để 100% lỗi thoát app bị mất từ vựng đã nhập với Hệ thống Bộ nhớ Vĩnh viễn Độc lập (Permanent Custom Storage & IndexedDB Dual-Layer).",
+    "Tích hợp toàn diện Bộ Từ vựng Chuẩn Oxford 3000 & Oxford 5000 (A1 -> C1) từ Đại học Oxford với 5.025 từ tra cứu tức thì.",
+    "Bổ sung 343 thẻ từ vựng thực chiến điểm 9+ kèm toàn bộ Đồng Nghĩa (ĐN), Trái Nghĩa (TN) và Collocations thành các thẻ học độc lập có đầy đủ nghĩa tiếng Việt.",
+    "Nâng tổng quy mô kho từ vựng cốt lõi lên 1.420+ từ chuẩn Bộ GD&ĐT & Oxford phân bổ đầy đủ trên 12 chủ đề thi."
   ]
 }
