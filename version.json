@@ -1,12 +1,12 @@
 {
-  "version": "1.9.2",
-  "versionCode": 11200,
+  "version": "1.9.3",
+  "versionCode": 11300,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.9.2: Tối Ưu Toàn Diện Chế Độ Xem \"Mới Tra Cứu / Mới Thêm\" & Khôi Phục Lịch Sử Tra Từ",
+  "title": "Bản Cập Nhật v1.9.3: Khắc Phục Triệt Để Hộp Thoại Cập Nhật Lặp Lại & Tối Ưu Làm Mới Trình Duyệt",
   "highlights": [
-    "Khắc phục triệt để chế độ xem \"Mới tra cứu / Mới thêm\": Tự động mở rộng và reset bộ lọc chữ cái (A-Z), ô tìm kiếm và bộ lọc cấp độ khi người dùng chọn chế độ xem mới nhất, đảm bảo hiển thị 100% các từ vừa tra cứu.",
-    "Khôi phục timestamp từ ID lịch sử: Tự động trích xuất mốc thời gian từ ID của tất cả từ vựng thủ công, từ đồng nghĩa/trái nghĩa CEFR và collocations tạo trước đó, giúp danh sách sắp xếp chính xác từ mới nhất đến cũ nhất.",
-    "Tự động ghi nhận mốc tra cứu tức thì: Khi người dùng tìm kiếm từ trong Kho Từ Vựng, bấm \"AI Tra & Lưu Ôn\", tra từ CEFR A1-C1 hay dịch nhanh, hệ thống lập tức đánh dấu mốc thời gian tra cứu và huy hiệu \"Vừa Tra Cứu\".",
-    "Phân định trực quan giữa \"✨ Mới Thêm\" và \"🕒 Vừa Tra Cứu\": Các từ vừa nạp trong phiên hiển thị huy hiệu xanh lá nổi bật, các từ vừa được tra cứu hiển thị huy hiệu tím than trực quan."
+    "Cơ chế ghi nhớ lựa chọn \"Để Sau\": Khi người dùng bấm bỏ qua cập nhật hoặc đóng hộp thoại, hệ thống ghi nhớ và tự động ẩn trong 24 giờ, tuyệt đối không làm phiền khi mở lại app hay chuyển tab.",
+    "Làm mới thông minh chống kẹt Cache: Khi bấm \"Cập Nhật Ngay\", ứng dụng tự động dọn sạch 100% bộ nhớ đệm Cache Storage cũ, kích hoạt Service Worker mới và nạp thẳng trang mới với tham số chống lưu cache trình duyệt.",
+    "So sánh phiên bản thông minh (Semantic Versioning): Chỉ kích hoạt thông báo khi phiên bản máy chủ thực sự lớn hơn phiên bản hiện tại, loại bỏ hoàn toàn tình trạng thông báo lặp lại sau khi đã cập nhật.",
+    "Bảo toàn 100% dữ liệu từ vựng cá nhân & đồng bộ đám mây xuyên suốt quá trình nâng cấp."
   ]
 }

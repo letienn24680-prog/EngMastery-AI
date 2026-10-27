@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.2 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.3 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3849,7 +3849,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.2 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.3 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -33254,7 +33254,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.9.2';
+        this.appVersion = '1.9.3';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -41495,10 +41495,10 @@ Trả về DUY NHẤT một JSON hợp lệ:
           localStorage.setItem('engMastery_last_seen_version', this.appVersion);
         } catch (e) {}
 
-        // Tự động kiểm tra bản cập nhật sau 2 giây khi mở ứng dụng
+        // Tự động kiểm tra bản cập nhật sau 3 giây khi mở ứng dụng
         setTimeout(() => {
           this.checkForAppUpdates(false);
-        }, 2000);
+        }, 3000);
 
         // Tự động kiểm tra mỗi khi học sinh quay lại app (mở khóa điện thoại / chuyển tab)
         document.addEventListener('visibilitychange', () => {
@@ -41512,10 +41512,26 @@ Trả về DUY NHẤT một JSON hợp lệ:
           this.checkForAppUpdates(false);
         });
 
-        // Định kỳ kiểm tra ngầm mỗi 10 phút một lần
+        // Định kỳ kiểm tra ngầm mỗi 15 phút một lần
         setInterval(() => {
           this.checkForAppUpdates(false);
-        }, 10 * 60 * 1000);
+        }, 15 * 60 * 1000);
+      }
+
+      // So sánh 2 chuỗi phiên bản ngữ nghĩa (Semantic Versioning: v1 > v2 => 1, v1 < v2 => -1, bằng nhau => 0)
+      compareVersions(v1, v2) {
+        if (!v1 || !v2) return 0;
+        const parse = v => String(v).replace(/^[^\d]*/, '').split('.').map(n => parseInt(n, 10) || 0);
+        const p1 = parse(v1);
+        const p2 = parse(v2);
+        const len = Math.max(p1.length, p2.length);
+        for (let i = 0; i < len; i++) {
+          const a = p1[i] || 0;
+          const b = p2[i] || 0;
+          if (a > b) return 1;
+          if (a < b) return -1;
+        }
+        return 0;
       }
 
       async checkForAppUpdates(isManual = false) {
@@ -41531,9 +41547,19 @@ Trả về DUY NHẤT một JSON hợp lệ:
           const res = await fetch(`./version.json?_t=${Date.now()}`, { cache: 'no-store' });
           if (res.ok) {
             const data = await res.json();
-            if (data && data.version && data.version !== this.appVersion) {
-              hasNewVersion = true;
-              updateData = data;
+            // CHỈ kích hoạt khi máy chủ có phiên bản CAO HƠN phiên bản đang chạy
+            if (data && data.version && this.compareVersions(data.version, this.appVersion) > 0) {
+              // Kiểm tra xem người dùng đã chọn "Để Sau" (bỏ qua) phiên bản này trong 24 giờ qua chưa
+              const dismissedKey = `engMastery_dismissed_update_${data.version}`;
+              const dismissedTime = parseInt(localStorage.getItem(dismissedKey) || '0', 10);
+              const oneDayMs = 24 * 60 * 60 * 1000;
+
+              if (!isManual && dismissedTime && (Date.now() - dismissedTime < oneDayMs)) {
+                console.log(`[Update Check] Đã bỏ qua thông báo cập nhật v${data.version} theo lựa chọn của người dùng trong 24h.`);
+              } else {
+                hasNewVersion = true;
+                updateData = data;
+              }
             }
           }
         } catch (err) {
@@ -41545,13 +41571,16 @@ Trả về DUY NHẤT một JSON hợp lệ:
           try {
             const reg = await navigator.serviceWorker.getRegistration();
             if (reg) {
-              if (reg.waiting) {
+              if (reg.waiting && hasNewVersion) {
+                // Đã có worker mới chờ sẵn và version.json xác nhận có bản mới
+              } else if (reg.waiting && !hasNewVersion && isManual) {
+                // Trường hợp kiểm tra thủ công và có worker mới chờ
                 hasNewVersion = true;
                 if (!updateData) {
                   updateData = {
-                    version: 'Mới nhất',
-                    title: 'Bản cập nhật mới đã sẵn sàng!',
-                    highlights: ['Tính năng tự động cập nhật', 'Gia cố dữ liệu học tập']
+                    version: this.appVersion,
+                    title: 'Bản vá dữ liệu & tối ưu hệ thống đã sẵn sàng!',
+                    highlights: ['Cập nhật bộ nhớ đệm ngoại tuyến', 'Tối ưu tốc độ phản hồi']
                   };
                 }
               } else {
@@ -41562,6 +41591,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
         }
 
         if (hasNewVersion && updateData) {
+          this._pendingUpdateData = updateData;
           this.showUpdateBanner(updateData);
         } else if (isManual) {
           this.showToast(`✨ Bạn đang sử dụng phiên bản mới nhất (v${this.appVersion})!`, 'success');
@@ -41601,34 +41631,71 @@ Trả về DUY NHẤT một JSON hợp lệ:
         if (!overlay) return;
         this.registerModalClose('modal-update-overlay');
         overlay.classList.add('hidden');
+
+        // Ghi nhớ việc người dùng đã bấm bỏ qua ("Để Sau" / Đóng) phiên bản này trong 24 giờ
+        const targetVer = (this._pendingUpdateData && this._pendingUpdateData.version) ? this._pendingUpdateData.version : null;
+        if (targetVer) {
+          try {
+            localStorage.setItem(`engMastery_dismissed_update_${targetVer}`, Date.now().toString());
+            console.log(`[Update] Đã lưu lựa chọn "Để Sau" cho phiên bản v${targetVer} (cooldown 24h).`);
+          } catch (e) {}
+        }
       }
 
       async applyPWAUpdate() {
         const btn = document.getElementById('btn-apply-update');
         if (btn) {
-          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang tải...';
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang tải bản mới...';
           btn.disabled = true;
         }
-        this.showToast('🚀 Đang kích hoạt bản cập nhật mới nhất...', 'info');
+        this.showToast('🚀 Đang xóa bộ đệm cũ và tải bản mới nhất...', 'info');
 
+        const targetVer = (this._pendingUpdateData && this._pendingUpdateData.version) ? this._pendingUpdateData.version : this.appVersion;
+
+        // Xóa sạch cờ dismissed cũ và cập nhật phiên bản đã thấy
+        try {
+          if (targetVer) {
+            localStorage.removeItem(`engMastery_dismissed_update_${targetVer}`);
+            localStorage.setItem('engMastery_last_seen_version', targetVer);
+          }
+        } catch (_) {}
+
+        // 1. Kích hoạt Service Worker mới và yêu cầu chiếm quyền điều khiển
         if ('serviceWorker' in navigator) {
           try {
-            const reg = await navigator.serviceWorker.getRegistration();
-            if (reg && reg.waiting) {
-              reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+            const regs = await navigator.serviceWorker.getRegistrations();
+            for (const r of regs) {
+              if (r.waiting) {
+                r.waiting.postMessage({ type: 'SKIP_WAITING' });
+              }
+              await r.update().catch(() => {});
             }
-            if ('caches' in window) {
-              const cacheNames = await caches.keys();
-              await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.9.2')) return caches.delete(c);
-              }));
-            }
-          } catch (e) {}
+          } catch (e) {
+            console.warn('[Update SW error]:', e);
+          }
         }
 
+        // 2. Xóa toàn bộ Caches cũ trong trình duyệt
+        if ('caches' in window) {
+          try {
+            const cacheNames = await caches.keys();
+            await Promise.all(cacheNames.map(c => caches.delete(c)));
+            console.log('[Update] Đã dọn sạch toàn bộ cache cũ.');
+          } catch (e) {
+            console.warn('[Update Cache error]:', e);
+          }
+        }
+
+        // 3. Tải lại trang với query param chống cache trình duyệt (Cache Buster)
         setTimeout(() => {
-          window.location.reload(true);
-        }, 500);
+          try {
+            const freshUrl = new URL(window.location.href);
+            freshUrl.searchParams.set('_v', Date.now().toString());
+            window.location.replace(freshUrl.toString());
+          } catch (_) {
+            window.location.reload();
+          }
+        }, 600);
       }
 
       openPWAInstallModal() {
@@ -48628,7 +48695,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.2</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.3</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
