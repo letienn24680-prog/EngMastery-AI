@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.5 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.6 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -1118,6 +1118,12 @@
             <button type="button" onclick="app.cleanInvalidVocabEntries(true)" class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white border border-rose-500/20 font-bold text-xs transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Quét toàn bộ hệ thống, tự động giữ lại từ vựng hợp lệ và xóa sạch các từ rác (như số thứ tự 81, 88, mã 2a, B2...)">
               <i class="fa-solid fa-broom"></i>
               <span>Quét & Dọn Từ Rác</span>
+            </button>
+
+            <!-- Merge Duplicate Words Button -->
+            <button type="button" onclick="app.mergeDuplicateVocabCards(true)" class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500 hover:text-white border border-indigo-500/20 font-bold text-xs transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Quét toàn bộ kho từ vựng và tự động gộp tất cả các từ bị trùng lặp làm 1 thẻ duy nhất, giữ nguyên nghĩa, đồng/trái nghĩa và tiến độ học">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Gộp Từ Trùng</span>
             </button>
 
             <!-- Sort Selector (Alphabet A-Z default) -->
@@ -3628,7 +3634,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.5 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.6 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -3662,6 +3668,10 @@
           <button type="button" onclick="app.cleanInvalidVocabEntries(true)" class="w-full py-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-xs cursor-pointer">
             <i class="fa-solid fa-broom"></i>
             <span>🧹 Quét & Tự Động Xóa Từ Rác (Số thứ tự, mã 2a, B2...)</span>
+          </button>
+          <button type="button" onclick="app.mergeDuplicateVocabCards(true)" class="w-full py-2.5 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500 hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-xs cursor-pointer">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>🗂 Quét & Tự Động Gộp Các Từ Bị Trùng Lặp Làm 1</span>
           </button>
         </div>
 
@@ -32977,7 +32987,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.7.5';
+        this.appVersion = '1.7.6';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -35314,6 +35324,8 @@ Yêu cầu output STRICTLY là một JSON object:
               this.vocabList = parsed;
               // Tự động quét và loại bỏ ngay các từ rác / không hợp lệ (số thứ tự, mã 2a, B2...)
               this.cleanInvalidVocabEntries(false);
+              // Tự động quét và gộp tất cả các từ trùng lặp làm 1 thẻ duy nhất
+              this.mergeDuplicateVocabCards(false);
               // Luôn đối chiếu và tự động bù đắp toàn bộ 1.060+ từ gốc chuẩn Bộ GD&ĐT còn thiếu
               if (typeof DEFAULT_VOCABULARY !== 'undefined' && Array.isArray(DEFAULT_VOCABULARY)) {
                 const existingKeys = new Set(this.vocabList.map(v => this.normalizeWordKey(v && v.word ? v.word : '')));
@@ -38874,6 +38886,261 @@ Trả về DUY NHẤT một JSON hợp lệ:
           .replace(/\s+/g, ' ');
       }
 
+      /* ========================================================================== */
+      /* THUẬT TOÁN QUÉT & TỰ ĐỘNG GỘP TỪ TRÙNG LẶP (VOCAB DEEP MERGE & DEDUPLICATION) */
+      /* ========================================================================== */
+
+      mergeMeaningVi(mean1, mean2) {
+        const isPh = (m) => {
+          if (!m || typeof m !== 'string') return true;
+          const low = m.toLowerCase();
+          return low.includes('đang cập nhật') || low.includes('tra cứu nhanh') || low.includes('biến thể của') || low.includes('danh từ/khái niệm của') || low.includes('user-created');
+        };
+        if (isPh(mean1) && !isPh(mean2)) return mean2.trim();
+        if (!isPh(mean1) && isPh(mean2)) return mean1.trim();
+        if (!mean1) return (mean2 || '').trim();
+        if (!mean2) return (mean1 || '').trim();
+        if (mean2.toLowerCase() === mean1.toLowerCase()) return mean1.trim();
+        if (mean1.toLowerCase().includes(mean2.toLowerCase().trim())) return mean1.trim();
+        if (mean2.toLowerCase().includes(mean1.toLowerCase().trim())) return mean2.trim();
+
+        const tokens1 = (mean1 || '').split(/[•|;\n]/).map(t => t.trim()).filter(Boolean);
+        const tokens2 = (mean2 || '').split(/[•|;\n]/).map(t => t.trim()).filter(Boolean);
+        const seen = new Set();
+        const res = [];
+        [...tokens1, ...tokens2].forEach(t => {
+          const low = t.toLowerCase();
+          if (!seen.has(low) && !isPh(t)) {
+            seen.add(low);
+            res.push(t);
+          }
+        });
+        return res.length > 0 ? res.join(' • ') : (mean1 || mean2 || '').trim();
+      }
+
+      mergeMeaningEn(en1, en2) {
+        const isPh = (m) => {
+          if (!m || typeof m !== 'string') return true;
+          const low = m.toLowerCase();
+          return low.includes('user-created') || low.includes('google translate') || low.includes('word family member') || low.includes('the term');
+        };
+        if (isPh(en1) && !isPh(en2)) return en2.trim();
+        if (!isPh(en1) && isPh(en2)) return en1.trim();
+        if (!en1) return (en2 || '').trim();
+        if (!en2) return (en1 || '').trim();
+        if (en1.toLowerCase() === en2.toLowerCase()) return en1.trim();
+        if (en1.toLowerCase().includes(en2.toLowerCase().trim())) return en1.trim();
+        if (en2.toLowerCase().includes(en1.toLowerCase().trim())) return en2.trim();
+        return `${en1.trim()} | ${en2.trim()}`;
+      }
+
+      mergeCefrStrings(str1, str2) {
+        const p1 = this.parseCefrSynAnt(str1) || {};
+        const p2 = this.parseCefrSynAnt(str2) || {};
+        const allLevels = ['A1', 'A2', 'B1', 'B2', 'C1'];
+        const merged = {};
+        allLevels.forEach(lvl => {
+          const w1 = p1[lvl] || [];
+          const w2 = p2[lvl] || [];
+          const combined = [];
+          const seen = new Set();
+          [...w1, ...w2].forEach(w => {
+            const clean = (w || '').trim();
+            const low = clean.toLowerCase();
+            if (clean && !seen.has(low)) {
+              seen.add(low);
+              combined.push(clean);
+            }
+          });
+          if (combined.length > 0) merged[lvl] = combined;
+        });
+
+        const parts = [];
+        allLevels.forEach(lvl => {
+          if (merged[lvl] && merged[lvl].length > 0) {
+            parts.push(`${lvl}: ${merged[lvl].join(', ')}`);
+          }
+        });
+        return parts.length > 0 ? parts.join(' | ') : (str1 || str2 || '');
+      }
+
+      mergeCollocations(colls1, colls2) {
+        const arr1 = (colls1 || '').split(/[,;\n•]/).map(s => s.trim()).filter(Boolean);
+        const arr2 = (colls2 || '').split(/[,;\n•]/).map(s => s.trim()).filter(Boolean);
+        const seen = new Set();
+        const res = [];
+        [...arr1, ...arr2].forEach(c => {
+          const key = c.toLowerCase();
+          if (!seen.has(key) && key.length > 1) {
+            seen.add(key);
+            res.push(c);
+          }
+        });
+        return res.join(', ');
+      }
+
+      mergeExamples(ex1, ex2, exVi1, exVi2) {
+        const isPh = (e) => {
+          if (!e || typeof e !== 'string') return true;
+          return e.includes('Learn and practice') || e.includes('Practice sentence with') || e.includes('Pay attention to the word form');
+        };
+        if (isPh(ex1) && !isPh(ex2)) return { example: ex2.trim(), exampleVi: (exVi2 || '').trim() };
+        if (!isPh(ex1) && isPh(ex2)) return { example: ex1.trim(), exampleVi: (exVi1 || '').trim() };
+        if (!ex1) return { example: (ex2 || '').trim(), exampleVi: (exVi2 || '').trim() };
+        if (!ex2) return { example: (ex1 || '').trim(), exampleVi: (exVi1 || '').trim() };
+        if (ex1.toLowerCase().includes(ex2.toLowerCase().trim())) return { example: ex1.trim(), exampleVi: (exVi1 || '').trim() };
+        if (ex2.toLowerCase().includes(ex1.toLowerCase().trim())) return { example: ex2.trim(), exampleVi: (exVi2 || '').trim() };
+
+        return {
+          example: `${ex1.trim()}\n\n• Ví dụ thêm: ${ex2.trim()}`,
+          exampleVi: exVi1 ? (exVi2 ? `${exVi1.trim()} | (${exVi2.trim()})` : exVi1.trim()) : (exVi2 ? `(${exVi2.trim()})` : '')
+        };
+      }
+
+      mergeDuplicateVocabCards(showFeedback = true) {
+        if (!this.vocabList || !Array.isArray(this.vocabList) || this.vocabList.length === 0) return 0;
+
+        const initialCount = this.vocabList.length;
+        const groupMap = new Map();
+
+        // 1. Phân nhóm tất cả thẻ theo khóa chuẩn hóa (normalizeWordKey)
+        this.vocabList.forEach(card => {
+          if (!card || !card.word) return;
+          const key = this.normalizeWordKey(card.word);
+          if (!key) return;
+
+          if (!groupMap.has(key)) {
+            groupMap.set(key, []);
+          }
+          groupMap.get(key).push(card);
+        });
+
+        const mergedList = [];
+        let mergedCardsCount = 0;
+        const mergedSampleWords = [];
+
+        // 2. Tiến hành gộp các nhóm thẻ trùng
+        groupMap.forEach((cards, key) => {
+          if (cards.length === 1) {
+            mergedList.push(cards[0]);
+            return;
+          }
+
+          mergedCardsCount += (cards.length - 1);
+          if (mergedSampleWords.length < 5) {
+            mergedSampleWords.push(cards[0].word);
+          }
+
+          // Sắp xếp: Ưu tiên thẻ chuẩn v_ của Bộ GD&ĐT hoặc thẻ có số lần ôn tập (repetitions) cao nhất
+          cards.sort((a, b) => {
+            const isMasterA = a.id && a.id.startsWith('v_') ? 10 : 0;
+            const isMasterB = b.id && b.id.startsWith('v_') ? 10 : 0;
+            const repA = (a.repetitions || 0) + isMasterA;
+            const repB = (b.repetitions || 0) + isMasterB;
+            return repB - repA;
+          });
+
+          const baseCard = Object.assign({}, cards[0]);
+
+          // Lấy chữ viết hoa đẹp nhất hoặc không dính dấu ngoặc kép
+          const properWord = cards.map(c => c.word).find(w => w && w[0] === w[0].toUpperCase() && !w.includes('"')) || baseCard.word;
+          baseCard.word = properWord.trim();
+
+          // Gộp thông tin từ các thẻ trùng lặp còn lại
+          for (let i = 1; i < cards.length; i++) {
+            const other = cards[i];
+
+            // Gộp Nghĩa tiếng Việt
+            baseCard.meaningVi = this.mergeMeaningVi(baseCard.meaningVi, other.meaningVi);
+
+            // Gộp Nghĩa tiếng Anh
+            baseCard.meaningEn = this.mergeMeaningEn(baseCard.meaningEn, other.meaningEn);
+
+            // Gộp IPA
+            if (!baseCard.ipa && other.ipa) baseCard.ipa = other.ipa.trim();
+
+            // Gộp Từ loại
+            if (other.type && other.type !== 'Word' && other.type !== 'Từ vựng') {
+              if (baseCard.type === 'Word' || baseCard.type === 'Từ vựng') {
+                baseCard.type = other.type;
+              } else if (!baseCard.type.includes(other.type)) {
+                baseCard.type = `${baseCard.type}, ${other.type}`;
+              }
+            }
+
+            // Gộp CEFR level
+            const levels = ['A1', 'A2', 'B1', 'B2', 'C1'];
+            if (levels.indexOf(other.level) > levels.indexOf(baseCard.level)) {
+              baseCard.level = other.level;
+            }
+
+            // Gộp Đồng nghĩa & Trái nghĩa CEFR
+            baseCard.synonyms = this.mergeCefrStrings(baseCard.synonyms, other.synonyms);
+            baseCard.antonyms = this.mergeCefrStrings(baseCard.antonyms, other.antonyms);
+
+            // Gộp Collocations
+            baseCard.collocations = this.mergeCollocations(baseCard.collocations, other.collocations);
+
+            // Gộp Câu ví dụ
+            const exRes = this.mergeExamples(baseCard.example, other.example, baseCard.exampleVi, other.exampleVi);
+            baseCard.example = exRes.example;
+            baseCard.exampleVi = exRes.exampleVi;
+
+            // Gộp Mẹo ghi nhớ
+            if (!baseCard.mnemonic || baseCard.mnemonic.includes('Ghi nhớ theo ngữ cảnh')) {
+              if (other.mnemonic && !other.mnemonic.includes('Ghi nhớ theo ngữ cảnh')) {
+                baseCard.mnemonic = other.mnemonic;
+              }
+            }
+
+            // Bảo lưu tiến độ ôn tập cao nhất của học sinh
+            if (other.isFavorite) baseCard.isFavorite = true;
+            if ((other.repetitions || 0) > (baseCard.repetitions || 0)) {
+              baseCard.repetitions = other.repetitions;
+              baseCard.interval = other.interval || baseCard.interval;
+              baseCard.easeFactor = other.easeFactor || baseCard.easeFactor;
+            }
+            if (other.status === 'mastered') baseCard.status = 'mastered';
+            else if (other.status === 'learning' && baseCard.status !== 'mastered') baseCard.status = 'learning';
+            if (other.due) baseCard.due = true;
+
+            // Bảo lưu cờ cộng đồng
+            if (other.isCommunity) baseCard.isCommunity = true;
+          }
+
+          delete baseCard._enriching;
+          mergedList.push(baseCard);
+        });
+
+        // 3. Cập nhật lại danh sách kho từ vựng
+        this.vocabList = mergedList;
+        this.saveState();
+        this.updateFilterCounts();
+        this.updateFilterBadges();
+        this.applyVocabTopicFilter(this.currentVocabTopicFilter || 'all');
+        if (this.currentCardIndex >= this.filteredCards.length) {
+          this.currentCardIndex = Math.max(0, this.filteredCards.length - 1);
+        }
+        this.renderFlashcard();
+        if (this.currentView === 'vocab-hub') {
+          this.renderVocabHub();
+        }
+
+        const syncCountEl = document.getElementById('sync-current-vocab-count');
+        if (syncCountEl) syncCountEl.innerText = this.vocabList.length.toLocaleString('vi-VN');
+
+        if (showFeedback) {
+          if (mergedCardsCount > 0) {
+            const sampleStr = mergedSampleWords.join(', ') + (mergedSampleWords.length >= 5 ? '...' : '');
+            this.showToast(`🎉 Đã tự động gộp ${mergedCardsCount} thẻ trùng lặp (${sampleStr}) thành 1 thẻ duy nhất! Kho từ hiện có ${this.vocabList.length.toLocaleString('vi-VN')} từ gọn gàng, không bị lộn.`, 'success');
+          } else {
+            this.showToast(`✨ Kho từ vựng của bạn rất gọn gàng: Không có từ nào bị trùng lặp (tổng cộng ${this.vocabList.length.toLocaleString('vi-VN')} từ duy nhất)!`, 'info');
+          }
+        }
+
+        return mergedCardsCount;
+      }
+
       /* =================================================== */
       /* THUẬT TOÁN GỘP TỪ TRÙNG LẶP (DEDUPLICATION & MERGE) */
       /* =================================================== */
@@ -38924,23 +39191,11 @@ Trả về DUY NHẤT một JSON hợp lệ:
           // 2. TỪ ĐÃ CÓ TRONG KHO (TRÙNG LẶP) -> TỰ ĐỘNG GỘP LÀM 1 ĐỂ TRÁNH LỘN XỘN
           const existing = this.vocabList[existingIdx];
 
-          // Gộp nghĩa tiếng Việt nếu chưa có
-          if (cardData.meaningVi) {
-            const newMean = cardData.meaningVi.trim();
-            if (!existing.meaningVi.toLowerCase().includes(newMean.toLowerCase())) {
-              existing.meaningVi = `${existing.meaningVi} • ${newMean}`;
-            }
-          }
+          // Gộp Nghĩa tiếng Việt thông minh (loại bỏ placeholder và từ trùng lặp)
+          existing.meaningVi = this.mergeMeaningVi(existing.meaningVi, cardData.meaningVi);
 
-          // Gộp nghĩa tiếng Anh
-          if (cardData.meaningEn) {
-            const newEn = cardData.meaningEn.trim();
-            if (!existing.meaningEn) {
-              existing.meaningEn = newEn;
-            } else if (!existing.meaningEn.toLowerCase().includes(newEn.toLowerCase())) {
-              existing.meaningEn = `${existing.meaningEn} | ${newEn}`;
-            }
-          }
+          // Gộp Nghĩa tiếng Anh
+          existing.meaningEn = this.mergeMeaningEn(existing.meaningEn, cardData.meaningEn);
 
           // Bổ sung IPA nếu thẻ cũ chưa có
           if (!existing.ipa && cardData.ipa) {
@@ -38948,37 +39203,31 @@ Trả về DUY NHẤT một JSON hợp lệ:
           }
 
           // Gộp từ loại nếu khác nhau (VD: Noun và Verb)
-          if (cardData.type && existing.type && !existing.type.includes(cardData.type)) {
-            existing.type = `${existing.type}, ${cardData.type}`;
+          if (cardData.type && cardData.type !== 'Word' && cardData.type !== 'Từ vựng') {
+            if (existing.type === 'Word' || existing.type === 'Từ vựng') {
+              existing.type = cardData.type;
+            } else if (!existing.type.includes(cardData.type)) {
+              existing.type = `${existing.type}, ${cardData.type}`;
+            }
+          }
+
+          // Gộp CEFR level
+          const levels = ['A1', 'A2', 'B1', 'B2', 'C1'];
+          if (levels.indexOf(cardData.level) > levels.indexOf(existing.level)) {
+            existing.level = cardData.level;
           }
 
           // Gộp Collocations (loại bỏ trùng lặp)
-          if (cardData.collocations) {
-            const oldColls = (existing.collocations || '').split(/[,;•\n]/).map(s => s.trim()).filter(Boolean);
-            const newColls = cardData.collocations.split(/[,;•\n]/).map(s => s.trim()).filter(Boolean);
-            const merged = Array.from(new Set([...oldColls, ...newColls]));
-            existing.collocations = merged.join(', ');
-          }
+          existing.collocations = this.mergeCollocations(existing.collocations, cardData.collocations);
 
-          // Gộp Đồng nghĩa & Trái nghĩa
-          if (cardData.synonyms) {
-            const oldSyn = (existing.synonyms || '').split(',').map(s => s.trim()).filter(Boolean);
-            const newSyn = cardData.synonyms.split(',').map(s => s.trim()).filter(Boolean);
-            existing.synonyms = Array.from(new Set([...oldSyn, ...newSyn])).join(', ');
-          }
-          if (cardData.antonyms) {
-            const oldAnt = (existing.antonyms || '').split(',').map(s => s.trim()).filter(Boolean);
-            const newAnt = cardData.antonyms.split(',').map(s => s.trim()).filter(Boolean);
-            existing.antonyms = Array.from(new Set([...oldAnt, ...newAnt])).join(', ');
-          }
+          // Gộp Đồng nghĩa & Trái nghĩa CEFR
+          existing.synonyms = this.mergeCefrStrings(existing.synonyms, cardData.synonyms);
+          existing.antonyms = this.mergeCefrStrings(existing.antonyms, cardData.antonyms);
 
           // Gộp ví dụ hoàn chỉnh nếu câu mới khác biệt
-          if (cardData.example && existing.example && !existing.example.toLowerCase().includes(cardData.example.toLowerCase().trim())) {
-            existing.example = `${existing.example}\n\n• Ví dụ thêm: ${cardData.example.trim()}`;
-            if (cardData.exampleVi) {
-              existing.exampleVi = existing.exampleVi ? `${existing.exampleVi} | (${cardData.exampleVi.trim()})` : `(${cardData.exampleVi.trim()})`;
-            }
-          }
+          const exRes = this.mergeExamples(existing.example, cardData.example, existing.exampleVi, cardData.exampleVi);
+          existing.example = exRes.example;
+          existing.exampleVi = exRes.exampleVi;
 
           // Gộp mẹo nhớ
           if (cardData.mnemonic && (!existing.mnemonic || !existing.mnemonic.toLowerCase().includes(cardData.mnemonic.toLowerCase().trim()))) {
@@ -39094,6 +39343,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
               }
             });
 
+            this.mergeDuplicateVocabCards(false);
             this.applyVocabTopicFilter(this.currentVocabTopicFilter);
             this.currentCardIndex = 0;
             this.renderFlashcard();
@@ -39481,6 +39731,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
 
           this.updateGlobalSyncStatus(true);
           if (newCount > 0) {
+            this.mergeDuplicateVocabCards(false);
             this.saveState();
             this.updateFilterCounts();
             if (this.currentView === 'vocab-hub') this.renderVocabHub();
@@ -39512,6 +39763,9 @@ Trả về DUY NHẤT một JSON hợp lệ:
 
         const initialCount = this.vocabList.length;
         const removedSamples = [];
+
+        // Tự động gộp tất cả các từ trùng lặp làm 1 thẻ duy nhất
+        const mergedDuplicatesCount = this.mergeDuplicateVocabCards(false);
 
         // Lọc sạch các thẻ từ rác / không hợp lệ
         this.vocabList = this.vocabList.filter(card => {
@@ -39575,11 +39829,13 @@ Trả về DUY NHẤT một JSON hợp lệ:
         if (syncCountEl) syncCountEl.innerText = this.vocabList.length.toLocaleString('vi-VN');
 
         if (showFeedback) {
-          if (removedCount > 0) {
-            const samplesStr = removedSamples.join(', ');
-            this.showToast(`🧹 Đã quét và tự động loại bỏ ${removedCount} từ rác / không hợp lệ (như ${samplesStr}...)! Kho từ hiện có ${this.vocabList.length.toLocaleString('vi-VN')} từ vựng chuẩn.`, 'success');
+          if (removedCount > 0 || (typeof mergedDuplicatesCount !== 'undefined' && mergedDuplicatesCount > 0)) {
+            const parts = [];
+            if (removedCount > 0) parts.push(`loại bỏ ${removedCount} từ rác`);
+            if (typeof mergedDuplicatesCount !== 'undefined' && mergedDuplicatesCount > 0) parts.push(`gộp ${mergedDuplicatesCount} thẻ trùng`);
+            this.showToast(`🧹 Đã quét và ${parts.join(' & ')}! Kho từ hiện có ${this.vocabList.length.toLocaleString('vi-VN')} từ vựng chuẩn, gọn gàng.`, 'success');
           } else {
-            this.showToast(`✨ Tuyệt vời! Toàn bộ ${this.vocabList.length.toLocaleString('vi-VN')} từ vựng trong kho của bạn đều hợp lệ và sạch sẽ!`, 'info');
+            this.showToast(`✨ Tuyệt vời! Toàn bộ ${this.vocabList.length.toLocaleString('vi-VN')} từ vựng trong kho của bạn đều hợp lệ, không bị trùng lặp!`, 'info');
           }
         }
 
@@ -39739,7 +39995,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
         try {
           const cleanTopic = 'engmastery_sync_' + savedCode.toLowerCase().replace(/[^a-z0-9_-]/g, '');
           const payload = {
-            version: '1.7.5',
+            version: '1.7.6',
             appVersion: this.appVersion,
             syncCode: savedCode,
             timestamp: Date.now(),
@@ -39857,6 +40113,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
               }
             });
           }
+          this.mergeDuplicateVocabCards(false);
 
           // Hợp nhất đề thi Lớp 12 đã lưu (nếu có)
           if (Array.isArray(remoteData.savedG12Exams) && remoteData.savedG12Exams.length > 0) {
@@ -40092,7 +40349,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.7.5')) return caches.delete(c);
+                if (!c.includes('v1.7.6')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -43447,9 +43704,9 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                 isFavorite: false,
                 wordFamilyRoot: canonicalRoot
               };
-              this.vocabList.unshift(newCard);
+              const upRes = this.upsertVocabCard(newCard);
+              if (upRes.isNew) addedCount++;
               addedWords.push(cleanW);
-              addedCount++;
             }
           }
         }
@@ -43683,8 +43940,8 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                   due: true,
                   nextReviewDate: new Date().toISOString()
                 };
-                this.vocabList.unshift(newCard);
-                addedCount++;
+                const upRes = this.upsertVocabCard(newCard);
+                if (upRes.isNew) addedCount++;
               }
             });
           }
@@ -43724,8 +43981,8 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                   due: true,
                   nextReviewDate: new Date().toISOString()
                 };
-                this.vocabList.unshift(newCard);
-                addedCount++;
+                const upRes = this.upsertVocabCard(newCard);
+                if (upRes.isNew) addedCount++;
               }
             });
           }
@@ -43763,8 +44020,8 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                 due: true,
                 nextReviewDate: new Date().toISOString()
               };
-              this.vocabList.unshift(newCard);
-              addedCount++;
+              const upRes = this.upsertVocabCard(newCard);
+              if (upRes.isNew) addedCount++;
             }
           });
         }
@@ -45797,7 +46054,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
           if (reg.waiting && window.app) {
             window.app.showUpdateBanner({
-              version: '1.7.5',
+              version: '1.7.6',
               title: 'Bản cập nhật mới đã sẵn sàng!',
               highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
             });
@@ -45811,7 +46068,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   if (window.app) {
                     window.app.showUpdateBanner({
-                      version: '1.7.5',
+                      version: '1.7.6',
                       title: 'Đã có bản cập nhật mới!',
                       highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
                     });
@@ -46363,7 +46620,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.5</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.6</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

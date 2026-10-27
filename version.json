@@ -1,12 +1,13 @@
 {
-  "version": "1.7.5",
-  "versionCode": 10615,
+  "version": "1.7.6",
+  "versionCode": 10616,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.7.5: Kho Từ Vựng Dùng Chung Toàn Cộng Đồng & Đồng Bộ Trực Tiếp Thời Gian Thực (Live Real-Time Sync)",
+  "title": "Bản Cập Nhật v1.7.6: Thuật Toán Quét & Tự Động Gộp Toàn Diện Từ Vựng Trùng Lặp (Intelligent Vocab Deduplication & Deep Merge)",
   "highlights": [
-    "Kho Từ Vựng Chung Toàn Cộng Đồng (Real-Time Live Sync): Bất kỳ người dùng nào thêm hoặc tra cứu từ mới ở thiết bị này, tất cả người học khác trên mọi thiết bị sẽ thấy từ mới xuất hiện ngay lập tức (< 0.5s) qua kết nối Server-Sent Events (SSE).",
-    "Tự Động Chữa Lành Từ Thiếu Đồng Nghĩa & Trái Nghĩa (Auto-Healing CEFR Engine): Tự động quét và nạp phân cấp CEFR A1 -> C1 (tối thiểu 3 từ/cấp độ), collocations và câu ví dụ ngữ cảnh cho mọi từ đã lưu (như Passion), đảm bảo không bao giờ bị trống hoặc hiển thị 'Chưa có dữ liệu'.",
-    "Nút '🌐 Kho Chung Live' trên thanh điều khiển: Hiển thị chấm trạng thái xanh trực quan, cho phép chủ động làm mới và nạp các từ vựng mới nhất do cộng đồng đóng góp bất kỳ lúc nào.",
-    "Bộ lọc '🌐 Từ Cộng Đồng' trên Flashcards và Kho Từ Vựng: Dễ dàng lọc và luyện tập riêng các từ vựng do bạn bè và cộng đồng học sinh cùng chia sẻ."
+    "Tự động quét và gộp tất cả các từ trùng lặp làm 1 thẻ duy nhất (Deep Deduplication & Merge Engine): Giải quyết triệt để tình trạng lộn xộn nhiều thẻ trùng nhau trong kho từ vựng.",
+    "Thuật toán hợp nhất thông minh (Deep Merge): Tự động gộp các nghĩa tiếng Việt khác nhau, bổ sung phiên âm IPA, gộp từ loại, hợp nhất các tầng cấp độ CEFR A1 -> C1, gom cụm Collocations và ghép các câu ví dụ thực tế.",
+    "Bảo lưu 100% tiến độ học tập: Giữ lại số lần ôn tập (Spaced Repetition SM-2), số ngày ôn, trạng thái ghi nhớ (mastered/learning) và biểu tượng yêu thích ⭐ cao nhất của học sinh.",
+    "Bổ sung nút 'Gộp Từ Trùng' trực tiếp trên thanh công cụ Kho Từ Vựng và Cài Đặt giúp học sinh chủ động dọn dẹp kho từ bất cứ lúc nào chỉ với 1 chạm.",
+    "Tự động kích hoạt gộp từ trên mọi luồng: Khởi động app, sau khi nhập thủ công, nhập file JSON, đồng bộ Cloud và đồng bộ Kho Chung Cộng Đồng."
   ]
 }
