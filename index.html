@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.5 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.6 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -1186,7 +1186,7 @@
             <div class="flex items-center space-x-2 shrink-0">
               <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
                 <i class="fa-solid fa-shield-check text-emerald-500"></i>
-                <span>1,420+ Từ Chuẩn Bộ GD&ĐT & Oxford</span>
+                <span>5,800+ Từ Chuẩn Oxford & Bộ GD&ĐT</span>
               </span>
             </div>
           </div>
@@ -3883,7 +3883,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.5 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.6 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -4012,6 +4012,11 @@
     </button>
   </div>
 
+
+  <!-- ============================================== -->
+  <!-- COMPLETE OXFORD 3000 & 5000 DATASET (5000+ WORDS) -->
+  <!-- ============================================== -->
+  <script src="./oxford_5000.js"></script>
 
   <!-- ============================================== -->
   <!-- JAVASCRIPT APPLICATION CORE                    -->
@@ -32484,6 +32489,11 @@
       "frequency": "Oxford Collocation"
   }
 ];
+    // Tự động tích hợp toàn bộ 4.472 từ vựng từ Đại từ điển The Oxford 3000 & The Oxford 5000 (A1 -> C1)
+    if (typeof OXFORD_5000_FULL !== 'undefined' && Array.isArray(OXFORD_5000_FULL)) {
+      DEFAULT_VOCABULARY.push(...OXFORD_5000_FULL);
+    }
+
 
     const DEFAULT_GRAMMAR = [
   {
@@ -42977,7 +42987,8 @@ Yêu cầu output STRICTLY là một JSON object:
         if (storedVocab) {
           try {
             const parsed = JSON.parse(storedVocab);
-            if (Array.isArray(parsed) && parsed.length > 0) {
+            // NẾU CACHE CŨ ÍT TỪ HƠN DEFAULT_VOCABULARY (5.800+ TỪ), ƯU TIÊN NẠP ĐẦY ĐỦ DEFAULT_VOCABULARY ĐỂ KHÔNG BỊ THIẾU TỪ
+            if (Array.isArray(parsed) && parsed.length >= DEFAULT_VOCABULARY.length) {
               this.vocabList = parsed;
               baseLoaded = true;
             }
@@ -56329,7 +56340,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.5</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.6</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

@@ -1,11 +1,11 @@
 {
-  "version": "1.9.5",
-  "buildDate": "2026-10-27",
+  "version": "1.9.6",
+  "buildDate": "2026-10-28",
   "critical": true,
   "changelog": [
-    "Khắc phục triệt để 100% lỗi thoát app bị mất từ vựng đã nhập với Hệ thống Bộ nhớ Vĩnh viễn Độc lập (Permanent Custom Storage & IndexedDB Dual-Layer).",
-    "Tích hợp toàn diện Bộ Từ vựng Chuẩn Oxford 3000 & Oxford 5000 (A1 -> C1) từ Đại học Oxford với 5.025 từ tra cứu tức thì.",
-    "Bổ sung 343 thẻ từ vựng thực chiến điểm 9+ kèm toàn bộ Đồng Nghĩa (ĐN), Trái Nghĩa (TN) và Collocations thành các thẻ học độc lập có đầy đủ nghĩa tiếng Việt.",
-    "Nâng tổng quy mô kho từ vựng cốt lõi lên 1.420+ từ chuẩn Bộ GD&ĐT & Oxford phân bổ đầy đủ trên 12 chủ đề thi."
+    "Nạp trọn vẹn 100% toàn bộ 5.017 từ vựng chuẩn từ 2 bộ Oxford 3000™ và Oxford 5000™ (từ A1 đến C1) vào kho từ vựng chính.",
+    "Bổ sung tệp dữ liệu chuyên sâu oxford_5000.js (3.55 MB) hỗ trợ PWA offline hoàn toàn, nâng tổng quy mô kho từ lên 5.895+ từ vựng phong phú.",
+    "Khắc phục triệt để lỗi hiển thị kẹt ở mức 1.550 từ trên trình duyệt: tự động đối chiếu và cập nhật tức thì kho từ vựng đầy đủ lên giao diện.",
+    "Mỗi từ vựng Oxford đều có đầy đủ cấp độ CEFR, phân loại từ, nghĩa tiếng Việt, câu hỏi điền từ (cloze), ví dụ ngữ cảnh, collocations và mẹo ghi nhớ."
   ]
 }
