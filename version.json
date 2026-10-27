@@ -1,12 +1,12 @@
 {
-  "version": "1.8.9",
-  "versionCode": 10900,
+  "version": "1.9.0",
+  "versionCode": 11000,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.8.9: Bác Sĩ AI Tự Động Quét & Bổ Sung Nghĩa Tiếng Việt, Sửa Lỗi Kho Từ Mỗi 30 Phút (Hoàn Toàn Tự Động)",
+  "title": "Bản Cập Nhật v1.9.0: Tự Động Kèm Nghĩa Tiếng Việt Trực Quan Cho Toàn Bộ Từ Đồng Nghĩa, Trái Nghĩa (A1–C1) & Collocations",
   "highlights": [
-    "Bác Sĩ AI Quét & Sửa Từ Tự Động Định Kỳ 30 Phút: Hệ thống luôn tự động chạy ngầm mỗi 30 phút (và ngay 6 giây sau khi khởi động app) để rà soát toàn bộ kho từ; tự động phát hiện các từ thiếu nghĩa tiếng Việt, lỗi chính tả, thiếu IPA hoặc ví dụ và cập nhật hoàn thiện 100%.",
-    "Hoạt động tự động hoàn toàn: Không yêu cầu người dùng kích hoạt thủ công, không yêu cầu đăng nhập tài khoản — bất kỳ ai truy cập cũng được hệ thống tự động bảo dưỡng kho từ liên tục.",
-    "Đa tầng dịch thuật nghĩa tiếng Việt thông minh: Tích hợp Google Translate + AI Gemini/xKiro + MyMemory vào luồng bóc tách từ đồng/trái nghĩa và collocations, đảm bảo mọi thẻ từ con tạo ra đều có nghĩa tiếng Việt đầy đủ, chấm dứt hoàn toàn hiện tượng từ không có nghĩa.",
-    "Giao diện hiển thị an toàn: Thẻ từ vựng trong quá trình chờ AI cập nhật sẽ hiển thị trạng thái sinh động 'Đang được AI cập nhật nghĩa...' thay vì để trống dòng nghĩa."
+    "Dịch nghĩa tiếng Việt trực quan cho toàn bộ Từ Đồng Nghĩa & Trái Nghĩa: Học sinh chỉ cần lướt xuống là thấy ngay nghĩa tiếng Việt của từng từ đồng nghĩa/trái nghĩa chuẩn CEFR (A1 ➔ C1), không cần phải đoán hay bấm vào từng từ.",
+    "Collocations hiển thị kèm dịch nghĩa tiếng Việt & nút phát âm 🔊: Các cụm từ thông dụng đi kèm được định dạng trực quan dạng thẻ badge kèm nghĩa tiếng Việt và hỗ trợ nghe phát âm chuẩn xác.",
+    "Tự động phân tách và nạp nghĩa tiếng Việt tức thì khi AI phân tích: Mỗi từ con khi sinh ra đều sở hữu ngay nghĩa tiếng Việt chính xác, không còn tình trạng thẻ phụ thuộc vào từ gốc hay bị thiếu nghĩa.",
+    "Bộ bóc tách thông minh (splitWordAndMeaning): Nhận diện mượt mà mọi định dạng từ và nghĩa đi kèm, hỗ trợ tra cứu chi tiết 1-chạm mà không bị dính chữ nghĩa tiếng Việt."
   ]
 }

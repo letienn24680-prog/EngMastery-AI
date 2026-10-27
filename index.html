@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.9 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.0 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3849,7 +3849,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.9 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.0 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -33254,7 +33254,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.8.9';
+        this.appVersion = '1.9.0';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -36587,7 +36587,8 @@ Yêu cầu output STRICTLY là một JSON object:
         const fcAntEl = document.getElementById('fc-antonyms');
         if (fcSynEl) fcSynEl.innerHTML = this.formatCefrSynAntHtml(card.synonyms, 'syn');
         if (fcAntEl) fcAntEl.innerHTML = this.formatCefrSynAntHtml(card.antonyms, 'ant');
-        document.getElementById('fc-collocations').innerText = (card.collocations && card.collocations !== card.word) ? card.collocations : (card.word ? 'Đang cập nhật collocations...' : '');
+        const fcCollocEl = document.getElementById('fc-collocations');
+        if (fcCollocEl) fcCollocEl.innerHTML = this.formatCollocationsHtml(card.collocations, card.word);
         document.getElementById('fc-mnemonic').innerText = card.mnemonic || 'Liên hệ từ vựng với hình ảnh hoặc ngữ cảnh thực tế.';
 
         // Render Họ Từ Vựng trên mặt sau Flashcard
@@ -37528,7 +37529,8 @@ Yêu cầu output STRICTLY là một JSON object:
         const modalAntEl = document.getElementById('modal-detail-antonyms');
         if (modalSynEl) modalSynEl.innerHTML = this.formatCefrSynAntHtml(item.synonyms, 'syn');
         if (modalAntEl) modalAntEl.innerHTML = this.formatCefrSynAntHtml(item.antonyms, 'ant');
-        document.getElementById('modal-detail-collocations').innerText = (item.collocations && item.collocations !== item.word) ? item.collocations : (item.word ? 'Đang cập nhật collocations...' : '');
+        const modalCollocEl = document.getElementById('modal-detail-collocations');
+        if (modalCollocEl) modalCollocEl.innerHTML = this.formatCollocationsHtml(item.collocations, item.word);
         document.getElementById('modal-detail-mnemonic').innerText = item.mnemonic || 'Ghi nhớ theo ngữ cảnh câu ví dụ.';
 
         // Render Họ Từ Vựng (Word Family V-N-Adj-Adv)
@@ -41496,7 +41498,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.8.9')) return caches.delete(c);
+                if (!c.includes('v1.9.0')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -42590,13 +42592,13 @@ Trả về DUY NHẤT một JSON hợp lệ (không kèm markdown ngoài) theo c
   "cloze": "câu ví dụ tiếng Anh có để trống [ _____ ] thay cho từ",
   "example": "câu ví dụ tiếng Anh đầy đủ chứa từ vựng",
   "exampleVi": "dịch nghĩa câu ví dụ sang tiếng Việt",
-  "synonyms": "A1: từ A1 | A2: từ A2 | B1: từ B1 | B2: từ B2 | C1: từ C1",
-  "antonyms": "A1: từ A1 | A2: từ A2 | B1: từ B1 | B2: từ B2 | C1: từ C1",
-  "collocations": "2-3 cụm collocation phổ biến",
+  "synonyms": "A1: từ 1 (nghĩa 1), từ 2 (nghĩa 2) | A2: ... | B1: ... | B2: ... | C1: ...",
+  "antonyms": "A1: từ 1 (nghĩa 1), từ 2 (nghĩa 2) | A2: ... | B1: ... | B2: ... | C1: ...",
+  "collocations": "cụm 1 (nghĩa 1), cụm 2 (nghĩa 2), cụm 3 (nghĩa 3)",
   "mnemonic": "mẹo ghi nhớ độc đáo, dễ nhớ"
 }
-LƯU Ý QUAN TRỌNG VỀ ĐỒNG NGHĨA & TRÁI NGHĨA:
-Bắt buộc phân chia các từ đồng nghĩa và trái nghĩa theo các cấp độ chuẩn CEFR từ A1 đến C1 (phân tách các cấp bằng dấu gạch đứng |). MỖI CẤP ĐỘ BẮT BUỘC CUNG CẤP TỐI THIỂU TỪ 3 TỪ/CỤM TỪ TRỞ LÊN (3 đến 5 từ phong phú, chuẩn xác; tuyệt đối không chỉ đưa 1 từ) kèm 3-6 collocations thông dụng.`;
+LƯU Ý QUAN TRỌNG VỀ ĐỒNG NGHĨA, TRÁI NGHĨA & COLLOCATIONS:
+Bắt buộc phân chia các từ đồng nghĩa và trái nghĩa theo các cấp độ chuẩn CEFR từ A1 đến C1 (phân tách các cấp bằng dấu |). TẤT CẢ các từ đồng nghĩa, trái nghĩa và cụm collocations ĐỀU BẮT BUỘC KÈM THEO NGHĨA TIẾNG VIỆT TRONG NGOẶC ĐƠN ĐỂ HỌC SINH HIỂU NGAY.`;
 
           const rawText = await this.callAI(prompt, { temperature: 0.2 });
           const cardData = this.extractJsonFromAI(rawText);
@@ -45594,6 +45596,68 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
         return levels;
       }
 
+      /* TÁCH TỪ VỰNG TIẾNG ANH VÀ NGHĨA TIẾNG VIỆT ĐI KÈM */
+      splitWordAndMeaning(rawText) {
+        if (!rawText || typeof rawText !== 'string') return { word: '', meaningVi: '' };
+        let str = rawText.trim();
+        // 1. Dạng: "word (nghĩa tiếng Việt)"
+        let match = str.match(/^([^\(\)]+?)\s*\(([^)]+)\)$/);
+        if (match) {
+          return { word: match[1].trim(), meaningVi: match[2].trim() };
+        }
+        // 2. Dạng: "word: nghĩa tiếng Việt" hoặc "word - nghĩa tiếng Việt"
+        match = str.match(/^([^:\-–]+?)\s*[:\-–]\s*(.+)$/);
+        if (match && /[a-zA-Z]/.test(match[1]) && /[^\x00-\x7F]/.test(match[2])) {
+          return { word: match[1].trim(), meaningVi: match[2].trim() };
+        }
+        return { word: str, meaningVi: '' };
+      }
+
+      /* ĐỊNH DẠNG COLLOCATIONS KÈM NGHĨA TIẾNG VIỆT & PHÁT ÂM */
+      formatCollocationsHtml(rawText, rootWord = '') {
+        if (!rawText || typeof rawText !== 'string' || !rawText.trim()) {
+          return '<span class="text-slate-400 italic text-xs">Đang cập nhật collocations...</span>';
+        }
+        if (rootWord && rawText.trim().toLowerCase() === rootWord.trim().toLowerCase()) {
+          return '<span class="text-slate-400 italic text-xs">Đang cập nhật collocations...</span>';
+        }
+
+        const items = rawText.split(/[,;\n]/).map(s => s.trim()).filter(Boolean);
+        if (items.length === 0) {
+          return '<span class="text-slate-400 italic text-xs">Đang cập nhật collocations...</span>';
+        }
+
+        const badgesHtml = items.map(item => {
+          const parsed = this.splitWordAndMeaning(item);
+          const cleanColloc = (this.sanitizeWebVocabHeadword(parsed.word) || parsed.word).trim();
+          if (!cleanColloc) return '';
+
+          let meaning = parsed.meaningVi;
+          if (!meaning) {
+            const norm = this.normalizeWordKey(cleanColloc);
+            const found = (Array.isArray(this.vocabList) ? this.vocabList.find(v => this.normalizeWordKey(v.word) === norm) : null)
+              || (typeof DEFAULT_VOCABULARY !== 'undefined' ? DEFAULT_VOCABULARY.find(v => this.normalizeWordKey(v.word) === norm) : null);
+            if (found && found.meaningVi && !this.isPlaceholderMeaning(found.meaningVi, cleanColloc)) {
+              meaning = found.meaningVi;
+            }
+          }
+
+          const safeColloc = cleanColloc.replace(/["']/g, '&quot;');
+          return `
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/80 dark:bg-slate-800/90 border border-indigo-500/20 shadow-xs hover:border-indigo-500/50 transition">
+              <span class="font-bold text-xs text-indigo-600 dark:text-indigo-400 cursor-pointer hover:underline" onclick="app.quickLookupWord('${safeColloc}')" title="Tra cứu cụm từ này">${cleanColloc}</span>
+              <button type="button" onclick="app.speakText('${safeColloc}', 'en'); event.stopPropagation();" class="text-slate-400 hover:text-indigo-500 transition-colors p-0.5" title="Phát âm ${safeColloc}">
+                <i class="fa-solid fa-volume-high text-[9px]"></i>
+              </button>
+              ${meaning ? `<span class="text-[11px] font-medium text-slate-500 dark:text-slate-400 border-l border-slate-200 dark:border-slate-700 pl-1.5 ml-0.5 italic">${meaning}</span>` : ''}
+            </div>
+          `;
+        }).filter(Boolean).join('');
+
+        return `<div class="flex flex-wrap gap-2 pt-1">${badgesHtml}</div>`;
+      }
+
+      /* ĐỊNH DẠNG TỪ ĐỒNG NGHĨA / TRÁI NGHĨA KÈM NGHĨA TIẾNG VIỆT & PHÁT ÂM THEO CHUẨN A1 - C1 */
       formatCefrSynAntHtml(rawText, type = 'syn') {
         const levels = this.parseCefrSynAnt(rawText);
         if (!levels || Object.keys(levels).length === 0) {
@@ -45609,31 +45673,48 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
           C1: 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/30 font-black'
         };
 
-        let html = '<div class="space-y-1.5">';
+        let html = '<div class="space-y-2">';
         levelOrder.forEach(lvl => {
           if (levels[lvl] && levels[lvl].length > 0) {
-            const wordsHtml = levels[lvl].map(w => {
-              const cleanW = w.replace(/["']/g, '&quot;');
+            const wordsHtml = levels[lvl].map(rawItem => {
+              const parsed = this.splitWordAndMeaning(rawItem);
+              const cleanWord = (this.sanitizeWebVocabHeadword(parsed.word) || parsed.word).trim();
+              if (!cleanWord) return '';
+
+              let meaning = parsed.meaningVi;
+              if (!meaning) {
+                const norm = this.normalizeWordKey(cleanWord);
+                const found = (Array.isArray(this.vocabList) ? this.vocabList.find(v => this.normalizeWordKey(v.word) === norm) : null)
+                  || (typeof DEFAULT_VOCABULARY !== 'undefined' ? DEFAULT_VOCABULARY.find(v => this.normalizeWordKey(v.word) === norm) : null);
+                if (found && found.meaningVi && !this.isPlaceholderMeaning(found.meaningVi, cleanWord)) {
+                  meaning = found.meaningVi;
+                }
+              }
+
+              const safeEscaped = cleanWord.replace(/["']/g, '&quot;');
               return `
-                <span class="inline-flex items-center gap-1 font-semibold text-slate-800 dark:text-slate-200 bg-white/70 dark:bg-slate-800/80 px-2 py-0.5 rounded-lg border border-slate-200/60 dark:border-slate-700/60 shadow-xs hover:border-primary-light/60 transition group/chip">
-                  <span onclick="app.quickLookupWord('${cleanW}')" class="cursor-pointer hover:text-primary-light hover:underline" title="Nhấn để xem chi tiết & học từ này">${w}</span>
-                  <button type="button" onclick="app.speakText('${cleanW}', 'en'); event.stopPropagation();" class="text-slate-400 hover:text-primary-light transition-colors p-0.5 ml-0.5" title="Nghe phát âm ${cleanW}">
+                <span class="inline-flex items-center gap-1.5 font-semibold text-slate-800 dark:text-slate-200 bg-white/80 dark:bg-slate-800/90 px-2.5 py-1 rounded-xl border border-slate-200/70 dark:border-slate-700/70 shadow-xs hover:border-primary-light/60 transition group/chip">
+                  <span onclick="app.quickLookupWord('${safeEscaped}')" class="cursor-pointer hover:text-primary-light hover:underline font-bold text-xs" title="Nhấn để xem chi tiết & học từ này">${cleanWord}</span>
+                  <button type="button" onclick="app.speakText('${safeEscaped}', 'en'); event.stopPropagation();" class="text-slate-400 hover:text-primary-light transition-colors p-0.5" title="Nghe phát âm ${cleanWord}">
                     <i class="fa-solid fa-volume-high text-[9px]"></i>
                   </button>
+                  ${meaning ? `<span class="text-[11px] font-medium text-emerald-600 dark:text-emerald-400 border-l border-slate-200 dark:border-slate-700 pl-1.5 ml-0.5 italic max-w-[140px] truncate" title="${meaning.replace(/"/g, '&quot;')}">${meaning}</span>` : ''}
                 </span>
               `;
-            }).join('');
+            }).filter(Boolean).join('');
 
-            html += `
-              <div class="flex items-start gap-1.5 py-0.5">
-                <span class="inline-flex items-center justify-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider shrink-0 ${badgeStyles[lvl]}">
-                  ${lvl}
-                </span>
-                <div class="flex flex-wrap items-center gap-1.5 min-w-0">
-                  ${wordsHtml}
+            if (wordsHtml) {
+              html += `
+                <div class="flex items-start gap-1.5 py-0.5">
+                  <span class="inline-flex items-center justify-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider shrink-0 ${badgeStyles[lvl]}">
+                    ${lvl}
+                  </span>
+                  <div class="flex flex-wrap items-center gap-1.5 min-w-0">
+                    ${wordsHtml}
+                  </div>
                 </div>
-              </div>
-            `;
+              `;
+            }
           }
         });
         html += '</div>';
@@ -45642,7 +45723,8 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
 
       quickLookupWord(wordName) {
         if (!wordName) return;
-        const clean = wordName.trim();
+        const parsed = this.splitWordAndMeaning(wordName);
+        const clean = (this.sanitizeWebVocabHeadword(parsed.word) || parsed.word).trim();
         const norm = this.normalizeWordKey(clean);
         const found = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
         if (found) {
@@ -45666,10 +45748,13 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
         if (synLevels) {
           for (const [level, words] of Object.entries(synLevels)) {
             words.forEach(w => {
-              const cleanW = this.sanitizeWebVocabHeadword(w);
+              const parsed = this.splitWordAndMeaning(w);
+              const cleanW = (this.sanitizeWebVocabHeadword(parsed.word) || parsed.word).trim();
               if (!cleanW || !this.isValidEnglishVocab(cleanW) || /\d/.test(cleanW) || cleanW.toLowerCase().includes("aboutprep")) return;
               const norm = this.normalizeWordKey(cleanW);
               if (norm === rootNorm) return;
+
+              const directVi = parsed.meaningVi || '';
 
               const exists = this.vocabList.some(v => this.normalizeWordKey(v.word) === norm);
               if (!exists) {
@@ -45681,9 +45766,9 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
                   level: level,
                   topic: 'topic_notebook',
                   topicLabel: `🟢 Đồng Nghĩa (${level})`,
-                  meaningVi: (rootMeaningVi && !this.isPlaceholderMeaning(rootMeaningVi, cleanRoot)) 
+                  meaningVi: directVi || (rootMeaningVi && !this.isPlaceholderMeaning(rootMeaningVi, cleanRoot) 
                     ? `Đồng nghĩa (${level}): ${rootMeaningVi}` 
-                    : `Đồng nghĩa (${level}) với "${cleanRoot}"`,
+                    : `Đồng nghĩa (${level}) với "${cleanRoot}"`),
                   meaningEn: `Synonym (${level}) of "${cleanRoot}"`,
                   cloze: `The ${level} word [ ${cleanW} ] is synonymous with "${cleanRoot}".`,
                   example: `You can use "${cleanW}" (${level}) in place of "${cleanRoot}" in this context.`,
@@ -45721,10 +45806,13 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
         if (antLevels) {
           for (const [level, words] of Object.entries(antLevels)) {
             words.forEach(w => {
-              const cleanW = this.sanitizeWebVocabHeadword(w);
+              const parsed = this.splitWordAndMeaning(w);
+              const cleanW = (this.sanitizeWebVocabHeadword(parsed.word) || parsed.word).trim();
               if (!cleanW || !this.isValidEnglishVocab(cleanW) || /\d/.test(cleanW) || cleanW.toLowerCase().includes("aboutprep")) return;
               const norm = this.normalizeWordKey(cleanW);
               if (norm === rootNorm) return;
+
+              const directVi = parsed.meaningVi || '';
 
               const exists = this.vocabList.some(v => this.normalizeWordKey(v.word) === norm);
               if (!exists) {
@@ -45736,7 +45824,7 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
                   level: level,
                   topic: 'topic_notebook',
                   topicLabel: `🔴 Trái Nghĩa (${level})`,
-                  meaningVi: `Trái nghĩa (${level}) với "${cleanRoot}"`,
+                  meaningVi: directVi || `Trái nghĩa (${level}) với "${cleanRoot}"`,
                   meaningEn: `Antonym (${level}) of "${cleanRoot}"`,
                   cloze: `The ${level} word [ ${cleanW} ] is opposite in meaning to "${cleanRoot}".`,
                   example: `In contrast to "${cleanRoot}", we can say "${cleanW}".`,
@@ -45771,12 +45859,16 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
 
         // 3. Phân tách và nạp các Collocations
         if (collocationsStr && typeof collocationsStr === 'string') {
-          const colList = collocationsStr.split(/[,;\n]/).map(c => this.sanitizeWebVocabHeadword(c)).filter(Boolean);
-          colList.forEach(c => {
+          const colList = collocationsStr.split(/[,;\n]/).map(c => c.trim()).filter(Boolean);
+          colList.forEach(rawC => {
+            const parsed = this.splitWordAndMeaning(rawC);
+            const c = (this.sanitizeWebVocabHeadword(parsed.word) || parsed.word).trim();
             if (!c || c.length < 3) return;
             if (!this.isValidEnglishVocab(c) || /\d/.test(c) || c.toLowerCase().includes('aboutprep')) return;
             const norm = this.normalizeWordKey(c);
             if (norm === rootNorm) return;
+
+            const directVi = parsed.meaningVi || '';
 
             const exists = this.vocabList.some(v => this.normalizeWordKey(v.word) === norm);
             if (!exists) {
@@ -45788,7 +45880,7 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
                 level: 'B2',
                 topic: 'topic_collocation',
                 topicLabel: '🔗 Collocation Mở Rộng',
-                meaningVi: `Cụm từ thông dụng đi với "${cleanRoot}"`,
+                meaningVi: directVi || `Cụm từ thông dụng đi với "${cleanRoot}"`,
                 meaningEn: `Common collocation with "${cleanRoot}"`,
                 cloze: `Complete the collocation: [ ${c} ].`,
                 example: `Remember to use the phrase "${c}" in your exam.`,
@@ -45805,17 +45897,18 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
               const upRes = this.upsertVocabCard(newCard);
               if (upRes.isNew) addedCount++;
 
-              // Tự động kích hoạt dịch ngầm nghĩa tiếng Việt cho cụm từ này
-              this.fetchVietnameseMeaning(c).then(realMeaning => {
-                if (realMeaning && !this.isPlaceholderMeaning(realMeaning, c)) {
-                  const cardRef = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
-                  if (cardRef) {
-                    cardRef.meaningVi = realMeaning;
-                    this.flushSaveState();
-                    if (this.currentView === 'vocab-hub') this.renderVocabHub();
+              if (!directVi) {
+                this.fetchVietnameseMeaning(c).then(realMeaning => {
+                  if (realMeaning && !this.isPlaceholderMeaning(realMeaning, c)) {
+                    const cardRef = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
+                    if (cardRef) {
+                      cardRef.meaningVi = realMeaning;
+                      this.flushSaveState();
+                      if (this.currentView === 'vocab-hub') this.renderVocabHub();
+                    }
                   }
-                }
-              }).catch(() => {});
+                }).catch(() => {});
+              }
             }
           });
         }
@@ -45865,15 +45958,16 @@ Từ vựng: "${word}"
 Loại từ: "${type}"
 Nghĩa tiếng Việt: "${meaningVi}"
 
-YÊU CẦU BẮT BUỘC:
+YÊU CẦU BẮT BUỘC ĐỂ HỌC SINH HIỂU NGHĨA NGAY:
 1. Phân chia rõ ràng đủ cả 5 cấp độ: A1, A2, B1, B2, C1 cho cả Đồng nghĩa và Trái nghĩa.
 2. MỖI CẤP ĐỘ BẮT BUỘC CUNG CẤP TỐI THIỂU TỪ 3 TỪ/CỤM TỪ TRỞ LÊN (3 đến 5 từ phong phú, học thuật, chuẩn xác).
-3. Cung cấp trường "collocations": từ 3 đến 6 cụm từ (collocations) thông dụng, học thuật hay xuất hiện nhất trong đề thi THPT Quốc Gia kèm với từ "${word}".
-4. Trả về DUY NHẤT một chuỗi JSON hợp lệ:
+3. BẮT BUỘC KÈM THEO DỊCH NGHĨA TIẾNG VIỆT TRONG NGOẶC ĐƠN CHO TỪNG TỪ ĐỒNG NGHĨA VÀ TRÁI NGHĨA: định dạng bắt buộc "từ (nghĩa tiếng Việt)". Ví dụ: "essential (thiết yếu), crucial (cốt yếu, quyết định)", "unnecessary (không cần thiết), inessential (không cốt yếu)".
+4. BẮT BUỘC KÈM THEO DỊCH NGHĨA TIẾNG VIỆT TRONG NGOẶC ĐƠN CHO TỪNG COLLOCATION: từ 3 đến 6 cụm từ (collocations) kèm nghĩa tiếng Việt trong ngoặc đơn. Ví dụ: "necessary steps (các bước cần thiết), consider it necessary (coi là cần thiết)".
+5. Trả về DUY NHẤT một chuỗi JSON hợp lệ không markdown:
 {
-  "synonyms": "A1: từ 1, từ 2, từ 3 | A2: từ 1, từ 2, từ 3 | B1: từ 1, từ 2, từ 3 | B2: từ 1, từ 2, từ 3 | C1: từ 1, từ 2, từ 3",
-  "antonyms": "A1: từ 1, từ 2, từ 3 | A2: từ 1, từ 2, từ 3 | B1: từ 1, từ 2, từ 3 | B2: từ 1, từ 2, từ 3 | C1: từ 1, từ 2, từ 3",
-  "collocations": "cụm 1, cụm 2, cụm 3, cụm 4"
+  "synonyms": "A1: từ 1 (nghĩa 1), từ 2 (nghĩa 2) | A2: ... | B1: ... | B2: ... | C1: ...",
+  "antonyms": "A1: từ 1 (nghĩa 1), từ 2 (nghĩa 2) | A2: ... | B1: ... | B2: ... | C1: ...",
+  "collocations": "cụm 1 (nghĩa 1), cụm 2 (nghĩa 2), cụm 3 (nghĩa 3)"
 }`;
             const raw = await this.callAI(prompt, { temperature: 0.25 });
             data = this.robustJSONParse(raw);
@@ -45898,7 +45992,7 @@ YÊU CẦU BẮT BUỘC:
           if (data && data.collocations) {
             this.activeModalWord.collocations = data.collocations;
             const collocEl = document.getElementById('modal-detail-collocations');
-            if (collocEl) collocEl.innerText = data.collocations;
+            if (collocEl) collocEl.innerHTML = this.formatCollocationsHtml(data.collocations, word);
           }
 
           // Cập nhật vào danh sách vocabList và lưu bộ nhớ vĩnh viễn
@@ -48325,7 +48419,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.9</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.0</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
