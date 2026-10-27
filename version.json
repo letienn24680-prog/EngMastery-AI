@@ -1,12 +1,12 @@
 {
-  "version": "1.8.8",
-  "versionCode": 10800,
+  "version": "1.8.9",
+  "versionCode": 10900,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.8.8: Sửa Triệt Để Lỗi Thiếu Dữ Liệu Đồng / Trái Nghĩa A1–C1 & Khắc Phục Treo Spinner Họ Từ Vựng",
+  "title": "Bản Cập Nhật v1.8.9: Bác Sĩ AI Tự Động Quét & Bổ Sung Nghĩa Tiếng Việt, Sửa Lỗi Kho Từ Mỗi 30 Phút (Hoàn Toàn Tự Động)",
   "highlights": [
-    "Tự động phát hiện & chuẩn hóa lỗi chính tả từ vựng (Typo Healing): Tự động nhận diện các lỗi gõ sai phổ biến (như 'neccesary' ➔ 'necessary') để kết nối chính xác 100% kho dữ liệu đồng nghĩa, trái nghĩa và họ từ vựng học thuật.",
-    "Bổ sung phương thức phân tích JSON thông minh (robustJSONParse): Khắc phục triệt để lỗi khiến nút 'AI Cập Nhật Đầy Đủ A1 ➔ C1' không đổ dữ liệu vào thẻ chi tiết từ.",
-    "Bộ lọc từ trái nghĩa theo ngữ cảnh chuẩn CEFR: Loại bỏ hoàn toàn các từ rác mô tả khái niệm chung ('face', 'across', 'anti-', 'adverse', 'antithesis',...) và tự động ưu tiên các từ trái nghĩa thực sự như 'unnecessary', 'inessential', 'nonessential'.",
-    "Nâng cấp Họ Từ Vựng (Word Family) thông minh & Khắc phục treo Spinner: Tích hợp AI phân tích đầy đủ 4 dạng thức V - N - Adj - Adv chuẩn cấu trúc đề thi THPT Quốc Gia; xử lý triệt để hiện tượng xoay vòng vô tận trên modal."
+    "Bác Sĩ AI Quét & Sửa Từ Tự Động Định Kỳ 30 Phút: Hệ thống luôn tự động chạy ngầm mỗi 30 phút (và ngay 6 giây sau khi khởi động app) để rà soát toàn bộ kho từ; tự động phát hiện các từ thiếu nghĩa tiếng Việt, lỗi chính tả, thiếu IPA hoặc ví dụ và cập nhật hoàn thiện 100%.",
+    "Hoạt động tự động hoàn toàn: Không yêu cầu người dùng kích hoạt thủ công, không yêu cầu đăng nhập tài khoản — bất kỳ ai truy cập cũng được hệ thống tự động bảo dưỡng kho từ liên tục.",
+    "Đa tầng dịch thuật nghĩa tiếng Việt thông minh: Tích hợp Google Translate + AI Gemini/xKiro + MyMemory vào luồng bóc tách từ đồng/trái nghĩa và collocations, đảm bảo mọi thẻ từ con tạo ra đều có nghĩa tiếng Việt đầy đủ, chấm dứt hoàn toàn hiện tượng từ không có nghĩa.",
+    "Giao diện hiển thị an toàn: Thẻ từ vựng trong quá trình chờ AI cập nhật sẽ hiển thị trạng thái sinh động 'Đang được AI cập nhật nghĩa...' thay vì để trống dòng nghĩa."
   ]
 }

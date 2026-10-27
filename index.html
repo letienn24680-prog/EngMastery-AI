@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.8 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.9 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -1213,6 +1213,12 @@
             <button type="button" onclick="app.mergeDuplicateVocabCards(true)" class="px-3.5 py-2.5 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500 hover:text-white border border-indigo-500/20 font-bold text-xs transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Quét toàn bộ kho từ vựng và tự động gộp tất cả các từ bị trùng lặp làm 1 thẻ duy nhất">
               <i class="fa-solid fa-layer-group"></i>
               <span>Gộp Từ Trùng</span>
+            </button>
+
+            <!-- Auto Vocab Doctor / Health Repair Button -->
+            <button type="button" onclick="app.autoRepairVocabHealth(true)" class="px-3.5 py-2.5 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 hover:bg-teal-500 hover:text-white border border-teal-500/20 font-bold text-xs transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Bác Sĩ AI: Quét và sửa toàn bộ các từ bị thiếu nghĩa, lỗi chính tả, thiếu ví dụ (Hệ thống cũng tự động chạy ngầm mỗi 30 phút)">
+              <i class="fa-solid fa-user-doctor"></i>
+              <span>Bác Sĩ AI (Sửa Từ Lỗi)</span>
             </button>
 
             <!-- Sort Selector -->
@@ -3843,7 +3849,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.8 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.9 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -3881,6 +3887,10 @@
           <button type="button" onclick="app.mergeDuplicateVocabCards(true)" class="w-full py-2.5 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500 hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-xs cursor-pointer">
             <i class="fa-solid fa-layer-group"></i>
             <span>🗂 Quét & Tự Động Gộp Các Từ Bị Trùng Lặp Làm 1</span>
+          </button>
+          <button type="button" onclick="app.autoRepairVocabHealth(true)" class="w-full py-2.5 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 hover:bg-teal-500 hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-xs cursor-pointer">
+            <i class="fa-solid fa-user-doctor"></i>
+            <span>🩺 Bác Sĩ AI: Quét & Tự Động Bù Nghĩa, Sửa Lỗi Toàn Bộ Từ (Chạy Tự Động Mỗi 30 Phút)</span>
           </button>
         </div>
 
@@ -33244,7 +33254,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.8.8';
+        this.appVersion = '1.8.9';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -35614,6 +35624,8 @@ Yêu cầu output STRICTLY là một JSON object:
         this.initAppViewRestoration();
         // KHÔI PHỤC BỘ NHỚ VĨNH VIỄN INDEXEDDB (CHỐNG TRÀN VÀ MẤT TỪ KHI F5 / THOÁT APP)
         this.restoreFromIndexedDB();
+        // BÁC SĨ TỰ ĐỘNG CHỮA LỖI TỪ VỰNG & BÙ ĐẮP NGHĨA ĐỊNH KỲ 30 PHÚT (VOCAB AUTO-DOCTOR)
+        this.initAutoVocabHealer();
 
         // BẢO VỆ DỮ LIỆU TỨC THÌ KHI TẮT TAB / F5 / ĐỔI ỨNG DỤNG
         window.addEventListener('beforeunload', () => {
@@ -36939,7 +36951,9 @@ Yêu cầu output STRICTLY là một JSON object:
               <p class="text-xs font-mono text-slate-400 mt-0.5">${item.ipa || ''}</p>
 
               <p class="text-xs font-bold text-primary-light mt-2.5">
-                ${item.meaningVi}
+                ${(!item.meaningVi || this.isPlaceholderMeaning(item.meaningVi, item.word)) 
+                  ? '<span class="text-amber-500 font-normal italic flex items-center gap-1"><i class="fa-solid fa-wand-magic-sparkles animate-pulse text-[10px]"></i><span>Đang được AI cập nhật nghĩa...</span></span>' 
+                  : item.meaningVi}
               </p>
               <p class="text-[11px] text-slate-500 dark:text-slate-400 italic line-clamp-2 mt-1">
                 ${item.meaningEn || ''}
@@ -40081,7 +40095,10 @@ Trả về DUY NHẤT một JSON hợp lệ:
         if (/^\[(?:noun|verb|adj|adv|word)\]/i.test(t)) return true;
         if (t.includes('Dạng từ vựng thuộc họ từ') || t.includes('Biến thể của "aboutprep"')) return true;
         if (t.includes('Tra cứu nhanh qua') || t.includes('User-created custom entry')) return true;
-        if (t.includes('Đang cập nhật')) return true;
+        if (t.includes('Đang cập nhật') || t.includes('Đang chờ AI') || t.includes('User custom vocabulary')) return true;
+        if (t.startsWith('Đồng nghĩa (') && (!t.includes(':') || t.endsWith(':') || (word && t.includes(`: ${word}`)))) return true;
+        if (t.startsWith('Trái nghĩa (') && (!t.includes(':') || t.endsWith(':') || (word && t.includes(`: ${word}`)))) return true;
+        if (t.startsWith('Cụm từ thông dụng đi với') && (!t.includes(':') || t.endsWith(':'))) return true;
         if (t.includes('aboutprep')) return true;
         return false;
       }
@@ -40091,7 +40108,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
         const clean = word.trim();
         if (!clean) return '';
 
-        // 1. Kiểm tra từ điển gốc DEFAULT_VOCABULARY trước
+        // 1. Kiểm tra từ điển gốc DEFAULT_VOCABULARY trước (0ms)
         if (typeof DEFAULT_VOCABULARY !== 'undefined' && Array.isArray(DEFAULT_VOCABULARY)) {
           const m = DEFAULT_VOCABULARY.find(v => v.word && v.word.toLowerCase() === clean.toLowerCase());
           if (m && m.meaningVi && !this.isPlaceholderMeaning(m.meaningVi, clean)) {
@@ -40099,14 +40116,14 @@ Trả về DUY NHẤT một JSON hợp lệ:
           }
         }
 
-        // 2. Thử Google Translate API trực tiếp
+        // 2. Thử Google Translate API trực tiếp (nhanh, chuẩn từ ngữ và collocations)
         try {
           const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=vi&dt=t&q=${encodeURIComponent(clean)}`;
           const res = await fetch(url);
           if (res.ok) {
             const data = await res.json();
             const translated = data[0].map(item => item[0]).join('').trim();
-            if (translated && translated.toLowerCase() !== clean.toLowerCase()) {
+            if (translated && translated.toLowerCase() !== clean.toLowerCase() && !this.isPlaceholderMeaning(translated, clean)) {
               return translated;
             }
           }
@@ -40114,7 +40131,21 @@ Trả về DUY NHẤT một JSON hợp lệ:
           console.warn('Google translate direct error:', e);
         }
 
-        // 3. Fallback chuyên sâu: Lấy định nghĩa tiếng Anh từ Dictionary API và dịch định nghĩa sang tiếng Việt
+        // 3. Fallback AI Engine thông minh (callAI dùng DEFAULT_AI_KEY 100% miễn phí, không cần đăng nhập)
+        try {
+          const prompt = `Dịch từ/cụm từ tiếng Anh "${clean}" sang tiếng Việt chuẩn xác, ngắn gọn theo chuẩn từ điển học đường THPT Quốc Gia (chỉ trả về từ 1 đến 3 nghĩa phổ biến nhất cách nhau bằng dấu phẩy, không giải thích thêm, không kèm dấu ngoặc kép):`;
+          const aiTrans = await this.callAI(prompt, { temperature: 0.1 });
+          if (aiTrans && typeof aiTrans === 'string' && aiTrans.trim()) {
+            const cleaned = aiTrans.trim().replace(/^["'`*#]+|["'`*#]+$/g, '').trim();
+            if (cleaned && cleaned.toLowerCase() !== clean.toLowerCase() && !cleaned.toLowerCase().includes('error') && !this.isPlaceholderMeaning(cleaned, clean)) {
+              return cleaned;
+            }
+          }
+        } catch (aiErr) {
+          console.warn('AI translation fallback error in fetchVietnameseMeaning:', aiErr);
+        }
+
+        // 4. Fallback chuyên sâu: Lấy định nghĩa tiếng Anh từ Dictionary API và dịch định nghĩa sang tiếng Việt
         try {
           const dictUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(clean.toLowerCase())}`;
           const dictRes = await fetch(dictUrl);
@@ -40134,7 +40165,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
                 if (transRes.ok) {
                   const transData = await transRes.json();
                   const viDef = transData[0].map(x => x[0]).join('').trim();
-                  if (viDef) return viDef;
+                  if (viDef && !this.isPlaceholderMeaning(viDef, clean)) return viDef;
                 }
               }
             }
@@ -40143,7 +40174,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
           console.warn('Dictionary definition translate error:', e);
         }
 
-        // 4. Fallback Datamuse definition
+        // 5. Fallback Datamuse definition
         try {
           const dmUrl = `https://api.datamuse.com/words?sp=${encodeURIComponent(clean.toLowerCase())}&md=d&max=1`;
           const dmRes = await fetch(dmUrl);
@@ -40156,13 +40187,13 @@ Trả về DUY NHẤT một JSON hợp lệ:
               if (transRes.ok) {
                 const transData = await transRes.json();
                 const viDef = transData[0].map(x => x[0]).join('').trim();
-                if (viDef) return viDef;
+                if (viDef && !this.isPlaceholderMeaning(viDef, clean)) return viDef;
               }
             }
           }
         } catch (e) {}
 
-        // 5. Fallback MyMemory Free Translation Engine
+        // 6. Fallback MyMemory Free Translation Engine
         try {
           const mmUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(clean)}&langpair=en|vi`;
           const mmRes = await fetch(mmUrl);
@@ -40170,25 +40201,192 @@ Trả về DUY NHẤT một JSON hợp lệ:
             const mmData = await mmRes.json();
             if (mmData && mmData.responseData && mmData.responseData.translatedText) {
               const trans = mmData.responseData.translatedText.trim();
-              if (trans && trans.toLowerCase() !== clean.toLowerCase() && !trans.includes('MYMEMORY WARNING')) {
+              if (trans && trans.toLowerCase() !== clean.toLowerCase() && !trans.includes('MYMEMORY WARNING') && !this.isPlaceholderMeaning(trans, clean)) {
                 return trans;
               }
             }
           }
         } catch (e) {}
 
-        // 6. Fallback Gemini AI Engine (nếu đã kích hoạt API key)
-        if (this.settings.geminiApiKey && typeof this.callGeminiApi === 'function') {
-          try {
-            const prompt = `Dịch từ/cụm từ tiếng Anh "${clean}" sang tiếng Việt ngắn gọn, chuẩn từ điển học đường Việt Nam (chỉ trả về 1-3 nghĩa thông dụng nhất, không giải thích thêm).`;
-            const aiTrans = await this.callGeminiApi(prompt);
-            if (aiTrans && aiTrans.trim() && !aiTrans.toLowerCase().includes('error')) {
-              return aiTrans.trim().replace(/^["'`]+|["'`]+$/g, '');
-            }
-          } catch (e) {}
+        return '';
+      }
+
+      /* ========================================================================== */
+      /* BÁC SĨ AI TỰ ĐỘNG QUÉT & CHỮA LỖI TỪ VỰNG ĐỊNH KỲ MỖI 30 PHÚT (AUTO HEALER) */
+      /* ========================================================================== */
+      initAutoVocabHealer() {
+        // 1. Quét tự động lần đầu sau 6 giây mở ứng dụng
+        setTimeout(() => {
+          this.autoRepairVocabHealth(false);
+        }, 6000);
+
+        // 2. Tự động quét định kỳ ngầm mỗi 30 phút một lần (30 * 60 * 1000 = 1.800.000 ms)
+        if (!this._vocabAutoHealerInterval) {
+          this._vocabAutoHealerInterval = setInterval(() => {
+            this.autoRepairVocabHealth(false);
+          }, 30 * 60 * 1000);
         }
 
-        return '';
+        // 3. Tự động kiểm tra và quét khi người dùng quay lại tab nếu cách lần quét trước > 30 phút
+        if (!this._vocabHealerVisibilityBound) {
+          this._vocabHealerVisibilityBound = true;
+          document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+              const last = parseInt(localStorage.getItem('engMastery_last_vocab_health_scan') || '0', 10);
+              if (Date.now() - last > 30 * 60 * 1000) {
+                this.autoRepairVocabHealth(false);
+              }
+            }
+          });
+        }
+      }
+
+      async autoRepairVocabHealth(isManual = false) {
+        if (this._isAutoRepairingVocab) {
+          if (isManual) this.showToast('⏳ Bác Sĩ AI đang trong tiến trình quét & sửa từ, vui lòng đợi trong giây lát...', 'info');
+          return;
+        }
+
+        if (!Array.isArray(this.vocabList) || this.vocabList.length === 0) return;
+
+        this._isAutoRepairingVocab = true;
+        try {
+          localStorage.setItem('engMastery_last_vocab_health_scan', Date.now().toString());
+        } catch (_) {}
+
+        if (isManual) {
+          this.showToast('🩺 Bác Sĩ AI đang rà soát toàn bộ kho từ vựng để sửa lỗi & bổ sung nghĩa...', 'info');
+        }
+
+        // 1. Tìm tất cả các từ bị lỗi hoặc thiếu dữ liệu
+        const flawedCards = [];
+        for (let i = 0; i < this.vocabList.length; i++) {
+          const card = this.vocabList[i];
+          if (!card || !card.word) continue;
+
+          const w = card.word.trim();
+          const corrected = this.getCorrectedWord(w);
+          const hasTypo = (corrected && corrected.toLowerCase() !== w.toLowerCase());
+          const isMissingVi = this.isPlaceholderMeaning(card.meaningVi, w);
+          const isMissingPos = (!card.type || card.type === 'Word' || card.type === 'Từ vựng');
+          const isMissingIpa = (!card.ipa || !card.ipa.trim());
+          const isMissingExample = (!card.example || !card.exampleVi || card.example.includes('Pay special attention'));
+
+          if (hasTypo || isMissingVi || isMissingPos || isMissingIpa || isMissingExample) {
+            flawedCards.push({ card, hasTypo, corrected, isMissingVi, isMissingPos, isMissingIpa, isMissingExample });
+          }
+        }
+
+        if (flawedCards.length === 0) {
+          if (isManual) {
+            this.showToast('✅ Tuyệt vời! Toàn bộ kho từ vựng đều đạt chuẩn 100%, không phát hiện từ lỗi hoặc thiếu nghĩa.', 'success');
+          }
+          this._isAutoRepairingVocab = false;
+          return;
+        }
+
+        console.log(`[Vocab Doctor] Tìm thấy ${flawedCards.length} từ cần chuẩn hóa / bổ sung nghĩa.`);
+
+        // Giới hạn số lượng xử lý mỗi đợt để tối ưu tài nguyên mạng & tránh nghẽn
+        const maxProcess = isManual ? 60 : 25;
+        const targets = flawedCards.slice(0, maxProcess);
+        let fixedCount = 0;
+
+        for (const item of targets) {
+          const card = item.card;
+          let changed = false;
+
+          // A. Sửa lỗi chính tả
+          if (item.hasTypo && item.corrected) {
+            card.originalTypo = card.word;
+            card.word = item.corrected;
+            changed = true;
+          }
+
+          const currentWord = card.word.trim();
+
+          // B. Bổ sung nghĩa tiếng Việt chuẩn
+          if (item.isMissingVi || this.isPlaceholderMeaning(card.meaningVi, currentWord)) {
+            let realVi = '';
+            if (typeof DEFAULT_VOCABULARY !== 'undefined' && Array.isArray(DEFAULT_VOCABULARY)) {
+              const defWord = DEFAULT_VOCABULARY.find(v => v.word && v.word.toLowerCase() === currentWord.toLowerCase());
+              if (defWord && defWord.meaningVi && !this.isPlaceholderMeaning(defWord.meaningVi, currentWord)) {
+                realVi = defWord.meaningVi;
+                if (!card.ipa && defWord.ipa) card.ipa = defWord.ipa;
+                if ((!card.type || card.type === 'Word') && defWord.type) card.type = defWord.type;
+                if ((!card.example || card.example.includes('Pay special attention')) && defWord.example) {
+                  card.example = defWord.example;
+                  card.exampleVi = defWord.exampleVi;
+                }
+              }
+            }
+
+            if (!realVi) {
+              try {
+                realVi = await this.fetchVietnameseMeaning(currentWord);
+              } catch (_) {}
+            }
+
+            if (realVi && !this.isPlaceholderMeaning(realVi, currentWord)) {
+              card.meaningVi = realVi;
+              changed = true;
+            }
+          }
+
+          // C. Bổ sung IPA và loại từ nếu còn thiếu
+          if (!card.ipa || !card.type || card.type === 'Word' || card.type === 'Từ vựng') {
+            try {
+              const dictUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(currentWord.toLowerCase())}`;
+              const res = await fetch(dictUrl);
+              if (res.ok) {
+                const data = await res.json();
+                if (Array.isArray(data) && data[0]) {
+                  if (!card.ipa && data[0].phonetic) {
+                    card.ipa = data[0].phonetic;
+                    changed = true;
+                  }
+                  if ((!card.type || card.type === 'Word') && data[0].meanings && data[0].meanings[0] && data[0].meanings[0].partOfSpeech) {
+                    const rawPos = data[0].meanings[0].partOfSpeech;
+                    card.type = rawPos.charAt(0).toUpperCase() + rawPos.slice(1);
+                    changed = true;
+                  }
+                }
+              }
+            } catch (_) {}
+          }
+
+          // D. Bổ sung câu ví dụ chuẩn nếu còn là câu mẫu tạm
+          if (!card.example || !card.exampleVi || card.example.includes('Pay special attention') || card.example.includes('Practice using')) {
+            card.example = `It is important to remember how to use "${currentWord}" in daily communication and exams.`;
+            card.exampleVi = `Điều quan trọng là ghi nhớ cách sử dụng từ "${currentWord}" trong giao tiếp và bài thi.`;
+            changed = true;
+          }
+
+          if (changed) fixedCount++;
+
+          if (fixedCount % 5 === 0) {
+            this.flushSaveState();
+          }
+
+          await new Promise(r => setTimeout(r, 120));
+        }
+
+        if (fixedCount > 0) {
+          this.flushSaveState();
+          this.updateFilterCounts();
+          if (this.currentView === 'vocab-hub') {
+            this.renderVocabHub();
+          }
+          if (this.currentView === 'flashcards' && this.renderFlashcard) {
+            this.renderFlashcard();
+          }
+          console.log(`[Vocab Doctor] Hoàn tất: Đã sửa và hoàn thiện thành công ${fixedCount}/${targets.length} từ vựng.`);
+          this.showToast(`✨ Bác Sĩ AI: Đã tự động rà soát & hoàn thiện nghĩa chuẩn cho +${fixedCount} từ vựng!`, 'success');
+        } else if (isManual) {
+          this.showToast('✅ Các từ trong danh sách đã được cập nhật ở trạng thái tốt nhất.', 'info');
+        }
+
+        this._isAutoRepairingVocab = false;
       }
 
       async fetchEnglishDefinition(word) {
@@ -41298,7 +41496,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.8.8')) return caches.delete(c);
+                if (!c.includes('v1.8.9')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -45483,7 +45681,9 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
                   level: level,
                   topic: 'topic_notebook',
                   topicLabel: `🟢 Đồng Nghĩa (${level})`,
-                  meaningVi: `Đồng nghĩa (${level}) với "${cleanRoot}": ${rootMeaningVi || cleanW}`,
+                  meaningVi: (rootMeaningVi && !this.isPlaceholderMeaning(rootMeaningVi, cleanRoot)) 
+                    ? `Đồng nghĩa (${level}): ${rootMeaningVi}` 
+                    : `Đồng nghĩa (${level}) với "${cleanRoot}"`,
                   meaningEn: `Synonym (${level}) of "${cleanRoot}"`,
                   cloze: `The ${level} word [ ${cleanW} ] is synonymous with "${cleanRoot}".`,
                   example: `You can use "${cleanW}" (${level}) in place of "${cleanRoot}" in this context.`,
@@ -45499,6 +45699,18 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
                 };
                 const upRes = this.upsertVocabCard(newCard);
                 if (upRes.isNew) addedCount++;
+
+                // Tự động kích hoạt dịch ngầm nghĩa chuẩn xác tiếng Việt cho từ mới này
+                this.fetchVietnameseMeaning(cleanW).then(realMeaning => {
+                  if (realMeaning && !this.isPlaceholderMeaning(realMeaning, cleanW)) {
+                    const cardRef = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
+                    if (cardRef) {
+                      cardRef.meaningVi = realMeaning;
+                      this.flushSaveState();
+                      if (this.currentView === 'vocab-hub') this.renderVocabHub();
+                    }
+                  }
+                }).catch(() => {});
               }
             });
           }
@@ -45540,6 +45752,18 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
                 };
                 const upRes = this.upsertVocabCard(newCard);
                 if (upRes.isNew) addedCount++;
+
+                // Tự động kích hoạt dịch ngầm nghĩa chuẩn xác tiếng Việt cho từ trái nghĩa này
+                this.fetchVietnameseMeaning(cleanW).then(realMeaning => {
+                  if (realMeaning && !this.isPlaceholderMeaning(realMeaning, cleanW)) {
+                    const cardRef = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
+                    if (cardRef) {
+                      cardRef.meaningVi = realMeaning;
+                      this.flushSaveState();
+                      if (this.currentView === 'vocab-hub') this.renderVocabHub();
+                    }
+                  }
+                }).catch(() => {});
               }
             });
           }
@@ -45580,6 +45804,18 @@ Trả về DUY NHẤT một JSON hợp lệ không markdown:
               };
               const upRes = this.upsertVocabCard(newCard);
               if (upRes.isNew) addedCount++;
+
+              // Tự động kích hoạt dịch ngầm nghĩa tiếng Việt cho cụm từ này
+              this.fetchVietnameseMeaning(c).then(realMeaning => {
+                if (realMeaning && !this.isPlaceholderMeaning(realMeaning, c)) {
+                  const cardRef = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
+                  if (cardRef) {
+                    cardRef.meaningVi = realMeaning;
+                    this.flushSaveState();
+                    if (this.currentView === 'vocab-hub') this.renderVocabHub();
+                  }
+                }
+              }).catch(() => {});
             }
           });
         }
@@ -48089,7 +48325,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.8</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.9</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
