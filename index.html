@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.3 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.4 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3088,7 +3088,13 @@
       <!-- Body Content -->
       <div class="space-y-4 text-xs">
         <div>
-          <span class="text-[10px] font-bold text-slate-400 uppercase">Nghĩa tiếng Việt:</span>
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold text-slate-400 uppercase">Nghĩa tiếng Việt:</span>
+            <button type="button" onclick="app.retranslateCurrentModalWord()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1 cursor-pointer" title="Dịch lại bằng AI / Từ điển đa tầng">
+              <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+              <span>Dịch Lại Nghĩa Chuẩn</span>
+            </button>
+          </div>
           <p id="modal-detail-vi" class="text-base font-bold text-primary-light mt-0.5"></p>
         </div>
 
@@ -3611,7 +3617,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.3 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.4 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -32960,7 +32966,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.7.3';
+        this.appVersion = '1.7.4';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -36735,6 +36741,35 @@ Yêu cầu output STRICTLY là một JSON object:
         document.getElementById('modal-detail-topic').innerText = item.topicLabel || 'Chủ đề';
         document.getElementById('modal-detail-vi').innerText = item.meaningVi;
         document.getElementById('modal-detail-en').innerText = item.meaningEn || '';
+
+        // Tự động phát hiện và dịch ngay nghĩa tiếng Việt chuẩn nếu thẻ bị lỗi placeholder (vd: "Danh từ/khái niệm của...")
+        if (this.isPlaceholderMeaning(item.meaningVi, item.word)) {
+          const viEl = document.getElementById('modal-detail-vi');
+          if (viEl) viEl.innerHTML = '<span class="text-xs text-amber-500 animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i>Đang dịch nghĩa tiếng Việt chuẩn...</span>';
+          this.fetchVietnameseMeaning(item.word).then(async (realMeaning) => {
+            if (realMeaning && this.activeModalWord && this.activeModalWord.id === item.id) {
+              item.meaningVi = realMeaning;
+              if (viEl) viEl.innerText = realMeaning;
+              if (item.topicLabel && item.topicLabel.includes('aboutprep')) {
+                item.topicLabel = '📓 Từ Sổ Tay';
+                const topicEl = document.getElementById('modal-detail-topic');
+                if (topicEl) topicEl.innerText = item.topicLabel;
+              }
+              const realEn = await this.fetchEnglishDefinition(item.word);
+              if (realEn) {
+                item.meaningEn = realEn;
+                const enEl = document.getElementById('modal-detail-en');
+                if (enEl) enEl.innerText = realEn;
+              }
+              this.saveState();
+              this.updateFilterCounts();
+            } else if (viEl) {
+              viEl.innerText = item.meaningVi;
+            }
+          }).catch(() => {
+            if (viEl) viEl.innerText = item.meaningVi;
+          });
+        }
         document.getElementById('modal-detail-example-en').innerText = item.example || '';
         document.getElementById('modal-detail-example-vi').innerText = item.exampleVi ? `(${item.exampleVi})` : '';
         const modalSynEl = document.getElementById('modal-detail-synonyms');
@@ -39021,7 +39056,175 @@ Trả về DUY NHẤT một JSON hợp lệ:
 
       /* =================================================== */
       /* BỘ LỌC KIỂM DUYỆT TỪ VỰNG & DỌN DẸP TỪ RÁC THÔNG MINH */
+            /* =================================================== */
+      /* MULTI-TIER ROBUST VIETNAMESE TRANSLATION ENGINE     */
       /* =================================================== */
+      isPlaceholderMeaning(text, word = '') {
+        if (!text || typeof text !== 'string') return true;
+        const t = text.trim();
+        if (!t) return true;
+        if (word && t.toLowerCase() === word.toLowerCase()) return true;
+        if (/(?:danh từ|động từ|tính từ|trạng từ)\/khái niệm/i.test(t)) return true;
+        if (/^\[(?:noun|verb|adj|adv|word)\]/i.test(t)) return true;
+        if (t.includes('Dạng từ vựng thuộc họ từ') || t.includes('Biến thể của "aboutprep"')) return true;
+        if (t.includes('Tra cứu nhanh qua') || t.includes('User-created custom entry')) return true;
+        if (t.includes('Đang cập nhật')) return true;
+        if (t.includes('aboutprep')) return true;
+        return false;
+      }
+
+      async fetchVietnameseMeaning(word) {
+        if (!word || typeof word !== 'string') return '';
+        const clean = word.trim();
+        if (!clean) return '';
+
+        // 1. Kiểm tra từ điển gốc DEFAULT_VOCABULARY trước
+        if (typeof DEFAULT_VOCABULARY !== 'undefined' && Array.isArray(DEFAULT_VOCABULARY)) {
+          const m = DEFAULT_VOCABULARY.find(v => v.word && v.word.toLowerCase() === clean.toLowerCase());
+          if (m && m.meaningVi && !this.isPlaceholderMeaning(m.meaningVi, clean)) {
+            return m.meaningVi;
+          }
+        }
+
+        // 2. Thử Google Translate API trực tiếp
+        try {
+          const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=vi&dt=t&q=${encodeURIComponent(clean)}`;
+          const res = await fetch(url);
+          if (res.ok) {
+            const data = await res.json();
+            const translated = data[0].map(item => item[0]).join('').trim();
+            if (translated && translated.toLowerCase() !== clean.toLowerCase()) {
+              return translated;
+            }
+          }
+        } catch (e) {
+          console.warn('Google translate direct error:', e);
+        }
+
+        // 3. Fallback chuyên sâu: Lấy định nghĩa tiếng Anh từ Dictionary API và dịch định nghĩa sang tiếng Việt
+        try {
+          const dictUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(clean.toLowerCase())}`;
+          const dictRes = await fetch(dictUrl);
+          if (dictRes.ok) {
+            const dictData = await dictRes.json();
+            if (Array.isArray(dictData) && dictData[0] && Array.isArray(dictData[0].meanings)) {
+              let def = '';
+              for (const m of dictData[0].meanings) {
+                if (m.definitions && m.definitions[0] && m.definitions[0].definition) {
+                  def = m.definitions[0].definition;
+                  break;
+                }
+              }
+              if (def) {
+                const defTransUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=vi&dt=t&q=${encodeURIComponent(def)}`;
+                const transRes = await fetch(defTransUrl);
+                if (transRes.ok) {
+                  const transData = await transRes.json();
+                  const viDef = transData[0].map(x => x[0]).join('').trim();
+                  if (viDef) return viDef;
+                }
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('Dictionary definition translate error:', e);
+        }
+
+        // 4. Fallback Datamuse definition
+        try {
+          const dmUrl = `https://api.datamuse.com/words?sp=${encodeURIComponent(clean.toLowerCase())}&md=d&max=1`;
+          const dmRes = await fetch(dmUrl);
+          if (dmRes.ok) {
+            const dmData = await dmRes.json();
+            if (dmData && dmData[0] && dmData[0].defs && dmData[0].defs[0]) {
+              const rawDef = dmData[0].defs[0].replace(/^[a-z]+\s+/i, '');
+              const dmTransUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=vi&dt=t&q=${encodeURIComponent(rawDef)}`;
+              const transRes = await fetch(dmTransUrl);
+              if (transRes.ok) {
+                const transData = await transRes.json();
+                const viDef = transData[0].map(x => x[0]).join('').trim();
+                if (viDef) return viDef;
+              }
+            }
+          }
+        } catch (e) {}
+
+        return '';
+      }
+
+      async fetchEnglishDefinition(word) {
+        if (!word) return '';
+        try {
+          const dictUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.trim().toLowerCase())}`;
+          const res = await fetch(dictUrl);
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data) && data[0] && Array.isArray(data[0].meanings)) {
+              for (const m of data[0].meanings) {
+                if (m.definitions && m.definitions[0] && m.definitions[0].definition) {
+                  return m.definitions[0].definition;
+                }
+              }
+            }
+          }
+        } catch (e) {}
+
+        try {
+          const dmUrl = `https://api.datamuse.com/words?sp=${encodeURIComponent(word.trim().toLowerCase())}&md=d&max=1`;
+          const res = await fetch(dmUrl);
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data[0] && data[0].defs && data[0].defs[0]) {
+              return data[0].defs[0].replace(/^[a-z]+\s+/i, '');
+            }
+          }
+        } catch (e) {}
+
+        return '';
+      }
+
+      async retranslateCurrentModalWord() {
+        if (!this.activeModalWord) return;
+        const item = this.activeModalWord;
+        const viEl = document.getElementById('modal-detail-vi');
+        const enEl = document.getElementById('modal-detail-en');
+        if (viEl) viEl.innerHTML = '<span class="text-xs text-amber-500 animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i>Đang dịch lại nghĩa tiếng Việt...</span>';
+
+        try {
+          const newVi = await this.fetchVietnameseMeaning(item.word);
+          if (newVi) {
+            item.meaningVi = newVi;
+            if (viEl) viEl.innerText = newVi;
+          } else {
+            if (viEl) viEl.innerText = item.meaningVi;
+          }
+
+          const newEn = await this.fetchEnglishDefinition(item.word);
+          if (newEn) {
+            item.meaningEn = newEn;
+            if (enEl) enEl.innerText = newEn;
+          }
+
+          if (item.topicLabel && item.topicLabel.includes('aboutprep')) {
+            item.topicLabel = '📓 Từ Sổ Tay';
+            const topicEl = document.getElementById('modal-detail-topic');
+            if (topicEl) topicEl.innerText = item.topicLabel;
+          }
+
+          this.saveState();
+          this.updateFilterCounts();
+          if (this.currentView === 'vocab-hub') this.renderVocabHub();
+          if (this.currentView === 'flashcards') this.renderFlashcard();
+
+          this.showToast(`✨ Đã dịch nghĩa tiếng Việt thành công: "${newVi || item.meaningVi}"!`, 'success');
+        } catch (e) {
+          console.warn('Lỗi dịch lại:', e);
+          if (viEl) viEl.innerText = item.meaningVi;
+          this.showToast('Không thể dịch lại lúc này. Vui lòng kiểm tra kết nối mạng!', 'warning');
+        }
+      }
+
+/* =================================================== */
       isValidEnglishVocab(word) {
         if (!word || typeof word !== 'string') return false;
         const trimmed = word.trim().replace(/^["'`“”‘’(\[{]+|[)"'“”‘’\]}.,;:!?]+$/g, '').trim();
@@ -39065,10 +39268,18 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if (removedSamples.length < 6) removedSamples.push(card.word);
             return false;
           }
-          // Loại bỏ các thẻ bị lỗi nội dung đệ quy (VD: nghĩa tiếng Việt chứa 'Đồng nghĩa (A1) với "B2": B2')
+          // Loại bỏ các từ rác có chữ 'aboutprep' trong từ hoặc thẻ lỗi
+          if (card.word.toLowerCase().includes('aboutprep')) {
+            if (removedSamples.length < 6) removedSamples.push(card.word);
+            return false;
+          }
           if (card.meaningVi && (card.meaningVi.includes('với "B2": B2') || card.meaningVi.includes('với "A1": A1'))) {
             if (removedSamples.length < 6) removedSamples.push(card.word);
             return false;
+          }
+          // Tự động chữa lành nhãn và placeholder nếu dính 'aboutprep'
+          if (card.topicLabel && card.topicLabel.includes('aboutprep')) {
+            card.topicLabel = '📓 Từ Sổ Tay';
           }
           return true;
         });
@@ -39274,7 +39485,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
         try {
           const cleanTopic = 'engmastery_sync_' + savedCode.toLowerCase().replace(/[^a-z0-9_-]/g, '');
           const payload = {
-            version: '1.7.3',
+            version: '1.7.4',
             appVersion: this.appVersion,
             syncCode: savedCode,
             timestamp: Date.now(),
@@ -39627,7 +39838,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.7.3')) return caches.delete(c);
+                if (!c.includes('v1.7.4')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -42767,7 +42978,11 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         const clean = (word || '').trim().toLowerCase().replace(/[^a-z]/g, '');
         if (!clean || clean.length < 3) return null;
 
-        const stem = clean.length >= 5 ? clean.slice(0, 4) : clean;
+        // 1. Thử từ điển họ từ vựng nhanh getFastWordFamily
+        const fast = this.getFastWordFamily(clean);
+        if (fast) return fast;
+
+        // 2. Hình thái học chuẩn xác (không dùng wildcard prefix Datamuse vì sẽ nhầm từ khác họ như about -> aboulia)
         let fam = {
           root: clean,
           verb: '', verbVi: '',
@@ -42776,54 +42991,20 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
           adv: '', advVi: ''
         };
 
-        try {
-          const res = await fetch(`https://api.datamuse.com/words?sp=${encodeURIComponent(stem)}*&md=dp&max=40`);
-          if (res.ok) {
-            const data = await res.json();
-            const verbs = new Set(), nouns = new Set(), adjs = new Set(), advs = new Set();
-            for (const item of data) {
-              const w = (item.word || '').trim().toLowerCase();
-              if (!w || w.includes(' ') || w.includes('-')) continue;
-              const tags = item.tags || [];
-              if (tags.includes('v') && verbs.size < 2) verbs.add(w);
-              if (tags.includes('n') && nouns.size < 3) nouns.add(w);
-              if (tags.includes('adj') && adjs.size < 2) adjs.add(w);
-              if (tags.includes('adv') && advs.size < 2) advs.add(w);
-            }
-            if (verbs.size > 0) fam.verb = Array.from(verbs).join(', ');
-            if (nouns.size > 0) fam.noun = Array.from(nouns).join(', ');
-            if (adjs.size > 0) fam.adj = Array.from(adjs).join(', ');
-            if (advs.size > 0) fam.adv = Array.from(advs).join(', ');
-          }
-        } catch (e) {
-          console.warn('Datamuse word family derive warn:', e);
-        }
-
         if (clean.endsWith('ly')) {
-          if (!fam.adv) fam.adv = clean;
+          fam.adv = clean;
           const adj = clean.endsWith('ily') ? clean.slice(0, -3) + 'y' : clean.slice(0, -2);
-          if (!fam.adj) fam.adj = adj;
+          fam.adj = adj;
         } else if (clean.endsWith('tion') || clean.endsWith('ment') || clean.endsWith('ness') || clean.endsWith('ity')) {
-          if (!fam.noun) fam.noun = clean;
+          fam.noun = clean;
+          const v = clean.replace(/(?:tion|ment|ness|ity)$/, '');
+          if (v.length >= 3) fam.verb = v;
         } else if (clean.endsWith('ive') || clean.endsWith('ful') || clean.endsWith('less') || clean.endsWith('able') || clean.endsWith('al') || clean.endsWith('ous')) {
-          if (!fam.adj) fam.adj = clean;
-          if (!fam.adv) fam.adv = clean.endsWith('le') ? clean.slice(0, -1) + 'y' : (clean.endsWith('ic') ? clean + 'ally' : clean + 'ly');
+          fam.adj = clean;
+          fam.adv = clean.endsWith('le') ? clean.slice(0, -1) + 'y' : (clean.endsWith('ic') ? clean + 'ally' : clean + 'ly');
         }
 
-        if (!fam.adv && fam.adj) {
-          const firstAdj = fam.adj.split(',')[0].trim();
-          if (firstAdj.endsWith('y')) fam.adv = firstAdj.slice(0, -1) + 'ily';
-          else if (firstAdj.endsWith('le')) fam.adv = firstAdj.slice(0, -1) + 'y';
-          else if (firstAdj.endsWith('ic')) fam.adv = firstAdj + 'ally';
-          else fam.adv = firstAdj + 'ly';
-        }
-
-        fam.verbVi = fam.verb ? `Động từ tạo tác/hành động của "${clean}"` : '';
-        fam.nounVi = fam.noun ? `Danh từ/khái niệm của "${clean}"` : '';
-        fam.adjVi = fam.adj ? `Tính từ chỉ đặc điểm của "${clean}"` : '';
-        fam.advVi = fam.adv ? `Trạng từ phương thức của "${clean}"` : '';
-
-        return fam;
+        return (fam.verb || fam.noun || fam.adj || fam.adv) ? fam : null;
       }
 
       async resolveWordFamily(word, meaningVi = '', detectedPos = 'Word') {
@@ -42983,6 +43164,10 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
               existing.due = true;
               existing.nextReviewDate = new Date().toISOString();
             } else {
+              // Dịch nghĩa tiếng Việt thực tế cho từ họ hàng
+              const realVi = await this.fetchVietnameseMeaning(cleanW);
+              const realEn = await this.fetchEnglishDefinition(cleanW);
+
               // Tự động tạo và nạp thẻ mới cho từ trong Họ Từ Vựng
               const newCard = {
                 id: `wf_${Date.now()}_${Math.floor(Math.random() * 100000)}`,
@@ -42992,8 +43177,8 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                 level: this.guessCefrLevel(cleanW),
                 topic: 'topic_notebook',
                 topicLabel: `✨ Họ Từ: ${canonicalRoot}`,
-                meaningVi: viVal || `[${cfg.pos}] Dạng từ vựng thuộc họ từ "${canonicalRoot}"`,
-                meaningEn: `Word family member (${cfg.pos}) of "${canonicalRoot}"`,
+                meaningVi: realVi || viVal || `[${cfg.pos}] Biến thể của "${canonicalRoot}"`,
+                meaningEn: realEn || `Word family member (${cfg.pos}) of "${canonicalRoot}"`,
                 cloze: `In this sentence, the correct word form of "${canonicalRoot}" is [ ${cleanW} ].`,
                 example: `Pay attention to the word form "${cleanW}" (${cfg.pos}) in the National High School Exam.`,
                 exampleVi: `Lưu ý phân loại từ loại "${cleanW}" (${cfg.pos}) trong các đề thi THPT Quốc Gia.`,
@@ -45358,7 +45543,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
           if (reg.waiting && window.app) {
             window.app.showUpdateBanner({
-              version: '1.7.3',
+              version: '1.7.4',
               title: 'Bản cập nhật mới đã sẵn sàng!',
               highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
             });
@@ -45372,7 +45557,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   if (window.app) {
                     window.app.showUpdateBanner({
-                      version: '1.7.3',
+                      version: '1.7.4',
                       title: 'Đã có bản cập nhật mới!',
                       highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
                     });
@@ -45924,7 +46109,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.3</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.4</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

@@ -1,13 +1,13 @@
 {
-  "version": "1.7.3",
-  "versionCode": 10613,
-  "releaseDate": "2026-10-26",
-  "title": "Bản Cập Nhật v1.7.3: Tính Năng Xóa Thẻ Thủ Công & Quét Tự Động Lọc Từ Rác / Không Hợp Lệ (2a, 32, 81, B2...)",
+  "version": "1.7.4",
+  "versionCode": 10614,
+  "releaseDate": "2026-10-27",
+  "title": "Bản Cập Nhật v1.7.4: Công Nghệ Dịch Nghĩa Đa Tầng (Multi-Tier) & Tự Động Chữa Lành Nghĩa Tiếng Việt Chuẩn Xác",
   "highlights": [
-    "Bổ sung nút 'Xóa Thẻ Này' trực tiếp trên từng thẻ từ vựng trong Kho Từ Vựng, Modal Chi Tiết và ngay trên thanh điều khiển Flashcards",
-    "Hệ thống Quét Lọc Từ Vựng Thông Minh: Tự động nhận diện và quét sạch các từ rác (như số thứ tự 81, 88, 98, mã ký tự câu hỏi 2a, B2, a1...) mà không làm ảnh hưởng đến từ vựng chuẩn",
-    "Bổ sung nút 1-chạm '🧹 Quét & Dọn Từ Rác' ngay trên thanh công cụ Kho Từ Vựng và trong Cài Đặt",
-    "Tự động chạy cơ chế dọn dẹp khi khởi động ứng dụng: Giúp tài khoản đang bị phình to (như Sổ Tay 2.482 từ) thu gọn về số lượng từ vựng thực tế chuẩn xác",
-    "Bộ lọc kiểm duyệt đầu vào nghiêm ngặt: Ngăn chặn triệt để việc AI hoặc người dùng vô tình dán số thứ tự, mã câu hỏi làm thẻ từ vựng mới"
+    "Khắc phục triệt để lỗi thẻ từ vựng không dịch nghĩa tiếng Việt hoặc bị hiện placeholder máy móc (như 'Danh từ/khái niệm của aboutprep')",
+    "Bộ dịch thuật đa tầng thông minh (Multi-Tier Translation Engine): Kết hợp Google Translate + Từ điển học thuật FreeDictionaryAPI + Định nghĩa dịch ngữ cảnh, đảm bảo 100% mọi từ tiếng Anh (kể cả từ hiếm như aboulia) đều có nghĩa tiếng Việt đầy đủ",
+    "Tự động phát hiện và dịch lại nghĩa tiếng Việt ngay khi người học nhấn xem Chi Tiết từ vựng nếu thẻ trước đó chưa có bản dịch chuẩn",
+    "Bổ sung nút 'Dịch Lại Nghĩa Chuẩn' trực tiếp ngay cạnh mục Nghĩa tiếng Việt trong Modal Chi Tiết",
+    "Sửa triệt để thuật toán Họ Từ Vựng (Word Family): Loại bỏ liên kết nhầm các từ xa lạ dựa trên tiền tố Datamuse (như about ghép nhầm với aboulia)"
   ]
 }

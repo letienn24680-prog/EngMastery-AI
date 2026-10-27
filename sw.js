@@ -1,5 +1,5 @@
 // EngMastery AI - Service Worker for PWA Offline & Multi-Device Isolation
-const CACHE_NAME = 'engmastery-v1.7.3';
+const CACHE_NAME = 'engmastery-v1.7.4';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -44,6 +44,7 @@ self.addEventListener('fetch', (event) => {
   if (url.origin.includes('api.xkiro.com') || 
       url.origin.includes('generativelanguage.googleapis.com') || 
       url.origin.includes('ntfy.sh') ||
+      url.origin.includes('dictionaryapi.dev') ||
       url.pathname.endsWith('version.json')) {
     return;
   }
