@@ -1,13 +1,11 @@
 {
-  "version": "1.8.0",
-  "versionCode": 10620,
+  "version": "1.8.1",
+  "versionCode": 10621,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.8.0: Đại Tu Giao Diện Responsive Toàn Diện Cho Mobile & PC (Zero Squishing, Zero Truncation, Perfect Layout)",
+  "title": "Bản Cập Nhật v1.8.1: Nâng Cấp Hệ Thống Hộp Thoại In-App Dialog Thuần Ứng Dụng (Loại Bỏ Hoàn Toàn Popup Trình Duyệt Native Xấu Xí)",
   "highlights": [
-    "Khắc phục triệt để lỗi tiêu đề Kho Từ Vựng bị ép thành 5 dòng dọc: Tái cấu trúc Banner Kho Từ Vựng theo chuẩn 2 tầng (Tier 1: Tiêu đề & phụ đề trải rộng 100%; Tier 2: Thanh công cụ bọc flex-wrap thông minh), không bao giờ bị chèn ép chữ hay vỡ khung.",
-    "Khắc phục lỗi nút bấm bị tràn và cắt cụt góc màn hình: Toàn bộ các nút Nhập Từ Thủ Công, AI Tra & Lưu Ôn, Quét & Dọn Từ Rác, Gộp Từ Trùng và các bộ lọc tự động dàn hàng và xuống dòng mượt mà trên mọi kích cỡ màn hình PC, laptop và điện thoại.",
-    "Sửa lỗi thanh điều hướng trên cùng (Breadcrumb) bị rút ngắn thành 'K..': Tối ưu hóa thanh điều hướng Navbar, tinh chỉnh hiển thị huy hiệu thích ứng để tiêu đề trang luôn hiển thị đầy đủ và rõ ràng trên cả màn hình chia đôi.",
-    "Mở rộng thanh Menu Sidebar (md:w-72) chống cụt chữ: Khắc phục lỗi hiển thị dấu hai chấm ('..') ở các mục '53 Cấu Trúc Ngữ Pháp', 'Thi Thử THPT Quốc Gia', 'Đề Cương & Thi Lớp 12', đảm bảo toàn bộ menu hiển thị trọn vẹn 100%.",
-    "Thanh cuộn mượt không hiện thanh xám xấu trên Windows: Thêm chuẩn no-scrollbar cho dải chữ cái A-Z và dải danh mục chủ đề để trải nghiệm lướt mượt mà như app gốc."
+    "Xóa bỏ 100% hộp thoại thông báo thô sơ của trình duyệt ('...github.io cho biết'): Thay thế toàn bộ confirm/alert/prompt bằng hệ thống In-App Dialog hiện đại chuẩn Tailwind, bo tròn góc, nền mờ kính backdrop-blur cao cấp và chuyển động mượt mà.",
+    "Giao diện Xác Nhận Nộp Bài Thi THPT chuyên nghiệp: Hiển thị hộp thoại in-app trực quan kèm huy hiệu số câu chưa làm ('⚠️ Còn X câu chưa trả lời'), nút 'Tiếp Tục Làm Bài' và 'Nộp Bài Ngay' đẹp mắt, đồng bộ hoàn hảo với giao diện ứng dụng trên điện thoại và máy tính.",
+    "Đồng bộ hóa toàn bộ thao tác Xóa thẻ từ vựng, Xóa đề thi, Đổi tên hồ sơ và Khôi phục dữ liệu: Tất cả đều sử dụng In-App Dialog và Toast thông báo sang trọng, không bao giờ bị nhảy popup hệ điều hành hay che khuất giao diện học tập."
   ]
 }

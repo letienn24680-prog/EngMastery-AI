@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.9 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.1 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3690,7 +3690,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.9 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.1 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -3757,6 +3757,48 @@
 
       <div class="pt-2 flex justify-end">
         <button onclick="app.saveSettings()" class="px-5 py-2 rounded-xl bg-primary text-white font-bold text-xs hover:bg-primary-hover shadow-glow-primary">Lưu Cài Đặt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- UNIVERSAL IN-APP DIALOG (CONFIRM & PROMPT)     -->
+  <!-- ============================================== -->
+  <div id="modal-app-dialog" class="fixed inset-0 z-[100] bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-4 transition-all duration-200">
+    <div class="bg-white dark:bg-darkCard rounded-3xl max-w-sm sm:max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 animate-scale-up relative">
+      <!-- Header -->
+      <div class="flex items-start justify-between">
+        <div class="flex items-start space-x-3.5">
+          <div id="modal-app-dialog-icon-wrapper" class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 bg-amber-500/10 text-amber-500 border border-amber-500/20 shadow-sm">
+            <i id="modal-app-dialog-icon" class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div class="min-w-0">
+            <h3 id="modal-app-dialog-title" class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-tight">Xác Nhận Nộp Bài Thi</h3>
+            <div id="modal-app-dialog-badge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold mt-1.5 hidden"></div>
+          </div>
+        </div>
+        <button id="modal-app-dialog-btn-close" type="button" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-white flex items-center justify-center transition shrink-0 ml-2" title="Đóng">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Message Text -->
+      <p id="modal-app-dialog-msg" class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"></p>
+
+      <!-- Input Field (for prompt mode) -->
+      <div id="modal-app-dialog-input-container" class="hidden space-y-1.5 pt-1">
+        <label id="modal-app-dialog-input-label" class="block text-xs font-bold text-slate-600 dark:text-slate-400"></label>
+        <input id="modal-app-dialog-input" type="text" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 text-xs sm:text-sm font-medium focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition" autocomplete="off">
+      </div>
+
+      <!-- Action Buttons Footer -->
+      <div class="flex items-center space-x-2.5 pt-2">
+        <button id="modal-app-dialog-btn-cancel" type="button" class="flex-1 py-2.5 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold text-xs sm:text-sm transition flex items-center justify-center">
+          Hủy Bỏ
+        </button>
+        <button id="modal-app-dialog-btn-confirm" type="button" class="flex-1 py-2.5 px-3 rounded-xl text-white font-extrabold text-xs sm:text-sm transition flex items-center justify-center space-x-1.5 shadow-md">
+          Xác Nhận
+        </button>
       </div>
     </div>
   </div>
@@ -33632,8 +33674,19 @@
         this.startGrade12Exam('current');
       }
 
-      deleteSavedG12Exam(examId) {
-        if (!confirm('Bạn có chắc muốn xóa đề thi này khỏi kho lưu trữ?')) return;
+      async deleteSavedG12Exam(examId) {
+        const ok = await this.showAppConfirm({
+          title: 'Xóa Đề Thi Lớp 12',
+          badge: '🗑️ Hành động không thể hoàn tác',
+          badgeColor: 'rose',
+          icon: 'fa-trash-can',
+          iconColor: 'rose',
+          message: 'Bạn có chắc chắn muốn xóa đề thi này khỏi kho lưu trữ của thiết bị không?',
+          confirmText: 'Xóa Đề Thi',
+          cancelText: 'Giữ Lại',
+          confirmColor: 'rose'
+        });
+        if (!ok) return;
         this.savedG12Exams = this.savedG12Exams.filter(e => e.id !== examId);
         try {
           localStorage.setItem('engmastery_saved_g12_exams_data_v2', JSON.stringify(this.savedG12Exams));
@@ -35955,8 +36008,19 @@ Yêu cầu output STRICTLY là một JSON object:
         this.showToast(`🎯 Đã chọn mục tiêu phiên học: ${limit === 'all' ? 'Toàn bộ từ' : limit + ' từ'}`, 'info');
       }
 
-      promptCustomSessionLimit() {
-        const val = prompt('Nhập số lượng từ bạn muốn học trong phiên này (VD: 8, 15, 25):', '15');
+      async promptCustomSessionLimit() {
+        const val = await this.showAppPrompt({
+          title: 'Mục Tiêu Phiên Học Flashcard',
+          message: 'Nhập số lượng từ bạn muốn học trong phiên này (VD: 8, 15, 25):',
+          defaultValue: '15',
+          placeholder: '15',
+          inputLabel: 'Số lượng từ mục tiêu:',
+          confirmText: 'Thiết Lập',
+          cancelText: 'Hủy Bỏ',
+          confirmColor: 'primary',
+          icon: 'fa-sliders',
+          iconColor: 'indigo'
+        });
         if (val) {
           const num = parseInt(val.trim());
           if (!isNaN(num) && num > 0) {
@@ -37924,17 +37988,27 @@ Note: "answer" must be an integer 0, 1, 2, or 3 corresponding to options A, B, C
         this.renderThptQuestion(this.thptCurrentIndex);
       }
 
-      submitThptExamEarly() {
+      async submitThptExamEarly() {
         const total = this.thptQuestions.length;
         const answered = Object.keys(this.thptUserAnswers).length;
         const unanswered = total - answered;
 
-        let confirmMsg = `Bạn có chắc chắn muốn nộp bài thi không?`;
-        if (unanswered > 0) {
-          confirmMsg = `Bạn còn ${unanswered} câu chưa trả lời. Bạn có chắc chắn muốn nộp bài ngay bây giờ không?`;
-        }
+        const isUnfinished = unanswered > 0;
+        const ok = await this.showAppConfirm({
+          title: 'Xác Nhận Nộp Bài Thi THPT',
+          badge: isUnfinished ? `⚠️ Còn ${unanswered} câu chưa trả lời` : '✅ Đã hoàn thành tất cả câu hỏi',
+          badgeColor: isUnfinished ? 'amber' : 'emerald',
+          icon: isUnfinished ? 'fa-triangle-exclamation' : 'fa-clipboard-check',
+          iconColor: isUnfinished ? 'amber' : 'emerald',
+          message: isUnfinished
+            ? `Bạn còn ${unanswered} câu chưa trả lời. Bạn có chắc chắn muốn nộp bài ngay bây giờ không? Hệ thống sẽ chấm điểm trên các câu bạn đã chọn.`
+            : 'Bạn đã trả lời đầy đủ các câu hỏi trong đề thi. Bạn có chắc chắn muốn nộp bài để xem điểm số và đáp án chi tiết không?',
+          confirmText: 'Nộp Bài Ngay',
+          cancelText: 'Tiếp Tục Làm Bài',
+          confirmColor: isUnfinished ? 'cyan' : 'emerald'
+        });
 
-        if (confirm(confirmMsg)) {
+        if (ok) {
           clearInterval(this.thptTimerInterval);
           this.calculateThptScore();
         }
@@ -38756,8 +38830,19 @@ YÊU CẦU ĐỊNH DẠNG: Output STRICTLY là một JSON Object hợp lệ (kh�
         }
       }
 
-      deleteDailyExam(examId) {
-        if (!confirm('Bạn có chắc chắn muốn xóa đề thi này khỏi kho lưu trữ không?')) return;
+      async deleteDailyExam(examId) {
+        const ok = await this.showAppConfirm({
+          title: 'Xóa Đề Thi',
+          badge: '🗑️ Hành động không thể hoàn tác',
+          badgeColor: 'rose',
+          icon: 'fa-trash-can',
+          iconColor: 'rose',
+          message: 'Bạn có chắc chắn muốn xóa đề thi này khỏi kho lưu trữ không?',
+          confirmText: 'Xóa Đề Thi',
+          cancelText: 'Giữ Lại',
+          confirmColor: 'rose'
+        });
+        if (!ok) return;
         this.thptDailyExams = this.thptDailyExams.filter(e => e.id !== examId);
         this.saveThptDailyExams();
         this.renderThptLobby();
@@ -39443,7 +39528,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
         const mnemonic = (document.getElementById('add-mnemonic')?.value || '').trim();
 
         if (!word || !meaningVi) {
-          alert('Vui lòng nhập từ vựng và nghĩa tiếng Việt!');
+          this.showToast('Vui lòng nhập từ vựng và nghĩa tiếng Việt!', 'warning');
           return;
         }
 
@@ -40137,7 +40222,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
         return removedCount;
       }
 
-      deleteVocabCard(cardId, confirmPrompt = true) {
+      async deleteVocabCard(cardId, confirmPrompt = true) {
         if (!cardId) return;
         const itemIdx = this.vocabList.findIndex(v => v.id === cardId);
         if (itemIdx === -1) {
@@ -40147,7 +40232,17 @@ Trả về DUY NHẤT một JSON hợp lệ:
 
         const item = this.vocabList[itemIdx];
         if (confirmPrompt) {
-          const ok = confirm(`Bạn có chắc chắn muốn xóa thẻ từ vựng "${item.word}" (${item.meaningVi}) khỏi kho lưu trữ?`);
+          const ok = await this.showAppConfirm({
+            title: 'Xóa Thẻ Từ Vựng',
+            badge: `Từ: ${item.word}`,
+            badgeColor: 'rose',
+            icon: 'fa-trash-can',
+            iconColor: 'rose',
+            message: `Bạn có chắc chắn muốn xóa thẻ từ vựng "${item.word}" (${item.meaningVi}) khỏi kho lưu trữ không?`,
+            confirmText: 'Xóa Thẻ',
+            cancelText: 'Giữ Lại',
+            confirmColor: 'rose'
+          });
           if (!ok) return;
         }
 
@@ -40644,7 +40739,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.7.9')) return caches.delete(c);
+                if (!c.includes('v1.8.1')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -40804,8 +40899,19 @@ Trả về DUY NHẤT một JSON hợp lệ:
         this.showToast('⚙️ Đã lưu cấu hình API Key mới!', 'success');
       }
 
-      resetAllData() {
-        if (confirm('Bạn có chắc chắn muốn khôi phục toàn bộ dữ liệu gốc mặc định không?')) {
+      async resetAllData() {
+        const ok = await this.showAppConfirm({
+          title: 'Khôi Phục Cài Đặt Gốc',
+          badge: '⚠️ Toàn bộ dữ liệu cục bộ sẽ được làm mới',
+          badgeColor: 'rose',
+          icon: 'fa-triangle-exclamation',
+          iconColor: 'rose',
+          message: 'Bạn có chắc chắn muốn khôi phục toàn bộ dữ liệu gốc mặc định không? Mọi từ vựng tùy chỉnh và lịch sử làm bài chưa đồng bộ sẽ bị đặt lại.',
+          confirmText: 'Khôi Phục Gốc',
+          cancelText: 'Hủy Bỏ',
+          confirmColor: 'rose'
+        });
+        if (ok) {
           localStorage.clear();
           location.reload();
         }
@@ -40844,6 +40950,263 @@ Trả về DUY NHẤT một JSON hợp lệ:
             textEl.innerText = 'Built-in Engine';
             badgeEl.className = 'flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-accent-emerald border border-emerald-500/20';
           }
+        }
+      }
+
+      /* =================================================== */
+      /* UNIVERSAL IN-APP DIALOG SYSTEM (CONFIRM & PROMPT)   */
+      /* =================================================== */
+      showAppConfirm({
+        title = 'Xác Nhận',
+        message = 'Bạn có chắc chắn muốn thực hiện thao tác này?',
+        badge = '',
+        badgeColor = 'amber',
+        confirmText = 'Đồng Ý',
+        cancelText = 'Hủy Bỏ',
+        confirmColor = 'primary',
+        icon = 'fa-triangle-exclamation',
+        iconColor = 'amber'
+      } = {}) {
+        return new Promise((resolve) => {
+          const modal = document.getElementById('modal-app-dialog');
+          if (!modal) {
+            resolve(window.confirm(message));
+            return;
+          }
+
+          const iconEl = document.getElementById('modal-app-dialog-icon');
+          const iconWrapper = document.getElementById('modal-app-dialog-icon-wrapper');
+          const titleEl = document.getElementById('modal-app-dialog-title');
+          const badgeEl = document.getElementById('modal-app-dialog-badge');
+          const msgEl = document.getElementById('modal-app-dialog-msg');
+          const inputContainer = document.getElementById('modal-app-dialog-input-container');
+          const btnCancel = document.getElementById('modal-app-dialog-btn-cancel');
+          const btnConfirm = document.getElementById('modal-app-dialog-btn-confirm');
+          const btnClose = document.getElementById('modal-app-dialog-btn-close');
+
+          if (titleEl) titleEl.innerText = title;
+          if (msgEl) {
+            msgEl.innerText = message;
+            msgEl.classList.remove('hidden');
+          }
+          if (inputContainer) inputContainer.classList.add('hidden');
+
+          if (badgeEl) {
+            if (badge) {
+              badgeEl.innerText = badge;
+              badgeEl.className = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold mt-1.5 ' + this._getDialogBadgeClasses(badgeColor);
+              badgeEl.classList.remove('hidden');
+            } else {
+              badgeEl.classList.add('hidden');
+            }
+          }
+
+          if (iconEl) iconEl.className = `fa-solid ${icon}`;
+          if (iconWrapper) iconWrapper.className = 'w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 shadow-sm ' + this._getDialogIconClasses(iconColor || badgeColor);
+
+          if (btnCancel) {
+            btnCancel.innerText = cancelText;
+            btnCancel.classList.remove('hidden');
+          }
+          if (btnConfirm) {
+            btnConfirm.innerText = confirmText;
+            btnConfirm.className = 'flex-1 py-2.5 px-3 rounded-xl text-white font-extrabold text-xs sm:text-sm transition flex items-center justify-center space-x-1.5 shadow-md active:scale-95 ' + this._getDialogConfirmBtnClasses(confirmColor);
+          }
+
+          const cleanup = () => {
+            modal.classList.add('hidden');
+            document.removeEventListener('keydown', handleKeyDown);
+            if (btnConfirm) btnConfirm.onclick = null;
+            if (btnCancel) btnCancel.onclick = null;
+            if (btnClose) btnClose.onclick = null;
+            modal.onclick = null;
+          };
+
+          const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+              e.preventDefault();
+              cleanup();
+              resolve(false);
+            } else if (e.key === 'Enter') {
+              e.preventDefault();
+              cleanup();
+              resolve(true);
+            }
+          };
+
+          if (btnConfirm) btnConfirm.onclick = () => { cleanup(); resolve(true); };
+          if (btnCancel) btnCancel.onclick = () => { cleanup(); resolve(false); };
+          if (btnClose) btnClose.onclick = () => { cleanup(); resolve(false); };
+          modal.onclick = (e) => {
+            if (e.target === modal) { cleanup(); resolve(false); }
+          };
+
+          document.addEventListener('keydown', handleKeyDown);
+          modal.classList.remove('hidden');
+        });
+      }
+
+      showAppPrompt({
+        title = 'Nhập Thông Tin',
+        message = '',
+        defaultValue = '',
+        placeholder = '',
+        inputLabel = '',
+        confirmText = 'Xác Nhận',
+        cancelText = 'Hủy Bỏ',
+        confirmColor = 'primary',
+        icon = 'fa-pen-to-square',
+        iconColor = 'indigo'
+      } = {}) {
+        return new Promise((resolve) => {
+          const modal = document.getElementById('modal-app-dialog');
+          if (!modal) {
+            resolve(window.prompt(message, defaultValue));
+            return;
+          }
+
+          const iconEl = document.getElementById('modal-app-dialog-icon');
+          const iconWrapper = document.getElementById('modal-app-dialog-icon-wrapper');
+          const titleEl = document.getElementById('modal-app-dialog-title');
+          const badgeEl = document.getElementById('modal-app-dialog-badge');
+          const msgEl = document.getElementById('modal-app-dialog-msg');
+          const inputContainer = document.getElementById('modal-app-dialog-input-container');
+          const inputEl = document.getElementById('modal-app-dialog-input');
+          const inputLabelEl = document.getElementById('modal-app-dialog-input-label');
+          const btnCancel = document.getElementById('modal-app-dialog-btn-cancel');
+          const btnConfirm = document.getElementById('modal-app-dialog-btn-confirm');
+          const btnClose = document.getElementById('modal-app-dialog-btn-close');
+
+          if (titleEl) titleEl.innerText = title;
+          if (msgEl) {
+            if (message) {
+              msgEl.innerText = message;
+              msgEl.classList.remove('hidden');
+            } else {
+              msgEl.classList.add('hidden');
+            }
+          }
+          if (badgeEl) badgeEl.classList.add('hidden');
+
+          if (inputContainer && inputEl) {
+            inputContainer.classList.remove('hidden');
+            inputEl.value = defaultValue || '';
+            inputEl.placeholder = placeholder || '';
+            if (inputLabelEl) {
+              if (inputLabel) {
+                inputLabelEl.innerText = inputLabel;
+                inputLabelEl.classList.remove('hidden');
+              } else {
+                inputLabelEl.classList.add('hidden');
+              }
+            }
+            setTimeout(() => {
+              inputEl.focus();
+              inputEl.select();
+            }, 50);
+          }
+
+          if (iconEl) iconEl.className = `fa-solid ${icon}`;
+          if (iconWrapper) iconWrapper.className = 'w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 shadow-sm ' + this._getDialogIconClasses(iconColor);
+
+          if (btnCancel) {
+            btnCancel.innerText = cancelText;
+            btnCancel.classList.remove('hidden');
+          }
+          if (btnConfirm) {
+            btnConfirm.innerText = confirmText;
+            btnConfirm.className = 'flex-1 py-2.5 px-3 rounded-xl text-white font-extrabold text-xs sm:text-sm transition flex items-center justify-center space-x-1.5 shadow-md active:scale-95 ' + this._getDialogConfirmBtnClasses(confirmColor);
+          }
+
+          const cleanup = () => {
+            modal.classList.add('hidden');
+            document.removeEventListener('keydown', handleKeyDown);
+            if (btnConfirm) btnConfirm.onclick = null;
+            if (btnCancel) btnCancel.onclick = null;
+            if (btnClose) btnClose.onclick = null;
+            modal.onclick = null;
+          };
+
+          const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+              e.preventDefault();
+              cleanup();
+              resolve(null);
+            } else if (e.key === 'Enter') {
+              e.preventDefault();
+              const val = inputEl ? inputEl.value : '';
+              cleanup();
+              resolve(val);
+            }
+          };
+
+          if (btnConfirm) btnConfirm.onclick = () => {
+            const val = inputEl ? inputEl.value : '';
+            cleanup();
+            resolve(val);
+          };
+          if (btnCancel) btnCancel.onclick = () => { cleanup(); resolve(null); };
+          if (btnClose) btnClose.onclick = () => { cleanup(); resolve(null); };
+          modal.onclick = (e) => {
+            if (e.target === modal) { cleanup(); resolve(null); }
+          };
+
+          document.addEventListener('keydown', handleKeyDown);
+          modal.classList.remove('hidden');
+        });
+      }
+
+      _getDialogBadgeClasses(color) {
+        switch (color) {
+          case 'rose':
+          case 'danger':
+            return 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/20';
+          case 'cyan':
+            return 'bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20';
+          case 'emerald':
+            return 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20';
+          case 'indigo':
+          case 'primary':
+            return 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20';
+          case 'amber':
+          default:
+            return 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/20';
+        }
+      }
+
+      _getDialogIconClasses(color) {
+        switch (color) {
+          case 'rose':
+          case 'danger':
+            return 'bg-rose-500/10 text-rose-500 border border-rose-500/20';
+          case 'cyan':
+            return 'bg-cyan-500/10 text-cyan-500 border border-cyan-500/20';
+          case 'emerald':
+            return 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20';
+          case 'indigo':
+          case 'primary':
+            return 'bg-indigo-500/10 text-indigo-500 border border-indigo-500/20';
+          case 'amber':
+          default:
+            return 'bg-amber-500/10 text-amber-500 border border-amber-500/20';
+        }
+      }
+
+      _getDialogConfirmBtnClasses(color) {
+        switch (color) {
+          case 'rose':
+          case 'danger':
+            return 'bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 shadow-rose-600/30';
+          case 'cyan':
+            return 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 shadow-cyan-600/30';
+          case 'emerald':
+            return 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-emerald-600/30';
+          case 'amber':
+            return 'bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 shadow-amber-600/30';
+          case 'indigo':
+          case 'primary':
+          default:
+            return 'bg-gradient-to-r from-primary to-indigo-600 hover:from-primary-hover hover:to-indigo-500 shadow-primary/30';
         }
       }
 
@@ -45669,8 +46032,19 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ theo cấu trúc:
         this.showToast(`Đã đổi tên hồ sơ thành: "${newName}"`, 'success');
       }
 
-      createNewProfilePrompt() {
-        const name = prompt('Nhập tên hồ sơ mới (e.g. Tên bạn, hoặc Lớp):');
+      async createNewProfilePrompt() {
+        const name = await this.showAppPrompt({
+          title: 'Tạo Hồ Sơ Mới',
+          message: 'Nhập tên hồ sơ mới (e.g. Tên bạn, hoặc Lớp):',
+          defaultValue: '',
+          placeholder: 'VD: Nguyễn Văn A - Lớp 12A1',
+          inputLabel: 'Tên hồ sơ mới:',
+          confirmText: 'Tạo Hồ Sơ',
+          cancelText: 'Hủy Bỏ',
+          confirmColor: 'primary',
+          icon: 'fa-user-plus',
+          iconColor: 'indigo'
+        });
         if (!name || !name.trim()) return;
 
         const newProfile = {
@@ -45742,7 +46116,7 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ theo cấu trúc:
             this.switchProfile(importedProfile.id);
             this.showToast(`Khôi phục thành công hồ sơ "${importedProfile.name}" với ${data.mistakes.length} câu sai!`, 'success');
           } catch (err) {
-            alert('Lỗi đọc file sao lưu: ' + err.message);
+            this.showToast('Lỗi đọc file sao lưu: ' + err.message, 'error');
           }
         };
         reader.readAsText(file);
@@ -47018,7 +47392,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.9</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.1</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
