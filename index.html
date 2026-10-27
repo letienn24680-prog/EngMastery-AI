@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.3 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.4 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -858,21 +858,29 @@
 
           <!-- Quick Topic Pills Bar -->
           <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 text-xs">
-            <button onclick="app.setVocabTopicFilter('all')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-primary text-white shadow-glow-primary" data-filter="all">🌟 Tất Cả (<span id="fc-count-all">1.060+</span>)</button>
-            <button onclick="app.setVocabTopicFilter('topic_notebook')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_notebook" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_notebook">📓 Sổ Tay (<span id="fc-count-notebook">179</span>)</button>
+            <button onclick="app.setVocabTopicFilter('all')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-primary text-white shadow-glow-primary" data-filter="all">🌟 Tất Cả (<span id="fc-count-all">1,080</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_notebook')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-amber-500" data-filter="topic_notebook">📓 Sổ Tay (<span id="fc-count-notebook">179</span>)</button>
             <button onclick="app.setVocabTopicFilter('topic_community')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-cyan-500 dark:text-cyan-400" data-filter="topic_community">🌐 Từ Cộng Đồng (<span id="fc-count-community">0</span>)</button>
             <button onclick="app.setVocabTopicFilter('topic_translated')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-emerald-500 dark:text-emerald-400" data-filter="topic_translated">🌐 Từ Vừa Tra & Dịch (<span id="fc-count-translated">0</span>)</button>
-            <button onclick="app.setVocabTopicFilter('topic_phrasal')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_phrasal">🔄 Phrasal Verbs (154)</button>
-            <button onclick="app.setVocabTopicFilter('topic_collocation')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_collocation">🔗 Collocations & Idioms (218)</button>
-            <button onclick="app.setVocabTopicFilter('topic_grade12')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_grade12">🎓 Trọng Tâm Lớp 12 (114)</button>
-            <button onclick="app.setVocabTopicFilter('freq_common')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="freq_common">⭐ Rất Phổ Biến (653)</button>
-            <button onclick="app.setVocabTopicFilter('freq_rare')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="freq_rare">💎 C1 & Nâng Cao (150)</button>
-            <button onclick="app.setVocabTopicFilter('topic_env')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_env">🌿 Môi Trường (25)</button>
-            <button onclick="app.setVocabTopicFilter('topic_edu')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_edu">🧠 Giáo Dục (391)</button>
+            <button onclick="app.setVocabTopicFilter('topic_phrasal')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_phrasal">🔄 Phrasal Verbs (<span id="fc-count-phrasal">154</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_collocation')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_collocation">🔗 Collocations & Idioms (<span id="fc-count-collocation">218</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_grade12')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-cyan-500" data-filter="topic_grade12">🎓 Lớp 12 (<span id="fc-count-grade12">114</span>)</button>
+            <button onclick="app.setVocabTopicFilter('freq_common')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-emerald-400" data-filter="freq_common">⭐ Phổ Biến (<span id="fc-count-common">653</span>)</button>
+            <button onclick="app.setVocabTopicFilter('freq_rare')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-purple-400" data-filter="freq_rare">💎 C1 Nâng Cao (<span id="fc-count-rare">150</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_env')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-emerald-400" data-filter="topic_env">🌿 Môi Trường (<span id="fc-count-env">43</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_tech')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-cyan-400" data-filter="topic_tech">🤖 AI & Công Nghệ (<span id="fc-count-tech">64</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_edu')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-indigo-400" data-filter="topic_edu">📚 Giáo Dục (<span id="fc-count-edu">577</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_work')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-amber-400" data-filter="topic_work">💼 Kinh Tế (<span id="fc-count-work">41</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_health')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-rose-400" data-filter="topic_health">🩺 Sức Khỏe (<span id="fc-count-health">23</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_society')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-blue-400" data-filter="topic_society">👥 Xã Hội (<span id="fc-count-society">96</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_psychology')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-purple-400" data-filter="topic_psychology">🧠 Cảm Xúc (<span id="fc-count-psychology">67</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_culture')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-orange-400" data-filter="topic_culture">🎨 Văn Hóa (<span id="fc-count-culture">17</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_travel')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-teal-400" data-filter="topic_travel">✈️ Du Lịch (<span id="fc-count-travel">15</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_communication')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-violet-400" data-filter="topic_communication">💬 Giao Tiếp (<span id="fc-count-communication">53</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_science')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-sky-400" data-filter="topic_science">🚀 Vũ Trụ (<span id="fc-count-science">25</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_law')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-red-400" data-filter="topic_law">⚖️ Pháp Luật (<span id="fc-count-law">16</span>)</button>
             <button onclick="app.setVocabTopicFilter('starred')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold text-amber-500 transition whitespace-nowrap" data-filter="starred"><i class="fa-solid fa-star mr-1"></i> Có sao (<span id="fc-count-starred">0</span>)</button>
-            <button onclick="app.setVocabTopicFilter('due')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold text-amber-500 transition whitespace-nowrap" data-filter="due">⏰ Cần ôn (<span id="fc-count-due">0</span>)</button>
-            
-          </div>
+            <button onclick="app.setVocabTopicFilter('due')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold text-amber-500 transition whitespace-nowrap" data-filter="due">⏰ Cần ôn (<span id="fc-count-due">0</span>)</button>          </div>
         </div>
 
         <!-- SESSION STUDY LIMIT & REPETITION CONTROLLER (TỰ CHỌN GIỚI HẠN TỪ & LẶP LẠI 2-3 LẦN ĐỂ KHẮC SÂU) -->
@@ -1377,7 +1385,7 @@
         <!-- Topic Categories Selector -->
         <div class="flex items-center space-x-2 overflow-x-auto pb-2 text-xs no-scrollbar">
           <button onclick="app.setHubTopic('all')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-primary text-white" data-topic="all">
-            Tất cả (<span id="hub-count-total">1,060+</span>)
+            🌟 Tất cả (<span id="hub-count-total">1,080</span>)
           </button>
           <button onclick="app.setHubTopic('topic_notebook')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-amber-500" data-topic="topic_notebook">
             📓 Sổ Tay (<span id="hub-count-notebook">179</span>)
@@ -1398,21 +1406,47 @@
             🎓 Trọng Tâm Lớp 12 (<span id="hub-count-grade12">114</span>)
           </button>
           <button onclick="app.setHubTopic('freq_common')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-emerald-400" data-topic="freq_common">
-            ⭐ Rất Phổ Biến
+            ⭐ Rất Phổ Biến (<span id="hub-count-common">653</span>)
           </button>
           <button onclick="app.setHubTopic('freq_rare')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-purple-400" data-topic="freq_rare">
-            💎 C1 & Nâng Cao
+            💎 C1 & Nâng Cao (<span id="hub-count-rare">150</span>)
           </button>
-          <button onclick="app.setHubTopic('topic_env')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" data-topic="topic_env">
-            🌿 Môi Trường
+          <button onclick="app.setHubTopic('topic_env')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-emerald-400" data-topic="topic_env">
+            🌿 Môi Trường & Sinh Thái (<span id="hub-count-env">43</span>)
           </button>
-          <button onclick="app.setHubTopic('topic_tech')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" data-topic="topic_tech">
-            🤖 Công Nghệ & AI
+          <button onclick="app.setHubTopic('topic_tech')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-cyan-400" data-topic="topic_tech">
+            🤖 Công Nghệ & AI (<span id="hub-count-tech">64</span>)
           </button>
-          <button onclick="app.setHubTopic('topic_edu')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" data-topic="topic_edu">
-            📚 Học Thuật
+          <button onclick="app.setHubTopic('topic_edu')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-indigo-400" data-topic="topic_edu">
+            📚 Giáo Dục & Học Thuật (<span id="hub-count-edu">577</span>)
           </button>
-        </div>
+          <button onclick="app.setHubTopic('topic_work')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-amber-400" data-topic="topic_work">
+            💼 Kinh Tế & Nghề Nghiệp (<span id="hub-count-work">41</span>)
+          </button>
+          <button onclick="app.setHubTopic('topic_health')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-rose-400" data-topic="topic_health">
+            🩺 Sức Khỏe & Y Tế (<span id="hub-count-health">23</span>)
+          </button>
+          <button onclick="app.setHubTopic('topic_society')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-blue-400" data-topic="topic_society">
+            👥 Xã Hội & Đời Sống (<span id="hub-count-society">96</span>)
+          </button>
+          <button onclick="app.setHubTopic('topic_psychology')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-purple-400" data-topic="topic_psychology">
+            🧠 Tâm Lý & Cảm Xúc (<span id="hub-count-psychology">67</span>)
+          </button>
+          <button onclick="app.setHubTopic('topic_culture')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-orange-400" data-topic="topic_culture">
+            🎨 Văn Hóa & Nghệ Thuật (<span id="hub-count-culture">17</span>)
+          </button>
+          <button onclick="app.setHubTopic('topic_travel')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-teal-400" data-topic="topic_travel">
+            ✈️ Du Lịch & Khám Phá (<span id="hub-count-travel">15</span>)
+          </button>
+          <button onclick="app.setHubTopic('topic_communication')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-violet-400" data-topic="topic_communication">
+            💬 Giao Tiếp & Truyền Thông (<span id="hub-count-communication">53</span>)
+          </button>
+          <button onclick="app.setHubTopic('topic_science')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-sky-400" data-topic="topic_science">
+            🚀 Khoa Học & Vũ Trụ (<span id="hub-count-science">25</span>)
+          </button>
+          <button onclick="app.setHubTopic('topic_law')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-red-400" data-topic="topic_law">
+            ⚖️ Pháp Luật & Đạo Đức (<span id="hub-count-law">16</span>)
+          </button>        </div>
 
         <!-- Vocab Cards Grid -->
         <div id="vocab-hub-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -3849,7 +3883,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.3 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.4 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -25185,6 +25219,407 @@
     "deck": "Phổ biến",
     "frequency": "Phổ biến"
   }
+,
+{
+    "id": "v_1061",
+    "word": "Wanderlust",
+    "type": "Noun",
+    "ipa": "/ˈwɒn.də.lʌst/",
+    "level": "C1",
+    "topic": "topic_travel",
+    "topicLabel": "✈️ Du Lịch & Khám Phá",
+    "meaningVi": "Niềm khao khát mãnh liệt được đi du lịch và khám phá thế giới",
+    "meaningEn": "A strong desire to travel and explore the world.",
+    "cloze": "His adventurous soul was consumed by a relentless [ _____ ] to visit distant lands.",
+    "example": "His adventurous soul was consumed by a relentless wanderlust to visit distant lands.",
+    "exampleVi": "Tâm hồn ưa phiêu lưu của anh ấy tràn ngập niềm khao khát mãnh liệt được đi khám phá những vùng đất xa xôi.",
+    "synonyms": "passion for travel, globetrotting, roaming impulse",
+    "antonyms": "homesickness, domesticity",
+    "collocations": "feel wanderlust, satisfy one's wanderlust",
+    "mnemonic": "Wander (lang thang) + Lust (khao khát) -> khao khát du lịch.",
+    "deck": "cefr",
+    "frequency": "Ít gặp / Nâng cao"
+  },
+  {
+    "id": "v_1062",
+    "word": "Itinerary",
+    "type": "Noun",
+    "ipa": "/aɪˈtɪn.ər.ər.i/",
+    "level": "B2",
+    "topic": "topic_travel",
+    "topicLabel": "✈️ Du Lịch & Khám Phá",
+    "meaningVi": "Lịch trình chuyến đi, kế hoạch lộ trình du lịch chi tiết",
+    "meaningEn": "A detailed plan or route of a journey or trip.",
+    "cloze": "We carefully planned a ten-day travel [ _____ ] covering the historical capitals.",
+    "example": "We carefully planned a ten-day travel itinerary covering the historical capitals.",
+    "exampleVi": "Chúng tôi lên kế hoạch chi tiết cho lịch trình du lịch mười ngày qua các cố đô lịch sử.",
+    "synonyms": "travel schedule, route, travel plan, tour programme",
+    "antonyms": "unplanned wandering, spontaneous trip",
+    "collocations": "detailed itinerary, planned itinerary, travel itinerary",
+    "mnemonic": "Itinera (con đường, lộ trình) -> lịch trình di chuyển.",
+    "deck": "cefr",
+    "frequency": "Phổ biến"
+  },
+  {
+    "id": "v_1063",
+    "word": "Breathtaking",
+    "type": "Adjective",
+    "ipa": "/ˈbreθˌteɪ.kɪŋ/",
+    "level": "B2",
+    "topic": "topic_travel",
+    "topicLabel": "✈️ Du Lịch & Khám Phá",
+    "meaningVi": "Đẹp ngoạn mục, choáng ngợp, làm nghẹt thở vì cảnh sắc",
+    "meaningEn": "Extremely exciting, beautiful, or surprising.",
+    "cloze": "From the mountain peak, tourists enjoyed a [ _____ ] panoramic view of the bay.",
+    "example": "From the mountain peak, tourists enjoyed a breathtaking panoramic view of the bay.",
+    "exampleVi": "Từ đỉnh núi, du khách được ngắm nhìn toàn cảnh vịnh đẹp ngoạn mục nghẹt thở.",
+    "synonyms": "spectacular, awe-inspiring, stunning, magnificent",
+    "antonyms": "unimpressive, mundane, ordinary",
+    "collocations": "breathtaking view, breathtaking scenery, breathtaking landscape",
+    "mnemonic": "Breath (hơi thở) + Taking (lấy đi) -> đẹp đến mức nín thở.",
+    "deck": "cefr",
+    "frequency": "Rất phổ biến"
+  },
+  {
+    "id": "v_1064",
+    "word": "Picturesque",
+    "type": "Adjective",
+    "ipa": "/ˌpɪk.tʃərˈesk/",
+    "level": "B2",
+    "topic": "topic_travel",
+    "topicLabel": "✈️ Du Lịch & Khám Phá",
+    "meaningVi": "Đẹp như tranh vẽ, thơ mộng cổ kính (phong cảnh, làng quê)",
+    "meaningEn": "(Of a place) visually attractive, especially in a quaint or charming way.",
+    "cloze": "The backpackers lodged in a [ _____ ] coastal village famous for fishing traditions.",
+    "example": "The backpackers lodged in a picturesque coastal village famous for fishing traditions.",
+    "exampleVi": "Những du khách đeo ba lô đã trọ lại ở một ngôi làng ven biển đẹp như tranh vẽ nổi tiếng với nghề chài lưới truyền thống.",
+    "synonyms": "scenic, charming, quaint, idyllic",
+    "antonyms": "unsightly, drab, industrial",
+    "collocations": "picturesque village, picturesque scenery, picturesque setting",
+    "mnemonic": "Picture (bức tranh) + esque (mang phong cách) -> đẹp như trong tranh.",
+    "deck": "cefr",
+    "frequency": "Phổ biến"
+  },
+  {
+    "id": "v_1065",
+    "word": "Off the beaten track",
+    "type": "Idiom",
+    "ipa": "/ɒf ðə ˈbiːtn træk/",
+    "level": "C1",
+    "topic": "topic_travel",
+    "topicLabel": "✈️ Du Lịch & Khám Phá",
+    "meaningVi": "Ở nơi xa xôi hẻo lánh, nguyên sơ chưa nhiều du khách đặt chân tới",
+    "meaningEn": "In or into an isolated place where few people go.",
+    "cloze": "True adventurers prefer exploring hidden destinations [ _____ ].",
+    "example": "True adventurers prefer exploring hidden destinations off the beaten track.",
+    "exampleVi": "Những nhà thám hiểm thực thụ thích khám phá những điểm đến hẻo lánh nguyên sơ chưa nhiều người lui tới.",
+    "synonyms": "isolated, secluded, remote, untrodden",
+    "antonyms": "touristy, crowded, mainstream",
+    "collocations": "travel off the beaten track, located off the beaten track",
+    "mnemonic": "Off (ra khỏi) + beaten track (đường mòn nhiều người đi) -> nơi hoang sơ ít người tới.",
+    "deck": "cefr",
+    "frequency": "Ít gặp / Nâng cao"
+  },
+  {
+    "id": "v_1066",
+    "word": "Hospitality",
+    "type": "Noun",
+    "ipa": "/ˌhɒs.pɪˈtæl.ə.ti/",
+    "level": "B1",
+    "topic": "topic_travel",
+    "topicLabel": "✈️ Du Lịch & Khám Phá",
+    "meaningVi": "Lòng hiếu khách, sự đón tiếp nồng hậu; ngành dịch vụ du lịch khách sạn",
+    "meaningEn": "The friendly and generous reception and entertainment of guests, visitors, or strangers.",
+    "cloze": "Vietnamese people are globally celebrated for their warm [ _____ ] towards tourists.",
+    "example": "Vietnamese people are globally celebrated for their warm hospitality towards tourists.",
+    "exampleVi": "Người dân Việt Nam được cả thế giới ngợi ca bởi lòng hiếu khách nồng hậu dành cho khách du lịch.",
+    "synonyms": "warmth, friendliness, welcoming nature, graciousness",
+    "antonyms": "hostility, coldness, aloofness",
+    "collocations": "warm hospitality, hospitality industry, show hospitality",
+    "mnemonic": "Hospitality liên quan đến hospital (chăm sóc) -> ân cần, niềm nở tiếp đón khách.",
+    "deck": "cefr",
+    "frequency": "Rất phổ biến"
+  },
+  {
+    "id": "v_1067",
+    "word": "Indigenous",
+    "type": "Adjective",
+    "ipa": "/ɪnˈdɪdʒ.ɪ.nəs/",
+    "level": "C1",
+    "topic": "topic_culture",
+    "topicLabel": "🎨 Văn Hóa & Nghệ Thuật",
+    "meaningVi": "Bản địa, thuộc về nguồn gốc nguyên thủy của một vùng đất",
+    "meaningEn": "Originating or occurring naturally in a particular place; native.",
+    "cloze": "Efforts are intensified to protect the ancestral heritage of [ _____ ] communities.",
+    "example": "Efforts are intensified to protect the ancestral heritage of indigenous communities.",
+    "exampleVi": "Các nỗ lực đang được tăng cường để bảo vệ di sản của tổ tiên các cộng đồng người bản địa.",
+    "synonyms": "native, aboriginal, endemic, original",
+    "antonyms": "alien, exotic, imported, non-native",
+    "collocations": "indigenous people, indigenous culture, indigenous species",
+    "mnemonic": "In- (bên trong) + gen- (sinh ra) -> sinh ra từ mảnh đất này (bản địa).",
+    "deck": "cefr",
+    "frequency": "Ít gặp / Nâng cao"
+  },
+  {
+    "id": "v_1068",
+    "word": "Intangible cultural heritage",
+    "type": "Collocation",
+    "ipa": "/ɪnˈtæn.dʒə.bl̩ ˈkʌl.tʃər.əl ˈher.ɪ.tɪdʒ/",
+    "level": "C1",
+    "topic": "topic_culture",
+    "topicLabel": "🎨 Văn Hóa & Nghệ Thuật",
+    "meaningVi": "Di sản văn hóa phi vật thể (như ca trù, nhã nhạc cung đình, lễ hội)",
+    "meaningEn": "Practices, representations, expressions, knowledge, or skills recognized by UNESCO as part of cultural heritage.",
+    "cloze": "UNESCO designated Quan Ho singing as a Masterpiece of the [ _____ ].",
+    "example": "UNESCO designated Quan Ho singing as a Masterpiece of the intangible cultural heritage.",
+    "exampleVi": "UNESCO đã vinh danh Dân ca Quan họ là Kiệt tác di sản văn hóa phi vật thể.",
+    "synonyms": "living heritage, non-material culture, traditional folklore",
+    "antonyms": "tangible relics, physical monuments",
+    "collocations": "preserve intangible cultural heritage, recognize as intangible cultural heritage",
+    "mnemonic": "Tangible = sờ thấy được -> Intangible = phi vật thể, mang giá trị tinh thần.",
+    "deck": "cefr",
+    "frequency": "Ít gặp / Nâng cao"
+  },
+  {
+    "id": "v_1069",
+    "word": "Cultural assimilation",
+    "type": "Collocation",
+    "ipa": "/ˈkʌl.tʃər.əl əˌsɪm.ɪˈleɪ.ʃən/",
+    "level": "C1",
+    "topic": "topic_culture",
+    "topicLabel": "🎨 Văn Hóa & Nghệ Thuật",
+    "meaningVi": "Sự đồng hóa văn hóa, hòa tan phong tục của nhóm thiểu số vào cộng đồng đa số",
+    "meaningEn": "The process in which a minority group comes to resemble a society's majority culture.",
+    "cloze": "Immigrants often navigate the tension between [ _____ ] and preserving their ethnic identity.",
+    "example": "Immigrants often navigate the tension between cultural assimilation and preserving their ethnic identity.",
+    "exampleVi": "Những người nhập cư thường phải trải qua sự giằng xé giữa đồng hóa văn hóa và gìn giữ bản sắc dân tộc.",
+    "synonyms": "acculturation, integration, cultural absorption",
+    "antonyms": "cultural preservation, segregation",
+    "collocations": "resist cultural assimilation, process of cultural assimilation",
+    "mnemonic": "Similar (tương tự) -> assimilate (làm cho giống) -> đồng hóa văn hóa.",
+    "deck": "cefr",
+    "frequency": "Ít gặp / Nâng cao"
+  },
+  {
+    "id": "v_1070",
+    "word": "Masterpiece",
+    "type": "Noun",
+    "ipa": "/ˈmɑː.stə.piːs/",
+    "level": "B2",
+    "topic": "topic_culture",
+    "topicLabel": "🎨 Văn Hóa & Nghệ Thuật",
+    "meaningVi": "Kiệt tác, tuyệt tác nghệ thuật đỉnh cao",
+    "meaningEn": "A work of outstanding artistry, skill, or workmanship.",
+    "cloze": "The Mona Lisa is revered globally as Leonardo da Vinci's crowning [ _____ ].",
+    "example": "The Mona Lisa is revered globally as Leonardo da Vinci's crowning masterpiece.",
+    "exampleVi": "Bức họa Mona Lisa được toàn cầu tôn kính như một kiệt tác đỉnh cao của Leonardo da Vinci.",
+    "synonyms": "magnum opus, tour de force, classic, triumph",
+    "antonyms": "mediocrity, failure, shoddy work",
+    "collocations": "artistic masterpiece, literary masterpiece, architectural masterpiece",
+    "mnemonic": "Master (bậc thầy) + piece (tác phẩm) -> tác phẩm của bậc thầy.",
+    "deck": "cefr",
+    "frequency": "Phổ biến"
+  },
+  {
+    "id": "v_1071",
+    "word": "Folklore",
+    "type": "Noun",
+    "ipa": "/ˈfəʊk.lɔːr/",
+    "level": "B2",
+    "topic": "topic_culture",
+    "topicLabel": "🎨 Văn Hóa & Nghệ Thuật",
+    "meaningVi": "Văn hóa dân gian, phong tục tập quán và truyện truyền miệng cổ xưa",
+    "meaningEn": "The traditional beliefs, customs, and stories of a community, passed through generations by word of mouth.",
+    "cloze": "Ancient dragons and mythical heroes feature prominently in traditional Vietnamese [ _____ ].",
+    "example": "Ancient dragons and mythical heroes feature prominently in traditional Vietnamese folklore.",
+    "exampleVi": "Những con rồng cổ xưa và anh hùng thần thoại xuất hiện nổi bật trong văn hóa dân gian truyền thống Việt Nam.",
+    "synonyms": "mythology, lore, traditional legends, folk tales",
+    "antonyms": "modern literature, documented history",
+    "collocations": "traditional folklore, local folklore, oral folklore",
+    "mnemonic": "Folk (người dân, dân gian) + Lore (tri thức truyền miệng).",
+    "deck": "cefr",
+    "frequency": "Phổ biến"
+  },
+  {
+    "id": "v_1072",
+    "word": "Legislation",
+    "type": "Noun",
+    "ipa": "/ˌledʒ.ɪˈsleɪ.ʃən/",
+    "level": "B2",
+    "topic": "topic_law",
+    "topicLabel": "⚖️ Pháp Luật & Đạo Đức",
+    "meaningVi": "Pháp luật, hệ thống luật pháp hoặc việc ban hành luật",
+    "meaningEn": "Laws, considered collectively; the act of making or enacting laws.",
+    "cloze": "The national parliament introduced stricter [ _____ ] to combat digital cybercrime.",
+    "example": "The national parliament introduced stricter legislation to combat digital cybercrime.",
+    "exampleVi": "Quốc hội đã ban hành hệ thống luật pháp nghiêm ngặt hơn để chống lại tội phạm không gian mạng.",
+    "synonyms": "laws, statutory regulations, acts, statutes, ordinances",
+    "antonyms": "lawlessness, anarchy",
+    "collocations": "enact legislation, introduce legislation, pending legislation",
+    "mnemonic": "Legal (hợp pháp) -> Legislator (nhà lập pháp) -> Legislation (luật pháp).",
+    "deck": "cefr",
+    "frequency": "Phổ biến"
+  },
+  {
+    "id": "v_1073",
+    "word": "Abide by the law",
+    "type": "Collocation",
+    "ipa": "/əˈbaɪd baɪ ðə lɔː/",
+    "level": "B2",
+    "topic": "topic_law",
+    "topicLabel": "⚖️ Pháp Luật & Đạo Đức",
+    "meaningVi": "Tuân thủ nghiêm chỉnh pháp luật, chấp hành quy định",
+    "meaningEn": "To accept, follow, or be obedient to the law.",
+    "cloze": "Every upright citizen is expected to [ _____ ] and respect public order.",
+    "example": "Every upright citizen is expected to abide by the law and respect public order.",
+    "exampleVi": "Mỗi công dân mẫu mực đều được kỳ vọng sẽ tuân thủ pháp luật và tôn trọng trật tự công cộng.",
+    "synonyms": "comply with the law, adhere to regulations, obey laws, conform to rules",
+    "antonyms": "break the law, violate regulations, defy legal codes",
+    "collocations": "strictly abide by the law, fail to abide by the law",
+    "mnemonic": "Abide by = tuân theo, tuân thủ (đi với giới từ by).",
+    "deck": "cefr",
+    "frequency": "Rất phổ biến"
+  },
+  {
+    "id": "v_1074",
+    "word": "Jurisdiction",
+    "type": "Noun",
+    "ipa": "/ˌdʒʊə.rɪsˈdɪk.ʃən/",
+    "level": "C1",
+    "topic": "topic_law",
+    "topicLabel": "⚖️ Pháp Luật & Đạo Đức",
+    "meaningVi": "Thẩm quyền pháp lý, quyền tài phán của tòa án hoặc cơ quan chức năng",
+    "meaningEn": "The official power to make legal decisions and judgements.",
+    "cloze": "International cross-border fraud falls directly under inter-agency [ _____ ].",
+    "example": "International cross-border fraud falls directly under inter-agency jurisdiction.",
+    "exampleVi": "Các vụ lừa đảo xuyên biên giới quốc tế thuộc quyền tài phán phối hợp giữa các cơ quan chức năng.",
+    "synonyms": "legal authority, remit, mandate, sphere of competence",
+    "antonyms": "powerlessness, lack of authority",
+    "collocations": "fall under the jurisdiction of, exercise jurisdiction",
+    "mnemonic": "Juri- (luật pháp, bồi thẩm đoàn) + Diction (phán quyết) -> quyền tài phán.",
+    "deck": "cefr",
+    "frequency": "Ít gặp / Nâng cao"
+  },
+  {
+    "id": "v_1075",
+    "word": "Ethical dilemma",
+    "type": "Collocation",
+    "ipa": "/ˈeθ.ɪ.kəl daɪˈlem.ə/",
+    "level": "C1",
+    "topic": "topic_law",
+    "topicLabel": "⚖️ Pháp Luật & Đạo Đức",
+    "meaningVi": "Thế tiến thoái lưỡng nan về mặt đạo đức, tình thế khó xử giữa điều đúng và sai",
+    "meaningEn": "A complex situation that often involves an apparent mental conflict between moral imperatives.",
+    "cloze": "Genetic cloning raises a grave [ _____ ] regarding human reproductive boundaries.",
+    "example": "Genetic cloning raises a grave ethical dilemma regarding human reproductive boundaries.",
+    "exampleVi": "Nhân bản vô tính đặt ra một thế tiến thoái lưỡng nan sâu sắc về đạo đức liên quan đến giới hạn sinh sản của con người.",
+    "synonyms": "moral conundrum, moral paradox, ethical crisis",
+    "antonyms": "straightforward moral choice, black-and-white situation",
+    "collocations": "face an ethical dilemma, resolve an ethical dilemma",
+    "mnemonic": "Ethical (đạo đức) + Dilemma (tình thế lưỡng nan).",
+    "deck": "cefr",
+    "frequency": "Ít gặp / Nâng cao"
+  },
+  {
+    "id": "v_1076",
+    "word": "Accountability",
+    "type": "Noun",
+    "ipa": "/əˌkaʊn.təˈbɪl.ə.ti/",
+    "level": "C1",
+    "topic": "topic_law",
+    "topicLabel": "⚖️ Pháp Luật & Đạo Đức",
+    "meaningVi": "Trách nhiệm giải trình, nghĩa vụ báo cáo và chịu trách nhiệm trước công chúng",
+    "meaningEn": "The fact or condition of being accountable; responsibility for one's actions.",
+    "cloze": "Democratic governance demands transparent leadership and strict public [ _____ ].",
+    "example": "Democratic governance demands transparent leadership and strict public accountability.",
+    "exampleVi": "Nền quản trị dân chủ đòi hỏi năng lực lãnh đạo minh bạch và trách nhiệm giải trình công khai nghiêm ngặt.",
+    "synonyms": "responsibility, liability, answerability, transparency",
+    "antonyms": "impunity, irresponsibility",
+    "collocations": "demand accountability, ensure accountability, hold somebody to accountability",
+    "mnemonic": "Account (giải thích, kiểm toán) + Ability (khả năng) -> năng lực chịu trách nhiệm giải trình.",
+    "deck": "cefr",
+    "frequency": "Phổ biến"
+  },
+  {
+    "id": "v_1077",
+    "word": "Celestial body",
+    "type": "Collocation",
+    "ipa": "/sɪˈles.tʃəl ˈbɒd.i/",
+    "level": "C1",
+    "topic": "topic_science",
+    "topicLabel": "🚀 Khoa Học & Vũ Trụ",
+    "meaningVi": "Thiên thể trong vũ trụ (mặt trời, mặt trăng, các hành tinh, tiểu hành tinh)",
+    "meaningEn": "Any natural body outside the Earth's atmosphere, such as a planet, moon, or asteroid.",
+    "cloze": "Telescopes track the orbital trajectories of every observable [ _____ ] in the solar system.",
+    "example": "Telescopes track the orbital trajectories of every observable celestial body in the solar system.",
+    "exampleVi": "Kính thiên văn theo dõi quỹ đạo quay của mọi thiên thể có thể quan sát được trong hệ mặt trời.",
+    "synonyms": "heavenly body, astronomical object, planetoid",
+    "antonyms": "terrestrial object, earthly matter",
+    "collocations": "observe celestial bodies, orbit of celestial bodies",
+    "mnemonic": "Celestial = thuộc về bầu trời, thiên đường (thiên) + Body = vật thể thể chất.",
+    "deck": "cefr",
+    "frequency": "Ít gặp / Nâng cao"
+  },
+  {
+    "id": "v_1078",
+    "word": "Scientific breakthrough",
+    "type": "Collocation",
+    "ipa": "/ˌsaɪənˈtɪf.ɪk ˈbreɪk.θruː/",
+    "level": "B2",
+    "topic": "topic_science",
+    "topicLabel": "🚀 Khoa Học & Vũ Trụ",
+    "meaningVi": "Bước đột phá khoa học mang tính lịch sử, bước tiến vĩ đại",
+    "meaningEn": "A major and groundbreaking achievement in scientific research or discovery.",
+    "cloze": "The mRNA vaccine formulation marked a historic [ _____ ] in biotechnology.",
+    "example": "The mRNA vaccine formulation marked a historic scientific breakthrough in biotechnology.",
+    "exampleVi": "Công thức vắc-xin mRNA đã đánh dấu một bước đột phá khoa học lịch sử trong ngành công nghệ sinh học.",
+    "synonyms": "monumental discovery, quantum leap, revolutionary advance",
+    "antonyms": "scientific impasse, stagnation, setback",
+    "collocations": "herald a scientific breakthrough, major scientific breakthrough",
+    "mnemonic": "Break (phá vỡ) + through (xuyên qua) -> đột phá hàng rào giới hạn.",
+    "deck": "cefr",
+    "frequency": "Rất phổ biến"
+  },
+  {
+    "id": "v_1079",
+    "word": "Epidemic",
+    "type": "Noun",
+    "ipa": "/ˌep.ɪˈdem.ɪk/",
+    "level": "B2",
+    "topic": "topic_health",
+    "topicLabel": "🩺 Sức Khỏe & Y Tế",
+    "meaningVi": "Dịch bệnh lây lan nhanh trong cộng đồng; sự bùng phát lan rộng",
+    "meaningEn": "A widespread occurrence of an infectious disease in a community at a particular time.",
+    "cloze": "Health officials mobilized medical units to contain the viral [ _____ ] before it spread.",
+    "example": "Health officials mobilized medical units to contain the viral epidemic before it spread.",
+    "exampleVi": "Các quan chức y tế đã huy động các đơn vị y tế để khống chế dịch bệnh do virus trước khi nó lây lan.",
+    "synonyms": "outbreak, contagion, scourge, pestilence",
+    "antonyms": "endemic, containment",
+    "collocations": "viral epidemic, flu epidemic, contain an epidemic",
+    "mnemonic": "Epi- (trên) + Demos (dân chúng) -> bệnh giáng xuống quần chúng (dịch bệnh).",
+    "deck": "cefr",
+    "frequency": "Phổ biến"
+  },
+  {
+    "id": "v_1080",
+    "word": "Vaccination",
+    "type": "Noun",
+    "ipa": "/ˌvæk.sɪˈneɪ.ʃən/",
+    "level": "B1",
+    "topic": "topic_health",
+    "topicLabel": "🩺 Sức Khỏe & Y Tế",
+    "meaningVi": "Sự tiêm chủng vắc-xin, biện pháp tiêm phòng tạo miễn dịch",
+    "meaningEn": "Treatment with a vaccine to produce immunity against an infectious disease.",
+    "cloze": "Universal childhood [ _____ ] programs have effectively eradicated polio worldwide.",
+    "example": "Universal childhood vaccination programs have effectively eradicated polio worldwide.",
+    "exampleVi": "Các chương trình tiêm chủng phổ cập cho trẻ em đã tiêu diệt bệnh bại liệt trên toàn thế giới một cách hiệu quả.",
+    "synonyms": "immunization, inoculation, booster shot",
+    "antonyms": "non-vaccination",
+    "collocations": "routine vaccination, mass vaccination campaign, vaccination rollout",
+    "mnemonic": "Vacca (con bò trong tiếng Latin - do vắc-xin đậu mùa ban đầu chế từ bò) -> vaccination.",
+    "deck": "cefr",
+    "frequency": "Rất phổ biến"
+  }
 ];
 
     const DEFAULT_GRAMMAR = [
@@ -33254,7 +33689,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.9.3';
+        this.appVersion = '1.9.4';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -36277,6 +36712,75 @@ Yêu cầu output STRICTLY là một JSON object:
         this.renderFlashcard();
       }
 
+      // Bộ lọc chủ đề từ vựng thông minh đa chiều (Multi-dimensional Thematic Classifier)
+      matchCardTopic(v, topicId) {
+        if (!v || !topicId || topicId === 'all') return true;
+        const top = (v.topic || '').toLowerCase();
+        const lbl = (v.topicLabel || '').toLowerCase();
+        const dck = (v.deck || '').toLowerCase();
+        const vi = (v.meaningVi || '').toLowerCase();
+        const en = (v.meaningEn || '').toLowerCase();
+        const wrd = (v.word || '').toLowerCase();
+        const full = `${wrd} ${vi} ${en} ${lbl} ${top}`;
+
+        switch (topicId) {
+          case 'topic_notebook':
+            return dck === 'notebook' || top === 'topic_notebook' || lbl.includes('sổ tay');
+          case 'topic_community':
+            return Boolean(v.isCommunity) || top === 'topic_community' || lbl.includes('cộng đồng');
+          case 'topic_translated':
+            return top === 'topic_translated' || dck === 'translated' || lbl.includes('tra cứu') || lbl.includes('dịch');
+          case 'topic_phrasal':
+            return v.type === 'Phrasal Verb' || top === 'topic_phrasal' || dck === 'phrasal' || lbl.includes('phrasal');
+          case 'topic_collocation':
+            return v.type === 'Collocation' || v.type === 'Idiom' || top === 'topic_collocation' || dck === 'collocation' || lbl.includes('collocation') || lbl.includes('idiom');
+          case 'topic_grade12':
+            return dck === 'grade12' || top === 'topic_grade12' || lbl.includes('lớp 12');
+          case 'freq_common':
+            return v.frequency === 'Rất phổ biến' || dck === 'rất phổ biến';
+          case 'freq_rare':
+            return v.frequency === 'Ít gặp / Nâng cao' || v.level === 'C1' || dck === 'c1' || dck === 'topic_c1' || dck === 'nâng cao / ít gặp' || lbl.includes('c1');
+          case 'topic_env':
+            return top.includes('env') || top.includes('green') || lbl.includes('môi trường') || lbl.includes('sinh thái') ||
+                   /(môi trường|sinh thái|ô nhiễm|bảo tồn|khí hậu|rác thải|tự nhiên|rừng|đa dạng sinh học|biodiversity|pollution|ecosystem|sustainable|conservation|climate|wildlife|degradation)/i.test(full);
+          case 'topic_tech':
+            return top.includes('tech') || top.includes('science') || top.includes('digital') || lbl.includes('công nghệ') || lbl.includes('khoa học') || lbl.includes('đổi mới') ||
+                   /(công nghệ|máy tính|phần mềm|trí tuệ nhân tạo|kỹ thuật số|AI|internet|robot|thuật toán|tự động hóa|technology|artificial intelligence|algorithm|digital|software|cyber)/i.test(full);
+          case 'topic_edu':
+            return top.includes('edu') || top.includes('academic') || lbl.includes('giáo dục') || lbl.includes('học thuật') || lbl.includes('thptqg') ||
+                   /(học tập|giáo dục|trường học|đại học|thi cử|học sinh|sinh viên|giảng viên|bằng cấp|academic|education|curriculum|scholarship|exam|pedagogy)/i.test(full);
+          case 'topic_work':
+            return top.includes('work') || top.includes('economy') || top.includes('business') || lbl.includes('công việc') || lbl.includes('nghề nghiệp') || lbl.includes('kinh tế') || lbl.includes('tài chính') ||
+                   /(công việc|nghề nghiệp|tiền lương|doanh nghiệp|kinh doanh|kinh tế|tài chính|đầu tư|nhân viên|thăng tiến|thất nghiệp|salary|career|employment|enterprise|business|economic)/i.test(full);
+          case 'topic_health':
+            return top.includes('health') || top.includes('medical') || lbl.includes('sức khỏe') || lbl.includes('y tế') || lbl.includes('thể chất') ||
+                   /(sức khỏe|bệnh tật|y tế|thuốc|chữa trị|dinh dưỡng|thể chất|thể dục|miễn dịch|virus|tuổi thọ|health|disease|hospital|medical|fitness|wellness|life expectancy)/i.test(full);
+          case 'topic_society':
+            return top.includes('society') || top.includes('life') || top.includes('community') || lbl.includes('xã hội') || lbl.includes('đời sống') || lbl.includes('cộng đồng') ||
+                   /(xã hội|đời sống|con người|cộng đồng|dân tộc|hôn nhân|gia đình|dân số|lối sống|bình đẳng|society|community|lifestyle|humanity|civic|population)/i.test(full);
+          case 'topic_psychology':
+            return top.includes('psych') || top.includes('emotion') || lbl.includes('tâm lý') || lbl.includes('tính cách') || lbl.includes('cảm xúc') ||
+                   /(tâm lý|cảm xúc|tính cách|tư duy|lo âu|trầm cảm|tự tin|tâm trạng|hành vi|nhận thức|tinh thần|psychology|emotion|personality|attitude|behavior|mental)/i.test(full);
+          case 'topic_culture':
+            return top.includes('arts') || top.includes('culture') || top.includes('heritage') || lbl.includes('văn hóa') || lbl.includes('nghệ thuật') || lbl.includes('di sản') ||
+                   /(văn hóa|nghệ thuật|di sản|truyền thống|lễ hội|phong tục|hội họa|âm nhạc|bản sắc|culture|heritage|tradition|art|custom|identity)/i.test(full);
+          case 'topic_travel':
+            return top.includes('travel') || top.includes('tourism') || lbl.includes('du lịch') || lbl.includes('khám phá') ||
+                   /(du lịch|tham quan|khám phá|chuyến đi|khách sạn|danh lam|thắng cảnh|hành lý|hộ chiếu|travel|tourism|journey|expedition|destination)/i.test(full);
+          case 'topic_communication':
+            return top.includes('communication') || top.includes('media') || lbl.includes('giao tiếp') || lbl.includes('truyền thông') || lbl.includes('ngôn ngữ') ||
+                   /(giao tiếp|truyền thông|báo chí|tin tức|thuyết trình|thảo luận|tranh luận|ngôn ngữ|đối thoại|communication|media|journalism|dialogue|debate|language)/i.test(full);
+          case 'topic_science':
+            return top.includes('science') || top.includes('space') || lbl.includes('khoa học') || lbl.includes('vũ trụ') ||
+                   /(khoa học|vũ trụ|thiên văn|vật lý|hóa học|thí nghiệm|hành tinh|space|universe|planet|astronomy|scientific|cosmos)/i.test(full);
+          case 'topic_law':
+            return top.includes('law') || top.includes('justice') || lbl.includes('pháp luật') || lbl.includes('đạo đức') || lbl.includes('công lý') ||
+                   /(pháp luật|luật pháp|tội phạm|tòa án|công lý|đạo đức|quyền lợi|công dân|law|crime|justice|ethics|legal|rights)/i.test(full);
+          default:
+            return top === topicId.toLowerCase() || dck === topicId.toLowerCase();
+        }
+      }
+
       updateActiveTopicBanner(filter) {
         const topicMeta = {
           topic_community: { title: '🌐 Kho Từ Vựng Chung Toàn Cộng Đồng', icon: 'fa-globe', badge: `${this.filteredCards.length} từ` },
@@ -36286,9 +36790,19 @@ Yêu cầu output STRICTLY là một JSON object:
           topic_collocation: { title: '🔗 Collocations & Idioms', icon: 'fa-link', badge: `${this.filteredCards.length} từ` },
           topic_grade12: { title: '🎓 Trọng Tâm Lớp 12 SGK', icon: 'fa-graduation-cap', badge: `${this.filteredCards.length} từ` },
           freq_common: { title: '⭐ Từ Vựng Phổ Biến Nhất', icon: 'fa-star', badge: `${this.filteredCards.length} từ` },
-          freq_rare: { title: '💎 C1 & Nâng Cao', icon: 'fa-gem', badge: `${this.filteredCards.length} từ` },
-          topic_env: { title: '🌿 Môi Trường & Đời Sống', icon: 'fa-leaf', badge: `${this.filteredCards.length} từ` },
-          topic_edu: { title: '🧠 Giáo Dục & Xã Hội', icon: 'fa-brain', badge: `${this.filteredCards.length} từ` },
+          freq_rare: { title: '💎 C1 & Nâng Cao (9+)', icon: 'fa-gem', badge: `${this.filteredCards.length} từ` },
+          topic_env: { title: '🌿 Môi Trường & Sinh Thái', icon: 'fa-leaf', badge: `${this.filteredCards.length} từ` },
+          topic_tech: { title: '🤖 Công Nghệ & Trí Tuệ Nhân Tạo (AI)', icon: 'fa-microchip', badge: `${this.filteredCards.length} từ` },
+          topic_edu: { title: '📚 Giáo Dục & Học Thuật THPTQG', icon: 'fa-graduation-cap', badge: `${this.filteredCards.length} từ` },
+          topic_work: { title: '💼 Kinh Tế & Nghề Nghiệp', icon: 'fa-briefcase', badge: `${this.filteredCards.length} từ` },
+          topic_health: { title: '🩺 Sức Khỏe & Y Tế', icon: 'fa-heart-pulse', badge: `${this.filteredCards.length} từ` },
+          topic_society: { title: '👥 Xã Hội & Đời Sống', icon: 'fa-users', badge: `${this.filteredCards.length} từ` },
+          topic_psychology: { title: '🧠 Tâm Lý & Cảm Xúc', icon: 'fa-brain', badge: `${this.filteredCards.length} từ` },
+          topic_culture: { title: '🎨 Văn Hóa & Nghệ Thuật', icon: 'fa-palette', badge: `${this.filteredCards.length} từ` },
+          topic_travel: { title: '✈️ Du Lịch & Khám Phá', icon: 'fa-plane-departure', badge: `${this.filteredCards.length} từ` },
+          topic_communication: { title: '💬 Giao Tiếp & Truyền Thông', icon: 'fa-comments', badge: `${this.filteredCards.length} từ` },
+          topic_science: { title: '🚀 Khoa Học & Vũ Trụ', icon: 'fa-rocket', badge: `${this.filteredCards.length} từ` },
+          topic_law: { title: '⚖️ Pháp Luật & Đạo Đức', icon: 'fa-scale-balanced', badge: `${this.filteredCards.length} từ` },
           starred: { title: '⭐ Từ Vựng Đã Gắn Sao', icon: 'fa-star', badge: `${this.filteredCards.length} từ` },
           due: { title: '⏰ Cần Ôn Tập Hôm Nay', icon: 'fa-clock', badge: `${this.filteredCards.length} từ` },
           all: { title: '📚 Toàn Bộ Kho Từ Vựng', icon: 'fa-layer-group', badge: `${this.filteredCards.length} từ` }
@@ -36311,54 +36825,18 @@ Yêu cầu output STRICTLY là một JSON object:
           this.filteredCards = this.vocabList.filter(v => v.isFavorite);
           if (this.filteredCards.length === 0) {
             this.showToast('Chưa có từ nào được gắn sao ⭐. Nhấn biểu tượng ngôi sao trên thẻ để gắn sao!', 'info');
-            this.filteredCards = this.vocabList.filter(v => v.deck === 'notebook' || v.topic === 'topic_notebook');
+            this.filteredCards = [...this.vocabList];
           }
         } else if (filter === 'due') {
           this.filteredCards = this.vocabList.filter(v => v.status === 'due' || new Date(v.nextReviewDate) <= new Date());
           if (this.filteredCards.length === 0) {
-            this.filteredCards = this.vocabList.filter(v => v.deck === 'notebook' || v.topic === 'topic_notebook');
+            this.filteredCards = [...this.vocabList];
           }
         } else if (filter === 'mastered') {
           this.filteredCards = this.vocabList.filter(v => v.status === 'mastered');
           if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
-        } else if (filter === 'topic_phrasal') {
-          this.filteredCards = this.vocabList.filter(v => v.type === 'Phrasal Verb' || v.topic === 'topic_phrasal' || v.deck === 'phrasal');
-          if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
-        } else if (filter === 'topic_collocation') {
-          this.filteredCards = this.vocabList.filter(v => v.type === 'Collocation' || v.type === 'Idiom' || v.topic === 'topic_collocation' || v.deck === 'collocation');
-          if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
-        } else if (filter === 'topic_grade12') {
-          this.filteredCards = this.vocabList.filter(v => v.deck === 'grade12' || v.topic === 'topic_grade12' || (v.topicLabel && v.topicLabel.includes('Lớp 12')));
-          if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
-        } else if (filter === 'topic_community') {
-          this.filteredCards = this.vocabList.filter(v => v.isCommunity || v.topic === 'topic_community' || (v.topicLabel && v.topicLabel.includes('Cộng Đồng')));
-          if (this.filteredCards.length === 0) {
-            this.showToast('Chưa có từ nào trong mục Từ Cộng Đồng. Nhấn "Kho Chung Live" để đồng bộ ngay!', 'info');
-            this.filteredCards = this.vocabList.filter(v => v.deck === 'notebook' || v.topic === 'topic_notebook');
-          }
-        } else if (filter === 'topic_translated') {
-          this.filteredCards = this.vocabList.filter(v => v.topic === 'topic_translated' || v.deck === 'translated');
-          if (this.filteredCards.length === 0) {
-            this.showToast('Chưa có từ nào trong chủ đề Từ Vừa Dịch. Hãy dùng công cụ Dịch để tra từ mới!', 'info');
-            this.filteredCards = this.vocabList.filter(v => v.deck === 'notebook' || v.topic === 'topic_notebook');
-          }
-        } else if (filter === 'topic_notebook') {
-          this.filteredCards = this.vocabList.filter(v => v.deck === 'notebook' || v.topic === 'topic_notebook');
-          if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
-        } else if (filter === 'freq_common') {
-          this.filteredCards = this.vocabList.filter(v => v.frequency === 'Rất phổ biến' || v.deck === 'Rất phổ biến');
-          if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
-        } else if (filter === 'freq_rare') {
-          this.filteredCards = this.vocabList.filter(v => v.frequency === 'Ít gặp / Nâng cao' || v.level === 'C1' || v.deck === 'c1' || v.deck === 'topic_c1');
-          if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
-        } else if (filter === 'topic_env') {
-          this.filteredCards = this.vocabList.filter(v => v.topic === 'topic_env' || v.topic === 'environment' || v.topic === 'green' || (v.topicLabel && v.topicLabel.includes('Môi trường')));
-          if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
-        } else if (filter === 'topic_edu') {
-          this.filteredCards = this.vocabList.filter(v => v.topic === 'topic_edu' || v.topic === 'education' || v.topic === 'academic' || (v.topicLabel && v.topicLabel.includes('Giáo dục')));
-          if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
         } else {
-          this.filteredCards = this.vocabList.filter(v => v.topic === filter || v.deck === filter);
+          this.filteredCards = this.vocabList.filter(v => this.matchCardTopic(v, filter));
           if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
         }
       }
@@ -36806,6 +37284,38 @@ Yêu cầu output STRICTLY là một JSON object:
         const transCount = this.vocabList.filter(v => v.topic === 'topic_translated' || v.deck === 'translated').length;
         setTxt('fc-count-translated', transCount);
         setTxt('hub-count-translated', transCount);
+
+        // Đếm số lượng từ theo 12 chủ đề chuyên sâu THPTQG & CEFR
+        const countEnv = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_env')).length;
+        const countTech = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_tech')).length;
+        const countEdu = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_edu')).length;
+        const countWork = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_work')).length;
+        const countHealth = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_health')).length;
+        const countSociety = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_society')).length;
+        const countPsych = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_psychology')).length;
+        const countCulture = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_culture')).length;
+        const countTravel = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_travel')).length;
+        const countComm = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_communication')).length;
+        const countScience = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_science')).length;
+        const countLaw = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_law')).length;
+        const countCommon = this.vocabList.filter(v => this.matchCardTopic(v, 'freq_common')).length;
+        const countRare = this.vocabList.filter(v => this.matchCardTopic(v, 'freq_rare')).length;
+
+        // Cập nhật cả Vocab Hub, Flashcard Bar và Topic Picker Modal
+        setTxt('hub-count-env', countEnv); setTxt('fc-count-env', countEnv); setTxt('topic-picker-count-env', `${countEnv} từ`);
+        setTxt('hub-count-tech', countTech); setTxt('fc-count-tech', countTech); setTxt('topic-picker-count-tech', `${countTech} từ`);
+        setTxt('hub-count-edu', countEdu); setTxt('fc-count-edu', countEdu); setTxt('topic-picker-count-edu', `${countEdu} từ`);
+        setTxt('hub-count-work', countWork); setTxt('fc-count-work', countWork); setTxt('topic-picker-count-work', `${countWork} từ`);
+        setTxt('hub-count-health', countHealth); setTxt('fc-count-health', countHealth); setTxt('topic-picker-count-health', `${countHealth} từ`);
+        setTxt('hub-count-society', countSociety); setTxt('fc-count-society', countSociety); setTxt('topic-picker-count-society', `${countSociety} từ`);
+        setTxt('hub-count-psychology', countPsych); setTxt('fc-count-psychology', countPsych); setTxt('topic-picker-count-psychology', `${countPsych} từ`);
+        setTxt('hub-count-culture', countCulture); setTxt('fc-count-culture', countCulture); setTxt('topic-picker-count-culture', `${countCulture} từ`);
+        setTxt('hub-count-travel', countTravel); setTxt('fc-count-travel', countTravel); setTxt('topic-picker-count-travel', `${countTravel} từ`);
+        setTxt('hub-count-communication', countComm); setTxt('fc-count-communication', countComm); setTxt('topic-picker-count-communication', `${countComm} từ`);
+        setTxt('hub-count-science', countScience); setTxt('fc-count-science', countScience); setTxt('topic-picker-count-science', `${countScience} từ`);
+        setTxt('hub-count-law', countLaw); setTxt('fc-count-law', countLaw); setTxt('topic-picker-count-law', `${countLaw} từ`);
+        setTxt('hub-count-common', countCommon); setTxt('fc-count-common', countCommon); setTxt('topic-picker-count-common', `${countCommon} từ`);
+        setTxt('hub-count-rare', countRare); setTxt('fc-count-rare', countRare); setTxt('topic-picker-count-rare', `${countRare} từ`);
         setTxt('topic-picker-count-translated', `${transCount} từ`);
         setTxt('dash-vocab-count', total);
         setTxt('dash-mastered-count', masteredCount);
@@ -36823,26 +37333,7 @@ Yêu cầu output STRICTLY là một JSON object:
         let list = [...this.vocabList];
 
         if (this.hubCurrentTopic !== 'all') {
-          const t = this.hubCurrentTopic;
-          if (t === 'topic_phrasal') {
-            list = list.filter(v => v.type === 'Phrasal Verb' || v.topic === 'topic_phrasal' || v.deck === 'phrasal');
-          } else if (t === 'topic_collocation') {
-            list = list.filter(v => v.type === 'Collocation' || v.type === 'Idiom' || v.topic === 'topic_collocation' || v.deck === 'collocation');
-          } else if (t === 'topic_grade12') {
-            list = list.filter(v => v.deck === 'grade12' || v.topic === 'topic_grade12' || (v.topicLabel && v.topicLabel.includes('Lớp 12')));
-          } else if (t === 'topic_community') {
-            list = list.filter(v => v.isCommunity || v.topic === 'topic_community' || (v.topicLabel && v.topicLabel.includes('Cộng Đồng')));
-          } else if (t === 'topic_translated') {
-            list = list.filter(v => v.topic === 'topic_translated' || v.deck === 'translated');
-          } else if (t === 'topic_notebook') {
-            list = list.filter(v => v.deck === 'notebook' || v.topic === 'topic_notebook');
-          } else if (t === 'freq_common') {
-            list = list.filter(v => v.frequency === 'Rất phổ biến');
-          } else if (t === 'freq_rare') {
-            list = list.filter(v => v.frequency === 'Ít gặp / Nâng cao' || v.level === 'C1');
-          } else {
-            list = list.filter(v => v.topic === t || v.deck === t);
-          }
+          list = list.filter(v => this.matchCardTopic(v, this.hubCurrentTopic));
         }
 
         if (this.hubCurrentLevel !== 'all') {
@@ -48604,8 +49095,168 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </button>
         </div>
 
-        <!-- Group 2: Theo độ khó & phân hóa -->
-        <span class="text-[11px] font-black uppercase tracking-wider text-primary-light pt-2 block">★ Theo Cấp Độ & Chủ Đề Xã Hội:</span>
+        <!-- Group 2: 12 Chủ Đề Chuyên Sâu THPTQG & CEFR -->
+        <span class="text-[11px] font-black uppercase tracking-wider text-primary-light pt-2 block">★ 12 Chủ Đề Chuyên Sâu Bám Sát Đề Thi THPTQG & CEFR:</span>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <button onclick="app.selectTopicAndCloseModal('topic_env')" class="p-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 hover:border-emerald-500 hover:bg-emerald-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-emerald-400">Môi Trường & Sinh Thái</h4>
+                <span id="topic-picker-count-env" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400">43 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Ecosystems, Green Living, Climate Action & Conservation.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_tech')" class="p-4 rounded-2xl border border-cyan-500/30 bg-cyan-500/5 hover:border-cyan-500 hover:bg-cyan-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-cyan-400">Công Nghệ & AI</h4>
+                <span id="topic-picker-count-tech" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-400">64 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Artificial Intelligence, Digital Skills, Cybersecurity & Automation.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_edu')" class="p-4 rounded-2xl border border-indigo-500/30 bg-indigo-500/5 hover:border-indigo-500 hover:bg-indigo-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-indigo-400">Giáo Dục & Học Thuật</h4>
+                <span id="topic-picker-count-edu" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-indigo-500/20 text-indigo-400">577 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Academic Discourse, Higher Education & National Exam Core.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_work')" class="p-4 rounded-2xl border border-amber-500/30 bg-amber-500/5 hover:border-amber-500 hover:bg-amber-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-amber-400">Kinh Tế & Nghề Nghiệp</h4>
+                <span id="topic-picker-count-work" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/20 text-amber-400">41 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Employment, Enterprise, Career Growth & Global Finance.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_health')" class="p-4 rounded-2xl border border-rose-500/30 bg-rose-500/5 hover:border-rose-500 hover:bg-rose-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-rose-400">Sức Khỏe & Y Tế</h4>
+                <span id="topic-picker-count-health" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-rose-500/20 text-rose-400">23 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Physical Wellness, Healthcare, Disease Prevention & Medicine.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_society')" class="p-4 rounded-2xl border border-blue-500/30 bg-blue-500/5 hover:border-blue-500 hover:bg-blue-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-blue-400">Xã Hội & Đời Sống</h4>
+                <span id="topic-picker-count-society" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-blue-500/20 text-blue-400">96 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Community Life, Modern Living, Demographics & Equity.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_psychology')" class="p-4 rounded-2xl border border-purple-500/30 bg-purple-500/5 hover:border-purple-500 hover:bg-purple-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-purple-400">Tâm Lý & Cảm Xúc</h4>
+                <span id="topic-picker-count-psychology" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-500/20 text-purple-400">67 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Mental Health, Personality Traits, Emotional Resilience & Cognitive Agility.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_culture')" class="p-4 rounded-2xl border border-orange-500/30 bg-orange-500/5 hover:border-orange-500 hover:bg-orange-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-palette"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-orange-400">Văn Hóa & Nghệ Thuật</h4>
+                <span id="topic-picker-count-culture" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-orange-500/20 text-orange-400">17 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Intangible Heritage, Folk Traditions, Artistic Expression & Identity.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_travel')" class="p-4 rounded-2xl border border-teal-500/30 bg-teal-500/5 hover:border-teal-500 hover:bg-teal-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-plane-departure"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-teal-400">Du Lịch & Khám Phá</h4>
+                <span id="topic-picker-count-travel" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-teal-500/20 text-teal-400">15 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Tourism, Remote Expeditions, Cultural Exchange & Wanderlust.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_communication')" class="p-4 rounded-2xl border border-violet-500/30 bg-violet-500/5 hover:border-violet-500 hover:bg-violet-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-violet-500/20 text-violet-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-violet-400">Giao Tiếp & Truyền Thông</h4>
+                <span id="topic-picker-count-communication" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-violet-500/20 text-violet-400">53 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Interpersonal Communication, Mass Media & Critical Thinking.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_science')" class="p-4 rounded-2xl border border-sky-500/30 bg-sky-500/5 hover:border-sky-500 hover:bg-sky-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-rocket"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-sky-400">Khoa Học & Vũ Trụ</h4>
+                <span id="topic-picker-count-science" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-sky-500/20 text-sky-400">25 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Space Exploration, Astronomy, Cosmic Frontiers & Scientific Breakthroughs.</p>
+            </div>
+          </button>
+
+          <button onclick="app.selectTopicAndCloseModal('topic_law')" class="p-4 rounded-2xl border border-red-500/30 bg-red-500/5 hover:border-red-500 hover:bg-red-500/10 transition text-left flex items-start space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-red-400">Pháp Luật & Đạo Đức</h4>
+                <span id="topic-picker-count-law" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-red-500/20 text-red-400">16 từ</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Justice, Legal Codes, Ethical Dilemmas & Civic Responsibility.</p>
+            </div>
+          </button>
+        </div>
+
+        <!-- Group 3: Phân loại theo độ khó & tần suất -->
+        <span class="text-[11px] font-black uppercase tracking-wider text-primary-light pt-2 block">★ Theo Cấp Độ & Độ Phổ Biến:</span>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button onclick="app.selectTopicAndCloseModal('freq_common')" class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition text-left flex items-start space-x-3 group">
             <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary-light flex items-center justify-center text-lg shrink-0 mt-0.5">
@@ -48614,7 +49265,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
             <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between">
                 <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-primary-light">Rất Phổ Biến</h4>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-primary/10 text-primary-light">653 từ</span>
+                <span id="topic-picker-count-common" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-primary/10 text-primary-light">653 từ</span>
               </div>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Từ vựng cốt lõi thường xuyên xuất hiện trong đề thi THPTQG.</p>
             </div>
@@ -48627,40 +49278,14 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
             <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between">
                 <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-purple-400">C1 & Nâng Cao</h4>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-500/20 text-purple-400">150 từ</span>
+                <span id="topic-picker-count-rare" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-500/20 text-purple-400">150 từ</span>
               </div>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Từ vựng học thuật C1 dành riêng cho học sinh chinh phục điểm 9+.</p>
             </div>
           </button>
-
-          <button onclick="app.selectTopicAndCloseModal('topic_env')" class="p-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 hover:border-emerald-500 hover:bg-emerald-500/10 transition text-left flex items-start space-x-3 group">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
-              <i class="fa-solid fa-leaf"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center justify-between">
-                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-emerald-400">Môi Trường & Đời Sống</h4>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400">25 từ</span>
-              </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Green Living, Conservation, Sustainable Ecosystems.</p>
-            </div>
-          </button>
-
-          <button onclick="app.selectTopicAndCloseModal('topic_edu')" class="p-4 rounded-2xl border border-indigo-500/30 bg-indigo-500/5 hover:border-indigo-500 hover:bg-indigo-500/10 transition text-left flex items-start space-x-3 group">
-            <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-lg shrink-0 mt-0.5">
-              <i class="fa-solid fa-brain"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center justify-between">
-                <h4 class="font-black text-sm text-slate-900 dark:text-white group-hover:text-indigo-400">Giáo Dục & Xã Hội</h4>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-indigo-500/20 text-indigo-400">391 từ</span>
-              </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Education, Lifelong Learning, Communication & Career Paths.</p>
-            </div>
-          </button>
         </div>
 
-        <!-- Group 3: Thẻ ghi nhớ cá nhân -->
+                <!-- Group 3: Thẻ ghi nhớ cá nhân -->
         <span class="text-[11px] font-black uppercase tracking-wider text-primary-light pt-2 block">★ Thẻ Cá Nhân & Tổng Hợp:</span>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <button onclick="app.selectTopicAndCloseModal('starred')" class="p-3.5 rounded-2xl border border-amber-500/30 bg-amber-500/5 hover:border-amber-500 transition text-left">
@@ -48695,7 +49320,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.3</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.4</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

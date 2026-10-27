@@ -1,12 +1,12 @@
 {
-  "version": "1.9.3",
-  "versionCode": 11300,
+  "version": "1.9.4",
+  "versionCode": 11400,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.9.3: Khắc Phục Triệt Để Hộp Thoại Cập Nhật Lặp Lại & Tối Ưu Làm Mới Trình Duyệt",
+  "title": "Bản Cập Nhật v1.9.4: Mở Rộng 12 Chủ Đề Chuyên Sâu THPTQG & Bổ Sung Bộ Từ Vựng Thực Chiến",
   "highlights": [
-    "Cơ chế ghi nhớ lựa chọn \"Để Sau\": Khi người dùng bấm bỏ qua cập nhật hoặc đóng hộp thoại, hệ thống ghi nhớ và tự động ẩn trong 24 giờ, tuyệt đối không làm phiền khi mở lại app hay chuyển tab.",
-    "Làm mới thông minh chống kẹt Cache: Khi bấm \"Cập Nhật Ngay\", ứng dụng tự động dọn sạch 100% bộ nhớ đệm Cache Storage cũ, kích hoạt Service Worker mới và nạp thẳng trang mới với tham số chống lưu cache trình duyệt.",
-    "So sánh phiên bản thông minh (Semantic Versioning): Chỉ kích hoạt thông báo khi phiên bản máy chủ thực sự lớn hơn phiên bản hiện tại, loại bỏ hoàn toàn tình trạng thông báo lặp lại sau khi đã cập nhật.",
-    "Bảo toàn 100% dữ liệu từ vựng cá nhân & đồng bộ đám mây xuyên suốt quá trình nâng cấp."
+    "Mở rộng toàn diện hệ thống 12 Chủ đề từ vựng chuyên sâu bám sát đề thi THPT Quốc Gia và chuẩn CEFR: Môi trường, Công nghệ AI, Học thuật, Kinh tế, Y tế, Xã hội, Tâm lý, Văn hóa, Du lịch, Giao tiếp, Vũ trụ và Pháp luật.",
+    "Bổ sung thanh duyệt chủ đề đa năng trên cả Kho Từ Vựng Chuyên Sâu và Thẻ Flashcard Thông Minh với huy hiệu đếm số lượng từ thời gian thực.",
+    "Nâng cấp Hộp thoại Chọn Chủ Đề Học (Topic Picker Modal) với giao diện thẻ trực quan, biểu tượng sinh động và giải thích chi tiết mục tiêu học tập.",
+    "Bổ sung 20 từ vựng cốt lõi điểm 9+ thuộc các chủ đề Du lịch, Văn hóa, Pháp luật & Vũ trụ, nâng tổng kho từ vựng lên 1.080+ từ."
   ]
 }
