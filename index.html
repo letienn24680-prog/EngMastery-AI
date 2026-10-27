@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.6 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.7 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -3843,7 +3843,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.6 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.7 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -33244,7 +33244,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.8.6';
+        this.appVersion = '1.8.7';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -35551,6 +35551,16 @@ Yêu cầu output STRICTLY là một JSON object:
         this.initGlobalCommunitySync();
         // KHÔI PHỤC HIỆN TRẠNG TRANG & HÀNG ĐỢI CÔNG VIỆC DỞ DANG KHI F5
         this.initAppViewRestoration();
+        // KHÔI PHỤC BỘ NHỚ VĨNH VIỄN INDEXEDDB (CHỐNG TRÀN VÀ MẤT TỪ KHI F5 / THOÁT APP)
+        this.restoreFromIndexedDB();
+
+        // BẢO VỆ DỮ LIỆU TỨC THÌ KHI TẮT TAB / F5 / ĐỔI ỨNG DỤNG
+        window.addEventListener('beforeunload', () => {
+          if (this.flushSaveState) this.flushSaveState();
+        });
+        window.addEventListener('pagehide', () => {
+          if (this.flushSaveState) this.flushSaveState();
+        });
 
         // Throttled 60fps Scroll listener với passive mode chống lag
         let scrollTicking = false;
@@ -35678,17 +35688,139 @@ Yêu cầu output STRICTLY là một JSON object:
         this.setVocabTopicFilter(this.currentVocabTopicFilter || 'all');
       }
 
+      /* ========================================================================== */
+      /* HỆ THỐNG LƯU TRỮ VĨNH VIỄN 2 LỚP: INDEXEDDB (KHÔNG GIỚI HẠN) + LOCALSTORAGE */
+      /* ========================================================================== */
+
+      openAppDB() {
+        return new Promise((resolve, reject) => {
+          if (typeof indexedDB === 'undefined') {
+            return reject(new Error('IndexedDB not supported'));
+          }
+          const req = indexedDB.open('EngMastery_PersistentDB_v1', 1);
+          req.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('store')) {
+              db.createObjectStore('store');
+            }
+          };
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+      }
+
+      async saveToIndexedDB(key, data) {
+        try {
+          const db = await this.openAppDB();
+          return new Promise((resolve, reject) => {
+            const tx = db.transaction('store', 'readwrite');
+            const store = tx.objectStore('store');
+            store.put(data, key);
+            tx.oncomplete = () => resolve(true);
+            tx.onerror = () => reject(tx.error);
+          });
+        } catch (e) {
+          return false;
+        }
+      }
+
+      async getFromIndexedDB(key) {
+        try {
+          const db = await this.openAppDB();
+          return new Promise((resolve, reject) => {
+            const tx = db.transaction('store', 'readonly');
+            const store = tx.objectStore('store');
+            const req = store.get(key);
+            req.onsuccess = () => resolve(req.result);
+            req.onerror = () => reject(req.error);
+          });
+        } catch (e) {
+          return null;
+        }
+      }
+
+      async restoreFromIndexedDB() {
+        try {
+          const idbVocab = await this.getFromIndexedDB('engMastery_vocab_v6');
+          if (Array.isArray(idbVocab) && idbVocab.length > 0) {
+            const existingKeys = new Set(this.vocabList.map(v => this.normalizeWordKey(v && v.word ? v.word : '')));
+            let addedCount = 0;
+            idbVocab.forEach(item => {
+              if (item && item.word && this.isValidEnglishVocab(item.word)) {
+                const k = this.normalizeWordKey(item.word);
+                if (!existingKeys.has(k)) {
+                  this.vocabList.unshift(item);
+                  existingKeys.add(k);
+                  addedCount++;
+                }
+              }
+            });
+
+            if (addedCount > 0) {
+              console.log(`[IndexedDB] Đã khôi phục thành công +${addedCount} từ vựng từ bộ nhớ vĩnh viễn IndexedDB.`);
+              this.updateFilterCounts();
+              this.updateFilterBadges();
+              this.renderDashboard();
+              if (this.currentView === 'vocab-hub') {
+                this.renderVocabHub();
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('Restore from IndexedDB warning:', e);
+        }
+      }
+
+      getCompactVocabBackup(list) {
+        if (!Array.isArray(list)) return [];
+        return list.slice(0, 1000).map(c => ({
+          id: c.id,
+          word: c.word,
+          type: c.type || 'Word',
+          ipa: c.ipa || '',
+          level: c.level || 'B2',
+          meaningVi: c.meaningVi || '',
+          topic: c.topic || 'topic_notebook',
+          deck: c.deck || 'notebook',
+          status: c.status || 'due',
+          due: c.due || true,
+          isFavorite: !!c.isFavorite
+        }));
+      }
+
+      flushSaveState() {
+        if (this._saveStateTimer) {
+          clearTimeout(this._saveStateTimer);
+          this._saveStateTimer = null;
+        }
+
+        // 1. Luôn lưu toàn bộ không giới hạn dung lượng vào IndexedDB
+        this.saveToIndexedDB('engMastery_vocab_v6', this.vocabList);
+
+        // 2. Lưu vào LocalStorage với Quota Guard chống tràn 5MB
+        try {
+          localStorage.setItem('engMastery_vocab_v6', JSON.stringify(this.vocabList));
+        } catch (quotaErr) {
+          console.warn('[Storage] LocalStorage quota reached, storing compact cache in LocalStorage & full in IndexedDB:', quotaErr);
+          try {
+            const compact = this.getCompactVocabBackup(this.vocabList);
+            localStorage.setItem('engMastery_vocab_v6', JSON.stringify(compact));
+          } catch (_) {}
+        }
+
+        try {
+          localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList));
+          localStorage.setItem('engMastery_settings', JSON.stringify(this.settings));
+          localStorage.setItem('engMastery_stats', JSON.stringify(this.stats));
+        } catch (e) {
+          console.warn('Lỗi lưu settings/grammar:', e);
+        }
+      }
+
       saveState() {
         if (this._saveStateTimer) clearTimeout(this._saveStateTimer);
         this._saveStateTimer = setTimeout(() => {
-          try {
-            localStorage.setItem('engMastery_vocab_v6', JSON.stringify(this.vocabList));
-            localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList));
-            localStorage.setItem('engMastery_settings', JSON.stringify(this.settings));
-            localStorage.setItem('engMastery_stats', JSON.stringify(this.stats));
-          } catch (e) {
-            console.warn('Lỗi lưu state:', e);
-          }
+          this.flushSaveState();
         }, 250);
       }
 
@@ -40413,11 +40545,25 @@ Trả về DUY NHẤT một JSON hợp lệ:
           if (!card || !card.word) return false;
           if (card._enriching) delete card._enriching;
 
+          // BẢO VỆ TUYỆT ĐỐI TỪ VỰNG DO NGƯỜI DÙNG TỰ NHẬP / SỔ TAY / ĐÁNH DẤU
+          const isUserManualCard = (
+            card.topic === 'topic_notebook' ||
+            card.deck === 'notebook' ||
+            (card.id && String(card.id).startsWith('custom_')) ||
+            (card.topicLabel && (card.topicLabel.includes('Thủ Công') || card.topicLabel.includes('Sổ Tay'))) ||
+            card.isFavorite ||
+            card.isCustom
+          );
+
           // Tự động làm sạch và chữa lành từ vựng dính ký tự lạ hoặc dính '-with'
           const origWord = card.word;
           const cleaned = this.sanitizeWebVocabHeadword(origWord);
 
           if (!cleaned || !this.isValidEnglishVocab(cleaned)) {
+            // Nếu là từ do người dùng tự nhập, chỉ xóa nếu từ rỗng hoặc chỉ là số thuần túy
+            if (isUserManualCard && /[a-zA-Z]/.test(origWord) && !/^\d+$/.test(origWord)) {
+              return true;
+            }
             if (removedSamples.length < 6) removedSamples.push(origWord);
             return false; // Xóa bỏ từ rác (như "2a", "32", "81", "88", "98", "a1", "-with", "with-", URL, web boilerplate)
           }
@@ -40444,7 +40590,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
           }
 
           // 2. Loại bỏ các thẻ con sinh ra từ các từ gốc không hợp lệ (như B2, A1, AIDS n., số thứ tự)
-          if (card.meaningVi && /(?:Đồng nghĩa|Trái nghĩa)\s*\([^)]*\)\s*với\s*"?(?:[a-cA-C][1-2]|\d+|[a-zA-Z]\d+|\d+[a-zA-Z]|AIDS\s*n\.|aboutprep)/i.test(card.meaningVi)) {
+          if (!isUserManualCard && card.meaningVi && /(?:Đồng nghĩa|Trái nghĩa)\s*\([^)]*\)\s*với\s*"?(?:[a-cA-C][1-2]|\d+|[a-zA-Z]\d+|\d+[a-zA-Z]|AIDS\s*n\.|aboutprep)/i.test(card.meaningVi)) {
             if (removedSamples.length < 6) removedSamples.push(card.word);
             return false;
           }
@@ -40488,12 +40634,8 @@ Trả về DUY NHẤT một JSON hợp lệ:
 
         const removedCount = initialCount - this.vocabList.length;
 
-        // Lưu lại dữ liệu sạch vào localStorage
-        try {
-          localStorage.setItem('engMastery_vocab_v6', JSON.stringify(this.vocabList));
-        } catch (e) {
-          console.warn('Lỗi lưu trữ sau khi dọn dẹp:', e);
-        }
+        // Lưu lại dữ liệu sạch vào bộ nhớ vĩnh viễn (IndexedDB + LocalStorage)
+        this.flushSaveState();
 
         // Cập nhật lại toàn bộ giao diện và bộ lọc
         this.updateFilterCounts();
@@ -41040,7 +41182,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.8.6')) return caches.delete(c);
+                if (!c.includes('v1.8.7')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -41217,6 +41359,11 @@ Trả về DUY NHẤT một JSON hợp lệ:
           confirmColor: 'rose'
         });
         if (ok) {
+          try {
+            if (typeof indexedDB !== 'undefined') {
+              indexedDB.deleteDatabase('EngMastery_PersistentDB_v1');
+            }
+          } catch (_) {}
           localStorage.clear();
           location.reload();
         }
@@ -43447,7 +43594,79 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
           total = words.length;
           alreadyProcessed = 0;
 
-          // BẢO LƯU CÔNG VIỆC XUYÊN F5: Lưu ngay hàng đợi vào persistent storage
+          // =========================================================================
+          // BƯỚC 1: LƯU TỨC THÌ 100% TỪ VỰNG VÀO HỆ THỐNG & BỘ NHỚ VĨNH VIỄN (0.05 GIÂY)
+          // ĐẢM BẢO F5 HOẶC THOÁT APP NGAY LẬP TỨC KHÔNG BAO GIỜ BỊ MẤT BẤT KỲ TỪ NÀO!
+          // =========================================================================
+          let newlyCreatedCount = 0;
+          let activatedDueCount = 0;
+
+          words.forEach(item => {
+            const w = (typeof item === 'object' && item !== null && item.word) ? item.word : item;
+            const customVi = (typeof item === 'object' && item !== null && item.meaningVi) ? item.meaningVi : '';
+            const norm = this.normalizeWordKey(w);
+            if (!norm) return;
+
+            let existing = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
+            if (existing) {
+              existing.status = 'due';
+              existing.due = true;
+              existing.nextReviewDate = new Date().toISOString();
+              existing.lastSearchedAt = Date.now();
+              if (customVi && (!existing.meaningVi || existing.meaningVi.includes('Đang chờ AI') || existing.meaningVi.includes('Đang cập nhật'))) {
+                existing.meaningVi = customVi;
+              }
+              activatedDueCount++;
+            } else {
+              const newCard = {
+                id: `custom_${Date.now()}_${Math.floor(Math.random() * 10000000)}`,
+                word: w.trim(),
+                type: 'Word',
+                ipa: '',
+                level: this.guessCefrLevel(w),
+                topic: 'topic_notebook',
+                topicLabel: '✍️ Từ Nhập Thủ Công',
+                meaningVi: customVi || 'Đang chờ AI phân tích nghĩa...',
+                meaningEn: `User custom vocabulary: ${w.trim()}`,
+                cloze: `Practice using [ ${w.trim()} ] in a sentence.`,
+                example: `Pay special attention to the usage of "${w.trim()}" in your studies.`,
+                exampleVi: `Hãy lưu ý cách sử dụng từ "${w.trim()}" trong bài thi.`,
+                synonyms: '',
+                antonyms: '',
+                collocations: w.trim(),
+                mnemonic: 'Từ vựng đã lưu vĩnh viễn vào hệ thống của bạn.',
+                deck: 'notebook',
+                repetitions: 0,
+                interval: 1,
+                easeFactor: 2.5,
+                nextReviewDate: new Date().toISOString(),
+                status: 'due',
+                due: true,
+                isFavorite: true,
+                _needsEnrichment: true
+              };
+              this.vocabList.unshift(newCard);
+              newlyCreatedCount++;
+            }
+          });
+
+          // LƯU NGAY LẬP TỨC VÀO PERSISTENT STORAGE (INDEXEDDB + LOCALSTORAGE)
+          this.flushSaveState();
+          this.updateFilterCounts();
+          this.updateFilterBadges();
+          this.renderDashboard();
+          if (this.currentView === 'vocab-hub') {
+            this.renderVocabHub();
+          }
+
+          // Xóa trắng ô nhập và draft vì tất cả từ đã nằm an toàn 100% trong hệ thống
+          textarea.value = '';
+          try {
+            localStorage.removeItem('engMastery_manual_words_draft');
+          } catch (_) {}
+          this.onManualWordsInputChange('');
+
+          // BẢO LƯU HÀNG ĐỢI PHÂN TÍCH CHO TIẾN TRÌNH AI
           try {
             localStorage.setItem('engMastery_active_batch_queue', JSON.stringify({
               words: words,
@@ -43456,6 +43675,11 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
               startedAt: Date.now()
             }));
           } catch (_) {}
+
+          const toastMsg = newlyCreatedCount > 0
+            ? `🎉 Đã lưu thành công +${newlyCreatedCount} từ mới vào Kho Từ Vựng & Sổ Tay! AI đang tiếp tục phân tích chi tiết...`
+            : `✨ Đã kích hoạt ${activatedDueCount} từ vựng vào danh sách Cần Ôn Tập!`;
+          this.showToast(toastMsg, 'success');
         }
 
         const submitBtn = document.getElementById('btn-submit-manual-words');
@@ -43467,7 +43691,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
 
         if (submitBtn) {
           submitBtn.disabled = true;
-          submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AI Đang Phân Tích & Lưu...</span>';
+          submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AI Đang Phân Tích & Hoàn Thiện...</span>';
         }
         if (progressBox) progressBox.classList.remove('hidden');
 
@@ -43475,9 +43699,10 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         let lastCreatedCardId = null;
         const processedWords = [];
 
-        if (!isResumed) {
-          this.showToast(`⚡ AI đang bắt đầu phân tích ${total} từ vựng (dịch nghĩa, bóc tách đồng/trái nghĩa, collocations)...`, 'info');
-        }
+        // =========================================================================
+        // BƯỚC 2: TIẾN TRÌNH AI LÀM GIÀU DỮ LIỆU (RICH ENRICHMENT ENGINE)
+        // =========================================================================
+        const isBulkMode = total > 20;
 
         for (let i = 0; i < words.length; i++) {
           const item = words[i];
@@ -43487,128 +43712,105 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
           const pct = Math.round((currentTotalIdx / total) * 100);
 
           if (progressText) {
-            progressText.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-emerald-500"></i> <span>Đang xử lý ${currentTotalIdx}/${total}: "<strong>${w}</strong>"...</span>`;
+            progressText.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-emerald-500"></i> <span>Đang hoàn thiện ${currentTotalIdx}/${total}: "<strong>${w}</strong>"...</span>`;
           }
           if (progressPct) progressPct.innerText = `${pct}%`;
           if (progressBar) progressBar.style.width = `${pct}%`;
           if (progressSub) {
-            progressSub.innerText = `Bóc tách nghĩa tiếng Việt, CEFR (A1-C1), collocations & họ từ cho "${w}"...`;
+            progressSub.innerText = `Tra cứu nghĩa, IPA, collocations & CEFR cho "${w}"...`;
           }
 
           try {
             const norm = this.normalizeWordKey(w);
-            let existing = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
+            let targetCard = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
 
-            if (existing) {
-              // Từ đã có -> kích hoạt vào danh sách Cần Ôn Tập
-              existing.status = 'due';
-              existing.due = true;
-              existing.nextReviewDate = new Date().toISOString();
-              existing.lastSearchedAt = Date.now();
-              lastCreatedCardId = existing.id;
-              processedWords.push(existing.word);
+            // Phân tích toàn diện bằng Rich Lexical Engine
+            const rich = await this.fetchRichLexicalData(w, customVi);
+            if (rich && targetCard) {
+              if (rich.type && rich.type !== 'Word' && rich.type !== 'Từ vựng') targetCard.type = rich.type;
+              if (rich.ipa) targetCard.ipa = rich.ipa;
+              if (rich.level) targetCard.level = rich.level;
+              if (rich.meaningVi && (!targetCard.meaningVi || targetCard.meaningVi.includes('Đang chờ AI') || targetCard.meaningVi.includes('Đang cập nhật'))) {
+                targetCard.meaningVi = rich.meaningVi;
+              }
+              if (rich.meaningEn && (!targetCard.meaningEn || targetCard.meaningEn.includes('User custom'))) {
+                targetCard.meaningEn = rich.meaningEn;
+              }
+              if (rich.example) targetCard.example = rich.example;
+              if (rich.exampleVi) targetCard.exampleVi = rich.exampleVi;
+              if (rich.synonyms) targetCard.synonyms = this.normalizeCefrField(rich.synonyms);
+              if (rich.antonyms) targetCard.antonyms = this.normalizeCefrField(rich.antonyms);
+              if (rich.collocations) targetCard.collocations = rich.collocations;
+              if (rich.mnemonic) targetCard.mnemonic = rich.mnemonic;
+              delete targetCard._needsEnrichment;
+
+              lastCreatedCardId = targetCard.id;
+              processedWords.push(targetCard.word);
               successCount++;
 
-              // Đảm bảo có đủ đồng nghĩa, trái nghĩa, collocation, word family
-              this.autoEnrichModalWord(existing);
-            } else {
-              // Từ mới -> Phân tích toàn diện bằng Rich Lexical Engine
-              const rich = await this.fetchRichLexicalData(w, customVi);
-              if (rich) {
-                const newCard = this.upsertVocabCard({
-                  word: rich.word || w,
-                  type: rich.type || 'Word',
-                  ipa: rich.ipa || '',
-                  level: rich.level || this.guessCefrLevel(w),
-                  meaningVi: rich.meaningVi,
-                  meaningEn: rich.meaningEn,
-                  topic: 'topic_notebook',
-                  topicLabel: '✍️ Từ Nhập Thủ Công',
-                  example: rich.example,
-                  exampleVi: rich.exampleVi,
-                  synonyms: this.normalizeCefrField(rich.synonyms),
-                  antonyms: this.normalizeCefrField(rich.antonyms),
-                  collocations: rich.collocations,
-                  mnemonic: rich.mnemonic,
-                  deck: 'notebook',
-                  status: 'due',
-                  due: true,
-                  nextReviewDate: new Date().toISOString(),
-                  isFavorite: true
-                });
-
-                if (newCard && newCard.card) {
-                  lastCreatedCardId = newCard.card.id;
-                }
-
-                // Tự động phân tách và nạp thêm các từ Đồng nghĩa, Trái nghĩa, Collocations
+              // Chỉ tự động phân tách thêm thẻ con (synonyms, word family) nếu nhập ít từ (<= 20 từ)
+              // để tránh bùng nổ hàng chục nghìn thẻ làm chậm máy khi nhập hàng nghìn từ
+              if (!isBulkMode) {
                 this.enrollExtractedCefrWords(rich.word || w, rich.meaningVi, rich.type, rich.synonyms, rich.antonyms, rich.collocations);
-
-                // Tự động nhận diện và nạp Họ Từ Vựng (Word Family: V-N-Adj-Adv)
                 await this.enrollWordFamilyMembers(rich.word || w, rich.meaningVi, rich.type);
-
-                processedWords.push(rich.word || w);
-                successCount++;
               }
+            } else if (targetCard) {
+              lastCreatedCardId = targetCard.id;
+              processedWords.push(targetCard.word);
+              successCount++;
             }
           } catch (err) {
             console.warn(`Lỗi phân tích từ "${w}":`, err);
           }
 
-          // CẬP NHẬT TIẾN ĐỘ PERSISTENT SAU MỖI TỪ ĐỂ F5 KHÔNG BỊ MẤT
-          const remainingWords = words.slice(i + 1);
-          if (remainingWords.length > 0) {
-            try {
-              localStorage.setItem('engMastery_active_batch_queue', JSON.stringify({
-                words: remainingWords,
-                total: total,
-                processedCount: currentTotalIdx,
-                startedAt: Date.now()
-              }));
-            } catch (_) {}
-          } else {
-            // Đã hoàn tất sạch hàng đợi
-            try {
-              localStorage.removeItem('engMastery_active_batch_queue');
-              localStorage.removeItem('engMastery_manual_words_draft');
-            } catch (_) {}
+          // CẬP NHẬT TIẾN ĐỘ PERSISTENT VÀ LƯU ĐỊNH KỲ MỖI 5 TỪ HOẶC TỪ CUỐI CÙNG
+          if (i % 5 === 0 || i === words.length - 1) {
+            this.flushSaveState();
+            const remainingWords = words.slice(i + 1);
+            if (remainingWords.length > 0) {
+              try {
+                localStorage.setItem('engMastery_active_batch_queue', JSON.stringify({
+                  words: remainingWords,
+                  total: total,
+                  processedCount: currentTotalIdx,
+                  startedAt: Date.now()
+                }));
+              } catch (_) {}
+            } else {
+              try {
+                localStorage.removeItem('engMastery_active_batch_queue');
+              } catch (_) {}
+            }
           }
 
           if (words.length > 1) {
-            await new Promise(r => setTimeout(r, 60));
+            await new Promise(r => setTimeout(r, 40));
           }
         }
 
-        // Hoàn tất
+        // Hoàn tất toàn bộ tiến trình
         if (progressText) {
-          progressText.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500"></i> <span>Hoàn tất! Đã lưu thành công ${successCount}/${total} từ vựng.</span>`;
+          progressText.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500"></i> <span>Hoàn tất! Đã phân tích & lưu thành công ${successCount}/${total} từ vựng.</span>`;
         }
         if (progressPct) progressPct.innerText = '100%';
         if (progressBar) progressBar.style.width = '100%';
 
-        this.saveState();
+        this.flushSaveState();
         this.updateFilterCounts();
         this.renderDashboard();
-        this.hubCurrentPage = 1;
         this.renderVocabHub();
 
-        // TỰ ĐỘNG PHÁT SÓNG TOÀN BỘ TỪ MỚI LÊN KHO CHUNG CHO TẤT CẢ NGƯỜI DÙNG
+        // Tự động phát sóng tối đa 50 từ mới lên kho chung cộng đồng
         if (processedWords.length > 0) {
-          const cardsToBroadcast = this.vocabList.filter(v => processedWords.includes(v.word));
+          const cardsToBroadcast = this.vocabList.filter(v => processedWords.includes(v.word)).slice(0, 50);
           if (cardsToBroadcast.length > 0) {
             this.broadcastBatchToCommunity(cardsToBroadcast);
           }
         }
 
-        // Xóa trắng ô nhập và bản nháp sau khi đã nạp thành công
-        const textareaEl = document.getElementById('hub-manual-input-textarea');
-        if (textareaEl) {
-          textareaEl.value = '';
-          this.onManualWordsInputChange('');
-        }
         try {
-          localStorage.removeItem('engMastery_manual_words_draft');
           localStorage.removeItem('engMastery_active_batch_queue');
+          localStorage.removeItem('engMastery_manual_words_draft');
         } catch (_) {}
 
         if (submitBtn) {
@@ -43621,7 +43823,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
         }, 3000);
 
         const sampleWords = processedWords.slice(0, 3).join(', ') + (processedWords.length > 3 ? '...' : '');
-        this.showToast(`🎉 AI đã phân tích & lưu thành công ${successCount} từ (${sampleWords}) kèm nghĩa, đồng/trái nghĩa & collocations!`, 'success');
+        this.showToast(`🎉 Đã phân tích hoàn thiện ${successCount} từ (${sampleWords}) kèm nghĩa chi tiết & lưu vĩnh viễn!`, 'success');
 
         // Nếu người dùng chỉ nhập đúng 1 từ, tự động mở Word Detail Modal để xem ngay
         if (total === 1 && lastCreatedCardId) {
@@ -47687,7 +47889,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.6</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.7</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

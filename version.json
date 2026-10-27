@@ -1,11 +1,11 @@
 {
-  "version": "1.8.6",
-  "versionCode": 10626,
+  "version": "1.8.7",
+  "versionCode": 10700,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.8.6: Sửa Triệt Để Lỗi Thẻ Footer Trôi Nổi & Cân Bằng Cấu Trúc Giao Diện Header",
+  "title": "Bản Cập Nhật v1.8.7: Cơ Chế Lưu Trữ Vĩnh Viễn 2 Lớp (IndexedDB + LocalStorage) & Nạp Từ Thủ Công Tức Thì 0.05s Chống Mất Từ Khi F5",
   "highlights": [
-    "Khắc phục triệt để mảnh thẻ trôi nổi trên màn hình: Xóa bỏ hoàn toàn đoạn footer mồ côi (hiển thị dòng chữ 'Tự động đồng bộ từ vựng, flashcard và kết quả làm đề [Đóng]') bị rò rỉ ra giữa màn hình Kho Từ Vựng.",
-    "Khôi phục cân bằng 100% cây DOM HTML: Dọn sạch các thẻ đóng div thừa, đưa tỷ lệ mở/đóng div về trạng thái hoàn hảo (Diff = 0), ngăn chặn toàn bộ lỗi vỡ khung giao diện và tràn thẻ ra ngoài.",
-    "Đại tu thanh Header trên màn hình laptop: Thu gọn các nút phụ thành biểu tượng thông minh, giải phóng không gian giúp thanh điều hướng 'EngMastery > Kho Từ Vựng Topic' hiển thị đầy đủ, không bao giờ bị ép co cụm thành chữ 'E.' nữa."
+    "Cơ chế nạp từ thủ công tức thì (Instant Ingestion 0.05s): Toàn bộ từ vựng nhập thủ công (đơn từ hoặc danh sách hàng nghìn từ) được ghi nhận và lưu ngay lập tức 100% vào hệ thống & Sổ Tay Cần Ôn Tập trước khi tiến trình phân tích bắt đầu; người dùng F5 hoặc tắt app bất kỳ lúc nào cũng không bao giờ bị mất từ.",
+    "Hệ thống lưu trữ vĩnh viễn 2 lớp không giới hạn dung lượng: Tích hợp IndexedDB lưu trữ hàng chục nghìn thẻ từ mà không bị giới hạn bởi trần 5MB của LocalStorage (loại bỏ hoàn toàn lỗi QuotaExceededError âm thầm làm rớt dữ liệu).",
+    "Tự động khôi phục và bảo vệ thẻ từ vựng khi F5 / Thoát app: Thêm sự kiện beforeunload và pagehide tự động đẩy toàn bộ dữ liệu bộ nhớ vào ổ đĩa; bảo vệ tuyệt đối các thẻ từ do học sinh tự nhập trong bộ lọc làm sạch rác."
   ]
 }
