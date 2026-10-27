@@ -1,13 +1,12 @@
 {
-  "version": "1.7.4",
-  "versionCode": 10614,
+  "version": "1.7.5",
+  "versionCode": 10615,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.7.4: Công Nghệ Dịch Nghĩa Đa Tầng (Multi-Tier) & Tự Động Chữa Lành Nghĩa Tiếng Việt Chuẩn Xác",
+  "title": "Bản Cập Nhật v1.7.5: Kho Từ Vựng Dùng Chung Toàn Cộng Đồng & Đồng Bộ Trực Tiếp Thời Gian Thực (Live Real-Time Sync)",
   "highlights": [
-    "Khắc phục triệt để lỗi thẻ từ vựng không dịch nghĩa tiếng Việt hoặc bị hiện placeholder máy móc (như 'Danh từ/khái niệm của aboutprep')",
-    "Bộ dịch thuật đa tầng thông minh (Multi-Tier Translation Engine): Kết hợp Google Translate + Từ điển học thuật FreeDictionaryAPI + Định nghĩa dịch ngữ cảnh, đảm bảo 100% mọi từ tiếng Anh (kể cả từ hiếm như aboulia) đều có nghĩa tiếng Việt đầy đủ",
-    "Tự động phát hiện và dịch lại nghĩa tiếng Việt ngay khi người học nhấn xem Chi Tiết từ vựng nếu thẻ trước đó chưa có bản dịch chuẩn",
-    "Bổ sung nút 'Dịch Lại Nghĩa Chuẩn' trực tiếp ngay cạnh mục Nghĩa tiếng Việt trong Modal Chi Tiết",
-    "Sửa triệt để thuật toán Họ Từ Vựng (Word Family): Loại bỏ liên kết nhầm các từ xa lạ dựa trên tiền tố Datamuse (như about ghép nhầm với aboulia)"
+    "Kho Từ Vựng Chung Toàn Cộng Đồng (Real-Time Live Sync): Bất kỳ người dùng nào thêm hoặc tra cứu từ mới ở thiết bị này, tất cả người học khác trên mọi thiết bị sẽ thấy từ mới xuất hiện ngay lập tức (< 0.5s) qua kết nối Server-Sent Events (SSE).",
+    "Tự Động Chữa Lành Từ Thiếu Đồng Nghĩa & Trái Nghĩa (Auto-Healing CEFR Engine): Tự động quét và nạp phân cấp CEFR A1 -> C1 (tối thiểu 3 từ/cấp độ), collocations và câu ví dụ ngữ cảnh cho mọi từ đã lưu (như Passion), đảm bảo không bao giờ bị trống hoặc hiển thị 'Chưa có dữ liệu'.",
+    "Nút '🌐 Kho Chung Live' trên thanh điều khiển: Hiển thị chấm trạng thái xanh trực quan, cho phép chủ động làm mới và nạp các từ vựng mới nhất do cộng đồng đóng góp bất kỳ lúc nào.",
+    "Bộ lọc '🌐 Từ Cộng Đồng' trên Flashcards và Kho Từ Vựng: Dễ dàng lọc và luyện tập riêng các từ vựng do bạn bè và cộng đồng học sinh cùng chia sẻ."
   ]
 }

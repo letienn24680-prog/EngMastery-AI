@@ -290,7 +290,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.4 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.7.5 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -360,6 +360,13 @@
         <button id="header-profile-badge" onclick="app.openProfileModal()" class="flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20 transition cursor-pointer shadow-xs" title="Hồ sơ người học & Cách ly dữ liệu cá nhân trên thiết bị">
           <i class="fa-solid fa-user-graduate text-xs"></i>
           <span id="header-profile-name" class="hidden lg:inline max-w-[110px] truncate">Hồ Sơ Của Tôi</span>
+        </button>
+
+        <!-- Live Shared Community Vocab Pool Badge & Sync -->
+        <button id="header-global-sync-badge" onclick="app.syncGlobalCommunityWords(true)" class="flex items-center space-x-1 sm:space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 transition cursor-pointer shadow-xs active:scale-95" title="Kho Từ Vựng Chung Toàn Cộng Đồng (Real-time Live Sync) - Nhấn để làm mới ngay">
+          <span id="global-sync-live-dot" class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
+          <i class="fa-solid fa-globe text-xs"></i>
+          <span class="hidden sm:inline">Kho Chung Live</span>
         </button>
 
         <!-- Network & Offline Status Indicator -->
@@ -772,6 +779,7 @@
           <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 text-xs">
             <button onclick="app.setVocabTopicFilter('all')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-primary text-white shadow-glow-primary" data-filter="all">🌟 Tất Cả (<span id="fc-count-all">1.060+</span>)</button>
             <button onclick="app.setVocabTopicFilter('topic_notebook')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_notebook" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_notebook">📓 Sổ Tay (<span id="fc-count-notebook">179</span>)</button>
+            <button onclick="app.setVocabTopicFilter('topic_community')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-cyan-500 dark:text-cyan-400" data-filter="topic_community">🌐 Từ Cộng Đồng (<span id="fc-count-community">0</span>)</button>
             <button onclick="app.setVocabTopicFilter('topic_translated')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap text-emerald-500 dark:text-emerald-400" data-filter="topic_translated">🌐 Từ Vừa Tra & Dịch (<span id="fc-count-translated">0</span>)</button>
             <button onclick="app.setVocabTopicFilter('topic_phrasal')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_phrasal">🔄 Phrasal Verbs (154)</button>
             <button onclick="app.setVocabTopicFilter('topic_collocation')" class="vocab-filter-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap" data-filter="topic_collocation">🔗 Collocations & Idioms (218)</button>
@@ -1251,6 +1259,9 @@
           </button>
           <button onclick="app.setHubTopic('topic_notebook')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-amber-500" data-topic="topic_notebook">
             📓 Sổ Tay (<span id="hub-count-notebook">179</span>)
+          </button>
+          <button onclick="app.setHubTopic('topic_community')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-cyan-400" data-topic="topic_community">
+            🌐 Từ Cộng Đồng (<span id="hub-count-community">0</span>)
           </button>
           <button onclick="app.setHubTopic('topic_translated')" class="hub-topic-btn px-4 py-2 rounded-2xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-emerald-500" data-topic="topic_translated">
             🌐 Từ Vừa Tra & Dịch (<span id="hub-count-translated">0</span>)
@@ -3617,7 +3628,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.4 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.7.5 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -32966,7 +32977,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.7.4';
+        this.appVersion = '1.7.5';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -35259,6 +35270,7 @@ Yêu cầu output STRICTLY là một JSON object:
         this.initThptDailySystem();
         this.initSavedG12Exams();
         this.initAutoUpdateSystem();
+        this.initGlobalCommunitySync();
 
         // Throttled 60fps Scroll listener với passive mode chống lag
         let scrollTicking = false;
@@ -35612,6 +35624,7 @@ Yêu cầu output STRICTLY là một JSON object:
 
       updateActiveTopicBanner(filter) {
         const topicMeta = {
+          topic_community: { title: '🌐 Kho Từ Vựng Chung Toàn Cộng Đồng', icon: 'fa-globe', badge: `${this.filteredCards.length} từ` },
           topic_translated: { title: '🌐 Từ Vừa Tra & Dịch', icon: 'fa-language', badge: `${this.filteredCards.length} từ` },
           topic_notebook: { title: '📓 Sổ Tay Từ Vựng', icon: 'fa-book', badge: `${this.filteredCards.length} từ` },
           topic_phrasal: { title: '🔄 Phrasal Verbs Trọng Điểm', icon: 'fa-rotate', badge: `${this.filteredCards.length} từ` },
@@ -35662,6 +35675,12 @@ Yêu cầu output STRICTLY là một JSON object:
         } else if (filter === 'topic_grade12') {
           this.filteredCards = this.vocabList.filter(v => v.deck === 'grade12' || v.topic === 'topic_grade12' || (v.topicLabel && v.topicLabel.includes('Lớp 12')));
           if (this.filteredCards.length === 0) this.filteredCards = [...this.vocabList];
+        } else if (filter === 'topic_community') {
+          this.filteredCards = this.vocabList.filter(v => v.isCommunity || v.topic === 'topic_community' || (v.topicLabel && v.topicLabel.includes('Cộng Đồng')));
+          if (this.filteredCards.length === 0) {
+            this.showToast('Chưa có từ nào trong mục Từ Cộng Đồng. Nhấn "Kho Chung Live" để đồng bộ ngay!', 'info');
+            this.filteredCards = this.vocabList.filter(v => v.deck === 'notebook' || v.topic === 'topic_notebook');
+          }
         } else if (filter === 'topic_translated') {
           this.filteredCards = this.vocabList.filter(v => v.topic === 'topic_translated' || v.deck === 'translated');
           if (this.filteredCards.length === 0) {
@@ -36096,12 +36115,15 @@ Yêu cầu output STRICTLY là một JSON object:
         const dueCount = this.vocabList.filter(v => v.status === 'due' || v.due === true || new Date(v.nextReviewDate) <= new Date()).length;
         const masteredCount = this.vocabList.filter(v => v.status === 'mastered').length;
         const starredCount = this.vocabList.filter(v => v.isFavorite).length;
+        const communityCount = this.vocabList.filter(v => v.isCommunity || v.topic === 'topic_community' || (v.topicLabel && v.topicLabel.includes('Cộng Đồng'))).length;
 
         this.updateMistakeBadge();
         this.initThptDailySystem();
         const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
         setTxt('fc-count-all', total);
         setTxt('fc-count-notebook', nbCount);
+        setTxt('fc-count-community', communityCount);
+        setTxt('hub-count-community', communityCount);
         setTxt('fc-count-phrasal', phrasalCount);
         setTxt('fc-count-collocation', collabCount);
         setTxt('fc-count-grade12', g12Count);
@@ -36140,6 +36162,8 @@ Yêu cầu output STRICTLY là một JSON object:
             list = list.filter(v => v.type === 'Collocation' || v.type === 'Idiom' || v.topic === 'topic_collocation' || v.deck === 'collocation');
           } else if (t === 'topic_grade12') {
             list = list.filter(v => v.deck === 'grade12' || v.topic === 'topic_grade12' || (v.topicLabel && v.topicLabel.includes('Lớp 12')));
+          } else if (t === 'topic_community') {
+            list = list.filter(v => v.isCommunity || v.topic === 'topic_community' || (v.topicLabel && v.topicLabel.includes('Cộng Đồng')));
           } else if (t === 'topic_translated') {
             list = list.filter(v => v.topic === 'topic_translated' || v.deck === 'translated');
           } else if (t === 'topic_notebook') {
@@ -36652,25 +36676,30 @@ Yêu cầu output STRICTLY là một JSON object:
       }
 
       async autoEnrichModalWord(item) {
-        if (!item || item._enriching) return;
+        if (!item) return;
+        if (item._enriching && Date.now() - (item._enrichingTime || 0) < 8000) return;
         item._enriching = true;
+        item._enrichingTime = Date.now();
 
         const synEl = document.getElementById('modal-detail-synonyms');
         const antEl = document.getElementById('modal-detail-antonyms');
         const collocEl = document.getElementById('modal-detail-collocations');
 
-        if (synEl && (!item.synonyms || item.synonyms.includes('Chưa có'))) {
+        if (synEl && (!item.synonyms || item.synonyms.includes('Chưa có') || item.synonyms.trim() === '')) {
           synEl.innerHTML = '<span class="text-xs text-amber-500 animate-pulse font-semibold"><i class="fa-solid fa-spinner fa-spin mr-1.5"></i>Đang tự động nạp phân cấp Đồng Nghĩa A1 ➔ C1...</span>';
         }
-        if (antEl && (!item.antonyms || item.antonyms.includes('Chưa có'))) {
+        if (antEl && (!item.antonyms || item.antonyms.includes('Chưa có') || item.antonyms.trim() === '')) {
           antEl.innerHTML = '<span class="text-xs text-rose-500 animate-pulse font-semibold"><i class="fa-solid fa-spinner fa-spin mr-1.5"></i>Đang tự động nạp phân cấp Trái Nghĩa A1 ➔ C1...</span>';
         }
-        if (collocEl && (!item.collocations || item.collocations === item.word)) {
+        if (collocEl && (!item.collocations || item.collocations === item.word || item.collocations.trim() === '')) {
           collocEl.innerHTML = '<span class="text-xs text-indigo-400 animate-pulse font-semibold"><i class="fa-solid fa-spinner fa-spin mr-1.5"></i>Đang tự động nạp collocations thông dụng...</span>';
         }
 
         try {
-          const rich = await this.fetchRichLexicalData(item.word, item.meaningVi);
+          const rich = await Promise.race([
+            this.fetchRichLexicalData(item.word, item.meaningVi),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Enrich timeout')), 8000))
+          ]);
           if (!rich) return;
 
           item.synonyms = rich.synonyms;
@@ -36715,7 +36744,25 @@ Yêu cầu output STRICTLY là một JSON object:
 
           this.showToast(`✨ Đã tự động cập nhật đầy đủ từ đồng nghĩa, trái nghĩa & collocations cho "${item.word}"!`, 'success');
         } catch (e) {
-          console.warn('Lỗi auto-enrich word:', e);
+          console.warn('Lỗi auto-enrich word, kích hoạt fallback CEFR thông minh:', e);
+          if (!item.synonyms || item.synonyms.includes('Chưa có') || item.synonyms.trim() === '') {
+            item.synonyms = this.buildCefrTierString([], 'syn', item.word, item.type || 'Word');
+          }
+          if (!item.antonyms || item.antonyms.includes('Chưa có') || item.antonyms.trim() === '') {
+            item.antonyms = this.buildCefrTierString([], 'ant', item.word, item.type || 'Word');
+          }
+          if (!item.collocations || item.collocations === item.word || item.collocations.trim() === '') {
+            item.collocations = `have a ${item.word}, great ${item.word}, strong ${item.word}, deep ${item.word}`;
+          }
+          const idx = this.vocabList.findIndex(v => v.id === item.id || v.word.toLowerCase() === item.word.toLowerCase());
+          if (idx !== -1) Object.assign(this.vocabList[idx], item);
+          this.saveState();
+
+          if (this.activeModalWord && (this.activeModalWord.id === item.id || this.activeModalWord.word.toLowerCase() === item.word.toLowerCase())) {
+            if (synEl) synEl.innerHTML = this.formatCefrSynAntHtml(item.synonyms, 'syn');
+            if (antEl) antEl.innerHTML = this.formatCefrSynAntHtml(item.antonyms, 'ant');
+            if (collocEl) collocEl.innerText = item.collocations;
+          }
         } finally {
           item._enriching = false;
         }
@@ -36790,11 +36837,15 @@ Yêu cầu output STRICTLY là một JSON object:
 
         document.getElementById('modal-word-detail').classList.remove('hidden');
 
-        // Tự động kiểm tra và làm giàu dữ liệu (Synonyms, Antonyms, Collocations) nếu từ này chưa có
-        const isMissingCefr = !item.synonyms || item.synonyms.includes('Chưa có') ||
-                              !item.antonyms || item.antonyms.includes('Chưa có') ||
-                              !item.collocations || item.collocations === item.word ||
-                              (item.meaningEn && item.meaningEn.includes('Google Translate'));
+        // Tự động giải phóng cờ _enriching nếu thẻ bị kẹt
+        delete item._enriching;
+
+        // Tự động kiểm tra và làm giàu dữ liệu (Synonyms, Antonyms, Collocations, Example) nếu từ này chưa có
+        const isMissingCefr = !item.synonyms || item.synonyms.includes('Chưa có') || item.synonyms.trim() === '' ||
+                              !item.antonyms || item.antonyms.includes('Chưa có') || item.antonyms.trim() === '' ||
+                              !item.collocations || item.collocations === item.word || item.collocations.trim() === '' ||
+                              (item.meaningEn && item.meaningEn.includes('Google Translate')) ||
+                              (item.example && item.example.includes('Learn and practice'));
 
         if (isMissingCefr) {
           this.autoEnrichModalWord(item);
@@ -38865,6 +38916,9 @@ Trả về DUY NHẤT một JSON hợp lệ:
           this.vocabList.unshift(newCard);
           this.saveState();
           this.updateFilterCounts();
+          if (!cardData._isFromGlobalSync && this.isValidEnglishVocab(newCard.word)) {
+            this.broadcastWordToCommunity(newCard);
+          }
           return { isNew: true, merged: false, card: newCard };
         } else {
           // 2. TỪ ĐÃ CÓ TRONG KHO (TRÙNG LẶP) -> TỰ ĐỘNG GỘP LÀM 1 ĐỂ TRÁNH LỘN XỘN
@@ -39254,6 +39308,205 @@ Trả về DUY NHẤT một JSON hợp lệ:
         return true;
       }
 
+      /* ========================================================================== */
+      /* REAL-TIME LIVE SHARED GLOBAL COMMUNITY VOCAB POOL (NTFY.SH SSE BROADCAST)  */
+      /* ========================================================================== */
+
+      initGlobalCommunitySync() {
+        if (!this.myDeviceId) {
+          this.myDeviceId = localStorage.getItem('engmastery_device_id') || `dev_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+          try { localStorage.setItem('engmastery_device_id', this.myDeviceId); } catch (_) {}
+        }
+
+        // 1. Tự động kết nối Real-time Server-Sent Events (SSE) để nhận từ mới tức thời (< 0.5s)
+        try {
+          if (window.EventSource) {
+            if (this._communityEventSource) {
+              try { this._communityEventSource.close(); } catch (_) {}
+            }
+            const sseUrl = 'https://ntfy.sh/engmastery_community_vocab_pool_v1/sse';
+            this._communityEventSource = new EventSource(sseUrl);
+
+            this._communityEventSource.onopen = () => {
+              this.updateGlobalSyncStatus(true);
+            };
+
+            this._communityEventSource.onmessage = (event) => {
+              try {
+                const data = JSON.parse(event.data);
+                if (data.event === 'message' && data.message) {
+                  const body = JSON.parse(data.message);
+                  this.handleIncomingGlobalWord(body);
+                }
+              } catch (_) {}
+            };
+
+            this._communityEventSource.onerror = () => {
+              this.updateGlobalSyncStatus(false);
+              if (this._communityEventSource) {
+                try { this._communityEventSource.close(); } catch (_) {}
+                this._communityEventSource = null;
+              }
+              // Tự động kết nối lại sau 20s
+              setTimeout(() => {
+                if (navigator.onLine) this.initGlobalCommunitySync();
+              }, 20000);
+            };
+          }
+        } catch (e) {
+          console.warn('SSE community init error:', e);
+        }
+
+        // 2. Tự động đồng bộ các từ mới nhất từ kho chung khi khởi động ứng dụng
+        setTimeout(() => {
+          this.syncGlobalCommunityWords(false);
+        }, 1600);
+      }
+
+      async broadcastWordToCommunity(card) {
+        if (!card || !card.word || card._isFromGlobalSync) return;
+        if (!this.isValidEnglishVocab(card.word)) return;
+
+        // Tránh broadcast liên tục trùng lặp một từ trong 30 giây
+        if (!this._broadcastCache) this._broadcastCache = new Set();
+        const norm = this.normalizeWordKey(card.word);
+        if (this._broadcastCache.has(norm)) return;
+        this._broadcastCache.add(norm);
+        setTimeout(() => this._broadcastCache.delete(norm), 30000);
+
+        try {
+          const profile = this.userProfile || { name: 'Bạn Học THPT' };
+          const payload = {
+            action: 'BROADCAST_WORD',
+            senderDeviceId: this.myDeviceId,
+            senderName: profile.name || 'Bạn Học THPT',
+            timestamp: Date.now(),
+            card: {
+              word: card.word.trim(),
+              type: card.type || 'Word',
+              ipa: card.ipa || '',
+              level: card.level || 'B2',
+              meaningVi: card.meaningVi || '',
+              meaningEn: card.meaningEn || '',
+              synonyms: card.synonyms || '',
+              antonyms: card.antonyms || '',
+              collocations: card.collocations || '',
+              example: card.example || '',
+              exampleVi: card.exampleVi || '',
+              topic: 'topic_community',
+              topicLabel: '🌐 Từ Cộng Đồng',
+              mnemonic: card.mnemonic || '',
+              isCommunity: true
+            }
+          };
+
+          await fetch('https://ntfy.sh/engmastery_community_vocab_pool_v1', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {
+              'Title': `New Vocab: ${card.word}`,
+              'Tags': 'globe,books'
+            }
+          });
+        } catch (e) {
+          console.warn('Broadcast community word warning:', e);
+        }
+      }
+
+      handleIncomingGlobalWord(body) {
+        if (!body || body.action !== 'BROADCAST_WORD' || !body.card) return;
+        if (body.senderDeviceId && body.senderDeviceId === this.myDeviceId) return; // Bỏ qua từ do chính máy này gửi
+
+        const c = body.card;
+        if (!c.word || !this.isValidEnglishVocab(c.word)) return;
+
+        c._isFromGlobalSync = true;
+        c.isCommunity = true;
+        c.topic = 'topic_community';
+        c.topicLabel = '🌐 Từ Cộng Đồng';
+        c.deck = 'notebook';
+        c.status = 'due';
+        c.due = true;
+
+        const res = this.upsertVocabCard(c);
+        if (res.isNew) {
+          const sender = body.senderName || 'Bạn học';
+          this.showToast(`🌐 ${sender} vừa đóng góp từ mới: "${c.word}" (${c.meaningVi})!`, 'info');
+          if (this.currentView === 'flashcards' && this.currentVocabTopicFilter === 'topic_community') {
+            this.applyVocabTopicFilter('topic_community');
+            this.renderFlashcard();
+          } else if (this.currentView === 'vocab-hub') {
+            this.renderVocabHub();
+          }
+        }
+      }
+
+      async syncGlobalCommunityWords(showToast = false) {
+        if (!navigator.onLine) {
+          if (showToast) this.showToast('Không có kết nối mạng để đồng bộ kho chung!', 'warning');
+          return;
+        }
+
+        if (showToast) {
+          this.showToast('🌐 Đang đồng bộ từ vựng mới nhất từ Kho Chung Cộng Đồng...', 'info');
+        }
+
+        try {
+          const res = await fetch('https://ntfy.sh/engmastery_community_vocab_pool_v1/json?poll=1&since=all');
+          if (!res.ok) throw new Error('Poll failed');
+          const text = await res.text();
+          const lines = text.split('\n').filter(l => l.trim().length > 0);
+          let newCount = 0;
+
+          lines.forEach(line => {
+            try {
+              const msg = JSON.parse(line);
+              if (msg.event === 'message' && msg.message) {
+                const body = JSON.parse(msg.message);
+                if (body && body.action === 'BROADCAST_WORD' && body.card) {
+                  const c = body.card;
+                  if (c.word && this.isValidEnglishVocab(c.word)) {
+                    c._isFromGlobalSync = true;
+                    c.isCommunity = true;
+                    c.topic = 'topic_community';
+                    c.topicLabel = '🌐 Từ Cộng Đồng';
+                    c.deck = 'notebook';
+                    const upRes = this.upsertVocabCard(c);
+                    if (upRes.isNew) newCount++;
+                  }
+                }
+              }
+            } catch (_) {}
+          });
+
+          this.updateGlobalSyncStatus(true);
+          if (newCount > 0) {
+            this.saveState();
+            this.updateFilterCounts();
+            if (this.currentView === 'vocab-hub') this.renderVocabHub();
+            if (showToast) {
+              this.showToast(`🎉 Đã đồng bộ thành công thêm +${newCount} từ mới từ Kho Cộng Đồng!`, 'success');
+            }
+          } else if (showToast) {
+            this.showToast('✨ Kho từ vựng của bạn đã đồng bộ mới nhất với Cộng Đồng!', 'success');
+          }
+        } catch (e) {
+          console.warn('Sync global community words error:', e);
+          if (showToast) this.showToast('Không thể kết nối đến Kho Chung lúc này.', 'warning');
+        }
+      }
+
+      updateGlobalSyncStatus(isConnected) {
+        const dot = document.getElementById('global-sync-live-dot');
+        if (dot) {
+          if (isConnected) {
+            dot.className = 'w-2 h-2 rounded-full bg-cyan-500 animate-pulse';
+          } else {
+            dot.className = 'w-2 h-2 rounded-full bg-slate-400';
+          }
+        }
+      }
+
       cleanInvalidVocabEntries(showFeedback = true) {
         if (!this.vocabList || !Array.isArray(this.vocabList)) return 0;
 
@@ -39263,6 +39516,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
         // Lọc sạch các thẻ từ rác / không hợp lệ
         this.vocabList = this.vocabList.filter(card => {
           if (!card || !card.word) return false;
+          if (card._enriching) delete card._enriching;
           const isValid = this.isValidEnglishVocab(card.word);
           if (!isValid) {
             if (removedSamples.length < 6) removedSamples.push(card.word);
@@ -39485,7 +39739,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
         try {
           const cleanTopic = 'engmastery_sync_' + savedCode.toLowerCase().replace(/[^a-z0-9_-]/g, '');
           const payload = {
-            version: '1.7.4',
+            version: '1.7.5',
             appVersion: this.appVersion,
             syncCode: savedCode,
             timestamp: Date.now(),
@@ -39838,7 +40092,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.7.4')) return caches.delete(c);
+                if (!c.includes('v1.7.5')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -45543,7 +45797,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           // Nếu có bản cập nhật đang đợi kích hoạt, hiển thị banner ngay
           if (reg.waiting && window.app) {
             window.app.showUpdateBanner({
-              version: '1.7.4',
+              version: '1.7.5',
               title: 'Bản cập nhật mới đã sẵn sàng!',
               highlights: ['Tự động kiểm tra & cập nhật', 'Giao diện đóng gói App PWA']
             });
@@ -45557,7 +45811,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   if (window.app) {
                     window.app.showUpdateBanner({
-                      version: '1.7.4',
+                      version: '1.7.5',
                       title: 'Đã có bản cập nhật mới!',
                       highlights: ['Bản cập nhật vừa được tải về', 'Bấm cập nhật ngay để áp dụng']
                     });
@@ -46109,7 +46363,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
         </div>
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.4</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.7.5</span>
             <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
           </div>
           <h4 class="font-extrabold text-sm sm:text-base text-white mt-1" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
