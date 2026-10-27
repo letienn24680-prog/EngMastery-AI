@@ -1,13 +1,12 @@
 {
-  "version": "1.8.2",
-  "versionCode": 10622,
+  "version": "1.8.3",
+  "versionCode": 10623,
   "releaseDate": "2026-10-27",
-  "title": "Bản Cập Nhật v1.8.2: Đại Tu Cơ Chế Hộp Thoại & Tab Nhỏ (Khóa Nền Triệt Để, Header/Footer Ghim Cố Định Không Lo Mất Nút X & Cập Nhật)",
+  "title": "Bản Cập Nhật v1.8.3: Bổ Sung Chế Độ Phóng To Toàn Màn Hình Khung Nhập Từ Vựng Thủ Công (Fullscreen Expand/Maximize)",
   "highlights": [
-    "Khóa nền & Cách ly tương tác 100% khi mở tab nhỏ (Modal Isolation & Scroll Lock): Khi mở bất kỳ tab nhỏ nào (Cài đặt, Cập nhật, Chi tiết từ, Thêm từ, Đồng bộ...), màn hình nền phía sau bị khóa cuộn và vô hiệu hóa tương tác hoàn toàn, loại bỏ triệt để hiện tượng chạm xuyên hoặc cuộn nhầm nền.",
-    "Kiến trúc 3 Tầng chống tràn màn hình (Fixed Header - Scrollable Body - Fixed Footer): Khắc phục triệt để lỗi tab nhiều chữ bị mất nút [X] và nút Cập nhật. Thanh tiêu đề & nút [X] luôn ghim cố định ở đỉnh, các nút hành động (Cập Nhật Ngay, Lưu, Xong) luôn ghim cố định ở đáy, nội dung dài cuộn mượt mà ở giữa.",
-    "Tối ưu hóa Hộp Thoại Cập Nhật Bản Mới: Bọc trong lớp nền làm mờ kính sang trọng, hiển thị trọn vẹn nút 'Cập Nhật Ngay' và 'Để Sau' ngay tầm mắt, danh sách cải tiến mới cuộn mượt mà trong khung.",
-    "Loại bỏ nút tròn màu tím [↑] nổi đè lên trên bảng: Tự động ẩn nút cuộn lên đầu trang khi có tab nhỏ đang mở, không bao giờ che khuất các nút bấm ở đáy màn hình.",
-    "Hỗ trợ phím tắt Escape (ESC) & Chạm vùng ngoài: Tự động đóng tab nhỏ linh hoạt bằng phím ESC hoặc chạm vào lớp nền mờ."
+    "Icon Phóng to / Thu nhỏ ô nhập thủ công (Fullscreen Expand / Maximize Mode): Bổ sung biểu tượng phóng to tại góc ô nhập và thanh tiêu đề, cho phép mở rộng khung nhập thành một cửa sổ lớn toàn màn hình để dễ dàng quan sát, chỉnh sửa và rà soát danh sách hàng ngàn từ vựng cùng lúc.",
+    "Lớp phủ làm mờ cách ly & Khóa cuộn trang (Modal Backdrop Isolation): Khi phóng to, toàn bộ nền phía sau được phủ mờ và khóa cuộn, tập trung tối đa không gian cho việc viết và duyệt từ vựng.",
+    "Bảo lưu 100% dữ liệu đang nhập: Chuyển đổi qua lại giữa chế độ phóng to và thu nhỏ giữ nguyên vẹn toàn bộ văn bản, vị trí con trỏ và số lượng từ đã được AI nhận diện thời gian thực.",
+    "Thao tác linh hoạt đa chiều: Dễ dàng thu nhỏ bằng nút 'Thu nhỏ' ở góc ô nhập, thanh tiêu đề, thanh công cụ đáy, phím tắt Escape (ESC) hoặc chạm vào vùng nền mờ bên ngoài."
   ]
 }

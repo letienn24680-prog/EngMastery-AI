@@ -73,6 +73,70 @@
       overscroll-behavior: none !important;
     }
 
+    /* Khung nhập từ vựng thủ công: Chế độ phóng to toàn màn hình (Expand/Maximize Mode) */
+    #hub-manual-input-panel.is-expanded {
+      position: fixed !important;
+      inset: 0.75rem !important;
+      z-index: 95 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      background: #ffffff !important;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7), 0 0 0 100vmax rgba(15, 23, 42, 0.65) !important;
+      margin: auto !important;
+      max-width: 1050px !important;
+      max-height: calc(100dvh - 1.5rem) !important;
+      height: calc(100dvh - 1.5rem) !important;
+      border-radius: 1.5rem !important;
+      overflow: hidden !important;
+      animation: expandPanelFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .dark #hub-manual-input-panel.is-expanded {
+      background: #1e293b !important;
+    }
+    @media (min-width: 640px) {
+      #hub-manual-input-panel.is-expanded {
+        inset: 1.75rem !important;
+        max-height: calc(100dvh - 3.5rem) !important;
+        height: calc(100dvh - 3.5rem) !important;
+      }
+    }
+    #hub-manual-input-panel.is-expanded > div:first-child {
+      flex-shrink: 0 !important;
+    }
+    #hub-manual-input-panel.is-expanded > .space-y-2 {
+      flex: 1 1 auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 0 !important;
+    }
+    #hub-manual-input-panel.is-expanded .relative {
+      flex: 1 1 auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 0 !important;
+    }
+    #hub-manual-input-panel.is-expanded #hub-manual-input-textarea {
+      flex: 1 1 auto !important;
+      height: 100% !important;
+      min-height: 220px !important;
+      font-size: 0.95rem !important;
+      line-height: 1.6 !important;
+      resize: none !important;
+    }
+    #hub-manual-input-panel.is-expanded > div:nth-of-type(3) {
+      flex-shrink: 0 !important;
+    }
+    @keyframes expandPanelFade {
+      0% {
+        opacity: 0.6;
+        transform: scale(0.97);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     /* Mobile Touch Optimization & High-Performance Rendering */
     * {
       -webkit-tap-highlight-color: transparent;
@@ -298,7 +362,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.2 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.8.3 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -1156,9 +1220,12 @@
           </div>
         </div>
 
-                <!-- KHỐI NHẬP TỪ VỰNG THỦ CÔNG & AI PHÂN TÍCH ĐA TỪ (SINGLE / BATCH IMPORT) -->
+                <!-- Lớp phủ nền làm mờ khi phóng to khung nhập từ vựng thủ công -->
+        <div id="hub-manual-backdrop" onclick="app.toggleManualInputExpand(false)" class="fixed inset-0 z-[94] bg-slate-950/75 backdrop-blur-md hidden transition-opacity duration-300"></div>
+
+        <!-- KHỐI NHẬP TỪ VỰNG THỦ CÔNG & AI PHÂN TÍCH ĐA TỪ (SINGLE / BATCH IMPORT) -->
         <div id="hub-manual-input-panel" class="hidden p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 dark:from-darkCard dark:via-darkCard dark:to-emerald-950/20 border border-slate-200 dark:border-slate-800 shadow-xl space-y-4 transition-all animate-scale-up">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-slate-200/80 dark:border-slate-800">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-slate-200/80 dark:border-slate-800 shrink-0">
             <div class="flex items-center space-x-2.5">
               <span class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center shadow-md shrink-0">
                 <i class="fa-solid fa-pen-fancy text-sm"></i>
@@ -1171,22 +1238,36 @@
                 <p class="text-[11px] text-slate-400">Nhập 1 từ hoặc dán nhiều từ (ngăn cách bởi dấu phẩy, chấm phẩy hoặc xuống dòng). AI sẽ tự động dịch nghĩa, tìm đồng nghĩa, trái nghĩa, collocations & họ từ để lưu vào hệ thống.</p>
               </div>
             </div>
-            <button type="button" onclick="app.toggleManualBatchVocabInput(false)" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm shrink-0" title="Đóng ô nhập">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
+            <div class="flex items-center space-x-1.5 shrink-0 self-end sm:self-center">
+              <button id="btn-expand-manual-panel" type="button" onclick="app.toggleManualInputExpand()" class="text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm flex items-center space-x-1.5 cursor-pointer" title="Phóng to toàn màn hình để viết và xem dễ dàng">
+                <i id="icon-expand-manual-panel" class="fa-solid fa-expand text-sm"></i>
+                <span id="text-expand-manual-panel" class="hidden sm:inline text-xs font-semibold">Phóng to</span>
+              </button>
+              <button type="button" onclick="app.toggleManualBatchVocabInput(false)" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm shrink-0 cursor-pointer" title="Đóng ô nhập">
+                <i class="fa-solid fa-xmark text-sm"></i>
+              </button>
+            </div>
           </div>
 
           <!-- Textarea Input Area -->
-          <div class="space-y-2">
-            <div class="relative">
+          <div class="space-y-2 flex-1 flex flex-col min-h-0">
+            <div class="relative flex-1 flex flex-col min-h-0">
               <textarea id="hub-manual-input-textarea" rows="3" oninput="app.onManualWordsInputChange(this.value)" onkeydown="if((event.ctrlKey || event.metaKey) && event.key==='Enter') app.submitManualBatchWords()" placeholder="Nhập 1 từ hoặc dán danh sách nhiều từ tiếng Anh tại đây (nhấn Ctrl+Enter để gửi)...&#10;Ví dụ: creative, resilience, sustainable, ambiguous, perseverance&#10;Hoặc mỗi từ một dòng..." class="w-full p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 text-slate-900 dark:text-white placeholder:text-slate-400 shadow-inner resize-y min-h-[95px]"></textarea>
-              <button type="button" onclick="app.clearManualWordsInput()" class="absolute right-3 bottom-3 text-slate-400 hover:text-rose-500 text-xs p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition" title="Xóa trắng ô nhập">
-                <i class="fa-solid fa-eraser"></i>
-              </button>
+              <div class="absolute right-2.5 bottom-2.5 flex items-center space-x-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-1 rounded-xl border border-slate-200/80 dark:border-slate-700/80 shadow-md">
+                <button id="btn-expand-manual-textarea" type="button" onclick="app.toggleManualInputExpand()" class="text-slate-500 hover:text-emerald-500 dark:text-slate-400 dark:hover:text-emerald-400 text-xs px-2.5 py-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center space-x-1.5 cursor-pointer font-bold" title="Phóng to / Thu nhỏ ô nhập">
+                  <i id="icon-expand-manual-textarea" class="fa-solid fa-expand"></i>
+                  <span id="label-expand-manual-textarea" class="text-[11px]">Phóng to</span>
+                </button>
+                <div class="h-3.5 w-px bg-slate-200 dark:bg-slate-700"></div>
+                <button type="button" onclick="app.clearManualWordsInput()" class="text-slate-500 hover:text-rose-500 dark:text-slate-400 dark:hover:text-rose-400 text-xs px-2.5 py-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center space-x-1.5 cursor-pointer font-bold" title="Xóa trắng ô nhập">
+                  <i class="fa-solid fa-eraser"></i>
+                  <span class="text-[11px]">Xóa</span>
+                </button>
+              </div>
             </div>
 
             <!-- Helper Bar: Quick Pills & Word Counter -->
-            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs shrink-0 pt-1">
               <div class="flex items-center flex-wrap gap-1.5">
                 <span class="text-[11px] font-bold text-slate-400">💡 Thử mẫu:</span>
                 <button type="button" onclick="app.fillManualWordsSample('creative, resilience, sustainable')" class="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500/10 hover:text-emerald-500 text-slate-600 dark:text-slate-300 font-semibold text-[11px] transition">Mẫu 3 từ B2-C1</button>
@@ -1200,14 +1281,18 @@
           </div>
 
           <!-- Action Buttons & Processing Feedback -->
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 shrink-0 border-t border-slate-200/80 dark:border-slate-800/80">
             <div class="flex items-center space-x-2 text-[11px] text-slate-500 dark:text-slate-400 font-medium">
               <i class="fa-solid fa-sparkles text-amber-500"></i>
               <span>AI tự động dịch nghĩa, tìm Đồng nghĩa, Trái nghĩa, Collocations & Họ từ (V-N-Adj-Adv)</span>
             </div>
             <div class="flex items-center space-x-2 w-full sm:w-auto justify-end">
-              <button type="button" onclick="app.toggleManualBatchVocabInput(false)" class="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition">Đóng lại</button>
-              <button id="btn-submit-manual-words" type="button" onclick="app.submitManualBatchWords()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-600 to-primary hover:from-emerald-600 hover:to-primary-hover text-white font-extrabold text-xs shadow-md hover:shadow-glow transition flex items-center justify-center space-x-2 active:scale-95 disabled:opacity-50">
+              <button type="button" onclick="app.toggleManualInputExpand(false)" id="btn-collapse-manual-bottom" class="hidden px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition flex items-center space-x-1.5 cursor-pointer">
+                <i class="fa-solid fa-compress"></i>
+                <span>Thu nhỏ</span>
+              </button>
+              <button type="button" onclick="app.toggleManualBatchVocabInput(false)" class="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition cursor-pointer">Đóng lại</button>
+              <button id="btn-submit-manual-words" type="button" onclick="app.submitManualBatchWords()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-600 to-primary hover:from-emerald-600 hover:to-primary-hover text-white font-extrabold text-xs shadow-md hover:shadow-glow transition flex items-center justify-center space-x-2 active:scale-95 disabled:opacity-50 cursor-pointer">
                 <i class="fa-solid fa-paper-plane"></i>
                 <span>Gửi Đi & AI Phân Tích Lưu Ngay</span>
               </button>
@@ -1215,7 +1300,7 @@
           </div>
 
           <!-- Real-time Progress Bar Area (shows during analysis) -->
-          <div id="hub-manual-progress-box" class="hidden p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 space-y-2">
+          <div id="hub-manual-progress-box" class="hidden p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 space-y-2 shrink-0">
             <div class="flex items-center justify-between text-xs font-bold text-emerald-600 dark:text-emerald-400">
               <span id="hub-manual-progress-text" class="flex items-center gap-1.5">
                 <i class="fa-solid fa-spinner fa-spin"></i>
@@ -3748,7 +3833,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.2 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.8.3 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -33146,7 +33231,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.7.6';
+        this.appVersion = '1.8.3';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -35663,6 +35748,10 @@ Yêu cầu output STRICTLY là một JSON object:
         // ⌨️ Global Escape key handler to close topmost open modal
         window.addEventListener('keydown', (e) => {
           if (e.key === 'Escape') {
+            if (this.isManualInputExpanded) {
+              this.toggleManualInputExpand(false);
+              return;
+            }
             if (this.activeModals && this.activeModals.size > 0) {
               const lastModal = Array.from(this.activeModals).pop();
               switch (lastModal) {
@@ -40832,7 +40921,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
             if ('caches' in window) {
               const cacheNames = await caches.keys();
               await Promise.all(cacheNames.map(c => {
-                if (!c.includes('v1.8.2')) return caches.delete(c);
+                if (!c.includes('v1.8.3')) return caches.delete(c);
               }));
             }
           } catch (e) {}
@@ -41054,6 +41143,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
       // 🔒 GLOBAL MODAL ISOLATION & SCROLL LOCK CONTROLLER
       // ==============================================================
       activeModals = new Set();
+      isManualInputExpanded = false;
 
       registerModalOpen(modalId) {
         if (!this.activeModals) this.activeModals = new Set();
@@ -43065,7 +43155,51 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
             }, 100);
           }
         } else {
+          if (this.isManualInputExpanded) {
+            this.toggleManualInputExpand(false);
+          }
           panel.classList.add('hidden');
+        }
+      }
+
+      toggleManualInputExpand(forceState) {
+        const panel = document.getElementById('hub-manual-input-panel');
+        const backdrop = document.getElementById('hub-manual-backdrop');
+        if (!panel) return;
+
+        this.isManualInputExpanded = (typeof forceState === 'boolean') ? forceState : !this.isManualInputExpanded;
+
+        const iconHeader = document.getElementById('icon-expand-manual-panel');
+        const textHeader = document.getElementById('text-expand-manual-panel');
+        const btnHeader = document.getElementById('btn-expand-manual-panel');
+        const iconTextarea = document.getElementById('icon-expand-manual-textarea');
+        const labelTextarea = document.getElementById('label-expand-manual-textarea');
+        const btnCollapseBottom = document.getElementById('btn-collapse-manual-bottom');
+        const textarea = document.getElementById('hub-manual-input-textarea');
+
+        if (this.isManualInputExpanded) {
+          panel.classList.add('is-expanded');
+          if (backdrop) backdrop.classList.remove('hidden');
+          this.registerModalOpen('hub-manual-input-panel');
+          if (iconHeader) iconHeader.className = 'fa-solid fa-compress text-sm';
+          if (textHeader) textHeader.innerText = 'Thu nhỏ';
+          if (btnHeader) btnHeader.title = 'Thu nhỏ ô nhập';
+          if (iconTextarea) iconTextarea.className = 'fa-solid fa-compress';
+          if (labelTextarea) labelTextarea.innerText = 'Thu nhỏ';
+          if (btnCollapseBottom) btnCollapseBottom.classList.remove('hidden');
+          if (textarea) textarea.focus();
+          this.showToast('🔍 Đã phóng to khung nhập từ vựng!', 'info');
+        } else {
+          panel.classList.remove('is-expanded');
+          if (backdrop) backdrop.classList.add('hidden');
+          this.registerModalClose('hub-manual-input-panel');
+          if (iconHeader) iconHeader.className = 'fa-solid fa-expand text-sm';
+          if (textHeader) textHeader.innerText = 'Phóng to';
+          if (btnHeader) btnHeader.title = 'Phóng to toàn màn hình';
+          if (iconTextarea) iconTextarea.className = 'fa-solid fa-expand';
+          if (labelTextarea) labelTextarea.innerText = 'Phóng to';
+          if (btnCollapseBottom) btnCollapseBottom.classList.add('hidden');
+          if (textarea) textarea.focus();
         }
       }
 
@@ -47421,7 +47555,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.2</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.8.3</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
