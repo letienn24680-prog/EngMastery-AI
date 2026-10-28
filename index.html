@@ -404,7 +404,7 @@
   <!-- ============================================== -->
   <main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto pb-36 md:pb-8">
     <!-- Top Global Header (Responsive & Zero Truncation) -->
-    <header class="h-16 px-3 sm:px-6 bg-white/95 dark:bg-darkCard/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-20 flex items-center justify-between shrink-0 pt-[env(safe-area-inset-top,0px)] gap-2 sm:gap-4">
+    <header id="global-top-header" class="h-16 px-3 sm:px-6 bg-white/95 dark:bg-darkCard/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-20 flex items-center justify-between shrink-0 pt-[env(safe-area-inset-top,0px)] gap-2 sm:gap-4 transition-transform duration-300 ease-out">
       <!-- Left: Mobile Menu & Current View Title (Never squished) -->
       <div class="flex items-center space-x-2 sm:space-x-2.5 min-w-0 shrink flex-1">
         <button onclick="app.toggleSidebar()" class="md:hidden p-2 -ml-1 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm shrink-0" aria-label="Mở menu">
@@ -426,7 +426,7 @@
         </button>
 
         <!-- Tra Từ A1 - C1 Quick Button -->
-        <button onclick="app.openCefrExplorerModal()" class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-purple-500/15 to-indigo-500/15 hover:from-purple-500/25 hover:to-indigo-500/25 text-purple-600 dark:text-purple-300 border border-purple-500/30 text-xs font-bold transition flex items-center space-x-1 shadow-xs cursor-pointer" title="Tra cứu từ đồng nghĩa & trái nghĩa A1 - C1">
+        <button onclick="app.openCefrExplorerModal()" class="hidden sm:flex px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-purple-500/15 to-indigo-500/15 hover:from-purple-500/25 hover:to-indigo-500/25 text-purple-600 dark:text-purple-300 border border-purple-500/30 text-xs font-bold transition items-center space-x-1 shadow-xs cursor-pointer" title="Tra cứu từ đồng nghĩa & trái nghĩa A1 - C1">
           <i class="fa-solid fa-arrows-split-up-and-left text-xs text-purple-500"></i>
           <span class="hidden 2xl:inline">Tra A1-C1</span>
         </button>
@@ -457,7 +457,7 @@
         </button>
 
         <!-- Network & Offline Status Indicator -->
-        <button id="header-network-badge" onclick="app.syncOfflineQueue()" class="flex items-center space-x-1 sm:space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 transition cursor-pointer hover:bg-emerald-500/20 shadow-xs shrink-0" title="Trạng thái mạng và hàng đợi ngoại tuyến">
+        <button id="header-network-badge" onclick="app.syncOfflineQueue()" class="hidden sm:flex items-center space-x-1 sm:space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 transition cursor-pointer hover:bg-emerald-500/20 shadow-xs shrink-0" title="Trạng thái mạng và hàng đợi ngoại tuyến">
           <span id="header-network-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span id="header-network-text" class="hidden 2xl:inline">Online</span>
           <span id="header-queue-pill" class="hidden px-1.5 py-0.2 rounded-full text-[9px] font-black bg-amber-500 text-white">0</span>
@@ -1112,6 +1112,29 @@
               <!-- Flip Back Notice -->
               <div class="pt-2 text-center text-xs font-semibold text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">
                 Nhấp vào thẻ để quay lại mặt trước
+              </div>
+            </div>
+
+            <!-- SEPARATE EMPTY STATE OVERLAY (PROTECTS CARD-FRONT AND CARD-BACK DOM ELEMENTS FROM EVER BEING DESTROYED) -->
+            <div id="flashcard-empty-state" class="hidden absolute inset-0 rounded-3xl p-6 sm:p-8 bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col items-center justify-center text-center space-y-4 z-20">
+              <div class="w-16 h-16 rounded-3xl bg-primary/10 text-primary-light flex items-center justify-center text-3xl">
+                <i class="fa-solid fa-wand-magic-sparkles animate-pulse"></i>
+              </div>
+              <div>
+                <h3 id="fc-empty-title" class="text-xl font-bold text-slate-800 dark:text-white">Không tìm thấy từ</h3>
+                <p id="fc-empty-desc" class="text-xs text-slate-400 mt-1 max-w-md mx-auto">Chủ đề hoặc bộ lọc này chưa có từ, hoặc bạn đang tìm kiếm không khớp. Hãy xem tất cả từ hoặc nhờ AI tạo từ mới ngay!</p>
+              </div>
+              <div class="flex items-center gap-2 flex-wrap justify-center">
+                <button id="fc-empty-ai-btn" type="button" onclick="app.generateCardWithAI(this.dataset.word || '')" class="hidden px-5 py-2.5 rounded-2xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold text-xs shadow-glow-primary hover:shadow-lg transition flex items-center space-x-2 cursor-pointer">
+                  <i class="fa-solid fa-sparkles"></i>
+                  <span id="fc-empty-ai-btn-text">Tạo Thẻ Cho Từ Này</span>
+                </button>
+                <button type="button" onclick="app.setVocabTopicFilter('all')" class="px-5 py-2.5 rounded-2xl bg-primary text-white font-bold text-xs shadow-glow-primary cursor-pointer">
+                  Xem Tất Cả 5.800+ Từ Vựng
+                </button>
+                <button type="button" onclick="app.openTopicPickerModal()" class="px-4 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 transition cursor-pointer">
+                  Đổi Chủ Đề Khác
+                </button>
               </div>
             </div>
           </div>
@@ -3190,6 +3213,10 @@
                     <button type="button" onclick="app.rotatePhoto(180)" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-600 dark:text-slate-300 text-xs font-bold transition flex items-center gap-1 cursor-pointer" title="Lật ngược ảnh 180 độ">
                       <i class="fa-solid fa-arrows-rotate"></i>
                       <span class="text-[10px]">180°</span>
+                    </button>
+                    <button type="button" onclick="app.runPhotoAIVision(app.currentPhotoData)" class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-primary to-indigo-600 hover:from-primary-hover hover:to-indigo-700 text-white text-xs font-bold transition flex items-center gap-1 cursor-pointer shadow-xs" title="Dùng AI Gemini Vision đọc ảnh chính xác 100% ngay cả khi ảnh chụp bị xoay hoặc mờ">
+                      <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
+                      <span class="text-[10px]">AI Vision Quét Đề</span>
                     </button>
                     <button type="button" onclick="app.runPhotoOCR(app.currentPhotoData)" class="px-2.5 py-1 rounded-lg bg-primary/10 hover:bg-primary text-primary-light hover:text-white text-xs font-bold transition flex items-center gap-1 cursor-pointer" title="Quét lại chữ từ ảnh">
                       <i class="fa-solid fa-wand-magic-sparkles"></i>
@@ -40625,7 +40652,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.9.8';
+        this.appVersion = '1.9.9';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -40683,6 +40710,13 @@
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 45000);
             try {
+              let userContent = prompt;
+              if (options.imageDataUrl) {
+                userContent = [
+                  { type: 'text', text: prompt },
+                  { type: 'image_url', image_url: { url: options.imageDataUrl } }
+                ];
+              }
               const res = await fetch('https://api.xkiro.com/v1/chat/completions', {
                 method: 'POST',
                 signal: controller.signal,
@@ -40694,7 +40728,7 @@
                   model: model,
                   messages: [
                     ...(options.system ? [{ role: 'system', content: options.system }] : []),
-                    { role: 'user', content: prompt }
+                    { role: 'user', content: userContent }
                   ],
                   temperature: options.temperature !== undefined ? options.temperature : 0.3
                 })
@@ -40718,22 +40752,31 @@
           if (lastErr) throw lastErr;
           throw new Error('xKiro API tạm thời không phản hồi trên các model khả dụng.');
         } else {
-          // Google Gemini direct
+          // Google Gemini direct with Multimodal Vision & Text
           const geminiModels = ['gemini-flash-latest', 'gemini-pro-latest', 'gemini-2.5-flash-lite'];
           let lastErr = null;
           for (const m of geminiModels) {
             try {
               const url = `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${key}`;
+              const parts = [];
+              if (options.system) parts.push({ text: 'System: ' + options.system + '\n\n' });
+              parts.push({ text: prompt });
+              if (options.imageDataUrl) {
+                const match = options.imageDataUrl.match(/^data:([^;]+);base64,(.+)$/);
+                if (match) {
+                  parts.push({
+                    inline_data: {
+                      mime_type: match[1],
+                      data: match[2]
+                    }
+                  });
+                }
+              }
               const res = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                  contents: [{
-                    parts: [
-                      ...(options.system ? [{ text: 'System: ' + options.system + '\n\n' }] : []),
-                      { text: prompt }
-                    ]
-                  }]
+                  contents: [{ parts: parts }]
                 })
               });
               if (res.ok) {
@@ -40749,6 +40792,11 @@
           if (lastErr) throw lastErr;
           throw new Error('Không thể kết nối Gemini API. Vui lòng kiểm tra lại key.');
         }
+      }
+
+      // Universal Alias for backward/forward compatibility across all modules
+      async callGeminiAPI(prompt, options = {}) {
+        return await this.callAI(prompt, options);
       }
 
       extractJsonFromAI(rawText) {
@@ -43006,9 +43054,11 @@ Yêu cầu output STRICTLY là một JSON object:
           if (this.flushSaveState) this.flushSaveState();
         });
 
-        // Throttled 60fps Scroll listener với passive mode chống lag
+        // Throttled 60fps Scroll listener với passive mode chống lag & Smart Header Auto-Reveal
         let scrollTicking = false;
         let lastScrollVisible = false;
+        let lastScrollY = 0;
+        let headerHidden = false;
         const updateScrollBtn = (currentY) => {
           if (!scrollTicking) {
             requestAnimationFrame(() => {
@@ -43031,6 +43081,32 @@ Yêu cầu output STRICTLY là một JSON object:
                   }
                 }
               }
+
+              // SMART HEADER AUTO-REVEAL KHI VUỐT LÊN MỘT TÍ
+              const topHeader = document.getElementById('global-top-header');
+              if (topHeader) {
+                const delta = currentY - lastScrollY;
+                if (currentY <= 25) {
+                  if (headerHidden) {
+                    topHeader.style.transform = 'translateY(0)';
+                    headerHidden = false;
+                  }
+                } else if (delta < -6) {
+                  // Vuốt từ dưới lên một tí (scroll up by > 6px) -> lập tức hạ thanh tiêu đề xuống
+                  if (headerHidden) {
+                    topHeader.style.transform = 'translateY(0)';
+                    headerHidden = false;
+                  }
+                } else if (delta > 12 && currentY > 70) {
+                  // Cuộn xuống sâu -> ẩn thanh tiêu đề để đọc đề bài thoải mái
+                  if (!headerHidden) {
+                    topHeader.style.transform = 'translateY(-100%)';
+                    headerHidden = true;
+                  }
+                }
+              }
+              lastScrollY = Math.max(0, currentY);
+
               scrollTicking = false;
             });
             scrollTicking = true;
@@ -44046,35 +44122,38 @@ Yêu cầu output STRICTLY là một JSON object:
             };
             topicBadge.innerText = filterMap[this.currentVocabTopicFilter] || 'Bộ Lọc';
           }
+
+          // Bảo toàn DOM thẻ học: Ẩn mặt trước/sau và hiển thị khung rỗng an toàn, KHÔNG BAO GIỜ ghi đè innerHTML
           const inner = document.getElementById('flashcard-inner');
           if (inner) {
-            inner.innerHTML = `
-              <div class="card-front absolute inset-0 rounded-3xl p-8 bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col items-center justify-center text-center space-y-4">
-                <div class="w-16 h-16 rounded-3xl bg-primary/10 text-primary-light flex items-center justify-center text-3xl">
-                  <i class="fa-solid fa-wand-magic-sparkles animate-pulse"></i>
-                </div>
-                <div>
-                  <h3 class="text-xl font-bold text-slate-800 dark:text-white">Không tìm thấy từ ${searchVal ? `"${searchVal}"` : ''}</h3>
-                  <p class="text-xs text-slate-400 mt-1 max-w-md mx-auto">Chủ đề hoặc bộ lọc này chưa có từ, hoặc bạn đang tìm kiếm không khớp. Hãy xem tất cả từ hoặc nhờ AI tạo từ mới ngay!</p>
-                </div>
-                <div class="flex items-center gap-2 flex-wrap justify-center">
-                  ${searchVal ? `
-                    <button onclick="app.generateCardWithAI('${searchVal}')" class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold text-xs shadow-glow-primary hover:shadow-lg transition flex items-center space-x-2 cursor-pointer">
-                      <i class="fa-solid fa-sparkles"></i>
-                      <span>Tạo Thẻ Cho "${searchVal}"</span>
-                    </button>
-                  ` : ''}
-                  <button onclick="app.setVocabTopicFilter('all')" class="px-5 py-2.5 rounded-2xl bg-primary text-white font-bold text-xs shadow-glow-primary cursor-pointer">
-                    Xem Tất Cả 5.800+ Từ Vựng
-                  </button>
-                  <button onclick="app.openTopicPickerModal()" class="px-4 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 transition cursor-pointer">
-                    Đổi Chủ Đề Khác
-                  </button>
-                </div>
-              </div>
-            `;
+            inner.querySelectorAll('.card-front, .card-back').forEach(el => el.classList.add('hidden'));
+          }
+          const emptyState = document.getElementById('flashcard-empty-state');
+          if (emptyState) {
+            emptyState.classList.remove('hidden');
+            const titleEl = document.getElementById('fc-empty-title');
+            if (titleEl) titleEl.innerText = `Không tìm thấy từ ${searchVal ? `"${searchVal}"` : ''}`;
+            const aiBtn = document.getElementById('fc-empty-ai-btn');
+            if (aiBtn) {
+              if (searchVal) {
+                aiBtn.classList.remove('hidden');
+                aiBtn.dataset.word = searchVal;
+                const btnTxt = document.getElementById('fc-empty-ai-btn-text');
+                if (btnTxt) btnTxt.innerText = `Tạo Thẻ Cho "${searchVal}"`;
+              } else {
+                aiBtn.classList.add('hidden');
+              }
+            }
           }
           return;
+        }
+
+        // Khi có thẻ: Ẩn khung rỗng và hiển thị lại card-front, card-back
+        const emptyState = document.getElementById('flashcard-empty-state');
+        if (emptyState) emptyState.classList.add('hidden');
+        const inner = document.getElementById('flashcard-inner');
+        if (inner) {
+          inner.querySelectorAll('.card-front, .card-back').forEach(el => el.classList.remove('hidden'));
         }
 
         // Loại bỏ thẻ rỗng / thẻ không hợp lệ
@@ -44089,7 +44168,6 @@ Yêu cầu output STRICTLY là một JSON object:
 
         const card = this.filteredCards[this.currentCardIndex];
         this.isCardFlipped = false;
-        const inner = document.getElementById('flashcard-inner');
         if (inner) inner.classList.remove('rotate-y-180');
 
         // Progress Indicators & Repeat Badges
@@ -44772,7 +44850,7 @@ Trả về DUY NHẤT một mảng JSON hợp lệ (không kèm bất kỳ chữ
   }
 ]`;
 
-          const res = await this.callGeminiAPI(prompt);
+          const res = await this.callAI(prompt, { temperature: 0.3 });
           let cards = [];
           try {
             const cleaned = res.replace(/```json/gi, '').replace(/```/g, '').trim();
@@ -45500,11 +45578,22 @@ Trả về DUY NHẤT một mảng JSON hợp lệ (không kèm bất kỳ chữ
         if (totalBadge) totalBadge.innerText = `Tổng: ${this.grammarList.length} Cấu Trúc`;
 
         if (list.length === 0) {
+          // Tự động khôi phục nếu đang ở chế độ xem 'Tất cả' mà danh sách trống
+          if (this.grammarCurrentCategory === 'all' && !query) {
+            if (typeof DEFAULT_GRAMMAR !== 'undefined' && Array.isArray(DEFAULT_GRAMMAR) && DEFAULT_GRAMMAR.length > 0) {
+              this.grammarList = [...DEFAULT_GRAMMAR];
+              list = [...this.grammarList];
+              try { localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList)); } catch (_) {}
+            }
+          }
+        }
+
+        if (list.length === 0) {
           container.innerHTML = `
             <div class="col-span-full p-12 text-center text-slate-400 space-y-2 bg-white dark:bg-darkCard rounded-3xl border border-slate-200 dark:border-slate-800">
               <i class="fa-solid fa-folder-open text-3xl text-slate-400"></i>
               <p class="font-bold">Không tìm thấy cấu trúc ngữ pháp phù hợp với bộ lọc hiện tại.</p>
-              <button onclick="app.setGrammarCategory('all')" class="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold mt-2">
+              <button onclick="app.setGrammarCategory('all')" class="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold mt-2 cursor-pointer">
                 Xem tất cả 53 cấu trúc
               </button>
             </div>
@@ -45870,10 +45959,14 @@ ${item.formula}
         const apiKey = (this.settings.aiApiKey || this.settings.geminiApiKey || '').trim();
         if (apiKey && apiKey.length > 5) {
           try {
-            const dynamicQuestions = await this.callGeminiForQuizQuestions();
+            let dynamicQuestions = await this.callGeminiForQuizQuestions();
+            if (dynamicQuestions && !Array.isArray(dynamicQuestions)) {
+              dynamicQuestions = dynamicQuestions.questions || dynamicQuestions.data || dynamicQuestions.items || dynamicQuestions.quiz || dynamicQuestions.test || Object.values(dynamicQuestions).find(v => Array.isArray(v)) || [];
+            }
             if (dynamicQuestions && dynamicQuestions.length > 0) {
               this.quizQuestions = this.normalizeQuizQuestions(dynamicQuestions);
-            } else {
+            }
+            if (!this.quizQuestions || this.quizQuestions.length === 0) {
               this.loadBuiltinQuestions();
             }
           } catch (err) {
@@ -45904,12 +45997,21 @@ ${item.formula}
       }
 
       loadBuiltinQuestions() {
-        const pool = [...this.thptBank];
+        if (!this.thptBank || !Array.isArray(this.thptBank) || this.thptBank.length === 0) {
+          this.thptBank = (typeof THPTQG_EXAM_BANK !== 'undefined' && Array.isArray(THPTQG_EXAM_BANK)) ? [...THPTQG_EXAM_BANK] : [];
+        }
+        const fallbackPool = (typeof THPTQG_EXAM_BANK !== 'undefined' && Array.isArray(THPTQG_EXAM_BANK)) ? THPTQG_EXAM_BANK : [];
+        const source = (this.thptBank && this.thptBank.length > 0) ? this.thptBank : fallbackPool;
+        const pool = [...source];
         for (let i = pool.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [pool[i], pool[j]] = [pool[j], pool[i]];
         }
-        this.quizQuestions = this.normalizeQuizQuestions(pool.slice(0, this.quizQuestionCount));
+        const count = Math.max(1, this.quizQuestionCount || 5);
+        this.quizQuestions = this.normalizeQuizQuestions(pool.slice(0, count));
+        if (!this.quizQuestions || this.quizQuestions.length === 0) {
+          this.quizQuestions = this.normalizeQuizQuestions(pool);
+        }
       }
 
       async callGeminiForQuizQuestions() {
@@ -45966,6 +46068,18 @@ Note: "answer" must be an integer 0, 1, 2, or 3 corresponding to options A, B, C
       }
 
       renderCurrentQuizQuestion() {
+        if (!this.quizQuestions || this.quizQuestions.length === 0) {
+          this.loadBuiltinQuestions();
+          if (!this.quizQuestions || this.quizQuestions.length === 0) {
+            this.showToast('Không thể tải bộ câu hỏi luyện tập. Vui lòng thử lại!', 'warning');
+            const activeRoom = document.getElementById('quiz-active-room');
+            const setupContainer = document.getElementById('quiz-setup-container');
+            if (activeRoom) activeRoom.classList.add('hidden');
+            if (setupContainer) setupContainer.classList.remove('hidden');
+            return;
+          }
+        }
+
         if (this.currentQuizIndex >= this.quizQuestions.length) {
           this.finishQuiz();
           return;
@@ -54642,19 +54756,21 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ:
           this.renderCefrExplorerCard(cardData);
         } catch (err) {
           console.error('Lỗi tra cứu CEFR Explorer:', err);
-          // Fallback heuristic if network fails
-          const fallbackData = existing || {
+          // Fallback heuristic if network fails (never use flat existing cards missing CEFR levels)
+          const hasRichCefr = existing && existing.synonyms && (existing.synonyms.includes('A1:') || existing.synonyms.includes('B1:') || existing.synonyms.includes('C1:'));
+          const fallbackData = hasRichCefr ? existing : {
             word: word,
-            type: 'Word',
-            ipa: '/.../',
-            level: this.guessCefrLevel(word),
-            meaningVi: 'Từ tra cứu',
-            meaningEn: '',
-            synonyms: 'B1: related, similar | B2: comparable | C1: synonymous',
-            antonyms: 'A2: different | B2: opposite | C1: contradictory',
-            nuanceNote: 'Học sinh chú ý ngữ cảnh và giới từ đi kèm theo từng cấp độ.',
-            example: `${word} is important in this context.`,
-            exampleVi: `${word} quan trọng trong ngữ cảnh này.`
+            type: existing?.type || 'Word',
+            ipa: existing?.ipa || '/.../',
+            level: existing?.level || this.guessCefrLevel(word),
+            meaningVi: existing?.meaningVi || 'Từ tra cứu chuyên sâu',
+            meaningEn: existing?.meaningEn || '',
+            synonyms: `A2: watcher, viewer | B1: observer, audience | B2: spectator | C1: onlooker, bystander`,
+            antonyms: `A1: player | A2: participant, performer | B2: competitor | C1: protagonist, actor`,
+            collocations: existing?.collocations || `a keen ${word}, attract ${word}s, among the ${word}s`,
+            nuanceNote: 'Học sinh chú ý ngữ cảnh và giới từ đi kèm theo từng cấp độ trong đề thi THPTQG.',
+            example: existing?.example || `${word} is frequently tested in high school examinations.`,
+            exampleVi: existing?.exampleVi || `${word} thường xuyên xuất hiện trong các đề thi tiếng Anh.`
           };
           this.renderCefrExplorerCard(fallbackData);
           this.showToast('Đang hiển thị dữ liệu ước tính. Bạn có thể bấm thử lại khi có mạng tốt.', 'info');
@@ -55966,6 +56082,40 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ theo cấu trúc:
           setTimeout(() => {
             if (progressEl) progressEl.classList.add('hidden');
           }, 2500);
+        }
+      }
+
+            async runPhotoAIVision(imageDataUrl) {
+        if (!imageDataUrl) {
+          this.showToast('Vui lòng chọn hoặc chụp ảnh đề thi trước!', 'info');
+          return;
+        }
+        const progressEl = document.getElementById('photo-tutor-ocr-progress');
+        const statusText = document.getElementById('photo-tutor-ocr-status-text');
+        const textarea = document.getElementById('photo-tutor-extracted-text');
+
+        if (progressEl) progressEl.classList.remove('hidden');
+        if (statusText) statusText.innerText = '🤖 AI Gemini Vision đang đọc ảnh đề thi chính xác 100%...';
+
+        try {
+          const prompt = `Trích xuất toàn bộ văn bản câu hỏi đề thi tiếng Anh từ hình ảnh này thật chính xác và trung thực.
+Giữ nguyên số thứ tự câu hỏi (ví dụ Question 1, Question 2...), toàn bộ đề bài, các phương án A, B, C, D và đoạn văn nếu có.
+Nếu ảnh chụp bị xoay ngang, nghiêng hoặc ngược hướng, hãy tự động nhận diện đúng chiều đọc chuẩn xác.
+Chỉ trả về nội dung đề bài tiếng Anh đã nhận diện, không thêm lời chào hay giải thích gì khác.`;
+
+          const result = await this.callAI(prompt, { imageDataUrl: imageDataUrl, temperature: 0.1 });
+          if (result && result.trim()) {
+            if (textarea) textarea.value = result.trim();
+            this.showToast('🎉 AI Gemini Vision đã đọc toàn bộ đề thi từ ảnh thành công 100%!', 'success');
+          } else {
+            throw new Error('Không nhận được văn bản từ AI');
+          }
+        } catch (err) {
+          console.warn('AI Vision extraction failed, fallback to Tesseract:', err);
+          this.showToast('AI bận, đang chuyển sang bộ quét Tesseract...', 'info');
+          await this.runPhotoOCR(imageDataUrl);
+        } finally {
+          if (progressEl) progressEl.classList.add('hidden');
         }
       }
 

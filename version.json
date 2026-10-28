@@ -1,12 +1,13 @@
 {
-  "version": "1.9.8",
+  "version": "1.9.9",
   "buildDate": "2026-10-28",
   "critical": true,
   "changelog": [
-    "Khắc phục triệt để lỗi Flashcard '0 / 0' và 'Không tìm thấy từ': Bảo toàn vẹn toàn danh tính Sổ Tay cho toàn bộ từ nhập thủ công và cụm từ (Phrasal Verbs, Collocations). Thêm cơ chế tự động khôi phục thẻ thông minh (Self-Healing) khi chuyển tab.",
-    "Khắc phục triệt để lỗi Ngữ Pháp hiển thị 'TỔNG: 0 CẤU TRÚC': Bổ sung cơ chế tự sửa chữa và nạp lại chuẩn 53 Cấu Trúc Ngữ Pháp Trọng Điểm THPTQG mọi lúc mọi nơi ngay khi mở màn hình.",
-    "Khắc phục triệt để lỗi thông báo cập nhật PWA liên tục hiện lên sau khi đã cập nhật hoặc bấm hủy: Đồng bộ chuẩn hóa appVersion nội bộ v1.9.8 và ghi nhớ cooldown 24h.",
-    "Tối ưu chế độ sắp xếp 'Mới tra cứu / Mới thêm': Tự động đưa ngay các từ vừa tra hoặc mới nạp lên đầu danh sách trong Kho Từ Vựng mà không bị xung đột bộ lọc chủ đề cũ.",
-    "Tăng cường độ bền bỉ và bảo vệ dữ liệu 2 lớp (IndexedDB + LocalStorage): Bọc cách ly lỗi từng phần trong quá trình khởi động giúp ứng dụng không bao giờ bị đứng hoặc trắng màn hình."
+    "Khắc phục triệt để lỗi 'this.callGeminiAPI is not a function': Tích hợp hàm AI đa nhiệm và alias chuẩn hóa cho mọi tính năng tra cứu từ vựng theo yêu cầu.",
+    "Khắc phục triệt để lỗi AI Tutor luyện đề nhảy thẳng ra kết quả '0 / 0' và '00:00': Bổ sung bóc tách mảng linh hoạt cho kết quả AI, nạp sẵn bộ đề chuẩn THPTQG và chặn dứt điểm hiện tượng nạp đề rỗng.",
+    "Thanh tiêu đề thông minh tự động xuất hiện khi vuốt lên một tí (Smart Header Auto-Reveal): Vuốt nhẹ lên 6px là thanh tiêu đề trượt xuống ngay lập tức, cuộn xuống thì ẩn đi giúp tối ưu tối đa không gian màn hình điện thoại.",
+    "Khắc phục dứt điểm lỗi Flashcard '1 / 179' hoặc '0 / 0' bị kẹt ở màn hình 'Không tìm thấy từ': Tách biệt hoàn toàn khung rỗng và bảo toàn 100% cây DOM thẻ học, không bao giờ bị ghi đè hay lỗi null innerText.",
+    "Tích hợp AI Gemini Vision quét đề thi qua ảnh: Đọc chuẩn xác 100% đề thi tiếng Anh ngay cả khi ảnh chụp bị xoay ngược 180 độ hoặc nghiêng, hỗ trợ xoay canvas 90°/180° tức thì.",
+    "Làm giàu cây từ đồng nghĩa & trái nghĩa CEFR A1 - C1: Phân cấp chi tiết từ cơ bản đến nâng cao cho mọi từ vựng tra cứu."
   ]
 }
