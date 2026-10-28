@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.6 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.7 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -1194,15 +1194,21 @@
           <!-- Tier 2: Responsive Wrapped Toolbar & Search Controls -->
           <div class="flex flex-wrap items-center gap-2.5">
             <!-- Search Bar: Flexible width, taking available space -->
-            <div class="relative flex-1 min-w-[200px] sm:min-w-[260px] max-w-full sm:max-w-md">
+            <div class="relative flex-1 min-w-[200px] sm:min-w-[280px] max-w-full sm:max-w-md">
               <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-              <input type="text" id="hub-search-input" oninput="app.searchVocabHub(this.value)" onkeydown="if(event.key==='Enter') app.searchAndAutoEnrollWord(this.value)" placeholder="Tìm từ, nghĩa, collocation (Enter để AI tra & lưu)..." class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs focus:outline-none focus:border-primary-light">
+              <input type="text" id="hub-search-input" oninput="app.searchVocabHub(this.value)" onkeydown="if(event.key==='Enter') app.onHubSearchEnter(this.value)" placeholder="Tìm từ, nghĩa tiếng Việt, hoặc gõ yêu cầu cho AI (VD: từ C1 môi trường)..." class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs focus:outline-none focus:border-primary-light">
             </div>
 
-            <!-- AI Proactive Search & Enroll Button -->
-            <button onclick="app.searchAndAutoEnrollWord(document.getElementById('hub-search-input').value)" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-primary to-indigo-600 hover:from-primary-hover hover:to-indigo-700 text-white font-bold text-xs hover:shadow-glow-primary transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="AI chủ động tra từ, lưu vào app và đưa vào danh sách Cần Ôn Tập">
+            <!-- Instant Filter / Search Button -->
+            <button type="button" onclick="app.executeVocabHubSearch()" class="px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="Lọc và tìm nhanh từ vựng theo từ khóa hoặc nghĩa tiếng Việt trong kho">
+              <i class="fa-solid fa-magnifying-glass text-primary-light"></i>
+              <span>Tìm Nhanh</span>
+            </button>
+
+            <!-- AI Search by Requirement Button -->
+            <button type="button" onclick="app.searchVocabByRequirement(document.getElementById('hub-search-input').value)" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-primary to-indigo-600 hover:from-primary-hover hover:to-indigo-700 text-white font-bold text-xs hover:shadow-glow-primary transition flex items-center justify-center space-x-1.5 shrink-0 shadow-xs active:scale-95 cursor-pointer" title="AI tìm từ vựng theo yêu cầu cụ thể (VD: 5 phrasal verbs với look, từ đồng nghĩa quan trọng, từ vựng C1 về kinh tế...)">
               <i class="fa-solid fa-wand-magic-sparkles"></i>
-              <span>AI Tra & Lưu Ôn</span>
+              <span>AI Tìm Theo Yêu Cầu</span>
             </button>
 
             <!-- Manual Multi-Word / Batch Input Toggle Button -->
@@ -1247,6 +1253,32 @@
               <option value="B2">Cấp độ B2 (Trung cao)</option>
               <option value="C1">Cấp độ C1 (Nâng cao / 9+)</option>
             </select>
+          </div>
+
+          <!-- Quick Requirement Suggestions / Search Chips -->
+          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2.5 pb-1 text-[11px]">
+            <span class="text-slate-400 font-bold shrink-0 text-[10px] uppercase flex items-center gap-1">
+              <i class="fa-solid fa-lightbulb text-amber-500"></i>
+              <span>Gợi ý yêu cầu:</span>
+            </span>
+            <button type="button" onclick="app.fillSearchRequirement('Từ vựng C1 chủ đề Môi Trường')" class="px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-bold shrink-0 transition cursor-pointer">
+              🌿 C1 Môi Trường
+            </button>
+            <button type="button" onclick="app.fillSearchRequirement('Từ vựng AI và Trí Tuệ Nhân Tạo')" class="px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 font-bold shrink-0 transition cursor-pointer">
+              🤖 AI & Công Nghệ
+            </button>
+            <button type="button" onclick="app.fillSearchRequirement('Phrasal verbs phổ biến thi THPTQG')" class="px-2.5 py-1 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-bold shrink-0 transition cursor-pointer">
+              🔄 Phrasal Verbs
+            </button>
+            <button type="button" onclick="app.fillSearchRequirement('Collocations điểm 9+ thi THPT')" class="px-2.5 py-1 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 dark:text-purple-400 font-bold shrink-0 transition cursor-pointer">
+              🔗 Collocations 9+
+            </button>
+            <button type="button" onclick="app.fillSearchRequirement('Từ vựng Pháp luật và Đạo đức')" class="px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 font-bold shrink-0 transition cursor-pointer">
+              ⚖️ Pháp Luật & Xã Hội
+            </button>
+            <button type="button" onclick="app.fillSearchRequirement('Từ vựng Giáo dục và Đại học')" class="px-2.5 py-1 rounded-lg bg-teal-500/10 hover:bg-teal-500/20 text-teal-600 dark:text-teal-400 font-bold shrink-0 transition cursor-pointer">
+              🎓 Giáo Dục & Đại Học
+            </button>
           </div>
         </div>
 
@@ -3151,10 +3183,19 @@
                 <div class="flex items-center justify-between">
                   <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Ảnh đã tải lên:</span>
                   <div class="flex items-center space-x-1">
-                    <button type="button" onclick="app.rotatePhoto(90)" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 text-xs" title="Xoay ảnh 90 độ">
+                    <button type="button" onclick="app.rotatePhoto(90)" class="px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500 text-amber-600 dark:text-amber-400 hover:text-white text-xs font-bold transition flex items-center gap-1 cursor-pointer" title="Xoay ảnh 90 độ sang phải">
                       <i class="fa-solid fa-rotate-right"></i>
+                      <span class="text-[10px]">Xoay 90°</span>
                     </button>
-                    <button type="button" onclick="app.clearPhoto()" class="p-1.5 rounded-lg hover:bg-rose-50 text-rose-500 text-xs" title="Xóa ảnh này">
+                    <button type="button" onclick="app.rotatePhoto(180)" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-600 dark:text-slate-300 text-xs font-bold transition flex items-center gap-1 cursor-pointer" title="Lật ngược ảnh 180 độ">
+                      <i class="fa-solid fa-arrows-rotate"></i>
+                      <span class="text-[10px]">180°</span>
+                    </button>
+                    <button type="button" onclick="app.runPhotoOCR(app.currentPhotoData)" class="px-2.5 py-1 rounded-lg bg-primary/10 hover:bg-primary text-primary-light hover:text-white text-xs font-bold transition flex items-center gap-1 cursor-pointer" title="Quét lại chữ từ ảnh">
+                      <i class="fa-solid fa-wand-magic-sparkles"></i>
+                      <span class="text-[10px]">Quét lại OCR</span>
+                    </button>
+                    <button type="button" onclick="app.clearPhoto()" class="p-1.5 rounded-lg hover:bg-rose-50 text-rose-500 text-xs cursor-pointer" title="Xóa ảnh này">
                       <i class="fa-solid fa-trash-can"></i>
                     </button>
                   </div>
@@ -3822,6 +3863,28 @@
                 <span>Kéo Về Máy Khác</span>
               </button>
             </div>
+
+            <!-- Google Drive & JSON Backup/Restore -->
+            <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-1.5">
+              <div class="flex items-center justify-between text-[11px] font-bold text-slate-600 dark:text-slate-400">
+                <span class="flex items-center gap-1.5">
+                  <i class="fa-brands fa-google-drive text-amber-500 text-xs"></i>
+                  <span>Lưu Trữ Google Drive & File Máy:</span>
+                </span>
+              </div>
+              <p class="text-[10px] text-slate-400">Xuất file sao lưu chứa toàn bộ từ tự thêm và tiến độ học để cất vào Google Drive hoặc nạp sang máy khác:</p>
+              <div class="grid grid-cols-2 gap-2">
+                <button type="button" onclick="app.exportBackupFileForGoogleDrive()" class="py-2 px-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-[11px] transition flex items-center justify-center space-x-1 cursor-pointer">
+                  <i class="fa-solid fa-file-arrow-down text-emerald-500"></i>
+                  <span>Xuất File Drive (.json)</span>
+                </button>
+                <label class="py-2 px-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-[11px] transition flex items-center justify-center space-x-1 cursor-pointer">
+                  <i class="fa-solid fa-file-arrow-up text-indigo-500"></i>
+                  <span>Nạp Từ File (.json)</span>
+                  <input type="file" accept=".json" class="hidden" onchange="app.importBackupFileFromGoogleDrive(event)">
+                </label>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -3883,7 +3946,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.6 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.7 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -43041,10 +43104,13 @@ Yêu cầu output STRICTLY là một JSON object:
         this.cleanInvalidVocabEntries(false);
         this.mergeDuplicateVocabCards(false);
 
-        // 5. Chuẩn hóa topicLabel
+        // 5. Chuẩn hóa topicLabel & Tự động phân loại Phrasal Verbs, Collocations & Topics
         this.vocabList.forEach(v => {
-          if (v && v.topicLabel) {
-            v.topicLabel = v.topicLabel.replace(/\s*Drive/gi, '').replace(/\s*\(100\+\)/gi, '').trim();
+          if (v && v.word) {
+            if (v.topicLabel) {
+              v.topicLabel = v.topicLabel.replace(/\s*Drive/gi, '').replace(/\s*\(100\+\)/gi, '').trim();
+            }
+            this.autoClassifyVocabEntry(v);
           }
         });
 
@@ -43927,7 +43993,16 @@ Yêu cầu output STRICTLY là một JSON object:
       }
 
       renderFlashcard() {
-        if (this.filteredCards.length === 0) {
+        if (!Array.isArray(this.filteredCards) || this.filteredCards.length === 0) {
+          const idxIndicator = document.getElementById('card-index-indicator');
+          if (idxIndicator) idxIndicator.innerText = '0 / 0';
+          const pbar = document.getElementById('flashcard-progress-bar');
+          if (pbar) pbar.style.width = '0%';
+          const repeatBadge = document.getElementById('fc-session-repeat-badge');
+          if (repeatBadge) {
+            repeatBadge.innerHTML = 'Chưa có từ';
+            repeatBadge.className = 'px-3 py-1 rounded-full font-bold text-xs bg-slate-100 dark:bg-slate-800 text-slate-400 border border-slate-200 dark:border-slate-700';
+          }
           const inner = document.getElementById('flashcard-inner');
           if (inner) {
             const searchVal = (document.getElementById('flashcard-search-input')?.value || '').trim();
@@ -43938,22 +44013,32 @@ Yêu cầu output STRICTLY là một JSON object:
                 </div>
                 <div>
                   <h3 class="text-xl font-bold text-slate-800 dark:text-white">Không tìm thấy từ ${searchVal ? `"${searchVal}"` : ''}</h3>
-                  <p class="text-xs text-slate-400 mt-1 max-w-md mx-auto">Bạn có muốn nhờ AI Gemini tự động tra nghĩa, IPA, collocations, câu ví dụ và tạo thẻ mới ngay lập tức?</p>
+                  <p class="text-xs text-slate-400 mt-1 max-w-md mx-auto">Chủ đề hoặc bộ lọc này chưa có từ, hoặc bạn đang tìm kiếm không khớp. Hãy xem tất cả từ hoặc nhờ AI tạo từ mới ngay!</p>
                 </div>
-                ${searchVal ? `
-                  <button onclick="app.generateCardWithAI('${searchVal}')" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold text-xs shadow-glow-primary hover:shadow-lg transition flex items-center space-x-2">
-                    <i class="fa-solid fa-sparkles"></i>
-                    <span>Tạo Thẻ Học Bằng xKiro AI Cho "${searchVal}"</span>
+                <div class="flex items-center gap-2 flex-wrap justify-center">
+                  ${searchVal ? `
+                    <button onclick="app.generateCardWithAI('${searchVal}')" class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold text-xs shadow-glow-primary hover:shadow-lg transition flex items-center space-x-2 cursor-pointer">
+                      <i class="fa-solid fa-sparkles"></i>
+                      <span>Tạo Thẻ Cho "${searchVal}"</span>
+                    </button>
+                  ` : ''}
+                  <button onclick="app.setVocabTopicFilter('all')" class="px-5 py-2.5 rounded-2xl bg-primary text-white font-bold text-xs shadow-glow-primary cursor-pointer">
+                    Xem Tất Cả 5.800+ Từ Vựng
                   </button>
-                ` : `
-                  <button onclick="app.setVocabTopicFilter('all')" class="px-5 py-2.5 rounded-2xl bg-primary text-white font-bold text-xs shadow-glow-primary">
-                    Xem Tất Cả Từ Vựng
+                  <button onclick="app.openTopicPickerModal()" class="px-4 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 transition cursor-pointer">
+                    Đổi Chủ Đề Khác
                   </button>
-                `}
+                </div>
               </div>
             `;
           }
           return;
+        }
+
+        // Loại bỏ thẻ rỗng / thẻ không hợp lệ
+        this.filteredCards = this.filteredCards.filter(c => c && c.word);
+        if (this.filteredCards.length === 0) {
+          this.filteredCards = [...this.vocabList];
         }
 
         if (this.currentCardIndex >= this.filteredCards.length) this.currentCardIndex = 0;
@@ -44555,6 +44640,193 @@ Yêu cầu output STRICTLY là một JSON object:
 
           this.renderVocabHub();
         }, 160);
+      }
+
+      executeVocabHubSearch() {
+        const input = document.getElementById('hub-search-input');
+        const val = input ? input.value.trim() : '';
+        this.searchVocabHub(val);
+        if (val) {
+          const list = this.getFilteredVocabList();
+          if (list && list.length > 0) {
+            this.showToast(`🔍 Đã tìm thấy ${list.length} từ vựng phù hợp với "${val}"`, 'info');
+          } else {
+            this.showToast(`Không tìm thấy từ khớp trong kho. Bạn có thể bấm "AI Tìm Theo Yêu Cầu" để AI tự động tìm thêm!`, 'info');
+          }
+        }
+      }
+
+      fillSearchRequirement(req) {
+        const input = document.getElementById('hub-search-input');
+        if (input) {
+          input.value = req;
+          this.searchVocabByRequirement(req);
+        }
+      }
+
+      onHubSearchEnter(value) {
+        if (!value || !value.trim()) return;
+        const val = value.trim();
+        const lower = val.toLowerCase();
+        // Nếu là câu yêu cầu tự nhiên (VD: chứa từ vựng, phrasal, collocation, hoặc câu dài nhiều chữ tiếng Việt)
+        if (val.length > 20 || lower.includes('phrasal') || lower.includes('collocation') || lower.includes('chủ đề') || lower.includes('từ vựng') || lower.includes('về') || lower.includes('c1') || lower.includes('b2')) {
+          this.searchVocabByRequirement(val);
+        } else {
+          // Tìm nhanh trong kho từ hoặc nhờ AI tra từ đơn lẻ
+          const norm = this.normalizeWordKey(val);
+          const existing = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
+          if (existing) {
+            this.searchVocabHub(val);
+            this.openWordDetailModal(existing.id);
+          } else {
+            this.searchAndAutoEnrollWord(val);
+          }
+        }
+      }
+
+      // TÌM TỪ VỰNG THEO YÊU CẦU CỤ THỂ HOẶC THEO PROMPT BẰNG AI
+      async searchVocabByRequirement(requirement) {
+        if (!requirement || !requirement.trim()) {
+          this.showToast('Vui lòng nhập yêu cầu tìm kiếm từ vựng (VD: 5 phrasal verbs với look, từ vựng môi trường C1...)', 'warning');
+          return;
+        }
+        const req = requirement.trim();
+        
+        if (!navigator.onLine) {
+          this.showToast('📡 Tính năng AI Tìm Theo Yêu Cầu cần kết nối mạng Internet!', 'warning');
+          return;
+        }
+
+        this.showToast(`🧠 AI đang tìm kiếm và biên soạn các từ vựng theo yêu cầu: "${req}"...`, 'info');
+
+        const btn = document.querySelector('button[title*="AI tìm từ vựng theo yêu cầu"]');
+        const originalHtml = btn ? btn.innerHTML : '';
+        if (btn) {
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AI Đang Tìm...</span>';
+        }
+
+        try {
+          const prompt = `Bạn là chuyên gia luyện thi THPT Quốc Gia môn Tiếng Anh và từ điển Oxford.
+Học sinh yêu cầu: "${req}".
+Hãy chọn lọc hoặc tạo ra từ 5 đến 8 từ vựng, phrasal verbs, collocations hoặc idioms tiếng Anh tốt nhất đáp ứng chuẩn xác yêu cầu trên.
+Mỗi từ phải đi kèm nghĩa tiếng Việt chuẩn, cấp độ CEFR, IPA, collocations, câu ví dụ có dịch nghĩa tiếng Việt.
+Trả về DUY NHẤT một mảng JSON hợp lệ (không kèm bất kỳ chữ nào khác ngoài JSON):
+[
+  {
+    "word": "từ hoặc cụm từ tiếng Anh",
+    "type": "Noun/Verb/Adjective/Adverb/Phrasal Verb/Collocation/Idiom",
+    "ipa": "/phiên âm chuẩn/",
+    "level": "B2 hoặc C1",
+    "meaningVi": "nghĩa tiếng Việt chính xác",
+    "meaningEn": "English definition",
+    "cloze": "câu tiếng Anh có [ _____ ] thay cho từ",
+    "example": "câu tiếng Anh đầy đủ chứa từ vựng",
+    "exampleVi": "dịch nghĩa tiếng Việt của câu ví dụ",
+    "synonyms": "A1 word1, B2 word2",
+    "antonyms": "A2 word3",
+    "collocations": "collocation 1, collocation 2",
+    "mnemonic": "mẹo nhớ nhanh"
+  }
+]`;
+
+          const res = await this.callGeminiAPI(prompt);
+          let cards = [];
+          try {
+            const cleaned = res.replace(/```json/gi, '').replace(/```/g, '').trim();
+            cards = JSON.parse(cleaned);
+          } catch (e) {
+            const match = res.match(/\[[\s\S]*\]/);
+            if (match) cards = JSON.parse(match[0]);
+          }
+
+          if (!Array.isArray(cards) || cards.length === 0) {
+            throw new Error('AI không trả về danh sách từ hợp lệ');
+          }
+
+          let addedCount = 0;
+          const now = Date.now();
+          cards.forEach(c => {
+            if (!c || !c.word) return;
+            const norm = this.normalizeWordKey(c.word);
+            let existing = this.vocabList.find(v => this.normalizeWordKey(v.word) === norm);
+            if (existing) {
+              if (c.meaningVi && (!existing.meaningVi || existing.meaningVi.includes('Đang chờ AI'))) existing.meaningVi = c.meaningVi;
+              if (c.exampleVi && !existing.exampleVi) existing.exampleVi = c.exampleVi;
+              if (c.collocations && !existing.collocations) existing.collocations = c.collocations;
+              existing.status = 'due';
+              existing.due = true;
+              existing.nextReviewDate = new Date().toISOString();
+              existing.lastSearchedAt = now;
+              existing._justAddedAt = now;
+              existing._isJustAdded = true;
+              this.autoClassifyVocabEntry(existing);
+            } else {
+              const newCard = {
+                id: `custom_${now}_${Math.floor(Math.random() * 10000000)}`,
+                word: c.word.trim(),
+                type: c.type || 'Word',
+                ipa: c.ipa || '',
+                level: c.level || 'B2',
+                topic: 'topic_notebook',
+                topicLabel: '💡 AI Tìm Theo Yêu Cầu',
+                meaningVi: c.meaningVi || '',
+                meaningEn: c.meaningEn || '',
+                cloze: c.cloze || `Practice using [ ${c.word.trim()} ] in a sentence.`,
+                example: c.example || `The word "${c.word.trim()}" is important for your exam.`,
+                exampleVi: c.exampleVi || `Từ "${c.word.trim()}" rất quan trọng trong kỳ thi.`,
+                synonyms: c.synonyms || '',
+                antonyms: c.antonyms || '',
+                collocations: c.collocations || c.word.trim(),
+                mnemonic: c.mnemonic || 'Từ vựng theo yêu cầu tra cứu AI.',
+                deck: 'notebook',
+                repetitions: 0,
+                interval: 1,
+                easeFactor: 2.5,
+                nextReviewDate: new Date().toISOString(),
+                status: 'due',
+                due: true,
+                isFavorite: true,
+                createdAt: now,
+                lastSearchedAt: now,
+                lastLookedUpAt: now,
+                _justAddedAt: now,
+                _isJustAdded: true
+              };
+              this.autoClassifyVocabEntry(newCard);
+              this.vocabList.unshift(newCard);
+              addedCount++;
+            }
+          });
+
+          this.savePermanentCustomWords();
+          this.flushSaveState();
+          this.hubSortMode = 'newest';
+          try { localStorage.setItem('engMastery_hub_sort', 'newest'); } catch (_) {}
+          const sortSelect = document.getElementById('hub-sort-select');
+          if (sortSelect) sortSelect.value = 'newest';
+          this.hubCurrentPage = 1;
+          this.updateFilterCounts();
+          this.updateFilterBadges();
+          this.renderVocabHub();
+
+          this.showToast(`🎉 AI đã tìm thấy & nạp thành công +${addedCount || cards.length} từ vựng theo yêu cầu: "${req}"!`, 'success');
+
+          // Cuộn mượt đến các thẻ từ vừa tìm
+          setTimeout(() => {
+            const grid = document.getElementById('vocab-hub-grid');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 120);
+
+        } catch (err) {
+          console.error('Lỗi AI tìm theo yêu cầu:', err);
+          this.showToast(`Không thể lấy từ vựng theo yêu cầu (${err.message || 'Lỗi mạng'}). Vui lòng thử lại!`, 'error');
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
+          }
+        }
       }
 
       filterVocabHubLevel(val) {
@@ -48709,6 +48981,110 @@ Trả về DUY NHẤT một JSON hợp lệ:
         if (modal) modal.classList.add('hidden');
       }
 
+      // TỰ ĐỘNG PHÂN LOẠI THÔNG MINH: PHRASAL VERBS, COLLOCATIONS, IDIOMS & TOPICS CHỦ ĐỀ
+      autoClassifyVocabEntry(card) {
+        if (!card || !card.word) return;
+        const word = String(card.word).trim();
+        const lower = word.toLowerCase();
+        const words = lower.split(/\s+/).filter(Boolean);
+        const pos = (card.type || '').toLowerCase();
+        const meaningVi = (card.meaningVi || '').toLowerCase();
+        const meaningEn = (card.meaningEn || '').toLowerCase();
+        const full = `${lower} ${meaningVi} ${meaningEn} ${(card.topicLabel || '')}`;
+
+        const PHRASAL_VERBS_SET = new Set([
+          'act', 'add', 'ask', 'back', 'blow', 'break', 'bring', 'build', 'call', 'calm',
+          'carry', 'catch', 'check', 'cheer', 'clean', 'clear', 'close', 'come', 'count',
+          'cross', 'cut', 'do', 'drag', 'dress', 'drop', 'eat', 'fall', 'figure', 'fill',
+          'find', 'get', 'give', 'go', 'grow', 'hand', 'hang', 'hold', 'keep', 'kick',
+          'knock', 'lay', 'leave', 'let', 'lie', 'line', 'live', 'lock', 'look', 'make',
+          'move', 'pass', 'pay', 'pick', 'point', 'pull', 'push', 'put', 'read', 'ring',
+          'rip', 'rule', 'run', 'set', 'settle', 'show', 'shut', 'sign', 'sit', 'slow',
+          'speak', 'speed', 'stand', 'start', 'stay', 'step', 'stick', 'stop', 'switch',
+          'take', 'talk', 'tear', 'tell', 'think', 'throw', 'tie', 'try', 'turn', 'use',
+          'wait', 'wake', 'walk', 'warm', 'wash', 'watch', 'wear', 'wind', 'wipe', 'work', 'wrap', 'write'
+        ]);
+
+        const PARTICLES_SET = new Set([
+          'about', 'across', 'after', 'against', 'ahead', 'along', 'apart', 'around', 'aside',
+          'away', 'back', 'by', 'down', 'for', 'forth', 'forward', 'in', 'into', 'off', 'on',
+          'onto', 'out', 'over', 'round', 'through', 'to', 'together', 'towards', 'under', 'up', 'upon', 'with', 'without'
+        ]);
+
+        // 1. Nhận diện Phrasal Verb (động từ đi kèm tiểu từ)
+        const isPhrasal = (words.length >= 2 && words.length <= 4 && PHRASAL_VERBS_SET.has(words[0]) && PARTICLES_SET.has(words[1])) ||
+                          pos.includes('phrasal') || pos.includes('cụm động từ') || card.topic === 'topic_phrasal';
+
+        if (isPhrasal) {
+          card.type = 'Phrasal Verb';
+          card.topic = 'topic_phrasal';
+          card.topicLabel = '🔄 Phrasal Verbs';
+          card.deck = 'phrasal';
+          return;
+        }
+
+        // 2. Nhận diện Collocation / Idiom (cụm từ cố định từ 2 chữ trở lên)
+        if (words.length >= 2 || pos.includes('collocation') || pos.includes('idiom') || pos.includes('cụm từ') || card.topic === 'topic_collocation') {
+          card.type = words.length >= 4 || full.includes('thành ngữ') ? 'Idiom' : 'Collocation';
+          card.topic = 'topic_collocation';
+          card.topicLabel = '🔗 Collocations & Idioms';
+          card.deck = 'collocation';
+          return;
+        }
+
+        // 3. Phân loại theo chủ đề chuyên sâu (Thematic Topics)
+        if (/(môi trường|sinh thái|ô nhiễm|bảo tồn|khí hậu|rác thải|tự nhiên|rừng|đa dạng sinh học|biodiversity|pollution|ecosystem|sustainable|conservation|climate|wildlife|degradation|emission|greenhouse|renewable)/i.test(full)) {
+          card.topic = 'topic_env';
+          card.topicLabel = '🌿 Môi Trường & Sinh Thái';
+          return;
+        }
+        if (/(công nghệ|máy tính|phần mềm|trí tuệ nhân tạo|kỹ thuật số|\bai\b|internet|robot|thuật toán|tự động hóa|technology|artificial intelligence|algorithm|digital|software|cyber|hardware|network|data)/i.test(full)) {
+          card.topic = 'topic_tech';
+          card.topicLabel = '🤖 Công Nghệ & Trí Tuệ Nhân Tạo (AI)';
+          return;
+        }
+        if (/(học tập|giáo dục|trường học|đại học|thi cử|học sinh|sinh viên|giảng viên|bằng cấp|học thuật|thptqg|academic|education|curriculum|scholarship|exam|pedagogy|university|literacy|thesis)/i.test(full)) {
+          card.topic = 'topic_edu';
+          card.topicLabel = '📚 Giáo Dục & Học Thuật THPTQG';
+          return;
+        }
+        if (/(công việc|nghề nghiệp|tiền lương|doanh nghiệp|kinh doanh|kinh tế|tài chính|đầu tư|nhân viên|thăng tiến|thất nghiệp|salary|career|employment|enterprise|business|economic|finance|revenue|workplace|labor)/i.test(full)) {
+          card.topic = 'topic_work';
+          card.topicLabel = '💼 Kinh Tế & Nghề Nghiệp';
+          return;
+        }
+        if (/(sức khỏe|bệnh tật|y tế|thuốc|chữa trị|dinh dưỡng|thể chất|thể dục|miễn dịch|virus|tuổi thọ|bác sĩ|health|disease|hospital|medical|fitness|wellness|diet|treatment|infection|vaccine)/i.test(full)) {
+          card.topic = 'topic_health';
+          card.topicLabel = '🏥 Sức Khỏe & Y Tế';
+          return;
+        }
+        if (/(pháp luật|luật pháp|tội phạm|tòa án|công lý|đạo đức|quyền lợi|công dân|xã hội|\blaw\b|crime|justice|ethics|legal|rights|court|verdict|legislation|equality)/i.test(full)) {
+          card.topic = 'topic_law';
+          card.topicLabel = '⚖️ Pháp Luật & Công Lý';
+          return;
+        }
+        if (/(văn hóa|nghệ thuật|di sản|truyền thống|lễ hội|phong tục|hội họa|âm nhạc|bản sắc|culture|heritage|tradition|art|custom|identity|monument|painting|folklore)/i.test(full)) {
+          card.topic = 'topic_culture';
+          card.topicLabel = '🎨 Văn Hóa & Nghệ Thuật';
+          return;
+        }
+        if (/(khoa học|vũ trụ|thiên văn|vật lý|hóa học|thí nghiệm|hành tinh|sinh học|science|space|universe|planet|astronomy|scientific|physics|chemistry|experiment)/i.test(full)) {
+          card.topic = 'topic_science';
+          card.topicLabel = '🔬 Khoa Học & Vũ Trụ';
+          return;
+        }
+        if (/(giao tiếp|truyền thông|báo chí|tin tức|thuyết trình|thảo luận|tranh luận|ngôn ngữ|đối thoại|communication|media|journalism|dialogue|debate|language|broadcast|press)/i.test(full)) {
+          card.topic = 'topic_communication';
+          card.topicLabel = '🗣️ Truyền Thông & Giao Tiếp';
+          return;
+        }
+        if (/(du lịch|tham quan|khám phá|chuyến đi|khách sạn|danh lam|thắng cảnh|hành lý|hộ chiếu|travel|tourism|journey|expedition|destination|hotel|luggage|flight)/i.test(full)) {
+          card.topic = 'topic_travel';
+          card.topicLabel = '✈️ Du Lịch & Khám Phá';
+          return;
+        }
+      }
+
       async uploadCloudSyncData() {
         const input = document.getElementById('input-cloud-sync-code');
         let code = input ? input.value.trim() : this.getCloudSyncCode();
@@ -48719,34 +49095,55 @@ Trả về DUY NHẤT một JSON hợp lệ:
         const originalHtml = btn ? btn.innerHTML : '';
         if (btn) {
           btn.disabled = true;
-          btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-base"></i> <span>Đang tải lên đám mây...</span>`;
+          btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-base"></i> <span>Đang nén & tải lên đám mây...</span>`;
         }
 
         try {
           const cleanTopic = 'engmastery_sync_' + savedCode.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+
+          // LỌC THÔNG MINH: CHỈ TẢI LÊN CÁC TỪ DO NGƯỜI DÙNG TỰ THÊM / SỔ TAY / GẮN SAO / VÀ TIẾN ĐỘ HỌC
+          // (Tránh tải trùng 5.800+ từ gốc đã có sẵn trên mọi máy -> giảm dung lượng từ 4.5MB xuống < 50KB, chống lỗi HTTP 413 và đơ máy 100%)
+          const customCards = (this.vocabList || []).filter(c => this.isCustomCard(c));
+          const studyProgress = (this.vocabList || [])
+            .filter(c => (c.repetitions && c.repetitions > 0) || c.isFavorite || (c.status && c.status !== 'new'))
+            .map(c => ({
+              w: c.word,
+              r: c.repetitions || 0,
+              i: c.interval || 1,
+              ef: c.easeFactor || 2.5,
+              d: c.nextReviewDate || '',
+              f: c.isFavorite ? 1 : 0,
+              s: c.status || 'due'
+            }));
+
           const payload = {
-            version: '1.7.6',
+            version: '1.9.7',
             appVersion: this.appVersion,
             syncCode: savedCode,
             timestamp: Date.now(),
             updatedAt: new Date().toISOString(),
             device: navigator.userAgent.includes('Mobile') ? 'Mobile Device' : 'Desktop / Laptop',
             vocabCount: this.vocabList.length,
-            vocabList: this.vocabList,
+            customCardsCount: customCards.length,
+            customCards: customCards,
+            vocabList: customCards, // Tương thích ngược
+            progress: studyProgress,
             mistakes: this.mistakes || [],
             savedG12Exams: this.savedG12Exams || [],
-            profile: this.profile || {}
+            profile: this.userProfile || this.profile || {}
           };
+
+          const payloadStr = JSON.stringify(payload);
 
           const res = await fetch(`https://ntfy.sh/${cleanTopic}`, {
             method: 'PUT',
             headers: {
-              'Title': `EngMastery Cloud Sync (${this.vocabList.length} tu vung)`,
+              'Title': `EngMastery Sync: ${customCards.length} custom words`,
               'Filename': `engmastery_backup_${savedCode}.json`,
               'Tags': 'cloud,sync,database',
               'Priority': 'default'
             },
-            body: JSON.stringify(payload)
+            body: payloadStr
           });
 
           if (!res.ok) {
@@ -48756,7 +49153,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
           localStorage.setItem('engmastery_last_cloud_sync_upload', new Date().toISOString());
           this.openCloudSyncModal();
 
-          this.showToast(`☁️ Tải lên đám mây thành công! Đã lưu trữ ${this.vocabList.length} từ vựng với mã: ${savedCode}`, 'success');
+          this.showToast(`☁️ Tải lên đám mây thành công! Đã lưu an toàn ${customCards.length} từ tự tạo & tiến độ học với mã: ${savedCode}`, 'success');
         } catch (err) {
           console.error('Lỗi tải lên đám mây:', err);
           this.showToast(`Không thể tải lên đám mây (${err.message || 'Lỗi mạng'}). Vui lòng thử lại!`, 'error');
@@ -48792,7 +49189,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
 
           const rawText = await res.text();
           if (!rawText || !rawText.trim()) {
-            throw new Error(`Chưa có dữ liệu nào được tải lên với mã "${savedCode}". Hãy bấm "1. ĐẨY LÊN ĐÁM MÂY" trên thiết bị có từ vựng trước!`);
+            throw new Error(`Chưa có dữ liệu nào được tải lên với mã "${savedCode}". Hãy bấm "Tải Lên Máy Này" trên thiết bị gốc trước!`);
           }
 
           const lines = rawText.trim().split('\n').filter(l => l.trim());
@@ -48809,7 +49206,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
           }
 
           if (!latestAttachmentUrl) {
-            throw new Error(`Không tìm thấy file sao lưu hợp lệ cho mã "${savedCode}". Vui lòng bấm "Đẩy lên đám mây" từ máy gốc trước!`);
+            throw new Error(`Không tìm thấy file sao lưu hợp lệ cho mã "${savedCode}". Vui lòng bấm "Tải Lên Máy Này" từ máy gốc trước!`);
           }
 
           const fileRes = await fetch(latestAttachmentUrl);
@@ -48818,22 +49215,45 @@ Trả về DUY NHẤT một JSON hợp lệ:
           }
 
           const remoteData = await fileRes.json();
-          if (!remoteData || !Array.isArray(remoteData.vocabList)) {
-            throw new Error('Dữ liệu đám mây không đúng định dạng danh sách từ vựng EngMastery!');
+          if (!remoteData) {
+            throw new Error('Dữ liệu đám mây không đúng định dạng!');
           }
 
           let newVocabCount = 0;
           let mergedVocabCount = 0;
 
-          remoteData.vocabList.forEach(item => {
+          // Hợp nhất danh sách từ tự tạo từ đám mây
+          const incomingCards = Array.isArray(remoteData.customCards) ? remoteData.customCards : (Array.isArray(remoteData.vocabList) ? remoteData.vocabList : []);
+
+          incomingCards.forEach(item => {
             if (item && item.word && (item.meaningVi || item.meaningEn)) {
+              this.autoClassifyVocabEntry(item);
               const r = this.upsertVocabCard(item);
               if (r.isNew) newVocabCount++;
               else if (r.merged) mergedVocabCount++;
             }
           });
 
-          // Tự động đảm bảo 1.060+ từ master luôn có mặt
+          // Hợp nhất tiến độ học
+          let progressCount = 0;
+          if (Array.isArray(remoteData.progress) && remoteData.progress.length > 0) {
+            remoteData.progress.forEach(p => {
+              if (!p || !p.w) return;
+              const norm = this.normalizeWordKey(p.w);
+              const card = this.vocabList.find(c => this.normalizeWordKey(c.word) === norm);
+              if (card) {
+                if (p.r !== undefined) card.repetitions = p.r;
+                if (p.i !== undefined) card.interval = p.i;
+                if (p.ef !== undefined) card.easeFactor = p.ef;
+                if (p.d) card.nextReviewDate = p.d;
+                if (p.s) card.status = p.s;
+                if (p.f) card.isFavorite = true;
+                progressCount++;
+              }
+            });
+          }
+
+          // Tự động đảm bảo 5.800+ từ master luôn có mặt
           if (typeof DEFAULT_VOCABULARY !== 'undefined' && Array.isArray(DEFAULT_VOCABULARY)) {
             const existingKeys = new Set(this.vocabList.map(v => this.normalizeWordKey(v.word)));
             DEFAULT_VOCABULARY.forEach(m => {
@@ -48845,7 +49265,19 @@ Trả về DUY NHẤT một JSON hợp lệ:
           }
           this.mergeDuplicateVocabCards(false);
 
-          // Hợp nhất đề thi Lớp 12 đã lưu (nếu có)
+          // Hợp nhất câu sai
+          if (Array.isArray(remoteData.mistakes) && remoteData.mistakes.length > 0) {
+            const curMistakeKeys = new Set((this.mistakes || []).map(m => m.id || m.question));
+            remoteData.mistakes.forEach(m => {
+              if (m && !curMistakeKeys.has(m.id || m.question)) {
+                if (!this.mistakes) this.mistakes = [];
+                this.mistakes.push(m);
+              }
+            });
+            this.updateMistakeBadge();
+          }
+
+          // Hợp nhất đề thi Lớp 12 đã lưu
           if (Array.isArray(remoteData.savedG12Exams) && remoteData.savedG12Exams.length > 0) {
             const currentExamIds = new Set((this.savedG12Exams || []).map(e => e.id));
             remoteData.savedG12Exams.forEach(remExam => {
@@ -48861,8 +49293,10 @@ Trả về DUY NHẤT một JSON hợp lệ:
             } catch (e) {}
           }
 
-          this.saveState();
+          this.savePermanentCustomWords();
+          this.flushSaveState();
           this.updateFilterBadges();
+          this.updateFilterCounts();
           this.applyVocabTopicFilter(this.currentVocabTopicFilter || 'all');
           this.currentCardIndex = 0;
           this.renderFlashcard();
@@ -48873,7 +49307,7 @@ Trả về DUY NHẤT một JSON hợp lệ:
           const countEl = document.getElementById('sync-current-vocab-count');
           if (countEl) countEl.innerText = this.vocabList.length.toLocaleString('vi-VN');
 
-          this.showToast(`🎉 Đồng bộ thành công! Hiện có ${this.vocabList.length} từ vựng (thêm mới ${newVocabCount}, gộp ${mergedVocabCount}). Toàn bộ thiết bị đã đồng nhất!`, 'success');
+          this.showToast(`🎉 Đồng bộ thành công! Đã nạp +${newVocabCount} từ mới, cập nhật tiến độ ${progressCount} từ. Tổng kho từ hiện có ${this.vocabList.length} từ!`, 'success');
         } catch (err) {
           console.error('Lỗi kéo dữ liệu đám mây:', err);
           this.showToast(`Không thể đồng bộ: ${err.message}`, 'error');
@@ -48883,6 +49317,144 @@ Trả về DUY NHẤT một JSON hợp lệ:
             btn.innerHTML = originalHtml;
           }
         }
+      }
+
+      // XUẤT FILE SAO LƯU JSON ĐỂ LƯU VÀO GOOGLE DRIVE HOẶC MÁY
+      exportBackupFileForGoogleDrive() {
+        const customCards = (this.vocabList || []).filter(c => this.isCustomCard(c));
+        const studyProgress = (this.vocabList || [])
+          .filter(c => (c.repetitions && c.repetitions > 0) || c.isFavorite)
+          .map(c => ({
+            w: c.word,
+            r: c.repetitions || 0,
+            i: c.interval || 1,
+            ef: c.easeFactor || 2.5,
+            d: c.nextReviewDate || '',
+            f: c.isFavorite ? 1 : 0
+          }));
+
+        const backupData = {
+          version: '1.9.7',
+          appName: 'EngMastery AI',
+          exportedAt: new Date().toISOString(),
+          totalVocabInApp: this.vocabList.length,
+          customCardsCount: customCards.length,
+          customCards: customCards,
+          progress: studyProgress,
+          mistakes: this.mistakes || [],
+          savedG12Exams: this.savedG12Exams || [],
+          profile: this.userProfile || this.profile || {}
+        };
+
+        const jsonStr = JSON.stringify(backupData, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        const d = new Date();
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        a.download = `EngMastery_Backup_Drive_${dateStr}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        this.showToast('📁 Đã xuất file sao lưu JSON thành công! Hãy lưu file này vào Google Drive để đồng bộ trên mọi thiết bị.', 'success');
+      }
+
+      // NHẬP FILE SAO LƯU TỪ GOOGLE DRIVE HOẶC MÁY
+      async importBackupFileFromGoogleDrive(event) {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          try {
+            const data = JSON.parse(e.target.result);
+            if (!data) throw new Error('File sao lưu JSON không có dữ liệu');
+
+            let newVocab = 0;
+            let mergedVocab = 0;
+            const incoming = Array.isArray(data.customCards) ? data.customCards : (Array.isArray(data.vocabList) ? data.vocabList : []);
+
+            incoming.forEach(item => {
+              if (item && item.word) {
+                this.autoClassifyVocabEntry(item);
+                const r = this.upsertVocabCard(item);
+                if (r.isNew) newVocab++;
+                else if (r.merged) mergedVocab++;
+              }
+            });
+
+            if (Array.isArray(data.progress)) {
+              data.progress.forEach(p => {
+                if (!p || !p.w) return;
+                const norm = this.normalizeWordKey(p.w);
+                const card = this.vocabList.find(c => this.normalizeWordKey(c.word) === norm);
+                if (card) {
+                  if (p.r !== undefined) card.repetitions = p.r;
+                  if (p.i !== undefined) card.interval = p.i;
+                  if (p.ef !== undefined) card.easeFactor = p.ef;
+                  if (p.d) card.nextReviewDate = p.d;
+                  if (p.f) card.isFavorite = true;
+                }
+              });
+            }
+
+            if (Array.isArray(data.mistakes) && data.mistakes.length > 0) {
+              const curIds = new Set((this.mistakes || []).map(m => m.id || m.question));
+              data.mistakes.forEach(m => {
+                if (m && !curIds.has(m.id || m.question)) {
+                  if (!this.mistakes) this.mistakes = [];
+                  this.mistakes.push(m);
+                }
+              });
+              this.updateMistakeBadge();
+            }
+
+            if (Array.isArray(data.savedG12Exams) && data.savedG12Exams.length > 0) {
+              const curIds = new Set((this.savedG12Exams || []).map(e => e.id));
+              data.savedG12Exams.forEach(rem => {
+                if (rem && rem.id && !curIds.has(rem.id)) {
+                  if (!this.savedG12Exams) this.savedG12Exams = [];
+                  this.savedG12Exams.push(rem);
+                }
+              });
+              try {
+                localStorage.setItem('engmastery_saved_g12_exams_data_v2', JSON.stringify(this.savedG12Exams));
+                this.renderSavedG12ExamsList();
+              } catch (_) {}
+            }
+
+            // Đảm bảo 5.800+ từ gốc chuẩn
+            if (typeof DEFAULT_VOCABULARY !== 'undefined' && Array.isArray(DEFAULT_VOCABULARY)) {
+              const existingKeys = new Set(this.vocabList.map(v => this.normalizeWordKey(v.word)));
+              DEFAULT_VOCABULARY.forEach(m => {
+                if (m && m.word && !existingKeys.has(this.normalizeWordKey(m.word))) {
+                  this.vocabList.push({ ...m });
+                  existingKeys.add(this.normalizeWordKey(m.word));
+                }
+              });
+            }
+
+            this.mergeDuplicateVocabCards(false);
+            this.savePermanentCustomWords();
+            this.flushSaveState();
+            this.updateFilterBadges();
+            this.updateFilterCounts();
+            this.applyVocabTopicFilter(this.currentVocabTopicFilter || 'all');
+            this.currentCardIndex = 0;
+            this.renderFlashcard();
+            if (this.currentView === 'vocab-hub') this.renderVocabHub();
+
+            this.showToast(`🎉 Khôi phục từ file thành công! Đã nạp +${newVocab} từ mới, gộp ${mergedVocab} từ. Tổng kho từ hiện có ${this.vocabList.length} từ!`, 'success');
+          } catch (err) {
+            console.error('Lỗi nhập file sao lưu:', err);
+            this.showToast(`Không thể đọc file sao lưu (${err.message}). Vui lòng kiểm tra lại file!`, 'error');
+          }
+        };
+        reader.readAsText(file);
+        event.target.value = '';
       }
 
       forceSyncMasterVocab(silent = false) {
@@ -51690,6 +52262,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                 _isJustAdded: true,
                 _needsEnrichment: true
               };
+              this.autoClassifyVocabEntry(newCard);
               this.vocabList.unshift(newCard);
               newlyCreatedCount++;
             }
@@ -51828,6 +52401,7 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
               if (rich.antonyms) targetCard.antonyms = this.normalizeCefrField(rich.antonyms);
               if (rich.collocations) targetCard.collocations = rich.collocations;
               if (rich.mnemonic) targetCard.mnemonic = rich.mnemonic;
+              this.autoClassifyVocabEntry(targetCard);
               delete targetCard._needsEnrichment;
 
               lastCreatedCardId = targetCard.id;
@@ -55311,12 +55885,44 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ theo cấu trúc:
       }
 
       rotatePhoto(deg = 90) {
-        if (!this.currentPhotoData) return;
-        this.currentPhotoRotation = (this.currentPhotoRotation + deg) % 360;
-        const img = document.getElementById('photo-tutor-preview-img');
-        if (img) {
-          img.style.transform = `rotate(${this.currentPhotoRotation}deg)`;
+        if (!this.currentPhotoData) {
+          this.showToast('Vui lòng chọn hoặc chụp ảnh trước!', 'info');
+          return;
         }
+
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          const normalizedDeg = ((deg % 360) + 360) % 360;
+          const isSideways = normalizedDeg === 90 || normalizedDeg === 270;
+
+          if (isSideways) {
+            canvas.width = img.height;
+            canvas.height = img.width;
+          } else {
+            canvas.width = img.width;
+            canvas.height = img.height;
+          }
+
+          ctx.translate(canvas.width / 2, canvas.height / 2);
+          ctx.rotate((normalizedDeg * Math.PI) / 180);
+          ctx.drawImage(img, -img.width / 2, -img.height / 2);
+
+          const rotatedDataUrl = canvas.toDataURL('image/jpeg', 0.92);
+          this.currentPhotoData = rotatedDataUrl;
+          this.currentPhotoRotation = 0;
+
+          const previewImg = document.getElementById('photo-tutor-preview-img');
+          if (previewImg) {
+            previewImg.src = rotatedDataUrl;
+            previewImg.style.transform = 'rotate(0deg)';
+          }
+
+          this.showToast(`🔄 Đã xoay ảnh ${normalizedDeg}°. Đang quét lại chữ OCR...`, 'info');
+          this.runPhotoOCR(this.currentPhotoData);
+        };
+        img.src = this.currentPhotoData;
       }
 
       clearPhoto() {
@@ -56340,7 +56946,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.6</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.7</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

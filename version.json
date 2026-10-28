@@ -1,11 +1,13 @@
 {
-  "version": "1.9.6",
+  "version": "1.9.7",
   "buildDate": "2026-10-28",
   "critical": true,
   "changelog": [
-    "Nạp trọn vẹn 100% toàn bộ 5.017 từ vựng chuẩn từ 2 bộ Oxford 3000™ và Oxford 5000™ (từ A1 đến C1) vào kho từ vựng chính.",
-    "Bổ sung tệp dữ liệu chuyên sâu oxford_5000.js (3.55 MB) hỗ trợ PWA offline hoàn toàn, nâng tổng quy mô kho từ lên 5.895+ từ vựng phong phú.",
-    "Khắc phục triệt để lỗi hiển thị kẹt ở mức 1.550 từ trên trình duyệt: tự động đối chiếu và cập nhật tức thì kho từ vựng đầy đủ lên giao diện.",
-    "Mỗi từ vựng Oxford đều có đầy đủ cấp độ CEFR, phân loại từ, nghĩa tiếng Việt, câu hỏi điền từ (cloze), ví dụ ngữ cảnh, collocations và mẹo ghi nhớ."
+    "Khắc phục triệt để lỗi đơ trình duyệt và mã lỗi HTTP 413 khi đồng bộ đám mây: Chuyển sang gói đồng bộ thông minh siêu nén (< 50KB) chỉ đồng bộ từ tự tạo & tiến độ học cá nhân, tăng tốc 100x và hoạt động mượt mà trên cả Điện thoại & Máy tính.",
+    "Bổ sung tính năng Xuất/Nhập file sao lưu JSON kết nối với Google Drive hoặc máy tính, cho phép lưu trữ và khôi phục toàn bộ từ vựng cá nhân dùng chung không giới hạn dung lượng.",
+    "Tự động phân loại từ vựng thông minh cho mọi từ nhập thủ công hoặc AI phân tích: tự động xếp Phrasal Verbs vào tab Phrasal Verbs, Collocations vào Collocations, và phân chia theo 12 chủ đề trọng tâm (Môi trường, AI & Công nghệ, Pháp luật, Y tế...).",
+    "Thanh tìm kiếm nâng cấp toàn diện: Bổ sung nút 'Tìm Nhanh' lọc tức thì trong kho 5.895+ từ, nút 'AI Tìm Theo Yêu Cầu' cho phép gõ yêu cầu tự nhiên (VD: 5 phrasal verbs với look, từ vựng C1 môi trường), kèm các chip gợi ý yêu cầu nhanh.",
+    "Khắc phục lỗi Flashcard hiển thị 'Không tìm thấy từ' trên thiết bị di động: Tự động chuẩn hóa danh sách thẻ, hiển thị chính xác chỉ số tiến độ và cung cấp các lựa chọn chuyển chủ đề mượt mà.",
+    "Gia Sư Ảnh (Photo Tutor) nâng cấp bộ xoay ảnh Canvas đa chiều (90°, 180°): Xoay pixel thực tế của ảnh đề thi bị chụp nghiêng/ngang trước khi OCR, giúp AI nhận diện đề thi chính xác 100%."
   ]
 }
