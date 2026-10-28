@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.7 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.8 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -40625,7 +40625,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.9.4';
+        this.appVersion = '1.9.8';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -43078,7 +43078,7 @@ Yêu cầu output STRICTLY là một JSON object:
                   this.vocabList.unshift(c);
                   existingKeys.add(k);
                 } else {
-                  const idx = this.vocabList.findIndex(v => this.normalizeWordKey(v.word) === k);
+                  const idx = this.vocabList.findIndex(v => v && v.word && this.normalizeWordKey(v.word) === k);
                   if (idx !== -1 && (c.meaningVi && (!this.vocabList[idx].meaningVi || this.vocabList[idx].meaningVi.includes('Đang chờ AI')))) {
                     Object.assign(this.vocabList[idx], c);
                   }
@@ -43101,40 +43101,52 @@ Yêu cầu output STRICTLY là một JSON object:
         }
 
         // 4. Dọn dẹp từ rác và gộp từ trùng
-        this.cleanInvalidVocabEntries(false);
-        this.mergeDuplicateVocabCards(false);
+        try {
+          this.cleanInvalidVocabEntries(false);
+          this.mergeDuplicateVocabCards(false);
+        } catch (e) {
+          console.warn('[Storage] Clean & merge warning in loadState:', e);
+        }
 
         // 5. Chuẩn hóa topicLabel & Tự động phân loại Phrasal Verbs, Collocations & Topics
-        this.vocabList.forEach(v => {
-          if (v && v.word) {
-            if (v.topicLabel) {
-              v.topicLabel = v.topicLabel.replace(/\s*Drive/gi, '').replace(/\s*\(100\+\)/gi, '').trim();
-            }
-            this.autoClassifyVocabEntry(v);
-          }
-        });
-
-        // Load Grammar with corruption protection
-        const storedGrammar = localStorage.getItem('engMastery_grammar_v4');
-        if (storedGrammar) {
-          try {
-            const parsedG = JSON.parse(storedGrammar);
-            if (Array.isArray(parsedG) && parsedG.length > 0) {
-              if (parsedG.length < DEFAULT_GRAMMAR.length) {
-                this.grammarList = [...DEFAULT_GRAMMAR];
-                try { localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList)); } catch (e) {}
-              } else {
-                this.grammarList = parsedG;
+        try {
+          this.vocabList.forEach(v => {
+            if (v && v.word) {
+              if (v.topicLabel) {
+                v.topicLabel = String(v.topicLabel).replace(/\s*Drive/gi, '').replace(/\s*\(100\+\)/gi, '').trim();
               }
-            } else {
-              this.grammarList = [...DEFAULT_GRAMMAR];
+              this.autoClassifyVocabEntry(v);
             }
-          } catch (e) {
-            console.warn('Lỗi đọc dữ liệu ngữ pháp cũ, phục hồi mặc định:', e);
-            this.grammarList = [...DEFAULT_GRAMMAR];
+          });
+        } catch (e) {
+          console.warn('[Storage] Auto classify warning in loadState:', e);
+        }
+
+        // Load Grammar with corruption protection & guaranteed self-repair
+        try {
+          const storedGrammar = localStorage.getItem('engMastery_grammar_v4');
+          if (storedGrammar) {
+            try {
+              const parsedG = JSON.parse(storedGrammar);
+              if (Array.isArray(parsedG) && parsedG.length >= 53) {
+                this.grammarList = parsedG;
+              } else {
+                this.grammarList = (typeof DEFAULT_GRAMMAR !== 'undefined' && Array.isArray(DEFAULT_GRAMMAR)) ? [...DEFAULT_GRAMMAR] : [];
+                try { localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList)); } catch (_) {}
+              }
+            } catch (e) {
+              console.warn('Lỗi đọc dữ liệu ngữ pháp cũ, phục hồi mặc định:', e);
+              this.grammarList = (typeof DEFAULT_GRAMMAR !== 'undefined' && Array.isArray(DEFAULT_GRAMMAR)) ? [...DEFAULT_GRAMMAR] : [];
+            }
+          } else {
+            this.grammarList = (typeof DEFAULT_GRAMMAR !== 'undefined' && Array.isArray(DEFAULT_GRAMMAR)) ? [...DEFAULT_GRAMMAR] : [];
           }
-        } else {
-          this.grammarList = [...DEFAULT_GRAMMAR];
+        } catch (e) {
+          console.warn('Lỗi khối nạp ngữ pháp:', e);
+          this.grammarList = (typeof DEFAULT_GRAMMAR !== 'undefined' && Array.isArray(DEFAULT_GRAMMAR)) ? [...DEFAULT_GRAMMAR] : [];
+        }
+        if (!this.grammarList || !Array.isArray(this.grammarList) || this.grammarList.length < 53) {
+          this.grammarList = (typeof DEFAULT_GRAMMAR !== 'undefined' && Array.isArray(DEFAULT_GRAMMAR)) ? [...DEFAULT_GRAMMAR] : [];
         }
 
         this.thptBank = (typeof THPTQG_EXAM_BANK !== 'undefined' && Array.isArray(THPTQG_EXAM_BANK)) ? [...THPTQG_EXAM_BANK] : [];
@@ -43519,6 +43531,10 @@ Yêu cầu output STRICTLY là một JSON object:
         if (viewId === 'thptqg') {
           this.renderThptLobby();
         } else if (viewId === 'flashcards') {
+          if (!Array.isArray(this.filteredCards) || this.filteredCards.length === 0) {
+            this.applyVocabTopicFilter(this.currentVocabTopicFilter || 'all');
+            this.initSessionDeck();
+          }
           this.updateActiveTopicBanner(this.currentVocabTopicFilter);
           this.renderFlashcard();
         } else if (viewId === 'vocab-hub') {
@@ -43755,7 +43771,7 @@ Yêu cầu output STRICTLY là một JSON object:
 
         switch (topicId) {
           case 'topic_notebook':
-            return dck === 'notebook' || top === 'topic_notebook' || lbl.includes('sổ tay');
+            return Boolean(v.isNotebook) || Boolean(v.isCustom) || this.isCustomCard(v) || dck === 'notebook' || top === 'topic_notebook' || lbl.includes('sổ tay') || lbl.includes('thủ công') || (v.id && (String(v.id).startsWith('custom_') || String(v.id).startsWith('user_')));
           case 'topic_community':
             return Boolean(v.isCommunity) || top === 'topic_community' || lbl.includes('cộng đồng');
           case 'topic_translated':
@@ -43993,6 +44009,18 @@ Yêu cầu output STRICTLY là một JSON object:
       }
 
       renderFlashcard() {
+        const searchInput = document.getElementById('flashcard-search-input');
+        const searchVal = (searchInput?.value || '').trim();
+
+        // Tự động khôi phục danh sách thẻ nếu mảng trống khi không có truy vấn tìm kiếm
+        if ((!Array.isArray(this.filteredCards) || this.filteredCards.length === 0) && !searchVal) {
+          this.applyVocabTopicFilter(this.currentVocabTopicFilter || 'all');
+          if (!Array.isArray(this.filteredCards) || this.filteredCards.length === 0) {
+            this.filteredCards = [...this.vocabList];
+          }
+          this.initSessionDeck();
+        }
+
         if (!Array.isArray(this.filteredCards) || this.filteredCards.length === 0) {
           const idxIndicator = document.getElementById('card-index-indicator');
           if (idxIndicator) idxIndicator.innerText = '0 / 0';
@@ -44003,9 +44031,23 @@ Yêu cầu output STRICTLY là một JSON object:
             repeatBadge.innerHTML = 'Chưa có từ';
             repeatBadge.className = 'px-3 py-1 rounded-full font-bold text-xs bg-slate-100 dark:bg-slate-800 text-slate-400 border border-slate-200 dark:border-slate-700';
           }
+          const topicBadge = document.getElementById('card-topic-badge');
+          if (topicBadge) {
+            const filterMap = {
+              all: '🌟 Tất Cả',
+              topic_notebook: '📓 Sổ Tay',
+              topic_community: '🌐 Cộng Đồng',
+              topic_translated: '🌐 Vừa Tra & Dịch',
+              topic_phrasal: '🔄 Phrasal Verbs',
+              topic_collocation: '🔗 Collocations',
+              topic_grade12: '🎓 Lớp 12',
+              starred: '⭐ Gắn Sao',
+              due: '⏰ Cần Ôn'
+            };
+            topicBadge.innerText = filterMap[this.currentVocabTopicFilter] || 'Bộ Lọc';
+          }
           const inner = document.getElementById('flashcard-inner');
           if (inner) {
-            const searchVal = (document.getElementById('flashcard-search-input')?.value || '').trim();
             inner.innerHTML = `
               <div class="card-front absolute inset-0 rounded-3xl p-8 bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col items-center justify-center text-center space-y-4">
                 <div class="w-16 h-16 rounded-3xl bg-primary/10 text-primary-light flex items-center justify-center text-3xl">
@@ -44303,7 +44345,7 @@ Yêu cầu output STRICTLY là một JSON object:
       
       updateFilterCounts() {
         const total = this.vocabList.length;
-        const nbCount = this.vocabList.filter(v => v.deck === 'notebook' || v.topic === 'topic_notebook').length;
+        const nbCount = this.vocabList.filter(v => this.matchCardTopic(v, 'topic_notebook')).length;
         const phrasalCount = this.vocabList.filter(v => v.type === 'Phrasal Verb' || v.deck === 'phrasal' || v.topic === 'topic_phrasal').length;
         const collabCount = this.vocabList.filter(v => v.type === 'Collocation' || v.type === 'Idiom' || v.deck === 'collocation' || v.topic === 'topic_collocation').length;
         const g12Count = this.vocabList.filter(v => v.deck === 'grade12' || v.topic === 'topic_grade12' || (v.topicLabel && v.topicLabel.includes('Lớp 12'))).length;
@@ -44841,9 +44883,20 @@ Trả về DUY NHẤT một mảng JSON hợp lệ (không kèm bất kỳ chữ
         try { localStorage.setItem('engMastery_hub_sort', val); } catch (_) {}
 
         if (val === 'newest') {
-          // 1. Tự động reset bộ lọc chữ cái (A-Z) để không bị ẩn các từ bắt đầu bằng chữ cái khác
+          this.hubCurrentTopic = 'all';
           this.hubLetterFilter = 'all';
-          try { localStorage.setItem('engMastery_hub_letter', 'all'); } catch (_) {}
+          try {
+            localStorage.setItem('engMastery_hub_sort', 'newest');
+            localStorage.setItem('engMastery_hub_topic', 'all');
+            localStorage.setItem('engMastery_hub_letter', 'all');
+          } catch (_) {}
+          document.querySelectorAll('.hub-topic-btn').forEach(btn => {
+            if (btn.dataset.topic === 'all') {
+              btn.className = 'hub-topic-btn px-4 py-2 rounded-2xl font-black transition text-xs shadow-sm bg-primary text-white shrink-0';
+            } else {
+              btn.className = 'hub-topic-btn px-4 py-2 rounded-2xl font-bold transition text-xs shadow-sm bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0';
+            }
+          });
           document.querySelectorAll('.hub-letter-btn').forEach(btn => {
             if (btn.dataset.letter === 'all') {
               btn.className = 'hub-letter-btn px-3 py-1 rounded-xl font-black transition text-xs bg-primary text-white shrink-0';
@@ -44851,15 +44904,11 @@ Trả về DUY NHẤT một mảng JSON hợp lệ (không kèm bất kỳ chữ
               btn.className = 'hub-letter-btn px-2.5 py-1 rounded-xl font-bold transition text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 hover:text-white shrink-0';
             }
           });
-
-          // 2. Xóa ô tìm kiếm nếu đang có truy vấn để người dùng thấy đầy đủ các từ mới tra cứu
           if (this.hubSearchQuery) {
             this.hubSearchQuery = '';
             const searchInput = document.getElementById('hub-search-input');
             if (searchInput) searchInput.value = '';
           }
-
-          // 3. Reset bộ lọc cấp độ CEFR về 'all' nếu đang chọn cấp độ cụ thể
           if (this.hubCurrentLevel !== 'all') {
             this.hubCurrentLevel = 'all';
             const levelFilter = document.getElementById('hub-level-filter');
@@ -45407,6 +45456,14 @@ Trả về DUY NHẤT một mảng JSON hợp lệ (không kèm bất kỳ chữ
         const container = document.getElementById('grammar-cards-grid');
         if (!container) return;
 
+        // Tự động phục hồi 53 cấu trúc nếu bộ nhớ trống hoặc bị lỗi
+        if (!this.grammarList || !Array.isArray(this.grammarList) || this.grammarList.length < 53) {
+          if (typeof DEFAULT_GRAMMAR !== 'undefined' && Array.isArray(DEFAULT_GRAMMAR) && DEFAULT_GRAMMAR.length > 0) {
+            this.grammarList = [...DEFAULT_GRAMMAR];
+            try { localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList)); } catch (_) {}
+          }
+        }
+
         let list = [...this.grammarList];
 
         if (this.grammarCurrentCategory === 'bookmarked') {
@@ -45650,7 +45707,17 @@ ${item.formula}
       }
 
       setGrammarCategory(cat) {
-        this.grammarCurrentCategory = cat;
+        this.grammarCurrentCategory = cat || 'all';
+        if (!this.grammarList || !Array.isArray(this.grammarList) || this.grammarList.length < 53) {
+          if (typeof DEFAULT_GRAMMAR !== 'undefined' && Array.isArray(DEFAULT_GRAMMAR) && DEFAULT_GRAMMAR.length > 0) {
+            this.grammarList = [...DEFAULT_GRAMMAR];
+            try { localStorage.setItem('engMastery_grammar_v4', JSON.stringify(this.grammarList)); } catch (_) {}
+          }
+        }
+        const searchInput = document.getElementById('grammar-search-input');
+        if (searchInput && cat === 'all') {
+          searchInput.value = '';
+        }
         document.querySelectorAll('.grammar-cat-btn').forEach(btn => {
           if (btn.dataset.cat === cat) {
             btn.classList.add('bg-primary', 'text-white');
@@ -48987,10 +49054,16 @@ Trả về DUY NHẤT một JSON hợp lệ:
         const word = String(card.word).trim();
         const lower = word.toLowerCase();
         const words = lower.split(/\s+/).filter(Boolean);
-        const pos = (card.type || '').toLowerCase();
-        const meaningVi = (card.meaningVi || '').toLowerCase();
-        const meaningEn = (card.meaningEn || '').toLowerCase();
-        const full = `${lower} ${meaningVi} ${meaningEn} ${(card.topicLabel || '')}`;
+        const pos = String(card.type || '').toLowerCase();
+        const meaningVi = String(card.meaningVi || '').toLowerCase();
+        const meaningEn = String(card.meaningEn || '').toLowerCase();
+        const full = `${lower} ${meaningVi} ${meaningEn} ${String(card.topicLabel || '')}`;
+
+        const isUserNotebook = Boolean(card.isNotebook) || Boolean(card.isCustom) || this.isCustomCard(card) || (card.deck || '').toLowerCase() === 'notebook' || (card.topic || '').toLowerCase() === 'topic_notebook' || (card.id && (String(card.id).startsWith('custom_') || String(card.id).startsWith('user_')));
+        if (isUserNotebook) {
+          card.isNotebook = true;
+          card.isCustom = true;
+        }
 
         const PHRASAL_VERBS_SET = new Set([
           'act', 'add', 'ask', 'back', 'blow', 'break', 'bring', 'build', 'call', 'calm',
@@ -49017,18 +49090,30 @@ Trả về DUY NHẤT một JSON hợp lệ:
 
         if (isPhrasal) {
           card.type = 'Phrasal Verb';
-          card.topic = 'topic_phrasal';
-          card.topicLabel = '🔄 Phrasal Verbs';
-          card.deck = 'phrasal';
+          if (!isUserNotebook) {
+            card.topic = 'topic_phrasal';
+            card.topicLabel = '🔄 Phrasal Verbs';
+            card.deck = 'phrasal';
+          } else {
+            card.deck = 'notebook';
+            card.topic = 'topic_notebook';
+            card.topicLabel = '📓 Sổ Tay (Phrasal Verb)';
+          }
           return;
         }
 
         // 2. Nhận diện Collocation / Idiom (cụm từ cố định từ 2 chữ trở lên)
         if (words.length >= 2 || pos.includes('collocation') || pos.includes('idiom') || pos.includes('cụm từ') || card.topic === 'topic_collocation') {
           card.type = words.length >= 4 || full.includes('thành ngữ') ? 'Idiom' : 'Collocation';
-          card.topic = 'topic_collocation';
-          card.topicLabel = '🔗 Collocations & Idioms';
-          card.deck = 'collocation';
+          if (!isUserNotebook) {
+            card.topic = 'topic_collocation';
+            card.topicLabel = '🔗 Collocations & Idioms';
+            card.deck = 'collocation';
+          } else {
+            card.deck = 'notebook';
+            card.topic = 'topic_notebook';
+            card.topicLabel = `📓 Sổ Tay (${card.type})`;
+          }
           return;
         }
 
@@ -56946,7 +57031,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.7</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.8</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>
