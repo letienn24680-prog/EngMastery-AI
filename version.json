@@ -1,13 +1,11 @@
 {
-  "version": "1.9.9",
-  "buildDate": "2026-10-28",
+  "version": "1.9.10",
+  "buildDate": "2026-10-30",
   "critical": true,
   "changelog": [
-    "Khắc phục triệt để lỗi 'this.callGeminiAPI is not a function': Tích hợp hàm AI đa nhiệm và alias chuẩn hóa cho mọi tính năng tra cứu từ vựng theo yêu cầu.",
-    "Khắc phục triệt để lỗi AI Tutor luyện đề nhảy thẳng ra kết quả '0 / 0' và '00:00': Bổ sung bóc tách mảng linh hoạt cho kết quả AI, nạp sẵn bộ đề chuẩn THPTQG và chặn dứt điểm hiện tượng nạp đề rỗng.",
-    "Thanh tiêu đề thông minh tự động xuất hiện khi vuốt lên một tí (Smart Header Auto-Reveal): Vuốt nhẹ lên 6px là thanh tiêu đề trượt xuống ngay lập tức, cuộn xuống thì ẩn đi giúp tối ưu tối đa không gian màn hình điện thoại.",
-    "Khắc phục dứt điểm lỗi Flashcard '1 / 179' hoặc '0 / 0' bị kẹt ở màn hình 'Không tìm thấy từ': Tách biệt hoàn toàn khung rỗng và bảo toàn 100% cây DOM thẻ học, không bao giờ bị ghi đè hay lỗi null innerText.",
-    "Tích hợp AI Gemini Vision quét đề thi qua ảnh: Đọc chuẩn xác 100% đề thi tiếng Anh ngay cả khi ảnh chụp bị xoay ngược 180 độ hoặc nghiêng, hỗ trợ xoay canvas 90°/180° tức thì.",
-    "Làm giàu cây từ đồng nghĩa & trái nghĩa CEFR A1 - C1: Phân cấp chi tiết từ cơ bản đến nâng cao cho mọi từ vựng tra cứu."
+    "Thêm tính năng 'Tự chọn từ trong app để luyện' cho Đấu Trường Ghép Từ Tốc Độ (Speed Match 60s): Người học có thể trực tiếp chọn bất kỳ danh sách từ vựng nào trong hơn 5.800+ từ để thi đấu ghép từ phản xạ.",
+    "Bổ sung nút bấm và tùy chọn '✏️ Tự Chọn Từ Trong App' ngay tại thanh chọn Bộ Từ và màn hình chờ thi đấu.",
+    "Nâng cấp Hộp thoại Chọn Từ Vựng: Bổ sung các phím lọc nhanh theo Sổ Tay (Notebook), Trọng tâm Lớp 12, Phrasal Verbs, Collocations và bộ tìm kiếm tức thì.",
+    "Tối ưu hiệu năng hiển thị 60fps khi mở danh sách từ vựng, tự động ghi nhớ bộ từ tự chọn vào bộ nhớ thiết bị."
   ]
 }
