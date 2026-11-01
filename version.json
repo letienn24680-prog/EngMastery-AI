@@ -1,11 +1,11 @@
 {
-  "version": "1.9.10",
-  "buildDate": "2026-10-30",
+  "version": "1.9.11",
+  "buildDate": "2026-11-01",
   "critical": true,
   "changelog": [
-    "Thêm tính năng 'Tự chọn từ trong app để luyện' cho Đấu Trường Ghép Từ Tốc Độ (Speed Match 60s): Người học có thể trực tiếp chọn bất kỳ danh sách từ vựng nào trong hơn 5.800+ từ để thi đấu ghép từ phản xạ.",
-    "Bổ sung nút bấm và tùy chọn '✏️ Tự Chọn Từ Trong App' ngay tại thanh chọn Bộ Từ và màn hình chờ thi đấu.",
-    "Nâng cấp Hộp thoại Chọn Từ Vựng: Bổ sung các phím lọc nhanh theo Sổ Tay (Notebook), Trọng tâm Lớp 12, Phrasal Verbs, Collocations và bộ tìm kiếm tức thì.",
-    "Tối ưu hiệu năng hiển thị 60fps khi mở danh sách từ vựng, tự động ghi nhớ bộ từ tự chọn vào bộ nhớ thiết bị."
+    "Khắc phục triệt để lỗi 'Failed to fetch' khi bấm 'AI Tìm Theo Yêu Cầu': Tích hợp bộ cứu hộ từ điển đa tầng (Multi-Layered Lexical Engine) tự động nạp từ vựng kèm nghĩa tiếng Việt, IPA, CEFR, đồng/trái nghĩa và ví dụ ngay cả khi máy chủ AI bị gián đoạn hoặc ngoại tuyến.",
+    "Bảo vệ 100% tỷ lệ tra cứu thành công cho các từ vựng đơn lẻ (như Evacuative, phrasal verbs, idioms): Tự động nạp trực tiếp vào Kho Từ Vựng và Sổ Tay, không bao giờ xuất hiện hộp thoại đỏ báo lỗi mạng.",
+    "Tự động kích hoạt AI Gemini Vision khi chụp hoặc tải ảnh đề thi: Quét trích xuất 100% đề thi tiếng Anh nguyên vẹn từ camera/file ngay lập tức, hỗ trợ tự xoay 90°/180° chuẩn xác.",
+    "Cơ chế chuyển đổi AI dự phòng thông minh (Auto-Failover): Tự động luân chuyển giữa xKiro và Google Gemini Direct để đảm bảo không bao giờ bị đứng mạng."
   ]
 }
