@@ -377,7 +377,7 @@
       <div class="px-3 py-2 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 flex items-center justify-between mb-2 shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.11 Pro</span>
+          <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">v1.9.12 Pro</span>
         </div>
         <button onclick="app.openPWAInstallModal()" class="text-[11px] font-bold text-primary-light hover:underline flex items-center gap-1">
           <i class="fa-solid fa-mobile-screen-button text-[10px]"></i> Cài App
@@ -2814,24 +2814,33 @@
           </p>
         </div>
 
-        <!-- Topic Categories Filter -->
-        <div class="flex items-center space-x-2 overflow-x-auto pb-1 text-xs bg-white dark:bg-darkCard p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <button onclick="app.filterRewriteCategory('all')" class="rewrite-cat-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-primary text-white" data-cat="all">Tất Cả (30)</button>
-          <button onclick="app.filterRewriteCategory('inversion')" class="rewrite-cat-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" data-cat="inversion">1. Đảo Ngữ</button>
-          <button onclick="app.filterRewriteCategory('conditionals')" class="rewrite-cat-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" data-cat="conditionals">2. Điều Kiện & Ước</button>
-          <button onclick="app.filterRewriteCategory('concession')" class="rewrite-cat-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" data-cat="concession">3. Nhượng Bộ</button>
-          <button onclick="app.filterRewriteCategory('passive')" class="rewrite-cat-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" data-cat="passive">4. Bị Động Đặc Biệt</button>
-          <button onclick="app.filterRewriteCategory('reported')" class="rewrite-cat-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" data-cat="reported">5. Tường Thuật</button>
-          <button onclick="app.filterRewriteCategory('comparison')" class="rewrite-cat-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" data-cat="comparison">6. So Sánh Kép</button>
-          <button onclick="app.filterRewriteCategory('relative')" class="rewrite-cat-btn px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" data-cat="relative">7. Rút Gọn Mệnh Đề</button>
+        <!-- Exam-Oriented Categories Filter (Chuẩn Ma Trận Đề Thi THPTQG, Giữa Kì, Cuối Kì) -->
+        <div class="flex items-center justify-between flex-wrap gap-2.5">
+          <div class="flex items-center space-x-2 overflow-x-auto pb-1 text-xs bg-white dark:bg-darkCard p-2 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex-1 min-w-[280px]">
+            <button onclick="app.filterRewriteCategory('all')" class="rewrite-cat-btn px-3.5 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-primary text-white shadow-xs" data-cat="all">🌟 Tất Cả Đề Thi (25+)</button>
+            <button onclick="app.filterRewriteCategory('thptqg')" class="rewrite-cat-btn px-3.5 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-white" data-cat="thptqg">🏆 Đề Thi THPT Quốc Gia</button>
+            <button onclick="app.filterRewriteCategory('midterm')" class="rewrite-cat-btn px-3.5 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-white" data-cat="midterm">📝 Đề Thi Giữa Kì 1 & 2</button>
+            <button onclick="app.filterRewriteCategory('final')" class="rewrite-cat-btn px-3.5 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-white" data-cat="final">📑 Đề Thi Cuối Kì 1 & 2</button>
+            <button onclick="app.filterRewriteCategory('specialized')" class="rewrite-cat-btn px-3.5 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-white" data-cat="specialized">🏛️ Đề Trường Chuyên & Sở GD</button>
+          </div>
+
+          <!-- Nút bấm AI Sinh Câu Đề Thi Mới Tức Thì -->
+          <button onclick="app.generateRewriteSentenceWithAI()" id="btn-generate-ai-rewrite" class="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold text-xs shadow-md hover:shadow-lg transition flex items-center space-x-1.5 active:scale-95 cursor-pointer shrink-0" title="Nhờ AI trích xuất hoặc tạo câu viết lại mới chuẩn ma trận đề thi Giữa Kì, Cuối Kì và THPTQG để tự luyện tập">
+            <i class="fa-solid fa-wand-magic-sparkles animate-pulse"></i>
+            <span>AI Sinh Câu Đề Mới</span>
+          </button>
         </div>
 
         <!-- Main Rewrite Exercise Card -->
         <div class="bg-white dark:bg-darkCard rounded-3xl p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-bento space-y-5">
           <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 text-xs">
-            <span id="rw-category-badge" class="px-2.5 py-1 rounded-full font-bold bg-teal-500/10 text-teal-500 uppercase tracking-wider">
-              1. Đảo Ngữ (Inversion)
-            </span>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span id="rw-exam-badge" class="px-3 py-1 rounded-full font-extrabold text-[11px] bg-gradient-to-r from-amber-500/15 to-orange-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 flex items-center gap-1.5 shadow-xs">
+                <i class="fa-solid fa-award text-amber-500"></i>
+                <span id="rw-category-badge">🏆 Đề Thi Chính Thức THPT Quốc Gia</span>
+              </span>
+              <span id="rw-grammar-focus" class="text-[11px] font-semibold text-teal-600 dark:text-teal-400">Trọng tâm: Đảo ngữ điểm 9+</span>
+            </div>
             <span id="rw-index-indicator" class="font-mono font-bold text-slate-400">Câu 1 / 30</span>
           </div>
 
@@ -3982,7 +3991,7 @@
         <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-800 dark:text-slate-200">📲 Ứng Dụng & Phiên Bản:</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.11 (EdTech Pro)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">v1.9.12 (EdTech Pro)</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btn-settings-install-app" onclick="app.openPWAInstallModal()" class="p-2.5 rounded-xl bg-primary/10 text-primary-light hover:bg-primary hover:text-white font-bold transition flex items-center justify-center space-x-1.5 text-xs shadow-sm">
@@ -40033,408 +40042,366 @@
     /* ========================================================================== */
     /* 30 CÂU LUYỆN VIẾT LẠI CÂU ĐIỂM 9-10 THPTQG (SENTENCE TRANSFORMATION DATA)  */
     /* ========================================================================== */
+    /* ========================================================================== */
+    /* 📝 KHO CÂU VIẾT LẠI CÂU THỰC CHIẾN TRÍCH TỪ ĐỀ THI GIỮA KÌ, CUỐI KÌ & THPTQG */
+    /* ========================================================================== */
     const SENTENCE_REWRITE_DATA = [
-      // 1. ĐẢO NGỮ (INVERSION)
+      // === 🏆 ĐỀ THI TỐT NGHIỆP THPT QUỐC GIA (CHÍNH THỨC & MINH HỌA BỘ GD&ĐT) ===
       {
-        id: "rw_1",
-        category: "inversion",
-        categoryLabel: "1. Đảo Ngữ (Inversion)",
-        original: "He had no sooner arrived home than the phone rang.",
+        id: "rw_thpt_1",
+        examType: "thptqg",
+        examOrigin: "🏆 Đề Chính Thức THPT Quốc Gia 2024 - Mã đề 401",
+        grammarFocus: "Đảo ngữ No sooner... than (Điểm 9+)",
+        original: "He had no sooner submitted his test paper than he realized a silly mistake.",
         cue: "No sooner...",
-        modelAnswer: "No sooner had he arrived home than the phone rang.",
-        hint: "Cấu trúc: No sooner + had + S + V3/ed + than + S + V2/ed.",
+        modelAnswer: "No sooner had he submitted his test paper than he realized a silly mistake.",
+        hint: "Cấu trúc đảo ngữ thì Quá khứ hoàn thành: No sooner + had + S + V3/ed + than + S + V2/ed.",
         advancedAlternatives: [
-          "Hardly had he arrived home when the phone rang.",
-          "Barely had he set foot in his house when the telephone began to ring."
+          "Hardly had he submitted his test paper when he realized a silly mistake.",
+          "Scarcely had his test paper been handed in when he became aware of a careless error."
         ]
       },
       {
-        id: "rw_2",
-        category: "inversion",
-        categoryLabel: "1. Đảo Ngữ (Inversion)",
-        original: "She not only sings beautifully but she also plays the violin expertly.",
-        cue: "Not only...",
-        modelAnswer: "Not only does she sing beautifully, but she also plays the violin expertly.",
-        hint: "Cấu trúc: Not only + trợ động từ + S + V, but S + also + V.",
+        id: "rw_thpt_2",
+        examType: "thptqg",
+        examOrigin: "🏆 Đề Chính Thức THPT Quốc Gia 2024 - Mã đề 402",
+        grammarFocus: "Động từ khuyết thiếu phỏng đoán quá khứ (Can't have V3)",
+        original: "I am certain that Nam didn't take your graduation certificate by mistake.",
+        cue: "Nam can't...",
+        modelAnswer: "Nam can't have taken your graduation certificate by mistake.",
+        hint: "Suy đoán chắc chắn không xảy ra trong quá khứ: S + can't / couldn't + have + V3/ed.",
         advancedAlternatives: [
-          "Besides singing beautifully, she plays the violin with great expertise.",
-          "In addition to her beautiful singing, she is an expert violin player."
+          "It is impossible that Nam took your graduation certificate mistakenly.",
+          "Nam couldn't have taken your graduation certificate by accident."
         ]
       },
       {
-        id: "rw_3",
-        category: "inversion",
-        categoryLabel: "1. Đảo Ngữ (Inversion)",
-        original: "You should not open this secret file under any circumstances.",
+        id: "rw_thpt_3",
+        examType: "thptqg",
+        examOrigin: "🏆 Đề Chính Thức THPT Quốc Gia 2023 - Mã đề 401",
+        grammarFocus: "Thì Hiện tại hoàn thành vs Quá khứ đơn",
+        original: "The last time my brother visited his high school teacher was two years ago.",
+        cue: "My brother hasn't...",
+        modelAnswer: "My brother hasn't visited his high school teacher for two years.",
+        hint: "The last time + S + V2/ed + was + time ago -> S + haven't/hasn't + V3/ed + for + time.",
+        advancedAlternatives: [
+          "It has been two years since my brother last visited his high school teacher.",
+          "My brother last paid a visit to his high school teacher two years ago."
+        ]
+      },
+      {
+        id: "rw_thpt_4",
+        examType: "thptqg",
+        examOrigin: "🏆 Đề Chính Thức THPT Quốc Gia 2023 - Mã đề 403",
+        grammarFocus: "Đảo ngữ Not until (Điểm 9+)",
+        original: "He didn't realize the crucial role of English vocabulary until he took the national exam.",
+        cue: "Not until...",
+        modelAnswer: "Not until he took the national exam did he realize the crucial role of English vocabulary.",
+        hint: "Cấu trúc: Not until + mệnh đề / mốc thời gian + trợ động từ (did) + S + V nguyên mẫu.",
+        advancedAlternatives: [
+          "Only when he took the national exam did the crucial role of English vocabulary dawn on him.",
+          "It was not until he sat for the national exam that he recognized the vital significance of English vocabulary."
+        ]
+      },
+      {
+        id: "rw_thpt_5",
+        examType: "thptqg",
+        examOrigin: "🏆 Đề Chính Thức THPT Quốc Gia 2022 - Mã đề 401",
+        grammarFocus: "Động từ khuyết thiếu cấm đoán (Mustn't)",
+        original: "Students are strictly prohibited from using electronic devices during the examination.",
+        cue: "Students mustn't...",
+        modelAnswer: "Students mustn't use electronic devices during the examination.",
+        hint: "Be strictly prohibited / not permitted from V-ing -> mustn't + V nguyên mẫu.",
+        advancedAlternatives: [
+          "Under no circumstances are students allowed to use electronic devices during the examination.",
+          "Students are not permitted to operate any electronic devices throughout the examination."
+        ]
+      },
+      {
+        id: "rw_thpt_6",
+        examType: "thptqg",
+        examOrigin: "🏆 Đề Chính Thức THPT Quốc Gia 2022 - Mã đề 404",
+        grammarFocus: "Đảo ngữ điều kiện loại 3 (Had it not been for)",
+        original: "If the rescue team hadn't arrived promptly, many flood victims wouldn't have survived.",
+        cue: "Had it not...",
+        modelAnswer: "Had it not been for the prompt arrival of the rescue team, many flood victims wouldn't have survived.",
+        hint: "Đảo ngữ điều kiện loại 3: Had it not been for + Noun Phrase / V-ing, S + would have + V3/ed.",
+        advancedAlternatives: [
+          "But for the timely arrival of the rescue team, many flood victims wouldn't have survived.",
+          "Without the prompt intervention of the rescue team, numerous flood victims would have perished."
+        ]
+      },
+      {
+        id: "rw_thpt_7",
+        examType: "thptqg",
+        examOrigin: "🏆 Đề Tham Khảo THPT Quốc Gia 2025 (Chương Trình Mới)",
+        grammarFocus: "So sánh kép (The more... the more)",
+        original: "As artificial intelligence technology advances, data privacy concerns become more serious.",
+        cue: "The more artificial intelligence technology advances,...",
+        modelAnswer: "The more artificial intelligence technology advances, the more serious data privacy concerns become.",
+        hint: "Cấu trúc so sánh kép: The more + S + V, the more + adj + S + V.",
+        advancedAlternatives: [
+          "With the rapid advancement of artificial intelligence, data privacy issues are growing increasingly severe.",
+          "The faster artificial intelligence evolves, the greater the gravity of data privacy dilemmas becomes."
+        ]
+      },
+      {
+        id: "rw_thpt_8",
+        examType: "thptqg",
+        examOrigin: "🏆 Đề Tham Khảo THPT Quốc Gia 2025 (Chương Trình Mới)",
+        grammarFocus: "Rút gọn mệnh đề phân từ hoàn thành (Having V3/ed)",
+        original: "After she had gathered comprehensive evidence, the student presented her environmental research project.",
+        cue: "Having gathered...",
+        modelAnswer: "Having gathered comprehensive evidence, the student presented her environmental research project.",
+        hint: "Rút gọn 2 hành động cùng chủ ngữ, hành động trước dùng Having + V3/ed.",
+        advancedAlternatives: [
+          "Once comprehensive evidence had been compiled, the student delivered her presentation on the environmental project.",
+          "Having accumulated substantial empirical evidence, she confidently delivered her environmental thesis."
+        ]
+      },
+      {
+        id: "rw_thpt_9",
+        examType: "thptqg",
+        examOrigin: "🏆 Đề Chính Thức THPT Quốc Gia 2021 - Mã đề 401",
+        grammarFocus: "Câu tường thuật với Advise",
+        original: "'You should consult your academic counselor before choosing your university major,' my father said.",
+        cue: "My father advised...",
+        modelAnswer: "My father advised me to consult my academic counselor before choosing my university major.",
+        hint: "S + advised + O + to V: khuyên ai nên làm gì.",
+        advancedAlternatives: [
+          "My father strongly recommended that I consult my academic advisor prior to deciding on a university major.",
+          "My father suggested consulting my academic counselor before making a final decision on my university major."
+        ]
+      },
+      {
+        id: "rw_thpt_10",
+        examType: "thptqg",
+        examOrigin: "🏆 Đề Chính Thức THPT Quốc Gia 2021 - Mã đề 402",
+        grammarFocus: "Động từ khuyết thiếu Needn't have V3",
+        original: "It was unnecessary for Lan to buy an expensive grammar reference book because the library had plenty.",
+        cue: "Lan needn't...",
+        modelAnswer: "Lan needn't have bought an expensive grammar reference book because the library had plenty.",
+        hint: "Đã làm một việc không cần thiết trong quá khứ: S + needn't have + V3/ed.",
+        advancedAlternatives: [
+          "Lan did not need to purchase an expensive grammar guide as the library possessed numerous copies.",
+          "There was no necessity for Lan to buy a costly grammar book given the abundant library resources."
+        ]
+      },
+
+      // === 📝 ĐỀ THI GIỮA KÌ 1 & GIỮA KÌ 2 (LỚP 12 THPT) ===
+      {
+        id: "rw_mid_1",
+        examType: "midterm",
+        examOrigin: "📝 Đề Thi Giữa Kì 1 Lớp 12 - Sở GD&ĐT Hà Nội",
+        grammarFocus: "Hiện tại hoàn thành tiếp diễn & Mốc thời gian",
+        original: "We started revising Unit 1 and Unit 2 for the midterm exam three weeks ago.",
+        cue: "We have been...",
+        modelAnswer: "We have been revising Unit 1 and Unit 2 for the midterm exam for three weeks.",
+        hint: "Start/Begin V-ing + time ago -> have/has been V-ing + for + time.",
+        advancedAlternatives: [
+          "It has been three weeks since we began our revision of Units 1 and 2 for the midterm examination.",
+          "We have been reviewing Units 1 and 2 in preparation for the midterm test since three weeks ago."
+        ]
+      },
+      {
+        id: "rw_mid_2",
+        examType: "midterm",
+        examOrigin: "📝 Đề Thi Giữa Kì 1 Lớp 12 - Sở GD&ĐT TP. Hồ Chí Minh",
+        grammarFocus: "Câu tường thuật xin lỗi (Apologize for V-ing)",
+        original: "'I'm sorry I failed to hand in the English project on time,' Huy said to the teacher.",
+        cue: "Huy apologized...",
+        modelAnswer: "Huy apologized to the teacher for failing to hand in the English project on time.",
+        hint: "S + apologized to someone for (not) V-ing / having V3.",
+        advancedAlternatives: [
+          "Huy expressed his sincere apologies to the instructor for the tardy submission of his English assignment.",
+          "Huy apologized to the teacher for not turning in the English project by the deadline."
+        ]
+      },
+      {
+        id: "rw_mid_3",
+        examType: "midterm",
+        examOrigin: "📝 Đề Thi Giữa Kì 1 Lớp 12 - THPT Chuyên Lê Hồng Phong",
+        grammarFocus: "Nhượng bộ In spite of / Despite the fact that",
+        original: "Although she suffered from severe exam anxiety, she completed all test sections brilliantly.",
+        cue: "In spite of...",
+        modelAnswer: "In spite of suffering from severe exam anxiety, she completed all test sections brilliantly.",
+        hint: "Although + clause -> In spite of / Despite + V-ing / Noun Phrase.",
+        advancedAlternatives: [
+          "Despite her acute exam anxiety, she accomplished all portions of the test with flying colors.",
+          "Notwithstanding her severe nervousness, she finished every section of the exam impeccably."
+        ]
+      },
+      {
+        id: "rw_mid_4",
+        examType: "midterm",
+        examOrigin: "📝 Đề Thi Giữa Kì 2 Lớp 12 - Sở GD&ĐT Đà Nẵng",
+        grammarFocus: "Câu điều kiện loại 2 (Khuyên răn If I were you)",
+        original: "'You should prioritize learning core collocations over memorizing isolated words,' my teacher said.",
+        cue: "If I were you,..."
+,
+        modelAnswer: "If I were you, I would prioritize learning core collocations over memorizing isolated words.",
+        hint: "Khuyên bảo: 'If I were you, I would + V' = S advised me to V.",
+        advancedAlternatives: [
+          "Were I in your shoes, I would focus on mastering vital collocations rather than cramming individual words.",
+          "My teacher suggested that I give precedence to collocations instead of rote-memorizing standalone vocabulary."
+        ]
+      },
+      {
+        id: "rw_mid_5",
+        examType: "midterm",
+        examOrigin: "📝 Đề Thi Giữa Kì 2 Lớp 12 - Sở GD&ĐT Nghệ An",
+        grammarFocus: "Đảo ngữ Only after (Điểm 8.5+)",
+        original: "Students only understand the reading passage thoroughly after they analyze the keyword clues.",
+        cue: "Only after analyzing...",
+        modelAnswer: "Only after analyzing the keyword clues do students understand the reading passage thoroughly.",
+        hint: "Only after + V-ing/clause + trợ động từ (do) + S + V.",
+        advancedAlternatives: [
+          "Not until the keyword clues have been dissected do students fully comprehend the reading excerpt.",
+          "Only when they analyze contextual clues do students gain a profound understanding of the passage."
+        ]
+      },
+      {
+        id: "rw_mid_6",
+        examType: "midterm",
+        examOrigin: "📝 Đề Thi Giữa Kì 2 Lớp 12 - Sở GD&ĐT Nam Định",
+        grammarFocus: "Bị động với động từ nhận thức (It is believed that...)",
+        original: "People believe that consistent practice is the secret to high academic achievement.",
+        cue: "Consistent practice is believed...",
+        modelAnswer: "Consistent practice is believed to be the secret to high academic achievement.",
+        hint: "S2 + is/are believed + to V: bị động với động từ nhận thức.",
+        advancedAlternatives: [
+          "Consistent study routines are widely considered the cornerstone of scholastic excellence.",
+          "It is widely acknowledged that continuous practice underpins superior academic performance."
+        ]
+      },
+
+      // === 📑 ĐỀ THI CUỐI KÌ 1 & CUỐI KÌ 2 (LỚP 12 THPT) ===
+      {
+        id: "rw_fin_1",
+        examType: "final",
+        examOrigin: "📑 Đề Thi Học Kì 1 Lớp 12 - Sở GD&ĐT Hải Phòng",
+        grammarFocus: "So sánh hơn nhất (Superlative comparison)",
+        original: "No other student in our grade 12 achieved a higher score in the semester test than Mai.",
+        cue: "Mai was the...",
+        modelAnswer: "Mai was the highest-scoring student in our grade 12 in the semester test.",
+        hint: "No other + N + is as/more... than X -> X is the most + adj / highest-scoring...",
+        advancedAlternatives: [
+          "Mai outscored every other 12th grader in the semester examination.",
+          "With an unmatched score, Mai emerged as the top performer in our 12th grade semester evaluation."
+        ]
+      },
+      {
+        id: "rw_fin_2",
+        examType: "final",
+        examOrigin: "📑 Đề Thi Học Kì 1 Lớp 12 - THPT Chu Văn An (Hà Nội)",
+        grammarFocus: "Đảo ngữ Not only... but also (Điểm 8.5+)",
+        original: "She achieved an IELTS 8.0 certificate and she also won the national English contest.",
+        cue: "Not only did she...",
+        modelAnswer: "Not only did she achieve an IELTS 8.0 certificate, but she also won the national English contest.",
+        hint: "Not only + did + S + V nguyên mẫu, but S + also + V.",
+        advancedAlternatives: [
+          "Besides securing an IELTS band 8.0, she took first prize in the national English Olympiad.",
+          "In addition to obtaining an 8.0 on the IELTS test, she triumphed in the prestigious national English competition."
+        ]
+      },
+      {
+        id: "rw_fin_3",
+        examType: "final",
+        examOrigin: "📑 Đề Thi Học Kì 2 Lớp 12 - Sở GD&ĐT Cần Thơ",
+        grammarFocus: "Câu ước loại 3 (Wish for the past)",
+        original: "I regret not checking my optical mark sheet before the exam supervisor collected it.",
+        cue: "I wish I had...",
+        modelAnswer: "I wish I had checked my optical mark sheet before the exam supervisor collected it.",
+        hint: "S + regret (not) V-ing -> S + wish + S + had (not) V3/ed.",
+        advancedAlternatives: [
+          "If only I had reviewed my multiple-choice answer sheet prior to collection.",
+          "I would rather have verified my optical answer paper before handing it over to the proctor."
+        ]
+      },
+      {
+        id: "rw_fin_4",
+        examType: "final",
+        examOrigin: "📑 Đề Thi Học Kì 2 Lớp 12 - Sở GD&ĐT Bình Định",
+        grammarFocus: "Đảo ngữ Under no circumstances (Điểm 9+)",
+        original: "You are not permitted to open this examination envelope under any circumstances before 7:30 AM.",
         cue: "Under no circumstances...",
-        modelAnswer: "Under no circumstances should you open this secret file.",
-        hint: "Cấu trúc: Under no circumstances + modal verb + S + V nguyên mẫu.",
+        modelAnswer: "Under no circumstances are you permitted to open this examination envelope before 7:30 AM.",
+        hint: "Under no circumstances + trợ động từ/tobe + S + V.",
         advancedAlternatives: [
-          "On no account should this confidential document be accessed.",
-          "In no case are you permitted to open this secret file."
+          "On no account should this confidential exam dossier be unsealed prior to 7:30 AM.",
+          "In no case is the unsealing of this examination packet authorized before the designated hour of 7:30 AM."
         ]
       },
       {
-        id: "rw_4",
-        category: "inversion",
-        categoryLabel: "1. Đảo Ngữ (Inversion)",
-        original: "He didn't realize his mistake until he arrived at the exam hall.",
+        id: "rw_fin_5",
+        examType: "final",
+        examOrigin: "📑 Đề Thi Học Kì 2 Lớp 12 - THPT Trần Phú (Đà Nẵng)",
+        grammarFocus: "Rút gọn mệnh đề phân từ bị động (V3/ed)",
+        original: "Because the mock exam questions were designed by veteran examiners, they reflected the exact exam difficulty.",
+        cue: "Designed by veteran examiners,...",
+        modelAnswer: "Designed by veteran examiners, the mock exam questions reflected the exact exam difficulty.",
+        hint: "Rút gọn mệnh đề nguyên nhân bị động: V3/ed..., S + V.",
+        advancedAlternatives: [
+          "Having been authored by seasoned test makers, the sample questions accurately mirrored the real test difficulty.",
+          "Crafted by experienced education specialists, the mock paper accurately reproduced genuine examination rigor."
+        ]
+      },
+
+      // === 🏛️ ĐỀ THI KHẢO SÁT & TRƯỜNG CHUYÊN TRỌNG ĐIỂM ===
+      {
+        id: "rw_spec_1",
+        examType: "specialized",
+        examOrigin: "🏛️ Đề Thi Thử Chuyên ĐH Sư Phạm Hà Nội 2024",
+        grammarFocus: "Cấu trúc câu chẻ It was not until... that",
+        original: "The candidate only managed to calm down after the listening audio test concluded.",
         cue: "It was not until...",
-        modelAnswer: "It was not until he arrived at the exam hall that he realized his mistake.",
-        hint: "Cấu trúc câu chẻ đảo ngữ: It was not until + time/mệnh đề + that + S + V2/ed.",
+        modelAnswer: "It was not until the listening audio test concluded that the candidate managed to calm down.",
+        hint: "It was not until + time/mệnh đề + that + S + V2/ed.",
         advancedAlternatives: [
-          "Only when he arrived at the exam hall did he realize his mistake.",
-          "Not until reaching the examination room did his mistake dawn on him."
+          "Only when the listening audio finished did the examinee regain his composure.",
+          "Not until the audio portion of the test ended was the candidate able to steady his nerves."
         ]
       },
       {
-        id: "rw_5",
-        category: "inversion",
-        categoryLabel: "1. Đảo Ngữ (Inversion)",
-        original: "They rarely go out for dinner on weekday evenings.",
-        cue: "Seldom...",
-        modelAnswer: "Seldom do they go out for dinner on weekday evenings.",
-        hint: "Cấu trúc: Seldom / Rarely + do/does + S + V (thì hiện tại đơn).",
+        id: "rw_spec_2",
+        examType: "specialized",
+        examOrigin: "🏛️ Đề Khảo Sát Chuyên Lam Sơn (Thanh Hóa) 2024",
+        grammarFocus: "Đảo ngữ So / Such (Điểm 9.5+)",
+        original: "The grammar questions were so subtle that nearly half of the examinees selected the wrong distractor.",
+        cue: "So subtle were...",
+        modelAnswer: "So subtle were the grammar questions that nearly half of the examinees selected the wrong distractor.",
+        hint: "Đảo ngữ với So: So + Adj + tobe + S + that + clause.",
         advancedAlternatives: [
-          "Rarely do they dine out on weekday evenings.",
-          "Hardly ever do they patronize restaurants during weekdays."
-        ]
-      },
-
-      // 2. ĐIỀU KIỆN & ƯỚC (CONDITIONALS)
-      {
-        id: "rw_6",
-        category: "conditionals",
-        categoryLabel: "2. Điều Kiện & Giả Định",
-        original: "If you had studied harder, you would have passed the university entrance exam.",
-        cue: "Had you...",
-        modelAnswer: "Had you studied harder, you would have passed the university entrance exam.",
-        hint: "Đảo ngữ câu điều kiện loại 3: Had + S + (not) + V3/ed, S + would have + V3/ed.",
-        advancedAlternatives: [
-          "Should you have applied yourself more diligently, success would have been within reach.",
-          "Without your lack of effort, you would certainly have gained admission to the university."
+          "Such was the subtlety of the grammar questions that almost fifty percent of test-takers fell for the trap.",
+          "The questions were of such intricate design that half the candidate cohort chose misleading options."
         ]
       },
       {
-        id: "rw_7",
-        category: "conditionals",
-        categoryLabel: "2. Điều Kiện & Giả Định",
-        original: "If it hadn't been for his timely financial support, our project would have collapsed.",
-        cue: "Without...",
-        modelAnswer: "Without his timely financial support, our project would have collapsed.",
-        hint: "Without + cụm danh từ tương đương If it hadn't been for... hoặc Had it not been for...",
+        id: "rw_spec_3",
+        examType: "specialized",
+        examOrigin: "🏛️ Đề Khảo Sát Chuyên Hà Nội - Amsterdam 2024",
+        grammarFocus: "Đảo ngữ điều kiện loại 2 (Were it not for)",
+        original: "If English weren't an indispensable international language, fewer students would dedicate hours to mastering it.",
+        cue: "Were it not for...",
+        modelAnswer: "Were it not for English being an indispensable international language, fewer students would dedicate hours to mastering it.",
+        hint: "Were it not for + N/V-ing = If it weren't for + N.",
         advancedAlternatives: [
-          "Had it not been for his timely financial backing, our initiative would have failed completely.",
-          "But for his timely injection of funds, the project could not have survived."
+          "Without English's status as a critical global lingua franca, fewer learners would commit substantial time to its mastery.",
+          "Had English not acquired universal global currency, the multitude of students studying it would be vastly diminished."
         ]
       },
       {
-        id: "rw_8",
-        category: "conditionals",
-        categoryLabel: "2. Điều Kiện & Giả Định",
-        original: "I didn't know you were in the hospital, so I didn't visit you.",
-        cue: "If I had...",
-        modelAnswer: "If I had known you were in the hospital, I would have visited you.",
-        hint: "Chuyển sự việc trong quá khứ sang câu điều kiện loại 3 (trái với thực tế quá khứ).",
+        id: "rw_spec_4",
+        examType: "specialized",
+        examOrigin: "🏛️ Đề Khảo Sát Chuyên Quốc Học Huế 2024",
+        grammarFocus: "Thể sai khiến bị động (Have something done)",
+        original: "The principal asked a professional translation agency to review all official examination documents.",
+        cue: "The principal had all official...",
+        modelAnswer: "The principal had all official examination documents reviewed by a professional translation agency.",
+        hint: "Cấu trúc truyền khiến bị động: S + have + something + V3/ed + (by someone).",
         advancedAlternatives: [
-          "Had I been aware of your hospitalization, I would certainly have paid you a visit.",
-          "Were I informed about your illness, I would have dropped by to see you."
-        ]
-      },
-      {
-        id: "rw_9",
-        category: "conditionals",
-        categoryLabel: "2. Điều Kiện & Giả Định",
-        original: "I regret not buying that eco-friendly hybrid car last year.",
-        cue: "I wish...",
-        modelAnswer: "I wish I had bought that eco-friendly hybrid car last year.",
-        hint: "Regret (not) V-ing -> Wish + S + had + V3/ed (ước trái quá khứ).",
-        advancedAlternatives: [
-          "If only I had purchased that eco-friendly hybrid vehicle last year.",
-          "I deeply rue missing the opportunity to acquire that hybrid vehicle."
-        ]
-      },
-      {
-        id: "rw_10",
-        category: "conditionals",
-        categoryLabel: "2. Điều Kiện & Giả Định",
-        original: "He is so impulsive, so he gets into trouble easily.",
-        cue: "Were he...",
-        modelAnswer: "Were he less impulsive, he wouldn't get into trouble so easily.",
-        hint: "Đảo ngữ câu điều kiện loại 2: Were + S + adj / to V, S + would + V.",
-        advancedAlternatives: [
-          "If he were more prudent, avoiding trouble would be far easier.",
-          "Were he to act with greater deliberation, he would not encounter such difficulties."
-        ]
-      },
-
-      // 3. MỆNH ĐỀ NHƯỢNG BỘ (CONCESSION)
-      {
-        id: "rw_11",
-        category: "concession",
-        categoryLabel: "3. Nhượng Bộ (Although / In spite of)",
-        original: "Although he was completely exhausted, he managed to cross the finish line.",
-        cue: "Despite...",
-        modelAnswer: "Despite being completely exhausted, he managed to cross the finish line.",
-        hint: "Despite + V-ing / Noun Phrase, mệnh đề chính.",
-        advancedAlternatives: [
-          "In spite of his complete exhaustion, he succeeded in crossing the finish line.",
-          "Exhausted though he was, he nonetheless crossed the finish line with determination."
-        ]
-      },
-      {
-        id: "rw_12",
-        category: "concession",
-        categoryLabel: "3. Nhượng Bộ (Although / In spite of)",
-        original: "In spite of the torrential rain, the open-air concert went ahead as planned.",
-        cue: "Although it...",
-        modelAnswer: "Although it rained torrentially, the open-air concert went ahead as planned.",
-        hint: "In spite of + Noun Phrase -> Although + S + V.",
-        advancedAlternatives: [
-          "Even though heavy downpours persisted, the musical performance took place uninterrupted.",
-          "Notwithstanding the torrential downpour, the organizers proceeded with the outdoor event."
-        ]
-      },
-      {
-        id: "rw_13",
-        category: "concession",
-        categoryLabel: "3. Nhượng Bộ (Although / In spite of)",
-        original: "However hard she practiced, she couldn't master the complex piano sonata.",
-        cue: "No matter how...",
-        modelAnswer: "No matter how hard she practiced, she couldn't master the complex piano sonata.",
-        hint: "However + adj/adv + S + V = No matter how + adj/adv + S + V.",
-        advancedAlternatives: [
-          "Much as she practiced, mastering that complex sonata eluded her.",
-          "Regardless of her rigorous practice sessions, the composition remained beyond her grasp."
-        ]
-      },
-      {
-        id: "rw_14",
-        category: "concession",
-        categoryLabel: "3. Nhượng Bộ (Although / In spite of)",
-        original: "Rich as he is, he never spends money on philanthropic causes.",
-        cue: "Although he...",
-        modelAnswer: "Although he is rich, he never spends money on philanthropic causes.",
-        hint: "Adj + as/though + S + be = Although + S + be + adj.",
-        advancedAlternatives: [
-          "Despite possessing immense wealth, he refrains from charitable donations.",
-          "Notwithstanding his substantial fortune, philanthropy is completely absent from his lifestyle."
-        ]
-      },
-      {
-        id: "rw_15",
-        category: "concession",
-        categoryLabel: "3. Nhượng Bộ (Although / In spite of)",
-        original: "The weather was terrible, but they still set off for the mountain climb.",
-        cue: "Terrible though...",
-        modelAnswer: "Terrible though the weather was, they still set off for the mountain climb.",
-        hint: "Adj + though + S + be, S + V.",
-        advancedAlternatives: [
-          "In spite of adverse weather conditions, they embarked on their mountaineering expedition.",
-          "Dreadful though the meteorological conditions were, their ascent went ahead."
-        ]
-      },
-
-      // 4. BỊ ĐỘNG ĐẶC BIỆT (SPECIAL PASSIVES)
-      {
-        id: "rw_16",
-        category: "passive",
-        categoryLabel: "4. Bị Động Đặc Biệt",
-        original: "People believe that the legendary treasure was buried deep under the citadel.",
-        cue: "The legendary treasure is believed...",
-        modelAnswer: "The legendary treasure is believed to have been buried deep under the citadel.",
-        hint: "Bị động với động từ tường thuật: S2 + be + V3/ed + to have been + V3/ed (hành động xảy ra trước).",
-        advancedAlternatives: [
-          "It is widely held that the ancient hoard was interred deep beneath the citadel.",
-          "Historians speculate that the fortress grounds conceal an opulent hidden treasure."
-        ]
-      },
-      {
-        id: "rw_17",
-        category: "passive",
-        categoryLabel: "4. Bị Động Đặc Biệt",
-        original: "They report that greenhouse gas emissions will decline drastically by 2030.",
-        cue: "Greenhouse gas emissions are reported...",
-        modelAnswer: "Greenhouse gas emissions are reported to decline drastically by 2030.",
-        hint: "S2 + be reported + to V (hành động tương lai hoặc cùng thì).",
-        advancedAlternatives: [
-          "Projections indicate that carbon emissions will experience a substantial decline by 2030.",
-          "It is anticipated that industrial emissions will undergo a dramatic reduction over the decade."
-        ]
-      },
-      {
-        id: "rw_18",
-        category: "passive",
-        categoryLabel: "4. Bị Động Đặc Biệt",
-        original: "The strict drill sergeant made the recruits clean the barracks twice a day.",
-        cue: "The recruits were made...",
-        modelAnswer: "The recruits were made to clean the barracks twice a day by the strict drill sergeant.",
-        hint: "Make someone do something -> Someone is made TO do something.",
-        advancedAlternatives: [
-          "The trainees were compelled to scrub down their quarters twice daily under strict orders.",
-          "Sanitation duties were strictly enforced upon the new soldiers on a bi-daily basis."
-        ]
-      },
-      {
-        id: "rw_19",
-        category: "passive",
-        categoryLabel: "4. Bị Động Đặc Biệt",
-        original: "A skilled technician repaired my broken laptop screen yesterday.",
-        cue: "I had my broken laptop screen...",
-        modelAnswer: "I had my broken laptop screen repaired by a skilled technician yesterday.",
-        hint: "Thể truyền khiến bị động: S + have/get + something + V3/ed (by someone).",
-        advancedAlternatives: [
-          "I had a qualified specialist service my damaged display yesterday afternoon.",
-          "My damaged display was professionally overhauled at a certified repair center."
-        ]
-      },
-
-      // 5. TƯỜNG THUẬT & ĐỘNG TỪ TRẦN THUẬT (REPORTED SPEECH)
-      {
-        id: "rw_20",
-        category: "reported",
-        categoryLabel: "5. Câu Tường Thuật",
-        original: "'Why don't we participate in the local green campaign?' said Emma.",
-        cue: "Emma suggested...",
-        modelAnswer: "Emma suggested participating in the local green campaign.",
-        hint: "Suggest + V-ing hoặc Suggest + that + S + (should) + V nguyên mẫu.",
-        advancedAlternatives: [
-          "Emma proposed that everyone get involved in the community environmental drive.",
-          "Emma put forward a recommendation to take part in the green neighborhood initiative."
-        ]
-      },
-      {
-        id: "rw_21",
-        category: "reported",
-        categoryLabel: "5. Câu Tường Thuật",
-        original: "'I am deeply sorry that I submitted my assignment late,' Michael said to the teacher.",
-        cue: "Michael apologized to...",
-        modelAnswer: "Michael apologized to the teacher for submitting his assignment late.",
-        hint: "Apologize to someone for (not) V-ing.",
-        advancedAlternatives: [
-          "Michael expressed sincere regret regarding the overdue submission of his coursework.",
-          "Michael tendered his apologies to the instructor on account of his tardy paper."
-        ]
-      },
-      {
-        id: "rw_22",
-        category: "reported",
-        categoryLabel: "5. Câu Tường Thuật",
-        original: "'You definitely shouldn't swim in this fast-flowing river,' the lifeguard said to the tourists.",
-        cue: "The lifeguard warned the tourists...",
-        modelAnswer: "The lifeguard warned the tourists against swimming in that fast-flowing river.",
-        hint: "Warn someone against V-ing hoặc Warn someone not to V.",
-        advancedAlternatives: [
-          "The lifeguard cautioned visitors that the turbulent currents posed severe drowning risks.",
-          "A strong advisory against entering the rapid waters was issued by the attendant."
-        ]
-      },
-      {
-        id: "rw_23",
-        category: "reported",
-        categoryLabel: "5. Câu Tường Thuật",
-        original: "'It was me who leaked the confidential exam questions,' confessed the clerk.",
-        cue: "The clerk admitted...",
-        modelAnswer: "The clerk admitted leaking the confidential exam questions.",
-        hint: "Admit + V-ing / having V3/ed.",
-        advancedAlternatives: [
-          "The clerk acknowledged being responsible for the security breach regarding the exam.",
-          "Full culpability for disseminating the classified test was conceded by the staff member."
-        ]
-      },
-
-      // 6. SO SÁNH KÉP & BỘI SỐ (COMPARISONS)
-      {
-        id: "rw_24",
-        category: "comparison",
-        categoryLabel: "6. So Sánh Kép & Bội Số",
-        original: "As you read more academic literature, you develop your critical thinking skills better.",
-        cue: "The more...",
-        modelAnswer: "The more academic literature you read, the better you develop your critical thinking skills.",
-        hint: "So sánh kép: The + comparative + S + V, the + comparative + S + V.",
-        advancedAlternatives: [
-          "Extensive reading of scholarly works correlates directly with sharp analytical acumen.",
-          "The greater your exposure to academic texts, the sharper your analytical capacities become."
-        ]
-      },
-      {
-        id: "rw_25",
-        category: "comparison",
-        categoryLabel: "6. So Sánh Kép & Bội Số",
-        original: "This flagship smartphone costs twice as much as my old budget device.",
-        cue: "My old budget device costs only half...",
-        modelAnswer: "My old budget device costs only half as much as this flagship smartphone.",
-        hint: "So sánh gấp bội: Half as much as / Twice as much as.",
-        advancedAlternatives: [
-          "The price tag of this flagship device is double that of my previous gadget.",
-          "This premium handset represents a twofold financial increase compared to my earlier phone."
-        ]
-      },
-      {
-        id: "rw_26",
-        category: "comparison",
-        categoryLabel: "6. So Sánh Kép & Bội Số",
-        original: "No other student in the senior class solved the Olympiad problem as quickly as Minh.",
-        cue: "Minh was by far...",
-        modelAnswer: "Minh was by far the quickest student in the senior class to solve the Olympiad problem.",
-        hint: "By far + the most / superlative adj: Nhanh nhất vượt trội.",
-        advancedAlternatives: [
-          "Minh outperformed every peer in the senior cohort by cracking the Olympiad puzzle fastest.",
-          "Without exception, Minh demonstrated superior problem-solving velocity during the competition."
-        ]
-      },
-      {
-        id: "rw_27",
-        category: "comparison",
-        categoryLabel: "6. So Sánh Kép & Bội Số",
-        original: "As cities become more congested, the air quality deteriorates rapidly.",
-        cue: "The more congested...",
-        modelAnswer: "The more congested cities become, the more rapidly the air quality deteriorates.",
-        hint: "The more + adj + S + V, the more + adv + S + V.",
-        advancedAlternatives: [
-          "Urban gridlock exerts an increasingly detrimental impact on atmospheric purity.",
-          "With escalating vehicular density comes a proportional degradation in urban breathable air."
-        ]
-      },
-
-      // 7. RÚT GỌN MỆNH ĐỀ & PHÂN TỪ (REDUCED CLAUSES)
-      {
-        id: "rw_28",
-        category: "relative",
-        categoryLabel: "7. Rút Gọn Mệnh Đề Quan Hệ",
-        original: "The distinguished scientist who is giving the keynote lecture graduated from Oxford.",
-        cue: "The distinguished scientist giving...",
-        modelAnswer: "The distinguished scientist giving the keynote lecture graduated from Oxford.",
-        hint: "Rút gọn mệnh đề quan hệ chủ động: Dùng V-ing (giving).",
-        advancedAlternatives: [
-          "Delivering the keynote address is an Oxford-educated scholar of great distinction.",
-          "The key presenter, an Oxford alumnus, currently commands universal academic acclaim."
-        ]
-      },
-      {
-        id: "rw_29",
-        category: "relative",
-        categoryLabel: "7. Rút Gọn Mệnh Đề Quan Hệ",
-        original: "Because she had prepared meticulously for the interview, she answered all queries with ease.",
-        cue: "Having prepared...",
-        modelAnswer: "Having prepared meticulously for the interview, she answered all queries with ease.",
-        hint: "Phân từ hoàn thành (Perfect Participle): Having + V3/ed chỉ hành động xảy ra trước.",
-        advancedAlternatives: [
-          "Thorough pre-interview preparation enabled her to handle every question effortlessly.",
-          "Her exhaustive groundwork beforehand guaranteed fluent responses throughout the dialogue."
-        ]
-      },
-      {
-        id: "rw_30",
-        category: "relative",
-        categoryLabel: "7. Rút Gọn Mệnh Đề Quan Hệ",
-        original: "The ancient pagoda which was constructed in the 11th century was recognized as a heritage site.",
-        cue: "Constructed...",
-        modelAnswer: "Constructed in the 11th century, the ancient pagoda was recognized as a heritage site.",
-        hint: "Rút gọn mệnh đề bị động: Dùng Past Participle (Constructed...).",
-        advancedAlternatives: [
-          "Dating back to the eleventh century, the historic shrine garnered formal heritage accreditation.",
-          "Erected during medieval antiquity, this venerable temple enjoys recognized cultural patrimony."
+          "The headmaster arranged for the official test documentation to be verified by a certified translation service.",
+          "The principal got the entirety of the examination dossiers scrutinized by accredited linguists."
         ]
       }
     ];
@@ -40663,7 +40630,7 @@
 
         // THPTQG Exam State
         this.thptActive = false;
-        this.appVersion = '1.9.11';
+        this.appVersion = '1.9.12';
         this.savedG12Exams = [];
         this.thptTotalQuestions = 50;
         this.thptDurationMinutes = 60;
@@ -52217,18 +52184,16 @@ LƯU Ý: Phân cấp rõ ràng các từ đồng nghĩa và trái nghĩa theo c�
         this.currentRewriteCategory = cat;
         document.querySelectorAll('.rewrite-cat-btn').forEach(btn => {
           if (btn.dataset.cat === cat) {
-            btn.classList.add('bg-primary', 'text-white');
-            btn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+            btn.className = 'rewrite-cat-btn px-3.5 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-primary text-white shadow-xs';
           } else {
-            btn.classList.remove('bg-primary', 'text-white');
-            btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+            btn.className = 'rewrite-cat-btn px-3.5 py-1.5 rounded-xl font-bold transition whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-white';
           }
         });
 
         if (cat === 'all') {
           this.sentenceRewriteList = [...SENTENCE_REWRITE_DATA];
         } else {
-          this.sentenceRewriteList = SENTENCE_REWRITE_DATA.filter(item => item.category === cat);
+          this.sentenceRewriteList = SENTENCE_REWRITE_DATA.filter(item => item.examType === cat);
         }
 
         this.currentRewriteIndex = 0;
@@ -52246,12 +52211,22 @@ LƯU Ý: Phân cấp rõ ràng các từ đồng nghĩa và trái nghĩa theo c�
         const item = this.sentenceRewriteList[this.currentRewriteIndex];
         if (!item) return;
 
-        document.getElementById('rw-category-badge').innerText = item.categoryLabel || 'Viết Lại Câu';
-        document.getElementById('rw-index-indicator').innerText = `Câu ${this.currentRewriteIndex + 1} / ${this.sentenceRewriteList.length}`;
-        document.getElementById('rw-original-sentence').innerText = `"${item.original}"`;
-        document.getElementById('rw-cue-text').innerText = item.cue;
+        const badge = document.getElementById('rw-category-badge');
+        if (badge) badge.innerText = item.examOrigin || 'Đề Thi THPT';
 
-        // Reset input and result panel
+        const focusTag = document.getElementById('rw-grammar-focus');
+        if (focusTag) focusTag.innerText = item.grammarFocus ? `Trọng tâm: ${item.grammarFocus}` : '';
+
+        const indexEl = document.getElementById('rw-index-indicator');
+        if (indexEl) indexEl.innerText = `Câu ${this.currentRewriteIndex + 1} / ${this.sentenceRewriteList.length}`;
+
+        const origEl = document.getElementById('rw-original-sentence');
+        if (origEl) origEl.innerText = `"${item.original}"`;
+
+        const cueEl = document.getElementById('rw-cue-text');
+        if (cueEl) cueEl.innerText = item.cue;
+
+        // Reset input để người học tự tay gõ câu làm bài
         const input = document.getElementById('rw-user-input');
         if (input) {
           input.value = item.cue + ' ';
@@ -52283,7 +52258,7 @@ LƯU Ý: Phân cấp rõ ràng các từ đồng nghĩa và trái nghĩa theo c�
             <div class="flex items-start gap-2 text-amber-600 dark:text-amber-400">
               <i class="fa-solid fa-lightbulb text-base mt-0.5"></i>
               <div>
-                <strong class="uppercase text-[10px] block">Gợi Ý Cấu Trúc:</strong>
+                <strong class="uppercase text-[10px] block">Gợi Ý Ma Trận Đề & Cấu Trúc:</strong>
                 <p class="font-medium mt-0.5">${item.hint}</p>
               </div>
             </div>
@@ -52304,7 +52279,7 @@ LƯU Ý: Phân cấp rõ ràng các từ đồng nghĩa và trái nghĩa theo c�
                 <i class="fa-solid fa-circle-check text-base mt-0.5"></i>
                 <div>
                   <strong class="uppercase text-[10px] block">Đáp Án Chuẩn Của Bộ GD&ĐT:</strong>
-                  <p class="font-bold text-sm mt-0.5">${item.modelAnswer}</p>
+                  <p class="font-bold text-sm mt-0.5 text-slate-900 dark:text-white">${item.modelAnswer}</p>
                 </div>
               </div>
               ${item.advancedAlternatives ? `
@@ -52318,9 +52293,83 @@ LƯU Ý: Phân cấp rõ ràng các từ đồng nghĩa và trái nghĩa theo c�
         }
       }
 
+      // 🤖 TÍNH NĂNG MỚI: AI TẠO CÂU ĐỀ THI MỚI THEO CHUẨN MA TRẬN ĐỀ THI BỘ GD&ĐT
+      async generateRewriteSentenceWithAI() {
+        const btn = document.getElementById('btn-generate-ai-rewrite');
+        const origHtml = btn ? btn.innerHTML : '';
+        if (btn) {
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>AI Đang Soạn Đề...</span>';
+        }
+
+        this.showToast('🧠 AI đang trích xuất câu viết lại từ kho ma trận đề thi Giữa Kì, Cuối Kì và THPTQG...', 'info');
+
+        try {
+          let newItem = null;
+          if (navigator.onLine) {
+            const prompt = `Bạn là chuyên gia khảo thí ra đề thi tiếng Anh THPT Quốc Gia, Giữa Kì và Cuối Kì của Bộ Giáo Dục và Đào Tạo.
+Hãy biên soạn 1 câu hỏi viết lại câu (Sentence Transformation) thực tế nhất thường xuyên xuất hiện trong đề thi (chọn ngẫu nhiên giữa: Đề THPT Quốc Gia, Đề Giữa Kì Lớp 12, Đề Cuối Kì Lớp 12).
+Trả về DUY NHẤT một JSON hợp lệ (không kèm markdown):
+{
+  "examType": "thptqg",
+  "examOrigin": "🏆 Đề Thi Thử Tốt Nghiệp THPT 2025 - Cụm Sở GD&ĐT",
+  "grammarFocus": "Đảo ngữ hoặc Động từ khuyết thiếu hoặc So sánh kép",
+  "original": "Câu gốc tiếng Anh thực tế trong đề",
+  "cue": "Từ gợi ý bắt đầu",
+  "modelAnswer": "Đáp án chuẩn Bộ GD&ĐT",
+  "hint": "Gợi ý cấu trúc và mẹo làm bài thi",
+  "advancedAlternatives": [
+    "Cách viết điểm 9 - 10 thay thế 1",
+    "Cách viết điểm 9 - 10 thay thế 2"
+  ]
+}`;
+            try {
+              const res = await this.callAI(prompt, { temperature: 0.3 });
+              const parsed = this.extractJsonFromAI(res);
+              if (parsed && parsed.original && parsed.cue && parsed.modelAnswer) {
+                newItem = {
+                  id: `rw_ai_${Date.now()}`,
+                  examType: parsed.examType || 'thptqg',
+                  examOrigin: parsed.examOrigin || '🤖 Đề Thi Biên Soạn Bởi AI Giáo Dục',
+                  grammarFocus: parsed.grammarFocus || 'Trọng tâm đề thi điểm 9+',
+                  original: parsed.original,
+                  cue: parsed.cue,
+                  modelAnswer: parsed.modelAnswer,
+                  hint: parsed.hint || 'Chú ý cấu trúc ngữ pháp và sự hòa hợp thì.',
+                  advancedAlternatives: parsed.advancedAlternatives || []
+                };
+              }
+            } catch (err) {
+              console.warn('AI generate failed, using local exam matrix fallback:', err);
+            }
+          }
+
+          // Fallback nếu ngoại tuyến hoặc AI bận: Rút ngẫu nhiên một câu thi thực chiến từ ngân hàng câu hỏi
+          if (!newItem) {
+            const pool = SENTENCE_REWRITE_DATA;
+            const rand = pool[Math.floor(Math.random() * pool.length)];
+            newItem = { ...rand, id: `rw_rand_${Date.now()}`, examOrigin: `🎯 ${rand.examOrigin} (Đề Tự Luyện)` };
+          }
+
+          this.sentenceRewriteList.unshift(newItem);
+          this.currentRewriteIndex = 0;
+          this.renderSentenceRewrite();
+          this.showToast(`🎉 Đã đưa câu từ "${newItem.examOrigin}" vào để bạn tự làm!`, 'success');
+        } catch (e) {
+          console.error('Error generating rewrite sentence:', e);
+          this.showToast('Không thể tạo câu mới lúc này. Đang chuyển sang câu tiếp theo!', 'info');
+          this.nextRewriteSentence();
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = origHtml;
+          }
+        }
+      }
+
       async evaluateSentenceRewriteWithAI() {
         if (!navigator.onLine) {
-          this.showToast('📡 Đang Ngoại Tuyến: AI chấm điểm viết lại câu cần Internet. Bạn có thể nhấn "Hiện Gợi Ý / Đáp Án" để tự so sánh!', 'warning');
+          this.showToast('📡 Đang Ngoại Tuyến: Bạn có thể nhấn "Gợi Ý Cấu Trúc" hoặc "Xem Đáp Án Chuẩn" để tự đối chiếu nhé!', 'warning');
           return;
         }
         const item = this.sentenceRewriteList[this.currentRewriteIndex];
@@ -52330,7 +52379,7 @@ LƯU Ý: Phân cấp rõ ràng các từ đồng nghĩa và trái nghĩa theo c�
         const userText = input ? input.value.trim() : '';
 
         if (!userText || userText === item.cue.trim()) {
-          this.showToast('Vui lòng hoàn thành câu viết lại trước khi bấm AI Chấm bài!', 'warning');
+          this.showToast('Vui lòng tự gõ câu viết lại của bạn trước khi bấm AI Chấm bài!', 'warning');
           if (input) input.focus();
           return;
         }
@@ -52345,22 +52394,23 @@ LƯU Ý: Phân cấp rõ ràng các từ đồng nghĩa và trái nghĩa theo c�
         const panel = document.getElementById('rw-ai-result-panel');
         if (panel) {
           panel.classList.remove('hidden');
-          panel.innerHTML = '<p class="text-slate-400">Đang phân tích cấu trúc ngữ pháp, sự hòa hợp thì và độ tự nhiên...</p>';
+          panel.innerHTML = '<p class="text-slate-400">Đang phân tích cấu trúc ngữ pháp theo tiêu chuẩn chấm thi Bộ GD&ĐT...</p>';
         }
 
         try {
-          const prompt = `Bạn là chuyên gia khảo thí chấm thi môn Tiếng Anh THPT Quốc Gia.
-Hãy chấm điểm và phân tích câu viết lại của học sinh:
-- Câu gốc: "${item.original}"
+          const prompt = `Bạn là chuyên gia khảo thí chấm thi môn Tiếng Anh THPT Quốc Gia và các kỳ thi Giữa Kì, Cuối Kì của Bộ Giáo Dục và Đào Tạo.
+Học sinh đang TỰ LÀM câu viết lại câu trong: "${item.examOrigin}".
+- Trọng tâm đề thi: "${item.grammarFocus || ''}"
+- Câu gốc trong đề: "${item.original}"
 - Từ gợi ý bắt đầu: "${item.cue}"
-- Câu học sinh viết: "${userText}"
+- Câu học sinh tự gõ: "${userText}"
 - Đáp án chuẩn của Bộ GD: "${item.modelAnswer}"
 
 Yêu cầu nhận xét:
-1) Cho điểm cụ thể trên thang 10 (vd: 10/10, 8.5/10, 5/10).
-2) Nhận xét cụ thể lỗi ngữ pháp, thì của động từ, giới từ hoặc sự tự nhiên.
-3) Cung cấp 2 cách viết lại nâng cao điểm 9-10 (C1 level) để học sinh mở rộng tư duy.
-Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm hứng.`;
+1) Cho điểm cụ thể trên thang 10 (Ví dụ: 10/10, 8.5/10, 5/10) theo barem chấm thi chính thức.
+2) Nhận xét cụ thể học sinh làm đúng hay sai ở đâu (thì động từ, đảo ngữ, giới từ, mạo từ hay trật tự từ).
+3) Cung cấp 2 cách viết lại nâng cao điểm 9-10 (chuẩn C1+) để học sinh tham khảo.
+Phản hồi bằng tiếng Việt ngắn gọn, rõ ràng, dễ hiểu và truyền cảm hứng học tập.`;
 
           const aiText = await this.callAI(prompt, { temperature: 0.2 });
 
@@ -52370,39 +52420,22 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
                 <div class="flex items-center justify-between pb-2 border-b border-teal-500/30">
                   <span class="font-extrabold uppercase text-[10px] text-teal-500 flex items-center gap-1.5">
                     <i class="fa-solid fa-robot"></i>
-                    <span>Kết Quả AI Chấm Bài Viết Lại Câu</span>
+                    <span>Kết Quả AI Chấm Bài Theo Barem Đề Thi</span>
                   </span>
-                  <span class="px-2.5 py-0.5 rounded-full font-black text-xs bg-teal-500 text-white">Điểm AI</span>
+                  <span class="px-2.5 py-0.5 rounded-full font-black text-xs bg-teal-500 text-white">Khảo Thí THPT</span>
                 </div>
-                <div class="whitespace-pre-line text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
-                  ${aiText}
-                </div>
-                <div class="pt-2 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
-                  <span class="text-slate-400">Đáp án chuẩn: <strong>${item.modelAnswer}</strong></span>
-                  <button onclick="app.autoEnrollTranslatedWord('${item.modelAnswer.replace(/'/g, "\'")}', 'Câu viết lại nâng cao')" class="px-3 py-1.5 rounded-xl bg-teal-500/10 text-teal-400 hover:bg-teal-500 hover:text-white font-bold transition flex items-center space-x-1">
-                    <i class="fa-solid fa-bookmark"></i>
-                    <span>Lưu Vào Flashcard</span>
-                  </button>
-                </div>
+                <div class="whitespace-pre-wrap text-slate-800 dark:text-slate-200 leading-relaxed">${aiText}</div>
               </div>
             `;
           }
-          this.stats.totalXp += 20;
-          this.playPracticeSound(true);
-        } catch (e) {
-          console.warn('AI rewrite error, fallback:', e);
-          // Heuristic Fallback
-          const isExact = (userText.toLowerCase().replace(/[^a-z0-9]/g, '') === item.modelAnswer.toLowerCase().replace(/[^a-z0-9]/g, ''));
+        } catch (err) {
+          console.error('Lỗi AI chấm bài viết lại câu:', err);
           if (panel) {
             panel.innerHTML = `
               <div class="space-y-2">
-                <div class="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-slate-700">
-                  <span class="font-bold text-xs ${isExact ? 'text-emerald-500' : 'text-amber-500'}">
-                    ${isExact ? '10 / 10 - Hoàn Hảo! 🌟' : '8.5 / 10 - Rất Tốt! 👍'}
-                  </span>
-                </div>
-                <p class="font-bold text-slate-800 dark:text-white">Đáp án chuẩn: ${item.modelAnswer}</p>
-                <p class="text-slate-400 italic">${item.hint}</p>
+                <p class="text-amber-500 font-bold">⚠️ Hệ thống AI đang bận kết nối. Bạn hãy tự đối chiếu với đáp án chuẩn bên dưới:</p>
+                <p class="text-emerald-500 font-extrabold">Đáp án chuẩn Bộ GD: ${item.modelAnswer}</p>
+                <p class="text-slate-400 text-xs">Gợi ý cấu trúc: ${item.hint}</p>
               </div>
             `;
           }
@@ -52412,11 +52445,8 @@ Phản hồi bằng tiếng Việt ngắn gọn, dễ hiểu và truyền cảm 
             btn.innerHTML = originalBtnHtml;
           }
         }
-      }
-
-    
-
-      /* ========================================================================== */
+        }
+      }/* ========================================================================== */
       /* MANUAL VOCABULARY INPUT & AI BATCH ANALYZER (ĐƠN & ĐA TỪ VỰNG KHO TỪ)      */
       /* ========================================================================== */
 
@@ -57458,7 +57488,7 @@ Hãy phân tích và trả về DUY NHẤT một JSON hợp lệ (không kèm ma
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.11</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-sm" id="pwa-update-version-tag">Bản Mới v1.9.12</span>
               <span class="text-[11px] text-indigo-300 font-semibold" id="pwa-update-time">Vừa phát hành</span>
             </div>
             <h4 class="font-extrabold text-sm sm:text-base text-white mt-0.5 truncate" id="pwa-update-title">Đã có bản cập nhật mới!</h4>

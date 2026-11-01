@@ -1,11 +1,11 @@
 {
-  "version": "1.9.11",
+  "version": "1.9.12",
   "buildDate": "2026-11-01",
   "critical": true,
   "changelog": [
-    "Khắc phục triệt để lỗi 'Failed to fetch' khi bấm 'AI Tìm Theo Yêu Cầu': Tích hợp bộ cứu hộ từ điển đa tầng (Multi-Layered Lexical Engine) tự động nạp từ vựng kèm nghĩa tiếng Việt, IPA, CEFR, đồng/trái nghĩa và ví dụ ngay cả khi máy chủ AI bị gián đoạn hoặc ngoại tuyến.",
-    "Bảo vệ 100% tỷ lệ tra cứu thành công cho các từ vựng đơn lẻ (như Evacuative, phrasal verbs, idioms): Tự động nạp trực tiếp vào Kho Từ Vựng và Sổ Tay, không bao giờ xuất hiện hộp thoại đỏ báo lỗi mạng.",
-    "Tự động kích hoạt AI Gemini Vision khi chụp hoặc tải ảnh đề thi: Quét trích xuất 100% đề thi tiếng Anh nguyên vẹn từ camera/file ngay lập tức, hỗ trợ tự xoay 90°/180° chuẩn xác.",
-    "Cơ chế chuyển đổi AI dự phòng thông minh (Auto-Failover): Tự động luân chuyển giữa xKiro và Google Gemini Direct để đảm bảo không bao giờ bị đứng mạng."
+    "Tái cấu trúc toàn diện tính năng 'Luyện Viết Lại Câu': Chuyển đổi từ phân loại theo các dạng ngữ pháp đơn lẻ sang ĐỀ THI THỰC CHIẾN (Đề Thi Giữa Kì 1 & 2, Đề Thi Cuối Kì 1 & 2, Đề Thi THPT Quốc Gia Chính Thức & Đề Chuyên).",
+    "Tối ưu trải nghiệm tự làm bài: Học sinh tự gõ câu viết lại hoàn chỉnh theo từ gợi ý của đề thi, AI đóng vai trò Chuyên gia khảo thí chấm điểm theo thang điểm 10, chỉ rõ lỗi ngữ pháp và đưa ra 2 cách viết điểm 9 - 10 (C1+).",
+    "Bổ sung nút '✨ AI Sinh Câu Đề Thi Mới': AI tự động biên soạn thêm câu hỏi viết lại câu sát chuẩn ma trận đề thi Giữa Kì, Cuối Kì và THPTQG mọi lúc mọi nơi để luyện tập không giới hạn.",
+    "Bổ sung nhãn nguồn đề thi thực tế (Mã đề chính thức Bộ GD&ĐT, Sở GD&ĐT Hà Nội, TP.HCM, Chuyên Sư Phạm, Chuyên Ams, Lam Sơn, Quốc Học Huế) và trọng tâm phân loại điểm 9+."
   ]
 }
