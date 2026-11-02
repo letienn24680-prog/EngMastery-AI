@@ -1,10 +1,10 @@
 {
-  "version": "1.9.13",
-  "buildDate": "2026-11-01",
+  "version": "1.9.14",
+  "buildDate": "2026-11-02",
   "critical": true,
   "changelog": [
-    "Khắc phục triệt để sự cố đứng giao diện do thừa dấu đóng ngoặc nhọn trong hàm chấm điểm viết lại câu: Đảm bảo toàn bộ hệ thống JavaScript và đối tượng window.app khởi tạo mượt mà 100% trên cả PC và thiết bị di động.",
-    "Toàn bộ nút bấm, điều hướng, tìm kiếm từ vựng, flashcards và luyện thi phản hồi tức thì với tốc độ 60fps.",
-    "Bảo toàn trọn vẹn bộ tính năng 'Luyện Viết Lại Câu' theo chuẩn đề thi Giữa Kì, Cuối Kì và THPT Quốc Gia kèm AI sinh đề mới."
+    "Khắc phục triệt để lỗi 'this.updateFilterBadges is not a function': Tích hợp đầy đủ các phương thức bổ trợ updateFilterBadges, escapeHtml và getFilteredVocabList vào lõi ứng dụng.",
+    "Bảo vệ 100% quy trình AI Tìm Theo Yêu Cầu cho toàn bộ từ vựng (như Misunderstanding, Evacuative...): Tự động nạp từ thành công, cập nhật giao diện bộ lọc và hiển thị ngay thẻ từ lên đầu danh sách.",
+    "Tối ưu hóa hiệu năng phản hồi và tương thích hoàn hảo trên mọi thiết bị di động và máy tính."
   ]
 }
